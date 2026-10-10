@@ -24,6 +24,19 @@
            ========================================================= */
 
 :root {
+            /* Base color tokens */
+            --color-white: #ffffff;
+            --color-charcoal: #17191c;
+            --color-charcoal-soft: #24272c;
+            --color-gray-100: #f2f3f5;
+            --color-gray-200: #e5e7eb;
+            --color-gray-400: #9aa0aa;
+            --color-gray-500: #6b7280;
+            --color-muted-gray: #5c6370;
+            --color-slate-700: #3c4450;
+            --color-pill-line: #c45a5a;
+            --color-indigo: #5b4dff;
+
             /* Brand ramps: 50 lightest → 950 darkest. Text is 950 or white. */
             /* AZURE RADIANCE — source 700 */
             --azure-50: #eef9ff; --azure-100: #d8f1ff; --azure-200: #b9e6ff; --azure-300: #8ad9ff;
@@ -73,7 +86,7 @@
             --tone-deep3: var(--active-950); --tone-deep4: var(--active-950); --tone-deep5: var(--active-950);
             --tone-light1: var(--active-600); --tone-light2: var(--active-500);
             --tone-light3: var(--active-400); --tone-light4: var(--active-300);
-            --pill-accent: var(--azure-700); --pill-accent-fg: #ffffff; --brand-ink: var(--azure-950);
+            --pill-accent: var(--azure-700); --pill-accent-fg: var(--color-white); --brand-ink: var(--azure-950);
 
             /* Font families (swapped by JS) */
             --headline-font: 'Syne', sans-serif;
@@ -93,21 +106,32 @@
             --kw-pill-radius: 999px;
             --kw-pill-fs: 0.8125rem;
             --kw-pill-gap: 8px;
-            --kw-pill-line: #c45a5a;
-            --kw-pill-bg: #fff;
-            --kw-pill-fg: #3c4450;
+            --kw-pill-line: var(--color-pill-line);
+            --kw-pill-bg: var(--color-white);
+            --kw-pill-fg: var(--color-slate-700);
             --kw-pill-weight: 650;
-            --kw-pill-active-bg: var(--ks-accent, var(--active-600, #5b4dff));
-            --kw-pill-active-fg: #fff;
+            --kw-pill-active-bg: var(--ks-accent, var(--active-600, var(--color-indigo)));
+            --kw-pill-active-fg: var(--color-white);
             --route-hero-h: 560px;
             --route-hero-copy-left: clamp(1rem, 4vw, 3rem);
             --route-hero-copy-bottom: 118px;
             --route-hero-copy-w: min(40rem, calc(100% - 32px));
-            --section-pad-block: 50px;
+            --section-pad-block: var(--section-pad-y);
             --fs-title:      clamp(2.25rem, 5vw + 1rem, 6rem);            /* 36 → 96px */
             --fs-title-side: clamp(2.25rem, 3vw + 1rem, 4.5rem);          /* 36 → 72px */
             --fs-sub:        var(--type-sub-size, 1.125rem);              /* strictly above body */
             --fs-btn:        clamp(1rem, 0.2vw + 0.95rem, 1.125rem);      /* 16 → 18px */
+
+            /* Spacing scale */
+            --space-1: 0.25rem;  /* 4px */
+            --space-2: 0.5rem;   /* 8px */
+            --space-3: 0.75rem;  /* 12px */
+            --space-4: 1rem;     /* 16px */
+            --space-6: 1.5rem;   /* 24px */
+            --space-8: 2rem;     /* 32px */
+            --space-12: 3rem;    /* 48px */
+            --space-16: 4rem;    /* 64px */
+            --section-pad-y: clamp(3.5rem, 7vw, 6rem);
 
             /* Fluid spacing */
             --pad-x: clamp(1rem, 4vw, 2.5rem);          /* 16 → 40px */
@@ -127,8 +151,8 @@
             /* Composite section width + ink. Feature stack and any data-container section. */
             --container-boxed: 1140px;
             --container-wide: 1440px;
-            --color-ink: #17191c;
-            --color-muted: #5c6370;
+            --color-ink: var(--color-charcoal);
+            --color-muted: var(--color-muted-gray);
             --active-brand: var(--pill-accent);
         }
 
@@ -1681,25 +1705,25 @@ body.has-marquee .hero-business .hb-reviews { bottom: 5.75rem; }
            ========================================================= */
 
 body.scheme-white {
-            --charcoal: #17191c;
-            --sch-bg: #ffffff;           /* hero background */
-            --sch-fg: #17191c;           /* all text: charcoal */
+            --charcoal: var(--color-charcoal);
+            --sch-bg: var(--color-white);           /* hero background */
+            --sch-fg: var(--color-charcoal);        /* all text: charcoal */
             --sch-label: var(--raven-600);
-            --sch-soft: #f2f3f5;         /* pills, placeholders, Layout 3 card */
-            --sch-card-pill: #ffffff;    /* pills sitting on the Layout 3 card */
-            --sch-line: #e5e7eb;
-            --sch-muted: #6b7280;
+            --sch-soft: var(--color-gray-100);      /* pills, placeholders, Layout 3 card */
+            --sch-card-pill: var(--color-white);    /* pills sitting on the Layout 3 card */
+            --sch-line: var(--color-gray-200);
+            --sch-muted: var(--color-gray-500);
         }
 
 body.scheme-dark {
-            --charcoal: #17191c;
-            --sch-bg: #17191c;           /* hero background: charcoal */
-            --sch-fg: #ffffff;           /* all text: white */
+            --charcoal: var(--color-charcoal);
+            --sch-bg: var(--color-charcoal);        /* hero background: charcoal */
+            --sch-fg: var(--color-white);           /* all text: white */
             --sch-label: var(--raven-400);
-            --sch-soft: #24272c;
-            --sch-card-pill: #17191c;
+            --sch-soft: var(--color-charcoal-soft);
+            --sch-card-pill: var(--color-charcoal);
             --sch-line: rgba(255,255,255,.1);
-            --sch-muted: #9aa0aa;
+            --sch-muted: var(--color-gray-400);
         }
 
 body:is(.scheme-white, .scheme-dark) .hero {
@@ -2154,7 +2178,7 @@ body.header-btn-white:not(.header-btn-outline) .site-header .sh-btn {
             color: var(--hb-fg);
 }
 body.header-btn-dark:not(.header-btn-outline) .site-header .sh-btn {
-            --hb-bg: #17191c;
+            --hb-bg: var(--color-charcoal, #17191c);
             --hb-fg: #ffffff;
             background: var(--hb-bg);
             color: var(--hb-fg);
@@ -2241,7 +2265,7 @@ body.site-btn-fill.site-btn-brand :is(.btn, .ks-btn, .cta-btn, .svc-all-btn, .fi
             border-color: transparent !important;
 }
 body.site-btn-fill.site-btn-dark :is(.btn, .ks-btn, .cta-btn, .svc-all-btn, .final-ctas .btn):not(.sh-btn):not(.btn-outline):not(.btn-link) {
-            background: #17191c !important;
+            background: var(--color-charcoal, #17191c) !important;
             color: #ffffff !important;
 }
 body.site-btn-fill.site-btn-white :is(.btn, .ks-btn, .cta-btn, .svc-all-btn, .final-ctas .btn):not(.sh-btn):not(.btn-outline):not(.btn-link) {
@@ -2890,10 +2914,10 @@ body.menu-line .site-header .sh-menu > li > :is(a, button)::after { transition: 
             --svc-bg: #ffffff; --svc-fg: #17191c;
             --svc-accent: var(--active-500); --svc-accent-fg: var(--brand-accent-fg, #ffffff);
             --svc-mix: #000000;            /* hover direction: darker */
-            --svc-radius: 14px; --svc-gap: 20px; --svc-ring: 2px;
+            --svc-radius: 14px; --svc-gap: var(--space-6); --svc-ring: 2px;
             position: relative;
             background: var(--svc-bg); color: var(--svc-fg);
-            padding: clamp(4rem, 8vw, 7rem) var(--pad-x);
+            padding: var(--section-pad-y) var(--pad-x);
             font-family: var(--body-font);
         }
 
@@ -3462,7 +3486,7 @@ body.svc-noicon .svc-sub .control-group:has([data-svc="icpos"]),
 
 .rc {
             --rc-bg: #f6f7f9; --rc-fg: #17191c; --rc-card: #ffffff; --rc-line: #e3e5e8; --rc-accent: var(--active-500); --rc-accent-fg: var(--brand-accent-fg, #ffffff);
-            position: relative; background: var(--rc-bg); color: var(--rc-fg); padding: clamp(4rem, 8vw, 7rem) var(--pad-x); font-family: var(--body-font);
+            position: relative; background: var(--rc-bg); color: var(--rc-fg); padding: var(--section-pad-y) var(--pad-x); font-family: var(--body-font);
             /* theme bridge → daisyUI */
             --color-base-100: var(--rc-card); --color-base-200: var(--rc-bg); --color-base-300: var(--rc-line); --color-base-content: var(--rc-fg);
             --color-primary: var(--rc-accent); --color-primary-content: var(--rc-accent-fg); --color-neutral: var(--rc-line); --color-neutral-content: var(--rc-fg);
@@ -3731,7 +3755,7 @@ body.scheme-dark .rc-badge, body.duo-pair:not(.scheme-white):not(.scheme-dark) .
             --ks-muted: color-mix(in oklab, var(--ks-fg) 70%, transparent);
             --color-base-100: var(--ks-card); --color-base-200: var(--ks-bg); --color-base-300: var(--ks-line); --color-base-content: var(--ks-fg);
             --color-primary: var(--ks-accent); --color-primary-content: var(--ks-accent-fg); --depth: 0; --noise: 0;
-            position: relative; background: var(--ks-bg); color: var(--ks-fg); padding: clamp(3.5rem, 7vw, 6rem) var(--pad-x); font-family: var(--body-font);
+            position: relative; background: var(--ks-bg); color: var(--ks-fg); padding: var(--section-pad-y) var(--pad-x); font-family: var(--body-font);
         }
 
 .ks-reviews, .ks-promo { --ks-bg: #f6f7f9; --ks-card: #ffffff; }
