@@ -4080,6 +4080,23 @@ if (typeof document !== 'undefined') {
             });
         });
 
+        document.querySelectorAll('[data-contrast-mode]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('[data-contrast-mode]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const mode = btn.dataset.contrastMode || 'adaptive';
+                document.body.dataset.contrastMode = mode;
+                try { localStorage.setItem('kitContrastMode', mode); } catch (e) {}
+                if (typeof protectThemeContrast === 'function') protectThemeContrast(document);
+                if (window.__brandMarkDirty) window.__brandMarkDirty();
+            });
+        });
+        try {
+            const savedMode = localStorage.getItem('kitContrastMode') || 'adaptive';
+            document.body.dataset.contrastMode = savedMode;
+            document.querySelectorAll('[data-contrast-mode]').forEach(b => b.classList.toggle('active', b.dataset.contrastMode === savedMode));
+        } catch (e) {}
+
         const _renderHeaders = renderHeaders;
         renderHeaders = function () { _renderHeaders(); updateStatusBadges(); fitHeaders(); if (window.__kitMarkNav) window.__kitMarkNav(); };
         updateStatusBadges(); fitHeaders();
@@ -10180,38 +10197,58 @@ if (typeof document !== 'undefined') {
             };
             const protectThemeContrast = (root = document) => {
                 if (!root || !root.querySelectorAll) return;
-                const targets = root.querySelectorAll('section, .page-sheet > div, .hero, .war-band, .rep-band, .ins-band, footer, [class*="-film"], [class*="-close"], [class*="-cta"]');
+
+                // 1. Purge any hardcoded inline color injections on text elements
+                root.querySelectorAll('[style*="color"]').forEach(el => {
+                    if (el.matches('h1, h2, h3, h4, h5, h6, p, span, b, strong, li, .subtext, .label, .overline, .svc-label, .rep-head, .ins-head, .war-head, .rep-inner, .ins-inner, .war-inner')) {
+                        el.style.removeProperty('color');
+                    }
+                });
+
+                // 2. Ensure page-sheet wrappers are never flagged as is-darkbg
+                root.querySelectorAll('.page-sheet, section.page-sheet, #page-repairs, #page-insurance, #page-emergency, #page-warranty, #page-contact, #page-about').forEach(sheet => {
+                    sheet.classList.remove('is-darkbg');
+                    sheet.classList.add('is-lightbg');
+                    sheet.dataset.contrast = 'light';
+                });
+
+                // 3. Evaluate specific atomic surfaces individually
+                const targets = root.querySelectorAll('.hero, .tow-hero, .rep-hero, .ins-hero-film, .hero-media, .rep-film, .war-film, .war-close, .rep-cta, .ins-close, .rep-band, .ins-band, .war-band, .tow-band, footer');
                 targets.forEach(el => {
-                    const hasVideo = el.querySelector('video') !== null;
-                    const style = window.getComputedStyle(el);
-                    const bg = style.backgroundColor;
-                    let isDark = false;
-                    if (hasVideo || el.classList.contains('war-film') || el.classList.contains('rep-film') || el.classList.contains('tow-hero') || el.classList.contains('war-close') || el.classList.contains('rep-cta') || el.classList.contains('ins-close')) {
-                        isDark = true;
-                    } else if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
-                        const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-                        if (m) {
-                            const r = parseInt(m[1], 10);
-                            const g = parseInt(m[2], 10);
-                            const b = parseInt(m[3], 10);
-                            const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-                            if (lum < 0.38) isDark = true;
+                    const hasDirectVideo = el.querySelector(':scope > video, :scope > div > video, :scope > .rep-film-video, :scope > .war-film-video') !== null;
+                    const isKnownDark = hasDirectVideo || el.classList.contains('war-film') || el.classList.contains('rep-film') || el.classList.contains('tow-hero') || el.classList.contains('rep-hero') || el.classList.contains('war-close') || el.classList.contains('ins-close') || el.classList.contains('rep-cta');
+                    const isKnownLight = !isKnownDark && (el.classList.contains('rep-band') || el.classList.contains('ins-band') || el.classList.contains('war-band') || el.classList.contains('tow-band'));
+
+                    let isDark = isKnownDark;
+                    if (!isKnownDark && !isKnownLight) {
+                        const style = window.getComputedStyle(el);
+                        const bg = style.backgroundColor;
+                        if (bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)') {
+                            const m = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                            if (m) {
+                                const r = parseInt(m[1], 10);
+                                const g = parseInt(m[2], 10);
+                                const b = parseInt(m[3], 10);
+                                const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+                                if (lum < 0.42) isDark = true;
+                            }
                         }
                     }
+
                     if (isDark) {
                         el.dataset.contrast = 'dark';
                         el.classList.add('is-darkbg');
-                        el.querySelectorAll('.subtext, p, li').forEach(p => {
-                            if (!p.closest('.stats, .promo-card, .btn, .cta-btn, .war-stats')) {
-                                p.style.setProperty('color', 'rgba(255, 255, 255, 0.88)', 'important');
-                            }
-                        });
-                        el.querySelectorAll('h1, h2, h3, h4').forEach(h => {
-                            h.style.setProperty('color', '#ffffff', 'important');
-                        });
-                        el.querySelectorAll('.label, .overline, .svc-label').forEach(lbl => {
-                            lbl.style.setProperty('color', 'var(--active-400, #4ade80)', 'important');
-                        });
+                        el.classList.remove('is-lightbg');
+                        el.style.setProperty('--surface-ink', '#ffffff');
+                        el.style.setProperty('--surface-text', 'rgba(255, 255, 255, 0.88)');
+                        el.style.setProperty('--surface-subtext', 'rgba(255, 255, 255, 0.75)');
+                    } else {
+                        el.dataset.contrast = 'light';
+                        el.classList.add('is-lightbg');
+                        el.classList.remove('is-darkbg');
+                        el.style.setProperty('--surface-ink', '#111827');
+                        el.style.setProperty('--surface-text', '#1f2937');
+                        el.style.setProperty('--surface-subtext', '#475569');
                     }
                 });
             };
@@ -10938,6 +10975,14 @@ if (typeof document !== 'undefined') {
             settingsBtn.innerHTML = ms('settings');
             foot.prepend(settingsBtn);
             if (settingsBtn.closest('.kit-head, .kit-modes, .kit-canvas-bar')) foot.prepend(settingsBtn);
+
+            const kitLink = document.createElement('a');
+            kitLink.href = '/kit';
+            kitLink.className = 'sidebar-footer-link';
+            kitLink.id = 'btn-open-kit';
+            kitLink.title = 'Component Kit Showcase';
+            kitLink.innerHTML = `<span class="material-symbols-outlined">settings_heart</span><span>Kit</span>`;
+            foot.appendChild(kitLink);
             const account = document.createElement('div');
             account.id = 'kit-account';
             account.className = 'kit-account';

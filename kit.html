@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pandino UI Kit &amp; Design System Showcase (/kit)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="./css/tokens-base.css?v=kit-showcase" />
+  <link rel="stylesheet" href="./css/services-components.css?v=kit-showcase" />
+  <style>
+    :root {
+      --kit-bg: #0b0f17;
+      --kit-card-bg: #111827;
+      --kit-border: rgba(255, 255, 255, 0.08);
+      --kit-text: #f8fafc;
+      --kit-muted: #94a3b8;
+    }
+    body.kit-showroom-light {
+      --kit-bg: #f8fafc;
+      --kit-card-bg: #ffffff;
+      --kit-border: rgba(0, 0, 0, 0.08);
+      --kit-text: #0f172a;
+      --kit-muted: #64748b;
+    }
+    html, body {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      height: auto !important;
+      min-height: 100vh;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--kit-bg);
+      color: var(--kit-text);
+      font-family: var(--body-font, 'Manrope', sans-serif);
+      transition: background-color .2s ease, color .2s ease;
+      line-height: 1.5;
+    }
+    .kit-nav-top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: color-mix(in oklab, var(--kit-bg) 85%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--kit-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .kit-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: var(--kit-text);
+    }
+    .kit-nav-brand .material-symbols-outlined {
+      color: var(--active-500, #0472f1);
+      font-size: 24px;
+    }
+    .kit-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .kit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--kit-border);
+      background: var(--kit-card-bg);
+      color: var(--kit-text);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .15s ease;
+    }
+    .kit-btn:hover {
+      border-color: var(--active-400, #0472f1);
+      color: var(--active-400, #0472f1);
+    }
+    .kit-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .kit-sec-head {
+      border-bottom: 1px solid var(--kit-border);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .kit-sec-head h2 {
+      margin: 0;
+      font-family: var(--headline-font, 'Syne', sans-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .kit-sec-head p {
+      margin: 4px 0 0;
+      color: var(--kit-muted);
+      font-size: 0.95rem;
+    }
+    /* Brand Tint / Shade Grid */
+    .kit-swatches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+    }
+    .kit-swatch-card {
+      background: var(--kit-card-bg);
+      border: 1px solid var(--kit-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .kit-swatch-box {
+      height: 70px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .kit-swatch-meta {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+    }
+    .kit-swatch-meta strong {
+      font-size: 0.9rem;
+      color: var(--kit-text);
+    }
+    .kit-swatch-meta code {
+      font-family: monospace;
+      color: var(--kit-muted);
+    }
+    .kit-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.725rem;
+      font-weight: 700;
+      width: fit-content;
+      margin-top: 4px;
+    }
+    .kit-badge.pass { background: #064e3b; color: #6ee7b7; }
+    .kit-badge.fail { background: #7f1d1d; color: #fca5a5; }
+
+    /* Surface Demo Box */
+    .kit-surface-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .kit-surface-demo { grid-template-columns: 1fr; }
+    }
+    .kit-surface-box {
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 1px solid var(--kit-border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .kit-surface-box.light {
+      background: #ffffff;
+      color: #111827;
+    }
+    .kit-surface-box.dark {
+      background: #111315;
+      color: #ffffff;
+    }
+    .kit-surface-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* Primitives Showcase */
+    .kit-primitives-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    /* Cards Showcase Grid */
+    .kit-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Buttons Row */
+    .kit-buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+      background: var(--kit-card-bg);
+      border: 1px solid var(--kit-border);
+      border-radius: 12px;
+    }
+    .kit-palette-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .kit-color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 99px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .kit-color-dot:hover, .kit-color-dot.active {
+      transform: scale(1.15);
+      border-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="kit-nav-top">
+    <a href="/" class="kit-nav-brand">
+      <span class="material-symbols-outlined">settings_heart</span>
+      <span>Pandino Design System · UI Kit</span>
+    </a>
+    <div class="kit-nav-actions">
+      <button type="button" class="kit-btn" id="btnToggleShowroomTheme">
+        <span class="material-symbols-outlined">light_mode</span>
+        <span>Canvas Mode</span>
+      </button>
+      <a href="/" class="kit-btn">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Back to Builder</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="kit-container">
+
+    <!-- HERO INTRO -->
+    <div class="header-group" style="text-align: center; max-width: 780px; margin: 0 auto;">
+      <div class="title-wrap">
+        <span class="svc-label label overline" style="color: var(--active-500, #0472f1);">Living Styleguide &amp; Architectural Protection</span>
+        <h1 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 3.5vw, 3.2rem); margin: 0;">Component Kit Showcase (/kit)</h1>
+      </div>
+      <p class="subtext" style="color: var(--kit-muted); font-size: 1.15rem; margin-top: 8px;">
+        Single source of truth for color tokens, contrast compliance, live typographic primitives, and standardized card components.
+      </p>
+
+      <!-- Palette Switcher -->
+      <div class="kit-palette-picker" style="justify-content: center; margin-top: 18px;">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--kit-muted); margin-right: 6px;">Active Brand Palette:</span>
+        <button type="button" class="kit-color-dot active" data-color="azure" style="background: #007aff;" title="Azure Radiance"></button>
+        <button type="button" class="kit-color-dot" data-color="blue" style="background: #2563eb;" title="Blue"></button>
+        <button type="button" class="kit-color-dot" data-color="rose" style="background: #f43f5e;" title="Rose"></button>
+        <button type="button" class="kit-color-dot" data-color="emerald" style="background: #10b981;" title="Emerald"></button>
+        <button type="button" class="kit-color-dot" data-color="gamboge" style="background: #eab308;" title="Gamboge"></button>
+        <button type="button" class="kit-color-dot" data-color="punch" style="background: #ea580c;" title="Punch"></button>
+        <button type="button" class="kit-color-dot" data-color="orange" style="background: #f97316;" title="International Orange"></button>
+        <button type="button" class="kit-color-dot" data-color="turquoise" style="background: #06b6d4;" title="Turquoise"></button>
+        <button type="button" class="kit-color-dot" data-color="raven" style="background: #475569;" title="Raven"></button>
+      </div>
+    </div>
+
+    <!-- 1. COLOR TOKENS & CONTRAST -->
+    <section>
+      <div class="kit-sec-head">
+        <div>
+          <h2>1. Theme Tokens &amp; 12 Shade Scale</h2>
+          <p>Dynamically computed from active brand color. Shows contrast ratio and surface text default rules.</p>
+        </div>
+      </div>
+      <div class="kit-swatches-grid" id="kitSwatchesGrid">
+        <!-- Dynamically painted by script -->
+      </div>
+    </section>
+
+    <!-- 2. LIVE TYPOGRAPHY & PRIMITIVES -->
+    <section>
+      <div class="kit-sec-head">
+        <div>
+          <h2>2. Live Typography Primitives (.header-group, .title-wrap)</h2>
+          <p>Side-by-side verification: Light surfaces strictly render dark ink (#111827), dark surfaces render crisp white (#ffffff).</p>
+        </div>
+      </div>
+
+      <div class="kit-surface-demo">
+        <!-- Light Surface -->
+        <div class="kit-surface-box light" data-contrast="light">
+          <span class="kit-surface-title">Light Surface (data-contrast="light" · White / --surface-wash)</span>
+          <div class="header-group">
+            <div class="title-wrap">
+              <span class="svc-label label overline">Standard Overline</span>
+              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem;">Precision Body Repair &amp; Spray Booth</h2>
+            </div>
+            <p class="subtext">Factory tolerances verified by laser measuring equipment before and after paint handoff.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="step-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #ffffff); color: var(--active-600, #0472f1); font-weight: 700; font-size: 0.8125rem;">01</span>
+            <span class="svc-badge">Certified Workshop</span>
+            <button class="tier-btn active">Primary Filter</button>
+            <button class="tier-btn">Secondary Filter</button>
+          </div>
+        </div>
+
+        <!-- Dark Surface -->
+        <div class="kit-surface-box dark is-darkbg" data-contrast="dark">
+          <span class="kit-surface-title" style="color: rgba(255, 255, 255, 0.6);">Dark Surface (data-contrast="dark" · Charcoal / Video Hero / Film)</span>
+          <div class="header-group">
+            <div class="title-wrap">
+              <span class="svc-label label overline">Standard Overline</span>
+              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem;">Precision Body Repair &amp; Spray Booth</h2>
+            </div>
+            <p class="subtext">Factory tolerances verified by laser measuring equipment before and after paint handoff.</p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="step-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: rgba(255, 255, 255, 0.15); color: #ffffff; font-weight: 700; font-size: 0.8125rem;">01</span>
+            <span class="svc-badge" style="background: #ffffff; color: #111315;">Certified Workshop</span>
+            <button class="tier-btn active" style="background: var(--active-600, #0472f1); color: #ffffff;">Primary Filter</button>
+            <button class="tier-btn" style="background: rgba(255,255,255,0.1); color: #ffffff; border-color: rgba(255,255,255,0.2);">Secondary Filter</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. OFFICIAL CARD VARIATIONS -->
+    <section>
+      <div class="kit-sec-head">
+        <div>
+          <h2>3. Official Card Primitives &amp; Variations</h2>
+          <p>Standardized card tokens: --surface-wash fill, var(--card-radius), borders, and hover elevation.</p>
+        </div>
+      </div>
+
+      <!-- STEP CARDS (.rep-cards / .ins-cards) -->
+      <h3 style="margin: 0 0 12px; font-size: 1.15rem; color: var(--kit-text);">A. Subpage Step Cards (ul.rep-cards / ul.ins-cards)</h3>
+      <div class="rep-band" style="background: var(--kit-card-bg); padding: 24px; border-radius: 16px; border: 1px solid var(--kit-border);">
+        <ul class="rep-cards">
+          <li>
+            <b>Look and measure</b>
+            <span>We photograph the damage, measure the frame, and tell you what can be saved.</span>
+          </li>
+          <li>
+            <b>Structural repair</b>
+            <span>Bent rails and pillars are pulled back to factory points, then welded where metal tore.</span>
+          </li>
+          <li>
+            <b>Paint in our booth</b>
+            <span>Colour is matched to the car’s code and baked, not blended in the parking lot.</span>
+          </li>
+          <li>
+            <b>Detail and handoff</b>
+            <span>Panels are fitted, lights aimed, and you walk the car with us before you leave.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- SERVICE CARDS (.svc-card in .svc-grid) -->
+      <h3 style="margin: 32px 0 12px; font-size: 1.15rem; color: var(--kit-text);">B. Standard Service Cards (.svc-card / .svc-grid)</h3>
+      <div class="svc" data-card="fill" data-corner="rounded" style="--svc-fill: var(--active-100); --svc-card-fg: #1e242c; --svc-radius: 16px; --svc-gap: 16px;">
+        <ul class="svc-grid" role="list">
+          <li class="svc-card">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+                <span class="material-symbols-outlined">build</span>
+              </span>
+              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Collision Repair</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569;">Frame and body restored to factory specs after any collision.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>Learn more</span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </span>
+            </a>
+          </li>
+          <li class="svc-card">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+                <span class="material-symbols-outlined">shield</span>
+              </span>
+              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Insurance Claims</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569;">We handle the paperwork and itemized quotes directly with your insurer.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>Learn more</span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </span>
+            </a>
+          </li>
+          <li class="svc-card">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+                <span class="material-symbols-outlined">speed</span>
+              </span>
+              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Suspension &amp; Alignment</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569;">Alignment checks and chassis balancing after pothole or curb strikes.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>Learn more</span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. CTA BLOCKS & BUTTON TIERS -->
+    <section>
+      <div class="kit-sec-head">
+        <div>
+          <h2>4. CTA Blocks &amp; Button Tiers</h2>
+          <p>Official CTA blocks (dark and light) plus primary, secondary, and tier button variants.</p>
+        </div>
+      </div>
+
+      <!-- CTA Dark Block -->
+      <div class="rep-band rep-cta is-darkbg" data-contrast="dark" style="background: #111315; border-radius: 20px; padding: 36px 32px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px;">
+        <div class="rep-inner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+          <header class="rep-head header-group" style="text-align: left; margin: 0;">
+            <div class="title-wrap">
+              <span class="svc-label label overline" style="color: var(--active-400, #4ade80);">Estimate &amp; Inspection</span>
+              <h2 style="color: #ffffff !important; margin: 0; font-size: 2rem;">Ask for an itemized repair plan.</h2>
+            </div>
+            <p class="subtext" style="color: #c9cdd3 !important; margin: 6px 0 0;">Send three photos. We reply with a written plan before any panel comes off.</p>
+          </header>
+          <div class="cta-row" style="display: flex; gap: 12px; align-items: center;">
+            <button class="btn cta-btn cta-primary">Upload Photos</button>
+            <button class="btn cta-btn cta-primary cta-second">Call Workshop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button Tiers Bar -->
+      <div class="kit-buttons-row">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--kit-muted); margin-right: 8px;">Button Primitives:</span>
+        <button class="btn cta-btn cta-primary">CTA Primary</button>
+        <button class="btn cta-btn cta-primary cta-second">CTA Secondary</button>
+        <button class="tier-btn active">Tier Active</button>
+        <button class="tier-btn">Tier Default</button>
+        <button class="btn-pill" style="padding: 6px 14px; border-radius: 99px; background: var(--active-600, #0472f1); color: #fff; border: 0; font-weight: 600; font-size: 0.85rem; cursor: pointer;">Pill Button</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Palettes defined in design system
+    const PALETTES = {
+      azure: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a', 950:'#172554' },
+      blue: { 50:'#f0f9ff', 100:'#e0f2fe', 200:'#bae6fd', 300:'#7dd3fc', 400:'#38bdf8', 500:'#0ea5e9', 600:'#0284c7', 700:'#0369a1', 800:'#075985', 900:'#0c4a6e', 950:'#082f49' },
+      rose: { 50:'#fff1f2', 100:'#ffe4e6', 200:'#fecdd3', 300:'#fda4af', 400:'#fb7185', 500:'#f43f5e', 600:'#e11d48', 700:'#be123c', 800:'#9f1239', 900:'#881337', 950:'#4c0519' },
+      emerald: { 50:'#ecfdf5', 100:'#d1fae5', 200:'#a7f3d0', 300:'#6ee7b7', 400:'#34d399', 500:'#10b981', 600:'#059669', 700:'#047857', 800:'#065f46', 900:'#064e3b', 950:'#022c22' },
+      gamboge: { 50:'#fefce8', 100:'#fef9c3', 200:'#fef08a', 300:'#fde047', 400:'#facc15', 500:'#eab308', 600:'#ca8a04', 700:'#a16207', 800:'#854d0e', 900:'#713f12', 950:'#422006' },
+      punch: { 50:'#fff7ed', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 400:'#fb923c', 500:'#f97316', 600:'#ea580c', 700:'#c2410c', 800:'#9a3412', 900:'#7c2d12', 950:'#431407' },
+      orange: { 50:'#fff7ed', 100:'#ffedd5', 200:'#fed7aa', 300:'#fdba74', 400:'#fb923c', 500:'#f97316', 600:'#ea580c', 700:'#c2410c', 800:'#9a3412', 900:'#7c2d12', 950:'#431407' },
+      turquoise: { 50:'#ecfeff', 100:'#cffafe', 200:'#a5f3fc', 300:'#67e8f9', 400:'#22d3ee', 500:'#06b6d4', 600:'#0891b2', 700:'#0e7490', 800:'#155e75', 900:'#164e63', 950:'#083344' },
+      raven: { 50:'#f8fafc', 100:'#f1f5f9', 200:'#e2e8f0', 300:'#cbd5e1', 400:'#94a3b8', 500:'#64748b', 600:'#475569', 700:'#334155', 800:'#1e293b', 900:'#0f172a', 950:'#020617' }
+    };
+
+    function hexToRgb(hex) {
+      let c = hex.replace('#', '');
+      if (c.length === 3) c = c.split('').map(x => x+x).join('');
+      const n = parseInt(c, 16);
+      return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+
+    function getLuminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+    }
+
+    function getContrast(l1, l2) {
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    function paintSwatches(paletteName) {
+      const pal = PALETTES[paletteName] || PALETTES.azure;
+      const grid = document.getElementById('kitSwatchesGrid');
+      grid.innerHTML = '';
+
+      const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+      const whiteLum = 1.0;
+      const inkLum = getLuminance(17, 24, 39); // #111827
+
+      steps.forEach(step => {
+        const hex = pal[step];
+        const rgb = hexToRgb(hex);
+        const lum = getLuminance(rgb.r, rgb.g, rgb.b);
+        const ratioWhite = getContrast(lum, whiteLum);
+        const ratioInk = getContrast(lum, inkLum);
+        const isDeep = lum < 0.42;
+        const passText = isDeep ? 'Deep: White Text' : 'Light: Dark Text';
+        const bestRatio = isDeep ? ratioWhite.toFixed(1) : ratioInk.toFixed(1);
+
+        const card = document.createElement('div');
+        card.className = 'kit-swatch-card';
+        card.innerHTML = `
+          <div class="kit-swatch-box" style="background:${hex}; color:${isDeep ? '#ffffff' : '#111827'};">
+            ${step}
+          </div>
+          <div class="kit-swatch-meta">
+            <strong>--active-${step}</strong>
+            <code>${hex}</code>
+            <span style="font-size:0.75rem; color:var(--kit-muted);">Lum: ${lum.toFixed(3)}</span>
+            <span class="kit-badge ${bestRatio >= 4.5 ? 'pass' : 'fail'}">
+              ${passText} (${bestRatio}:1)
+            </span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Update root active variables
+      const root = document.documentElement;
+      steps.forEach(s => {
+        root.style.setProperty(`--active-${s}`, pal[s]);
+      });
+      root.style.setProperty('--active-brand', pal[500]);
+    }
+
+    // Toggle Canvas Light / Dark
+    document.getElementById('btnToggleShowroomTheme').addEventListener('click', () => {
+      document.body.classList.toggle('kit-showroom-light');
+    });
+
+    // Palette dots
+    document.querySelectorAll('.kit-color-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        document.querySelectorAll('.kit-color-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        paintSwatches(dot.dataset.color);
+      });
+    });
+
+    // Initial paint
+    paintSwatches('azure');
+  </script>
+</body>
+</html>
