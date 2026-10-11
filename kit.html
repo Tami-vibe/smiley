@@ -660,6 +660,81 @@
       border-color: var(--active-500, #0472f1);
       box-shadow: 0 0 0 3px color-mix(in oklab, var(--active-500) 20%, transparent);
     }
+
+    /* Vibrant Service Card Styles (Image 1 Theme Reference) */
+    .kit-svc-brand-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .kit-svc-brand-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .kit-svc-brand-card {
+      background: var(--active-500, #007aff);
+      border-radius: var(--card-radius, 16px);
+      padding: clamp(1.5rem, 2.5vw, 2.2rem);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 122, 255, 0.25);
+      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, background-color .2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .kit-svc-brand-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(0, 122, 255, 0.4);
+    }
+    .kit-svc-brand-card .svc-ic {
+      width: 40px;
+      height: 40px;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+      transition: transform .25s ease;
+    }
+    .kit-svc-brand-card:hover .svc-ic {
+      transform: scale(1.08);
+    }
+    .kit-svc-brand-card h3 {
+      margin: 0;
+      font-family: var(--headline-font, 'Syne', sans-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.015em;
+    }
+    .kit-svc-brand-card p {
+      margin: 0;
+      font-family: var(--body-font, 'Manrope', sans-serif);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.88);
+      flex: 1;
+    }
+    .kit-svc-brand-card .svc-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-top: 0.5rem;
+      text-decoration: none;
+    }
+    .kit-svc-brand-card .svc-arrow {
+      width: 1.2em;
+      height: 1.2em;
+      display: inline-block;
+      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .kit-svc-brand-card:hover .svc-arrow {
+      transform: translateX(6px);
+    }
   </style>
 </head>
 <body class="kit-standalone-page">
@@ -678,9 +753,11 @@
       <a href="#sec-tokens" class="kit-nav-pill active">1. Color Ramp</a>
       <a href="#sec-buttons" class="kit-nav-pill">2. Premium Buttons</a>
       <a href="#sec-typography" class="kit-nav-pill">3. Typography</a>
-      <a href="#sec-cards" class="kit-nav-pill">4. Card Primitives</a>
-      <a href="#sec-recipes" class="kit-nav-pill">5. Section Recipes</a>
-      <a href="#sec-forms" class="kit-nav-pill">6. Form Controls</a>
+      <a href="#sec-cards" class="kit-nav-pill">4. Card Primitives &amp; Services</a>
+      <a href="#sec-heroes" class="kit-nav-pill">5. Homepage Hero Layouts</a>
+      <a href="#sec-about" class="kit-nav-pill">6. Our Story Timeline</a>
+      <a href="#sec-recipes" class="kit-nav-pill">7. Section Recipes</a>
+      <a href="#sec-forms" class="kit-nav-pill">8. Form Controls</a>
     </nav>
 
     <!-- Top Controls -->
@@ -962,8 +1039,111 @@
         </ul>
       </div>
 
-      <!-- B. SERVICE CARDS (.svc-card in .svc-grid) -->
-      <h3 style="margin: 36px 0 14px; font-size: 1.15rem; color: var(--kit-text);">B. Standard Service Cards (.svc-card / .svc-grid)</h3>
+      <!-- B. VIBRANT SOLID BRAND FILL CARDS (THEME ACCORD IMAGE 1) -->
+      <h3 style="margin: 36px 0 14px; font-size: 1.15rem; color: var(--kit-text);">B. Solid Brand Fill Cards (.svc[data-card="fill"]) with Animated "Learn More →"</h3>
+      <div style="background: var(--kit-card-bg); padding: clamp(24px, 3vw, 40px); border-radius: 20px; border: 1px solid var(--kit-border);">
+        <div class="svc-head" style="text-align: left; align-items: flex-start; margin-bottom: 32px;">
+          <div class="title-wrap" style="align-items: flex-start; text-align: left;">
+            <span class="svc-label label overline" style="color: var(--active-500, #007aff); font-weight: 700;">Collision Services</span>
+            <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; color: var(--kit-text); margin: 6px 0; letter-spacing: -0.02em;">Everything your car needs after an accident.</h2>
+          </div>
+          <p class="subtext" style="color: var(--kit-muted); font-size: 1.1rem; line-height: 1.5; margin: 0;">From the first call to the final polish, one workshop takes care of it all.</p>
+        </div>
+
+        <div class="kit-svc-brand-grid">
+          <!-- Card 1: Collision Repair -->
+          <a class="kit-svc-brand-card" href="#services">
+            <svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path>
+              <path d="M14 8v-2"></path>
+              <path d="M19 12h2"></path>
+              <path d="M17.5 15.5l1.5 1.5"></path>
+              <path d="M17.5 8.5l1.5 -1.5"></path>
+            </svg>
+            <h3>Collision repair</h3>
+            <p>Frame and body restored to factory specs after any accident.</p>
+            <span class="svc-more">
+              <span>Learn more</span>
+              <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12l14 0"></path>
+                <path d="M13 18l6 -6"></path>
+                <path d="M13 6l6 6"></path>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Card 2: Paint & Refinishing -->
+          <a class="kit-svc-brand-card" href="#services">
+            <svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 12a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2l0 -7"></path>
+              <path d="M6 10v-4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4"></path>
+              <path d="M15 7h.01"></path>
+              <path d="M18 9h.01"></path>
+              <path d="M18 5h.01"></path>
+              <path d="M21 3h.01"></path>
+              <path d="M21 7h.01"></path>
+              <path d="M21 11h.01"></path>
+              <path d="M10 7h1"></path>
+            </svg>
+            <h3>Paint &amp; refinishing</h3>
+            <p>Computer colour matching and a showroom finish.</p>
+            <span class="svc-more">
+              <span>Learn more</span>
+              <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12l14 0"></path>
+                <path d="M13 18l6 -6"></path>
+                <path d="M13 6l6 6"></path>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Card 3: Frame & Suspension -->
+          <a class="kit-svc-brand-card" href="#services">
+            <svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 22a3 3 0 1 1 0 -6a3 3 0 0 1 0 6"></path>
+              <path d="M12 16v-12"></path>
+              <path d="M13 2h-2v2h2v-2"></path>
+              <path d="M9 11l6 -1"></path>
+              <path d="M9 14l6 -1"></path>
+              <path d="M9 8l6 -1"></path>
+            </svg>
+            <h3>Frame &amp; suspension</h3>
+            <p>Alignment checks after impacts and potholes.</p>
+            <span class="svc-more">
+              <span>Learn more</span>
+              <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12l14 0"></path>
+                <path d="M13 18l6 -6"></path>
+                <path d="M13 6l6 6"></path>
+              </svg>
+            </span>
+          </a>
+
+          <!-- Card 4: Courtesy Car -->
+          <a class="kit-svc-brand-card" href="#services">
+            <svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+              <path d="M15 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+              <path d="M5 20h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path>
+              <path d="M3 6l9 -4l9 4"></path>
+            </svg>
+            <h3>Courtesy car</h3>
+            <p>Keep moving while we repair your vehicle.</p>
+            <span class="svc-more">
+              <span>Learn more</span>
+              <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12l14 0"></path>
+                <path d="M13 18l6 -6"></path>
+                <path d="M13 6l6 6"></path>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- C. SURFACE WASH & ICON BADGE CARDS -->
+      <h3 style="margin: 36px 0 14px; font-size: 1.15rem; color: var(--kit-text);">C. Surface Wash Cards with Icon Wrapper (.svc-icwrap)</h3>
       <div class="svc" data-card="fill" data-corner="rounded">
         <ul class="svc-grid" role="list">
           <li class="svc-card">
@@ -975,7 +1155,7 @@
               <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">Frame and body restored to factory specs after any collision.</p>
               <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
                 <span>Explore process</span>
-                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                <span class="material-symbols-outlined svc-arrow" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
           </li>
@@ -988,7 +1168,7 @@
               <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">We handle the paperwork and itemized quotes directly with your insurer.</p>
               <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
                 <span>Insurance claims</span>
-                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                <span class="material-symbols-outlined svc-arrow" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
           </li>
@@ -1001,7 +1181,7 @@
               <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">Alignment checks and chassis balancing after pothole or curb strikes.</p>
               <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
                 <span>View telemetry</span>
-                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                <span class="material-symbols-outlined svc-arrow" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
           </li>
@@ -1010,12 +1190,351 @@
     </section>
 
     <!-- =========================================================
-         5. SECTION RECIPES SHOWROOM (EVERY SECTION IN THE THEME)
+         5. ALL HOMEPAGE HERO SECTION LAYOUT OPTIONS (6 TOTAL)
+         ========================================================= -->
+    <section id="sec-heroes">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 5</span>
+          <h2>Homepage Hero Section Layout Options</h2>
+          <p>The complete 6 hero architectural layouts supported in the builder. Switch anytime via Inspector.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+
+        <!-- HERO OPTION 1: SOFT GRADIENT CENTERED -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 1</span>
+              <h4 class="kit-recipe-title">Soft Center Gradient (data-hmhero="0")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-gradient" data-panel="off"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport gradient-viewport" style="text-align: center; padding: 70px 24px;">
+            <div class="header-group" style="max-width: 720px; margin: 0 auto;">
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8); font-weight: 700;">Step Into The Green</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 8px 0; color: #ffffff; letter-spacing: -0.02em;">Experience the Future of Mobility</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.15rem; line-height: 1.55; margin-top: 12px;">
+                Advanced technology meets stunning design. Premium automotive experience awaits you in Milan.
+              </p>
+              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 28px; flex-wrap: wrap;">
+                <button class="btn ks-btn">Book a Test Drive</button>
+                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO OPTION 2: FULL-BLEED VIDEO WITH BUSINESS PANEL -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 2</span>
+              <h4 class="kit-recipe-title">Full-Bleed Media + Floating Business Panel (data-hmhero="1")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-fullbleed" data-panel="right"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: url(./media/hero/highway-suv.jpg) center/cover no-repeat; min-height: 420px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; padding: 50px 36px;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.88) 100%); pointer-events: none;"></div>
+            
+            <div class="header-group" style="position: relative; z-index: 2; max-width: 540px;">
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8); font-weight: 700;">Unlock Performance</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2rem, 3.5vw, 2.7rem); color: #ffffff; margin: 8px 0; letter-spacing: -0.02em;">Unlock Next Level Performance</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-top: 8px; line-height: 1.5;">Experience the power of cutting-edge technology and engineering excellence.</p>
+              <div style="display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap;">
+                <button class="btn ks-btn">Explore Now →</button>
+                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+              </div>
+            </div>
+
+            <!-- Floating Biz Panel -->
+            <div style="position: relative; z-index: 2; background: rgba(18, 24, 38, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.15); border-radius: 18px; padding: 24px; width: 320px; display: flex; flex-direction: column; gap: 12px;">
+              <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--active-400);">Operating Hours</span>
+              <div style="font-size: 1rem; font-weight: 700; color: #ffffff;">Mon - Fri: 08:00 - 18:30</div>
+              <div style="font-size: 0.875rem; color: #94a3b8;">Via Nazionale 42, Milan · Booth #1</div>
+              <a href="tel:+390212345678" style="color: var(--active-400); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
+                <span>+39 02 1234 5678</span>
+              </a>
+            </div>
+            
+            <div style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 120px; background: var(--active-500); border-radius: 3px 0 0 3px;"></div>
+          </div>
+        </div>
+
+        <!-- HERO OPTION 3: CENTERED PHOTO / FRAMED -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 3</span>
+              <h4 class="kit-recipe-title">Centered Framed Media Card (data-hmhero="2")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-centered" data-panel="left"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="position: relative; min-height: 400px; border-radius: 20px; overflow: hidden; background: url(./media/showcase/workshop-bay.jpg) center/cover no-repeat; display: flex; align-items: flex-end; padding: 40px 32px; border: 2px solid rgba(255,255,255,0.12);">
+              <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%);"></div>
+              <div class="header-group" style="position: relative; z-index: 2; max-width: 600px;">
+                <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Next-Gen Automotive</span>
+                <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.4rem; color: #ffffff; margin: 6px 0;">Build a Life in Performance</h2>
+                <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.5;">Streamline your experience and boost confidence with intuitive solutions. Speed, safety, and simplicity—all in one vehicle.</p>
+                <div style="display: flex; gap: 12px; margin-top: 20px;">
+                  <button class="btn ks-btn">Get Started</button>
+                  <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO OPTION 4: SIDE MENU / FRAMED SIDEBAR -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 4</span>
+              <h4 class="kit-recipe-title">Framed Sidebar Navigation Menu (data-hmhero="3")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-framed" data-panel="bottom"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 44px 32px; display: grid; grid-template-columns: minmax(180px, 240px) 1fr; gap: 40px; align-items: center;">
+            <!-- Left Sidebar Navigation -->
+            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+              <div>
+                <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--active-400); letter-spacing: 0.08em;">Navigation</span>
+                <h4 style="margin: 4px 0 0; font-size: 1.15rem; color: #fff;">Workshop Index</h4>
+              </div>
+              <nav style="display: flex; flex-direction: column; gap: 4px;">
+                <a href="#" style="padding: 8px 12px; border-radius: 8px; background: rgba(255,255,255,0.08); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600;">01. Collision Bay</a>
+                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">02. Paint Oven</a>
+                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">03. Frame Jig</a>
+                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">04. Loaner Fleet</a>
+              </nav>
+            </div>
+
+            <!-- Right Content Column -->
+            <div class="header-group" style="max-width: 580px;">
+              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Right Column</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.3rem; color: #ffffff; margin: 8px 0;">Build a Life in Performance</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.55;">Supporting content for the right side column. Distinct dual-column architecture for modern automotive portals.</p>
+              <div style="display: flex; gap: 12px; margin-top: 22px;">
+                <button class="btn ks-btn">Action Button</button>
+                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO OPTION 5: BOLD LINE / MINIMALIST -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 5</span>
+              <h4 class="kit-recipe-title">Bold Minimal / 96px+ Typography (data-hmhero="4")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-aerial" data-panel="off"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: #090e17; padding: 60px 36px; text-align: left;">
+            <div class="header-group" style="max-width: 800px;">
+              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700; font-size: 0.95rem;">Innovation</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.95; font-weight: 800; color: #ffffff; margin: 12px 0 16px; letter-spacing: -0.04em;">Beast Mode</h2>
+              <p class="subtext" style="color: #94a3b8; font-size: 1.25rem; line-height: 1.5; max-width: 580px;">Self-driving freight is here. The future of logistics starts now.</p>
+              <div style="display: flex; gap: 14px; margin-top: 28px;">
+                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: #ffffff; padding: 12px 28px;">Enter Now</button>
+                <button class="btn ks-btn-outline" style="color: rgba(255,255,255,0.7) !important; border-color: rgba(255,255,255,0.2); padding: 12px 28px;">Learn More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO OPTION 6: PHOTO BESIDE WORDS / BUSINESS INFO -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Hero Layout 6</span>
+              <h4 class="kit-recipe-title">Business Info / Split Photo Stage (data-hmhero="5")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-business" data-panel="bottom"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 44px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+            <!-- Left Media Stage with Interactive Slide Dots -->
+            <div style="position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 16/10; box-shadow: 0 12px 32px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+              <img src="./media/showcase/mountain-road.jpg" alt="Business Hero Stage" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <div style="position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
+                <span style="width: 24px; height: 6px; border-radius: 3px; background: #ffffff;"></span>
+                <span style="width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.4);"></span>
+                <span style="width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.4);"></span>
+              </div>
+            </div>
+
+            <!-- Right Business Content -->
+            <div class="header-group">
+              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Body Shop in Milan</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.3rem; color: #ffffff; margin: 8px 0; letter-spacing: -0.02em;">Your car in safe hands.</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.5;">Repairs, paint and insurance claims. Certified technician team with full manufacturer calibration rigs.</p>
+              <div style="margin-top: 22px;">
+                <button class="btn ks-btn">Call Workshop Floor</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. OUR STORY MILESTONE TIMELINE (THEME ACCORD IMAGE 2)
+         ========================================================= -->
+    <section id="sec-about">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 6</span>
+          <h2>Our Story: Interactive Milestone Timeline</h2>
+          <p>The exact vertical milestone timeline from the theme (#about.ks-about-timeline). Alternating media cards with central axis and milestone nodes.</p>
+        </div>
+      </div>
+
+      <div class="kit-recipe-box">
+        <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 70px 24px;">
+          <!-- Alternating Timeline Container -->
+          <div class="timeline-container" data-container="boxed">
+            <div class="timeline-header" style="text-align: center; margin-bottom: 70px;">
+              <h2 class="timeline-headline" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: clamp(2.4rem, 4vw, 3.4rem); color: #ffffff; font-weight: 400; margin: 0; letter-spacing: -0.02em;">Our story</h2>
+            </div>
+
+            <div class="timeline-track" style="position: relative; max-width: 980px; margin: 0 auto;">
+              <!-- Central Axis -->
+              <div class="timeline-axis" aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #262626; transform: translateX(-50%);"></div>
+
+              <!-- Row 1: 2021 (Left Media, Right Content) -->
+              <div class="timeline-row row-left-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
+                <div class="timeline-media" style="grid-column: 1; justify-self: end; padding-right: 40px; width: 100%; max-width: 380px;">
+                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <img src="./media/showcase/bodywork-door-repair.jpg" alt="2021 First Prototype" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                  </div>
+                </div>
+                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div class="timeline-content" style="grid-column: 3; justify-self: start; padding-left: 40px; max-width: 380px;">
+                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2021</h3>
+                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
+                    First prototype launched. Focused on solving core workflow bottlenecks for early adopters and establishing foundational standards.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Row 2: 2022 (Left Content, Right Media) -->
+              <div class="timeline-row row-right-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
+                <div class="timeline-content" style="grid-column: 1; justify-self: end; text-align: left; padding-right: 40px; max-width: 380px;">
+                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2022</h3>
+                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
+                    Expanded core engineering team, deployed version 2.0 with improved responsiveness, and reached critical adoption across initial sectors.
+                  </p>
+                </div>
+                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div class="timeline-media" style="grid-column: 3; justify-self: start; padding-left: 40px; width: 100%; max-width: 380px;">
+                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <img src="./media/showcase/diagnostic-scanner.jpg" alt="2022 Diagnostic Scanner" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 3: 2023 (Left Media, Right Content) -->
+              <div class="timeline-row row-left-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
+                <div class="timeline-media" style="grid-column: 1; justify-self: end; padding-right: 40px; width: 100%; max-width: 380px;">
+                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <img src="./media/showcase/workshop-bay.jpg" alt="2023 Operations Expansion" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                  </div>
+                </div>
+                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div class="timeline-content" style="grid-column: 3; justify-self: start; padding-left: 40px; max-width: 380px;">
+                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2023</h3>
+                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
+                    Rolled out advanced customization capabilities, modular integrations, and expanded client support for enterprise operations.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Row 4: 2024 / Today (Left Content, Right Media) -->
+              <div class="timeline-row row-right-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center;">
+                <div class="timeline-content" style="grid-column: 1; justify-self: end; text-align: left; padding-right: 40px; max-width: 380px;">
+                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2024</h3>
+                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
+                    Key milestone year: complete architectural redesign, sub-second rendering pipelines, and rapid expansion into global multi-sector markets.
+                  </p>
+                </div>
+                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div class="timeline-media" style="grid-column: 3; justify-self: start; padding-left: 40px; width: 100%; max-width: 380px;">
+                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
+                    <img src="./media/hero/ev-lift-diagnostic.jpg" alt="2024 Architecture Redesign" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Mission Video with Glass Play Pill -->
+          <div style="margin-top: 80px; max-width: 860px; margin-inline: auto;">
+            <div style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);">
+              <img src="./media/showcase/service-authorization.jpg" alt="Mission Poster" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
+                <button type="button" class="about-glass-play-pill" aria-label="Discover Our Journey" style="display: inline-flex; align-items: center; gap: 14px; padding: 12px 24px; border-radius: 999px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); color: #fff; cursor: pointer;">
+                  <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #ffffff; color: #111;">
+                    <span class="material-symbols-outlined" style="font-size: 22px;">play_arrow</span>
+                  </span>
+                  <div style="text-align: left;">
+                    <div style="font-size: 0.95rem; font-weight: 700;">Discover Our Journey</div>
+                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7);">1 MIN VIDEO OVERVIEW</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pillars Proof Grid -->
+          <div style="margin-top: 60px; max-width: 860px; margin-inline: auto;">
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">verified</span>
+                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">A clear promise</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">Every job is scoped before it starts, so the price you hear is the price you pay.</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">shield</span>
+                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">Work you can check</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">You see the estimate, the parts, and the date. Nothing moves without you.</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">support_agent</span>
+                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">A person on the line</h4>
+                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">One contact stays with the job from the first call to the handoff.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. SECTION RECIPES SHOWROOM (EVERY SECTION IN THE THEME)
          ========================================================= -->
     <section id="sec-recipes">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 5</span>
+          <span class="kit-chapter-tag">Chapter 7</span>
           <h2>The Recipe Section Library</h2>
           <p>Live interactive previews of every section recipe. See what each section looks like in advance before requesting it to be added to your site.</p>
         </div>
@@ -1023,73 +1542,52 @@
 
       <div style="display: flex; flex-direction: column; gap: 40px;">
 
-        <!-- RECIPE 1: HERO GRADIENT CENTERED -->
+        <!-- RECIPE 1: SERVICES TABBED SHOWCASE -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
               <span class="kit-recipe-badge">Recipe #01</span>
-              <h4 class="kit-recipe-title">Hero: Soft Gradient Centered</h4>
+              <h4 class="kit-recipe-title">Services: Tabbed Showcase (.svc-tabbed-showcase)</h4>
             </div>
             <div class="kit-recipe-actions">
-              <code>class="hero hero-gradient"</code>
+              <code>#services[data-layout="showcase"]</code>
             </div>
           </div>
-          <div class="kit-recipe-viewport gradient-viewport" style="text-align: center; padding: 60px 24px;">
-            <div class="header-group" style="max-width: 680px; margin: 0 auto;">
-              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Step Into The Future</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2rem, 3.5vw, 3rem); margin: 8px 0; color: #ffffff;">Experience the Next Level of Automotive Care</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.5;">
-                Advanced technology meets stunning craftsmanship. Precision body repair and factory paint matching in Milan.
-              </p>
-              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px;">
-                <button class="btn ks-btn">Book A Service</button>
-                <button class="btn ks-btn-outline" style="color: #fff !important; border-color: rgba(255,255,255,0.25);">Explore Booth</button>
+          <div class="kit-recipe-viewport light-viewport" style="background: #ffffff; padding: 48px 24px;">
+            <div class="svc-tabbed-showcase" style="display: block !important;">
+              <div class="showcase-eyebrow" style="text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--active-500, #007aff);">Precision Work</div>
+              <h2 class="showcase-title" style="font-family: var(--headline-font); font-size: 2rem; font-weight: 700; text-align: center; margin: 0 0 28px; color: #111827;">Certified Factory Procedures</h2>
+              
+              <div class="showcase-tabs" style="display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+                <button type="button" class="tier-btn active" style="font-weight: 700;">Paint Booth</button>
+                <button type="button" class="tier-btn">Structural Pull</button>
+                <button type="button" class="tier-btn">ADAS Sensor Calibration</button>
+                <button type="button" class="tier-btn">Glass Handoff</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
+                  <img src="./media/showcase/workshop-bay.jpg" alt="Spray Bay" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Sealed Downdraft Booth</div>
+                </div>
+                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
+                  <img src="./media/showcase/bodywork-door-repair.jpg" alt="Panel Match" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Spectrophotometer Scan</div>
+                </div>
+                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
+                  <img src="./media/hero/ev-lift-diagnostic.jpg" alt="Final Bake" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
+                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Heated Ceramic Clearcoat</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- RECIPE 2: HERO FULLBLEED WITH BUSINESS PANEL -->
+        <!-- RECIPE 2: PAINS & PROBLEMS SECTION -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
               <span class="kit-recipe-badge">Recipe #02</span>
-              <h4 class="kit-recipe-title">Hero: Fullbleed Video + Floating Business Panel</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-fullbleed" data-panel="right"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport" style="background: url(./media/showcase/night-city-sedan.jpg) center/cover no-repeat; min-height: 380px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; padding: 48px 36px;">
-            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%); pointer-events: none;"></div>
-            
-            <div class="header-group" style="position: relative; z-index: 2; max-width: 520px;">
-              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Night &amp; Emergency Dispatch</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.2rem; color: #fff; margin: 6px 0;">On the road. The record travels with the car.</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.8); margin-top: 8px;">24/7 towing and factory repairs verified by laser measuring.</p>
-              <div style="margin-top: 18px;">
-                <button class="btn ks-btn">Request Immediate Tow</button>
-              </div>
-            </div>
-
-            <!-- Floating Biz Panel -->
-            <div style="position: relative; z-index: 2; background: rgba(18, 24, 38, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 22px; width: 300px; display: flex; flex-direction: column; gap: 12px;">
-              <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--active-400);">Workshop Hours</span>
-              <div style="font-size: 0.95rem; font-weight: 700;">Mon - Fri: 08:00 - 18:30</div>
-              <div style="font-size: 0.85rem; color: #94a3b8;">Via Nazionale 42, Milan</div>
-              <a href="tel:+390212345678" style="color: var(--active-400); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
-                <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
-                <span>+39 02 1234 5678</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECIPE 3: PAINS & PROBLEMS SECTION -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #03</span>
               <h4 class="kit-recipe-title">Pains &amp; Problems: The 4 Common Repair Traps</h4>
             </div>
             <div class="kit-recipe-actions">
@@ -1122,53 +1620,53 @@
           </div>
         </div>
 
-        <!-- RECIPE 4: INTERACTIVE TIMELINE & WORKSHOP STORY -->
+        <!-- RECIPE 3: LIFECYCLE & REPAIRS STEPPER -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #04</span>
-              <h4 class="kit-recipe-title">About &amp; Craftsmanship: Interactive Story Timeline</h4>
+              <span class="kit-recipe-badge">Recipe #03</span>
+              <h4 class="kit-recipe-title">Repairs Stepper: Four Steps to Handoff</h4>
             </div>
             <div class="kit-recipe-actions">
-              <code>id="about" class="ks-about-timeline"</code>
+              <code>#repairs .ls-simple-steps</code>
             </div>
           </div>
-          <div class="kit-recipe-viewport dark-viewport">
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 48px 24px;">
             <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
-              <span class="svc-label label overline" style="color: var(--active-400);">Heritage &amp; Proof</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">A Family Booth in Milan Since 2001</h2>
-              <p class="subtext" style="color: #94a3b8;">Over two decades of precision repair and community trust.</p>
+              <span class="svc-label label overline" style="color: var(--active-400);">Step by Step</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Clear Milestones Before You Drive Away</h2>
+              <p class="subtext" style="color: #94a3b8;">Every repair is trackable live through our customer coordination desk.</p>
             </div>
-            <div class="kit-steps-grid">
-              <div class="kit-telemetry-card">
-                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2001</span>
-                <b style="font-size: 1.15rem; color: #fff;">First Downdraft Booth</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Opened Via Nazionale with our first sealed heated spray booth.</p>
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 24px; max-width: 760px; margin: 0 auto 36px; position: relative;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">1</div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #fff;">Call Dispatch</span>
               </div>
-              <div class="kit-telemetry-card">
-                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2012</span>
-                <b style="font-size: 1.15rem; color: #fff;">Laser Chassis Bench</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Upgraded frame realignment with computerized 3D laser measuring.</p>
+              <div style="flex: 1; height: 2px; background: var(--active-500);"></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">2</div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #fff;">3D Scan</span>
               </div>
-              <div class="kit-telemetry-card">
-                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2020</span>
-                <b style="font-size: 1.15rem; color: #fff;">ADAS Radar Calibration</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Equipped static and dynamic target boards for lane-assist and radar sensors.</p>
+              <div style="flex: 1; height: 2px; background: rgba(255,255,255,0.2);"></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 700;">3</div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Booth Spray</span>
               </div>
-              <div class="kit-telemetry-card">
-                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">TODAY</span>
-                <b style="font-size: 1.15rem; color: #fff;">12,000+ Vehicles Restored</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Trusted by local families, collectors, and corporate fleets across Lombardy.</p>
+              <div style="flex: 1; height: 2px; background: rgba(255,255,255,0.2);"></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 700;">4</div>
+                <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Key Handoff</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- RECIPE 5: TRUST PROOF & CUSTOMER REVIEWS -->
+        <!-- RECIPE 4: TRUST PROOF & CUSTOMER REVIEWS -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #05</span>
+              <span class="kit-recipe-badge">Recipe #04</span>
               <h4 class="kit-recipe-title">Trust Bar &amp; Verified Customer Reviews</h4>
             </div>
             <div class="kit-recipe-actions">
@@ -1216,11 +1714,11 @@
           </div>
         </div>
 
-        <!-- RECIPE 6: FAQ ACCORDION -->
+        <!-- RECIPE 5: FAQ ACCORDION -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #06</span>
+              <span class="kit-recipe-badge">Recipe #05</span>
               <h4 class="kit-recipe-title">FAQ: Questions &amp; Clear Answers</h4>
             </div>
             <div class="kit-recipe-actions">
@@ -1264,11 +1762,11 @@
           </div>
         </div>
 
-        <!-- RECIPE 7: HIGH IMPACT CLOSING CTA -->
+        <!-- RECIPE 6: HIGH IMPACT CLOSING CTA -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #07</span>
+              <span class="kit-recipe-badge">Recipe #06</span>
               <h4 class="kit-recipe-title">Final Closing CTA: Conversion Engine</h4>
             </div>
             <div class="kit-recipe-actions">
@@ -1300,12 +1798,12 @@
     </section>
 
     <!-- =========================================================
-         6. FORM & INTERACTIVE CONTROLS
+         8. FORM & INTERACTIVE CONTROLS
          ========================================================= -->
     <section id="sec-forms">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 6</span>
+          <span class="kit-chapter-tag">Chapter 8</span>
           <h2>Form &amp; Interactive Calculator Primitives</h2>
           <p>Input controls, estimate sliders, and photo upload dropzones.</p>
         </div>

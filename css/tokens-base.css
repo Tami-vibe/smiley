@@ -3233,7 +3233,17 @@ body.scheme-white .svc-label { color: var(--raven-600); }
 
 .svc-more { display: inline-flex; align-items: center; gap: .35em; font-weight: 700; font-size: .95rem; margin-top: .4rem; }
 
-.svc-arrow { width: 1.1em; height: 1.1em; }
+.svc-arrow {
+    width: 1.1em;
+    height: 1.1em;
+    display: inline-block;
+    transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.svc-link:is(:hover, :focus-visible) .svc-arrow,
+.svc-card:is(:hover, :focus-visible) .svc-arrow {
+    transform: translateX(6px);
+}
 
 /* Fill */
 
