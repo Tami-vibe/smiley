@@ -7853,12 +7853,18 @@ body[data-editor-page="about"] #page-about { display: block !important; height: 
 .war-split:has(#war-s3:checked) .war-points .for-s3,
 .war-split:has(#war-s4:checked) .war-points .for-s4 { opacity: 1; visibility: visible; }
 
-.war-points b, .war-film b { color: #141414; }
+.war-points b { color: #141414; }
 .war-film { position: relative; min-height: 560px; display: grid; align-items: center; overflow: hidden; color: #fff; }
 .war-film video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .war-film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
 .war-film-grid { position: relative; z-index: 1; width: min(76rem, calc(100% - 48px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); align-items: center; gap: clamp(24px, 4vw, 48px); padding: clamp(3rem, 8vw, 5.5rem) 0; }
-.war-film-copy { position: relative; z-index: 1; width: auto; margin: 0; }
+.war-film-copy { position: relative; z-index: 1; width: auto; margin: 0; text-align: left; }
+.war-film-copy :is(.header-group, .title-stack, .war-film-head) { align-items: flex-start !important; text-align: left !important; margin-inline: 0 !important; }
+.war-film-copy .title-wrap { align-items: flex-start !important; text-align: left !important; }
+.war-film-copy :is(.subtext, p, h2, ul, li) { text-align: left !important; margin-inline: 0 !important; }
+.war-film-copy ul { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: 0.75rem; }
+.war-film-copy li { color: rgba(255, 255, 255, 0.88); font-size: 1rem; line-height: 1.5; }
+.war-film-copy li b { color: #ffffff; margin-right: 0.35rem; }
 .war-stats { justify-self: end; align-self: center; width: 100%; border-radius: 18px; background: rgba(16,17,20,.72); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); box-shadow: 0 18px 40px rgba(0,0,0,.28); overflow: hidden; }
 .war-stats .stat { padding: 16px 18px; }
 .war-stats .stat + .stat { border-top: 1px solid rgba(255,255,255,.12); }
@@ -7867,12 +7873,61 @@ body[data-editor-page="about"] #page-about { display: block !important; height: 
 .war-stats .stat-value { color: #fff; font-size: 1.7rem; font-weight: 650; letter-spacing: -.03em; line-height: 1.1; margin-top: 4px; }
 .war-stats .stat-desc { color: rgba(255,255,255,.62); font-size: .75rem; line-height: 1.35; margin-top: 4px; }
 @media (max-width: 800px) { .war-film-grid { grid-template-columns: 1fr; } .war-stats { justify-self: stretch; } }
-.war-film .svc-label, .war-film h2, .war-film p, .war-film li, .war-film b { color: #fff; }
-.war-film p { margin: .5rem 0 0; font-size: 1.05rem; line-height: 1.45; }
-.war-head { display: grid; gap: .4rem; max-width: 40rem; margin: 0; }
-.war-close { background: #111; }
-.war-close h2, .war-close .svc-label { color: #fff; }
-.war-close .war-sub { color: #c9cdd3; }
+.war-film :is(.svc-label, h2, p, li, b) { color: #fff; }
+.war-film .svc-label { color: var(--active-400, #4ade80) !important; }
+.war-film .subtext, .war-film p { margin: 0; font-size: var(--type-sub-size, 1.125rem) !important; line-height: 1.55; color: rgba(255, 255, 255, 0.88) !important; }
+
+/* Section: Selling (.war-close) */
+.war-close { background: #111 !important; color: #ffffff !important; }
+.war-close .war-split { align-items: center; }
+.war-close .war-head { align-items: flex-start !important; text-align: left !important; margin-inline: 0 !important; max-width: 44rem; }
+.war-close .war-head .title-wrap { align-items: flex-start !important; text-align: left !important; }
+.war-close :is(h1, h2, h3, b, strong) { color: #ffffff !important; text-align: left !important; }
+.war-close :is(.subtext, p, span:not(.svc-label)) { color: rgba(255, 255, 255, 0.88) !important; text-align: left !important; margin-inline: 0 !important; }
+.war-close .svc-label { color: var(--active-400, #4ade80) !important; text-align: left !important; }
+.war-close .page-call { margin: 0; display: flex; justify-content: flex-end; align-items: center; }
+
+/* =========================================================
+   ASIDE / SPLIT LAYOUT INVARIANT: Copy Column is Flush Left
+   Any layout containing an aside or split columns must keep
+   its copy block and headlines flush left to prevent ragged centering.
+   ========================================================= */
+:is(.war-film-grid, .war-split, .rep-split, .ins-split, .tow-split, :has(> aside), :has(+ aside)) :is(.war-film-copy, .war-copy, .ins-copy, .header-group, .war-head, .rep-head, .ins-head, .tow-head) {
+    align-items: flex-start !important;
+    text-align: left !important;
+    margin-inline: 0 !important;
+}
+
+:is(.war-film-grid, .war-split, .rep-split, .ins-split, .tow-split, :has(> aside), :has(+ aside)) .title-wrap {
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+:is(.war-film-grid, .war-split, .rep-split, .ins-split, .tow-split, :has(> aside), :has(+ aside)) :is(.subtext, p, h1, h2, h3, ul, li) {
+    text-align: left !important;
+    margin-inline: 0 !important;
+}
+
+/* =========================================================
+   UNIVERSAL CONTRAST PROTECTION SYSTEM
+   Guarantees that dark containers, night videos, and overlays
+   never render dark text. Text is strictly protected to light/white.
+   ========================================================= */
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) {
+    color: #ffffff !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(h1, h2, h3, h4, h5, h6, b, strong) {
+    color: #ffffff !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.subtext, p, li, .desc, .lead, .page-lead, .ins-sub, .rep-sub, .war-sub) {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.label, .overline, .svc-label) {
+    color: var(--active-400, #4ade80) !important;
+}
 @container (max-width: 900px) { .war-hero { grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 0; } }
 @container (max-width: 560px) { .war-hero { grid-template-columns: 1fr; } }
 
