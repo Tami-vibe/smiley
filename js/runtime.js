@@ -12559,6 +12559,22 @@ if (typeof document !== 'undefined') {
                 showEditorPage(pageId);
             });
             document.addEventListener('click', e => {
+                const pillLabel = e.target.closest('.war-pills label[for], .kw-pills label[for]');
+                if (pillLabel) {
+                    const forId = pillLabel.getAttribute('for');
+                    const targetRadio = document.getElementById(forId);
+                    if (targetRadio) {
+                        const groupName = targetRadio.getAttribute('name');
+                        if (groupName) {
+                            document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                                r.checked = (r === targetRadio);
+                            });
+                        } else {
+                            targetRadio.checked = true;
+                        }
+                        targetRadio.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
                 const a = e.target.closest('.site-header a[href], #framedSidebarNav a[href], #shMobileMenu a[href], #footer a[href]');
                 if (!a) return;
                 const href = a.getAttribute('href') || '';

@@ -481,16 +481,23 @@ body.hero-halign-right .hero:is(.hero-gradient, .hero-fullbleed, .hero-centered,
 
 .header-group .overline,
 .header-group .label,
+.header-group .svc-label,
 .title-stack .overline,
 .title-stack .label,
 .title-stack .svc-label {
     font-family: var(--body-font);
-    font-size: var(--type-overline-size, 0.75rem);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: var(--type-overline-track, 0.12em);
-    text-transform: uppercase;
-    margin: 0;
+    font-size: var(--type-overline-size, 0.75rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: var(--type-overline-track, 0.12em) !important;
+    text-transform: uppercase !important;
+    color: var(--active-600, var(--color-primary, #16a34a));
+    margin: 0 !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .war-film, .rep-film) :is(.header-group, .title-stack, .hero) :is(.overline, .label, .svc-label),
+.hero-fullbleed :is(.overline, .label, .svc-label) {
+    color: var(--active-400, #4ade80);
 }
 
 .header-group h1,
@@ -538,7 +545,9 @@ body.hero-halign-right .hero:is(.hero-gradient, .hero-fullbleed, .hero-centered,
 
 .ks,
 .hero,
+.svc,
 .section-block,
+section,
 [data-align="center"] {
     --sec-align-text: center;
     --sec-align-items: center;
@@ -631,12 +640,13 @@ section[data-height] {
 
 .hero .label {
             font-family: var(--body-font);
-            font-size: var(--fs-label);
+            font-size: var(--type-overline-size, 0.75rem);
             font-weight: 700;
             line-height: 1.2;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: var(--gap-label);
+            letter-spacing: var(--type-overline-track, 0.12em);
+            color: var(--active-600, var(--color-primary, #16a34a));
+            margin-bottom: 0;
         }
 
 /* Title */
@@ -801,8 +811,8 @@ section[data-height] {
             color: var(--hero-ink, var(--tone-deep5));
         }
 
-.hero-gradient .hero-label,
-        .hero-gradient .label { color: rgba(255, 255, 255, 0.85); }
+.hero-gradient .hero-label { color: rgba(255, 255, 255, 0.85); }
+.hero-gradient .label { color: var(--active-600, var(--color-primary, #16a34a)); }
 
 .hero-gradient { --cta-bg: var(--tone-light4); --cta-fg: var(--tone-deep5); }
 
@@ -7641,7 +7651,7 @@ header[data-kit-bar],
 #rep-s4:checked ~ .rep-notes label[for="rep-s4"] { background: #111; color: #fff; }
 .rep-band { container-type: inline-size; padding: clamp(2.5rem, 5cqi, 4rem) 0; }
 .rep-inner { width: min(72rem, calc(100% - 32px)); margin-inline: auto; }
-.rep-band:not(.rep-cta) .rep-head { display: grid; gap: .5rem; max-width: 44rem; margin: 0 auto 2.25rem; text-align: center; }
+.rep-band:not(.rep-cta) .rep-head { max-width: 44rem; margin: 0 auto 2.25rem; text-align: center; }
 .rep-head .svc-label { margin: 0; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-primary, var(--active-600, #5b4dff)); }
 .rep-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); }
 .rep-cards li { background: #f3f5f8; border-radius: 14px; padding: 1.25rem 1.35rem; border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02); transition: transform .2s ease, box-shadow .2s ease; }
@@ -7789,11 +7799,50 @@ body[data-editor-page="about"] #page-about { display: block !important; height: 
 .war-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; }
 #war-s1:checked ~ .war-photo .for-s1, #war-s2:checked ~ .war-photo .for-s2,
 #war-s3:checked ~ .war-photo .for-s3, #war-s4:checked ~ .war-photo .for-s4 { opacity: 1; }
-.war-pills { margin: 0 0 14px; }
-.war-split:has(#war-s1:checked) .kw-pills label[for="war-s1"],
-.war-split:has(#war-s2:checked) .kw-pills label[for="war-s2"],
-.war-split:has(#war-s3:checked) .kw-pills label[for="war-s3"],
-.war-split:has(#war-s4:checked) .kw-pills label[for="war-s4"] { background: var(--kw-pill-active-bg); border-color: var(--kw-pill-active-bg); color: var(--kw-pill-active-fg); }
+.war-pills,
+.kw-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 1.25rem;
+    padding: 4px;
+    background: #f1f4f8;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.war-pills label,
+.kw-pills :is(label, button, a) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 18px;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #4b5563;
+    font-family: var(--body-font);
+    font-size: 0.8125rem;
+    font-weight: 650;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+}
+.war-pills label:hover,
+.kw-pills :is(label, button, a):hover {
+    color: #111827;
+    background: rgba(255, 255, 255, 0.6);
+}
+.war-split:has(#war-s1:checked) :is(.war-pills, .kw-pills) label[for="war-s1"],
+.war-split:has(#war-s2:checked) :is(.war-pills, .kw-pills) label[for="war-s2"],
+.war-split:has(#war-s3:checked) :is(.war-pills, .kw-pills) label[for="war-s3"],
+.war-split:has(#war-s4:checked) :is(.war-pills, .kw-pills) label[for="war-s4"] {
+    background: var(--active-600, #16a34a) !important;
+    border-color: var(--active-600, #16a34a) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
 .war-copy h2, .war-head h2, .war-film h2 { margin: 0; font-family: var(--headline-font, inherit); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; font-size: clamp(1.75rem, 3vw, 2.6rem); color: #141414; }
 .war-sub { margin: .6rem 0 0; }
 .war-points, .war-film ul { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .65rem; }
@@ -8127,68 +8176,56 @@ body.is-sticky-header main.heroes-container {
 }
 
 .route-hero-copy > p:not(.svc-label),
+.header-group .subtext,
+.header-group > p,
+.title-stack .subtext,
+.title-stack > p,
 .ins-sub,
 .rep-sub,
 .war-sub,
 .tow-sub,
 .tow-hero p,
 .ks-head > p,
+.page-sheet .subtext,
 .page-sheet .page-lead {
-    font-size: var(--type-sub-size, 1.125rem);
-    line-height: var(--type-sub-lh, 1.5);
+    font-size: var(--type-sub-size, 1.125rem) !important;
+    line-height: var(--type-sub-lh, 1.55) !important;
 }
 
-.page-sheet p:not(.page-lead),
+.page-sheet p:not(.page-lead):not(.subtext),
 .page-sheet li,
-.ks p:not(.page-lead):not(.ins-sub):not(.rep-sub):not(.war-sub):not(.tow-sub),
+.ks p:not(.page-lead):not(.subtext):not(.ins-sub):not(.rep-sub):not(.war-sub):not(.tow-sub),
 .ins-points,
 .ins-cards span,
 .tow-steps span,
-.tow-pay span {
+.tow-pay span,
+.war-points li {
     font-size: var(--type-body-size, 1rem);
-    line-height: var(--type-body-lh, 1.55);
-}
-.route-hero .route-hero-copy > p:not(.svc-label),
-.ins-sub,
-.rep-sub,
-.war-sub,
-.tow-sub,
-.page-sheet .page-lead {
-    font-size: var(--type-sub-size, 1.125rem);
-    line-height: var(--type-sub-lh, 1.5);
+    line-height: var(--type-body-lh, 1.6);
 }
 
-.kw-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--kw-pill-gap, 8px);
-    margin: 0;
+/* Box Card Typographic Hierarchy */
+:is(.svc-card, .rep-cards, .ins-cards) :is(h3, b) {
+    font-family: var(--headline-font, var(--body-font));
+    font-size: 1.125rem !important;
+    font-weight: 650 !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em;
+    color: #111827;
 }
-.kw-pills :is(label, button, a) {
-    margin: 0;
-    padding-block: var(--kw-pill-pad-block, 7px);
-    padding-inline: var(--kw-pill-pad-inline, 12px);
-    border-radius: var(--kw-pill-radius, 999px);
-    border: 1px solid var(--kw-pill-line, #c45a5a);
-    background: var(--kw-pill-bg, #fff);
-    color: var(--kw-pill-fg, #3c4450);
+
+:is(.svc-card, .rep-cards, .ins-cards) :is(p, span:not(.svc-more)) {
     font-family: var(--body-font);
-    font-size: var(--kw-pill-fs, 0.8125rem);
-    font-weight: var(--kw-pill-weight, 650);
-    letter-spacing: -0.01em;
-    line-height: 1;
-    cursor: pointer;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    font-size: 0.9375rem !important;
+    line-height: 1.5 !important;
+    color: #5e6772;
 }
-.kw-pills :is(label, button, a):hover {
-    border-color: var(--kw-pill-active-bg);
-    color: var(--kw-pill-active-bg);
-}
-.kw-pills :is(label, button, a).is-active,
-.kw-pills :is(label, button, a)[aria-selected="true"] {
-    background: var(--kw-pill-active-bg);
-    border-color: var(--kw-pill-active-bg);
-    color: var(--kw-pill-active-fg, #fff);
+
+:is(.svc-card, .rep-cards, .ins-cards) :is(.svc-more, .svc-link, .rc-link) {
+    font-family: var(--body-font);
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
 }
 
 .route-hero,

@@ -4,15 +4,52 @@
 
 body.scheme-dark .svc-badge, body.duo-pair:not(.scheme-white):not(.scheme-dark) .svc-badge { background: #fff; color: #17191c; }
 
-.svc-head { max-width: 46rem; margin-inline: var(--sec-margin-inline, auto); margin-block: 0 clamp(2rem, 4vw, 3.5rem); text-align: var(--sec-align-text, center); display: flex; flex-direction: column; align-items: var(--sec-align-items, center); }
+.svc-head {
+    max-width: var(--measure-title, 56rem);
+    margin-inline: var(--sec-margin-inline, auto);
+    margin-block: 0 clamp(2rem, 4vw, 3.5rem);
+    text-align: var(--sec-align-text, center);
+    display: flex;
+    flex-direction: column;
+    align-items: var(--sec-align-items, center);
+    gap: var(--gap-title, clamp(0.75rem, 1.5vw, 1.25rem));
+    width: 100%;
+}
 
-.svc-head > .title-wrap { display: flex; flex-direction: column; align-items: inherit; gap: var(--gap-overline, 0.5rem); width: 100%; margin-bottom: var(--gap-title); }
-.svc-head > .title-wrap > * { margin-bottom: 0 !important; }
+.svc-head > .title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    text-align: inherit;
+    gap: var(--gap-overline, 0.5rem);
+    width: 100%;
+    margin-bottom: 0 !important;
+}
+.svc-head > .title-wrap > * {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
 
-.svc-head h2 { font-family: var(--headline-font); font-size: clamp(2rem, 2.6vw + 1rem, 3.5rem); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; text-wrap: balance; margin-bottom: var(--gap-title); }
-.svc-head:has(> .title-wrap) h2 { margin-bottom: 0; }
+.svc-head h2 {
+    font-family: var(--headline-font);
+    font-size: var(--type-title-size, clamp(2rem, 2.6vw + 1rem, 3.5rem));
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    text-wrap: balance;
+    margin: 0 !important;
+}
 
-.svc-head p { font-size: var(--fs-sub); line-height: 1.55; opacity: .85; margin: 0; }
+.svc-head .subtext,
+.svc-head p {
+    font-family: var(--body-font);
+    font-size: var(--type-sub-size, 1.125rem) !important;
+    line-height: var(--type-sub-lh, 1.55);
+    opacity: .88;
+    margin: 0;
+    max-width: var(--measure-sub, 38rem);
+    text-wrap: pretty;
+}
 
 #services[data-layout="showcase"],
         #services[data-layout="stack"],
