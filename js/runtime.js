@@ -668,15 +668,16 @@ export function hydrateUnifiedInspector(secId, node, targetCtx) {
         hydrateLayoutShowroom(secId, node);
         if (normalizeSecId(secId) === 'hero') hydrateHeroLayerControls();
 
-        let align = node.dataset.align || 'left';
-        if (normalizeSecId(secId) === 'hero') {
-            if (document.body.classList.contains('hero-halign-center')) align = 'center';
-            else if (document.body.classList.contains('hero-halign-right')) align = 'right';
-            else if (document.body.classList.contains('hero-halign-left')) align = 'left';
-            node.dataset.align = align;
-        }
+        let align = node.dataset.align || 'center';
+        node.dataset.align = align;
         ins.querySelectorAll('[data-prop="align"] .tier-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.val === align);
+        });
+
+        let height = node.dataset.height || (normalizeSecId(secId) === 'hero' ? 'full' : 'default');
+        node.dataset.height = height;
+        ins.querySelectorAll('[data-prop="height"] .tier-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.val === height);
         });
 
         /* Corners: body classes are truth; default CSS is rounded (~8px), not square */
@@ -765,6 +766,10 @@ export function hydrateUnifiedInspector(secId, node, targetCtx) {
                 setProp('headerStyle', hdrStyle);
                 setProp('headerPillColor', hdrPillColor);
                 setProp('headerAlign', hdrAlign);
+                const hdrSticky = (hs && hs.sticky)
+                    || (document.body.dataset.stickyHeader === 'true' ? 'on' : 'off')
+                    || (localStorage.getItem('kitHeaderSticky') || 'off');
+                setProp('headerSticky', hdrSticky);
                 setProp('headerBtns', hdrBtns);
                 setProp('headerBtnStyle', hdrBtnStyle);
                 setProp('headerBtnColor', hdrBtnColor);
@@ -1313,20 +1318,29 @@ function applySectionProp(node, prop, val) {
     if (target !== node) node.dataset[prop] = String(val);
 
     if (prop === 'align') {
+        target.dataset.align = String(val);
+        if (target !== node) node.dataset.align = String(val);
         if (secId === 'hero') {
-            ['left', 'center', 'right'].forEach(a =>
-                document.body.classList.toggle('hero-halign-' + a, val === a));
             document.querySelectorAll('[data-halign]').forEach(b => {
                 const on = b.dataset.halign === val;
                 b.classList.toggle('active', on);
                 b.setAttribute('aria-pressed', String(on));
             });
-        } else {
-            node.style.textAlign = val;
-            node.querySelectorAll('.sec-title, .sec-desc, h1, h2, h3, .ks-head').forEach(el => {
-                el.style.textAlign = val;
-            });
+            document.body.classList.remove('hero-halign-left', 'hero-halign-center', 'hero-halign-right');
         }
+        // Purge legacy inline styles from element tree
+        [target, node].forEach(n => {
+            if (!n) return;
+            n.style.removeProperty('text-align');
+            n.querySelectorAll('.sec-title, .sec-desc, h1, h2, h3, .ks-head, .header-group, .final-inner, .svc-head, .hero-content').forEach(el => {
+                el.style.removeProperty('text-align');
+            });
+        });
+    }
+
+    if (prop === 'height') {
+        target.dataset.height = String(val);
+        if (target !== node) node.dataset.height = String(val);
     }
 
     if (prop === 'corner') {
@@ -1431,6 +1445,22 @@ function applySectionProp(node, prop, val) {
             if (typeof window.__renderHeaders === 'function') window.__renderHeaders();
         } else {
             document.querySelectorAll('.site-header').forEach(h => { h.dataset.align = val; });
+        }
+    }
+
+    if (prop === 'headerSticky') {
+        const hs = window.__headerState;
+        const isSticky = val === 'on' || val === 'sticky';
+        if (hs) hs.sticky = isSticky ? 'on' : 'off';
+        document.body.dataset.stickyHeader = isSticky ? 'true' : 'false';
+        try { localStorage.setItem('kitHeaderSticky', isSticky ? 'on' : 'off'); } catch (e) {}
+        if (!isSticky) {
+            document.querySelectorAll('.site-header').forEach(h => h.classList.remove('is-stuck'));
+        }
+        if (typeof window.__renderHeaders === 'function') {
+            window.__renderHeaders();
+        } else if (typeof window.__syncStickyHeader === 'function') {
+            window.__syncStickyHeader();
         }
     }
 
@@ -2066,6 +2096,11 @@ export function initUnifiedInspector() {
     });
 
     ins.addEventListener('click', e => {
+        if (!activeCanvasNode) {
+            activeCanvasNode = document.querySelector('main.heroes-container > .hero.is-live-hero')
+                || document.querySelector('main.heroes-container > .hero')
+                || document.getElementById('hero');
+        }
         if (!activeCanvasNode) return;
         const targetNode = activeTargetContext?.node || activeCanvasNode;
 
@@ -3230,6 +3265,7 @@ if (typeof document !== 'undefined') {
         const headerState = {
             pill: 'auto', type: 'bar', show: 'on', style: 'transparent', align: 'left',
             count: '4', buttons: 'both', marquee: 'off', mqdir: 'rtl', mqsize: 'm',
+            sticky: (localStorage.getItem('kitHeaderSticky') || 'on') === 'off' ? 'off' : 'on',
             itemDrops: [false, false, false, false, false, false]
         };
 
@@ -3327,19 +3363,61 @@ if (typeof document !== 'undefined') {
                 <ul class="sh-menu">${desktop}</ul></div>
                 <div class="sh-actions">${actionsHTML()}<button class="sh-burger" aria-label="Open menu">Menu</button></div>`;
 
-            document.querySelectorAll('.hero').forEach(hero => {
-                let el = hero.querySelector(':scope > .site-header');
-                if (!el) {
-                    el = document.createElement('header');
-                    el.className = 'site-header';
-                    hero.prepend(el);
-                }
-                el.dataset.type = headerState.type;
-                el.dataset.pill = headerState.pill;
-                el.dataset.style = headerState.type === 'pill' ? 'transparent' : headerState.style;
-                el.dataset.align = headerState.align;
-                el.innerHTML = html;
+            const isSticky = headerState.sticky === 'on';
+            document.body.dataset.stickyHeader = isSticky ? 'true' : 'false';
+            document.body.classList.toggle('is-sticky-header', isSticky);
+            localStorage.setItem('kitHeaderSticky', isSticky ? 'on' : 'off');
+
+            document.querySelectorAll('[data-opt="sticky"]').forEach(b => {
+                b.classList.toggle('active', b.dataset.val === headerState.sticky);
             });
+            document.querySelectorAll('[data-prop="headerSticky"] .tier-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.val === headerState.sticky);
+            });
+
+            const canvasScroll = document.querySelector('.kit-canvas-scroll');
+            const heroesContainer = document.querySelector('main.heroes-container');
+            const hostContainer = canvasScroll || heroesContainer;
+
+            if (isSticky && hostContainer) {
+                let stickyHeader = hostContainer.querySelector(':scope > .site-header');
+                if (!stickyHeader) {
+                    stickyHeader = document.createElement('header');
+                    hostContainer.prepend(stickyHeader);
+                }
+                stickyHeader.className = 'site-header navbar sticky top-0 z-50 bg-base-100';
+                stickyHeader.dataset.type = headerState.type;
+                stickyHeader.dataset.pill = headerState.pill;
+                stickyHeader.dataset.style = headerState.type === 'pill' ? 'transparent' : headerState.style;
+                stickyHeader.dataset.align = headerState.align;
+                stickyHeader.innerHTML = html;
+
+                if (canvasScroll && heroesContainer) {
+                    heroesContainer.querySelectorAll(':scope > .site-header').forEach(h => h.remove());
+                }
+
+                document.querySelectorAll('.hero > .site-header').forEach(h => {
+                    h.style.display = 'none';
+                });
+                stickyHeader.style.display = headerState.show === 'off' ? 'none' : '';
+            } else {
+                canvasScroll?.querySelector(':scope > .site-header')?.remove();
+                heroesContainer?.querySelector(':scope > .site-header')?.remove();
+                document.querySelectorAll('.hero').forEach(hero => {
+                    let el = hero.querySelector(':scope > .site-header');
+                    if (!el) {
+                        el = document.createElement('header');
+                        hero.prepend(el);
+                    }
+                    el.style.display = headerState.show === 'off' ? 'none' : '';
+                    el.className = 'site-header navbar';
+                    el.dataset.type = headerState.type;
+                    el.dataset.pill = headerState.pill;
+                    el.dataset.style = headerState.type === 'pill' ? 'transparent' : headerState.style;
+                    el.dataset.align = headerState.align;
+                    el.innerHTML = html;
+                });
+            }
 
             document.getElementById('shMobileMenu').innerHTML = menu.map(m => m.items
                 ? `<div class="sh-acc"><button>${m.label}${chev}</button><div class="sh-acc-body"><div>${m.items.map(i => `<a href="#">${i}</a>`).join('')}</div></div></div>`
@@ -3361,10 +3439,91 @@ if (typeof document !== 'undefined') {
             resolvePanelMarquee();
             renderFramedSidebar(menu);
             if (typeof window.__kitMarkNav === 'function') window.__kitMarkNav();
+            if (typeof syncStickyHeader === 'function') syncStickyHeader();
         }
         window.__renderHeaders = renderHeaders;
         window.__headerState = headerState;
         window.__kitSyncNav = syncCanvasNav;
+
+        function checkSticky() {
+            // 1. Explicit static checks from body dataset, active UI button, or state
+            if (document.body.dataset.stickyHeader === 'false' || document.body.dataset.stickyHeader === 'off') return false;
+            const activeBtn = document.querySelector('[data-prop="headerSticky"] .tier-btn.active, [data-opt="sticky"].active');
+            if (activeBtn && (activeBtn.dataset.val === 'off' || activeBtn.dataset.val === 'static')) return false;
+            const hs = window.__headerState || (typeof headerState !== 'undefined' ? headerState : null);
+            if (hs && (hs.sticky === 'off' || hs.sticky === false)) return false;
+
+            // 2. Explicit sticky checks
+            if (document.body.dataset.stickyHeader === 'true' || document.body.dataset.stickyHeader === 'on') return true;
+            if (activeBtn && (activeBtn.dataset.val === 'on' || activeBtn.dataset.val === 'sticky')) return true;
+            if (hs && (hs.sticky === 'on' || hs.sticky === true)) return true;
+            const liveSticky = document.querySelector('.kit-canvas-scroll > .site-header.sticky, main.heroes-container > .site-header.sticky, .site-header.sticky');
+            if (liveSticky) return true;
+            return localStorage.getItem('kitHeaderSticky') === 'on';
+        }
+        window.__checkSticky = checkSticky;
+
+        function syncStickyHeader() {
+            if (!checkSticky()) {
+                document.querySelectorAll('.site-header').forEach(h => h.classList.remove('is-stuck'));
+                return;
+            }
+
+            const isDrawer = !!document.getElementById('kit-drawer');
+            const scroller = isDrawer ? document.querySelector('.kit-canvas-scroll') : null;
+            const scrollTop = scroller ? scroller.scrollTop : (window.pageYOffset || document.documentElement.scrollTop || 0);
+            const shouldStick = scrollTop > 20;
+
+            if (isDrawer && scroller) {
+                const rect = scroller.getBoundingClientRect();
+                document.documentElement.style.setProperty('--kit-sticky-top', `${rect.top}px`);
+                document.documentElement.style.setProperty('--kit-sticky-left', `${rect.left}px`);
+                document.documentElement.style.setProperty('--kit-sticky-width', `${rect.width}px`);
+            } else {
+                document.documentElement.style.setProperty('--kit-sticky-top', '0px');
+                document.documentElement.style.setProperty('--kit-sticky-left', '0px');
+                document.documentElement.style.setProperty('--kit-sticky-width', '100%');
+            }
+
+            document.querySelectorAll('.site-header').forEach(h => {
+                h.classList.toggle('is-stuck', shouldStick);
+            });
+        }
+        window.__syncStickyHeader = syncStickyHeader;
+
+        if (headerState.sticky === 'on') {
+            document.body.dataset.stickyHeader = 'true';
+        }
+
+        const attachStickyListeners = () => {
+            const scroller = document.querySelector('.kit-canvas-scroll');
+            if (scroller && !scroller.__stickyWired) {
+                scroller.__stickyWired = true;
+                scroller.addEventListener('scroll', syncStickyHeader, { passive: true });
+            }
+            if (!window.__stickyWired) {
+                window.__stickyWired = true;
+                window.addEventListener('scroll', () => {
+                    if (!checkSticky()) {
+                        const header = document.querySelector('.site-header');
+                        if (header) header.classList.remove('is-stuck');
+                        return;
+                    }
+                    syncStickyHeader();
+                }, { passive: true });
+                window.addEventListener('resize', syncStickyHeader, { passive: true });
+                document.getElementById('kitDrawer')?.addEventListener('change', () => {
+                    setTimeout(syncStickyHeader, 100);
+                    setTimeout(syncStickyHeader, 350);
+                });
+            }
+            syncStickyHeader();
+        };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', attachStickyListeners);
+        } else {
+            attachStickyListeners();
+        }
 
         /* Layout 4 only: flat sidebar menu (no dropdown groups — top-level labels only) */
         function renderFramedSidebar(menu) {
@@ -3378,6 +3537,10 @@ if (typeof document !== 'undefined') {
         }
 
         function liveHeader() {
+            const scrollerSticky = document.querySelector('.kit-canvas-scroll > .site-header');
+            if (scrollerSticky && scrollerSticky.style.display !== 'none') return scrollerSticky;
+            const sticky = document.querySelector('main.heroes-container > .site-header');
+            if (sticky && sticky.style.display !== 'none') return sticky;
             const hero = document.querySelector('main.heroes-container > .hero.is-live-hero')
                 || document.querySelector('main.heroes-container > .hero');
             return hero ? hero.querySelector(':scope > .site-header') : null;
@@ -3750,11 +3913,16 @@ if (typeof document !== 'undefined') {
         pick('data-mqdir', v => { headerState.mqdir = v; applyMarqueeStyle(); });
         pick('data-mqsize', v => { headerState.mqsize = v; applyMarqueeStyle(); });
         pick('data-halign', v => {
-            ['left', 'center', 'right'].forEach(a => document.body.classList.toggle('hero-halign-' + a, v === a));
+            const hero = document.querySelector('main.heroes-container > .hero.is-live-hero')
+                || document.querySelector('.hero.is-live-hero')
+                || document.querySelector('.hero');
+            if (hero) applySectionProp(hero, 'align', v);
             scheduleMatch();
         });
-        /* Default Layouts 1–3 content align */
-        document.body.classList.add('hero-halign-center');
+        /* Default Layouts 1–6 content align */
+        document.querySelectorAll('main.heroes-container > .hero, .hero').forEach(h => {
+            if (!h.dataset.align) h.dataset.align = 'center';
+        });
         document.querySelectorAll('[data-halign]').forEach(b => {
             const on = b.dataset.halign === 'center';
             b.classList.toggle('active', on);
@@ -12358,13 +12526,23 @@ if (typeof document !== 'undefined') {
                 add.addEventListener('click', () => { closePageMenu(); pageAdd.hidden = false; });
                 pageMenu.appendChild(add);
             };
+            const positionPageMenu = () => {
+                const btn = document.getElementById('kitPage');
+                if (!btn || pageMenu.hidden) return;
+                const rect = btn.getBoundingClientRect();
+                const parentRect = (pageMenu.offsetParent || document.body).getBoundingClientRect();
+                pageMenu.style.setProperty('left', Math.round(rect.left - parentRect.left) + 'px', 'important');
+                pageMenu.style.setProperty('top', Math.round(rect.bottom - parentRect.top + 4) + 'px', 'important');
+            };
             const togglePageMenu = e => {
                 e.stopPropagation();
                 if (!pageMenu.hidden) { closePageMenu(); return; }
                 paintPageMenu();
                 pageMenu.hidden = false;
+                positionPageMenu();
                 crumbBtn.setAttribute('aria-expanded', 'true');
             };
+            window.addEventListener('resize', positionPageMenu);
             crumbBtn.addEventListener('click', togglePageMenu);
             const pageCrumb = document.getElementById('kitPage');
             if (pageCrumb) pageCrumb.addEventListener('click', togglePageMenu);
@@ -12460,15 +12638,24 @@ if (typeof document !== 'undefined') {
             /* ---------- snapshot of the website (no editor, no kit labels) ---------- */
             const EXTRA = [
                 '.header, .palettes-section, .kit-open, .kit-device, .kit-canvas-bar, .svc-badge, .hero-label { display: none !important; }',
-                'html, body { height: auto !important; min-height: 0 !important; max-height: none !important; overflow: visible !important; overflow-y: auto !important; overflow-x: hidden !important; overscroll-behavior: auto !important; }',
+                'html, body { height: auto !important; min-height: 0 !important; max-height: none !important; overflow: visible !important; overflow-y: auto !important; overflow-x: clip !important; overscroll-behavior: auto !important; }',
                 '#preview-page { display: block !important; height: auto !important; min-height: 100vh; overflow: visible !important; }',
+                '.site-header.sticky, .site-header.navbar.sticky { position: -webkit-sticky !important; position: sticky !important; top: 0 !important; z-index: 999999 !important; width: 100% !important; }',
+                '.site-header.bg-base-100 { background-color: var(--color-base-100, #ffffff) !important; color: var(--color-base-content, #17191c) !important; }',
+                '.site-header.static, body[data-sticky-header="false"] .site-header, body[data-sticky-header="off"] .site-header { position: relative !important; }',
+                '.hero > .site-header.static, body[data-sticky-header="false"] .hero > .site-header, body[data-sticky-header="off"] .hero > .site-header { position: absolute !important; inset: 0 0 auto 0 !important; width: 100% !important; z-index: 30 !important; }',
+                'body[data-sticky-header="false"] .site-header.is-stuck, body[data-sticky-header="off"] .site-header.is-stuck { position: relative !important; animation: none !important; background: transparent !important; }',
+                'body[data-sticky-header="false"] .hero > .site-header.is-stuck, body[data-sticky-header="off"] .hero > .site-header.is-stuck { position: absolute !important; inset: 0 0 auto 0 !important; animation: none !important; background: transparent !important; }',
+                '#preview-page > .hero { overflow: visible !important; }',
                 '#services, #about, #solutions, #trust-bar, #reviews, #quote, #faq, #promo, #contact, #cta, #page-repairs, #page-insurance, #page-emergency, #page-warranty, #page-contact, #page-about, #footer { display: block !important; position: relative !important; height: auto !important; overflow: visible !important; }',
                 '#preview-page .site-header .sh-menu { display: flex !important; }',
                 '#preview-page .site-header .sh-burger { display: none !important; }',
                 '#preview-page .site-header.sh-compact .sh-menu { display: flex !important; }',
                 'body[data-preview-page]:not([data-preview-page="home"]) .hero > :not(.site-header) { display: none !important; }',
-                '#preview-page > .hero.is-header-only { position: sticky; top: 0; z-index: 60; background: #fff; min-height: var(--header-h, 72px); }',
-                '#preview-page > .hero.is-header-only > .site-header { position: sticky; top: 0; width: 100%; height: var(--header-h, 72px); background: #fff !important; color: #17191c !important; border-bottom: 1px solid #e6e8ee; }',
+                '#preview-page > .hero.is-header-only { position: relative; top: 0; z-index: 99999 !important; min-height: 0 !important; height: auto !important; overflow: visible !important; isolation: auto !important; }',
+                '#preview-page > .hero.is-header-only:not(:has(.site-header[data-type="pill"])) { background: #fff; }',
+                '#preview-page > .hero.is-header-only > .site-header { top: 0; width: 100%; min-height: var(--header-h, 72px); }',
+                '#preview-page > .hero.is-header-only > .site-header:not([data-type="pill"]) { background: #fff !important; color: #17191c !important; border-bottom: 1px solid #e6e8ee; }',
                 'body[data-preview-page]:not([data-preview-page="home"]) #services, body[data-preview-page]:not([data-preview-page="home"]) #pains, body[data-preview-page]:not([data-preview-page="home"]) #about, body[data-preview-page]:not([data-preview-page="home"]) #solutions, body[data-preview-page]:not([data-preview-page="home"]) #trust-bar, body[data-preview-page]:not([data-preview-page="home"]) #reviews, body[data-preview-page]:not([data-preview-page="home"]) #quote, body[data-preview-page]:not([data-preview-page="home"]) #faq, body[data-preview-page]:not([data-preview-page="home"]) #promo, body[data-preview-page]:not([data-preview-page="home"]) #contact, body[data-preview-page]:not([data-preview-page="home"]) #cta { display: none !important; }'
             ].join('');
             const PAGE_SECTIONS = new Set(['hero', 'services', 'about', 'repairs', 'trust', 'reviews', 'quote', 'faq', 'promo', 'contact', 'final-cta', 'footer']);
@@ -12506,10 +12693,41 @@ if (typeof document !== 'undefined') {
             const activePageId = () => {
                 try { return (currentProject().activePage) || 'home'; } catch (e) { return 'home'; }
             };
+            const checkSticky = () => {
+                // 1. Explicit static checks from body dataset, active UI button, or state
+                if (document.body.dataset.stickyHeader === 'false' || document.body.dataset.stickyHeader === 'off') return false;
+                const activeBtn = document.querySelector('[data-prop="headerSticky"] .tier-btn.active, [data-opt="sticky"].active');
+                if (activeBtn && (activeBtn.dataset.val === 'off' || activeBtn.dataset.val === 'static')) return false;
+                const hs = window.__headerState || (typeof headerState !== 'undefined' ? headerState : null);
+                if (hs && (hs.sticky === 'off' || hs.sticky === false)) return false;
+
+                // 2. Explicit sticky checks
+                if (document.body.dataset.stickyHeader === 'true' || document.body.dataset.stickyHeader === 'on') return true;
+                if (activeBtn && (activeBtn.dataset.val === 'on' || activeBtn.dataset.val === 'sticky')) return true;
+                if (hs && (hs.sticky === 'on' || hs.sticky === true)) return true;
+                const liveSticky = document.querySelector('.kit-canvas-scroll > .site-header.sticky, main.heroes-container > .site-header.sticky, .site-header.sticky');
+                if (liveSticky) return true;
+                return localStorage.getItem('kitHeaderSticky') === 'on';
+            };
+
             const siteHTML = pageId => {
                 const id = pageId || activePageId();
                 const want = new Set(templateFor(id));
-                const parts = [];
+                const isSticky = checkSticky();
+                const hs = window.__headerState || (typeof headerState !== 'undefined' ? headerState : null);
+                const showHeader = (!hs || hs.show !== 'off');
+
+                const liveHdr = document.querySelector('.kit-canvas-scroll > .site-header')
+                    || document.querySelector('main.heroes-container > .site-header')
+                    || document.querySelector('.site-header');
+
+                const headerClass = isSticky 
+                    ? "site-header navbar sticky top-0 z-50 bg-base-100" 
+                    : "site-header navbar static bg-base-100";
+
+                const sectionParts = [];
+                let hasEmbeddedHeader = false;
+
                 const take = (src, headerOnly) => {
                     if (!src) return;
                     const node = src.cloneNode(true);
@@ -12518,14 +12736,47 @@ if (typeof document !== 'undefined') {
                     node.classList.remove('is-canvas-on', 'is-live-hero', 'is-canvas-selected', 'is-node-on');
                     node.querySelectorAll('.is-node-on').forEach(n => n.classList.remove('is-node-on'));
                     node.classList.toggle('is-header-only', !!headerOnly);
-                    node.querySelectorAll('.site-header').forEach(header => header.classList.remove('sh-compact'));
+
+                    if (isSticky || headerOnly) {
+                        node.querySelectorAll('.site-header').forEach(header => header.remove());
+                    } else {
+                        // Static mode: check if this section already has an embedded header
+                        const nestedHdrs = node.querySelectorAll('.site-header');
+                        if (nestedHdrs.length > 0) {
+                            hasEmbeddedHeader = true;
+                            nestedHdrs.forEach(h => {
+                                h.style.display = showHeader ? '' : 'none';
+                                h.style.visibility = 'visible';
+                                h.classList.remove('sh-compact', 'is-stuck', 'sticky', 'top-0', 'z-50', 'bg-base-100');
+                                h.classList.add('static');
+                            });
+                        }
+                    }
+
                     node.querySelectorAll('.svc-badge, .hero-label, script').forEach(n => n.remove());
-                    parts.push(node.outerHTML);
+                    if (headerOnly) return;
+                    sectionParts.push(node.outerHTML);
                 };
+
+                // 1. Process sections first to discover if any wanted section has an embedded header
                 take(previewNode('hero'), !want.has('hero'));
                 PREVIEW_STACK.forEach(key => { if (key !== 'hero' && want.has(key)) take(previewNode(key)); });
                 if (want.has('footer')) take(document.getElementById('footer'));
-                return '<div id="preview-page">' + parts.join('') + '</div>';
+
+                // 2. Only inject a top-level standalone header if:
+                // - Sticky header is turned ON (needs to float at root level), OR
+                // - There is NO embedded header inside the page sections yet (and showHeader is true).
+                let topHeaderHtml = '';
+                if (showHeader && liveHdr && (isSticky || !hasEmbeddedHeader)) {
+                    const hdrNode = liveHdr.cloneNode(true);
+                    hdrNode.style.display = '';
+                    hdrNode.style.visibility = 'visible';
+                    hdrNode.classList.remove('sh-compact', 'is-stuck');
+                    hdrNode.className = headerClass;
+                    topHeaderHtml = hdrNode.outerHTML;
+                }
+
+                return '<div id="preview-page">' + topHeaderHtml + sectionParts.join('') + '</div>';
             };
             /* Copy both linked stylesheets and inline <style> in document order, so the preview keeps the full cascade. Links use their absolute href so they resolve under any base. */
             const canvasStyles = () => [...document.head.querySelectorAll('link[rel="stylesheet"], style')].map(n =>
@@ -12535,12 +12786,29 @@ if (typeof document !== 'undefined') {
                 const rootStyle = (document.documentElement.getAttribute('style') || '').replace(/"/g, '&quot;');
                 /* Base on the real document URL so relative CSS, fonts and assets load; link clicks are still intercepted by guard(). */
                 const base = (document.baseURI || location.href).replace(/"/g, '&quot;');
-                const jump = '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(/^(tel:|mailto:)/i.test(h))return;e.preventDefault();var host=window.opener||window.parent;if(host&&host!==window&&host.__kitPreviewGo)host.__kitPreviewGo(h,document);},true);<\/script>';
-                return `<!doctype html><html lang="en" style="${rootStyle}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="${base}"><title>${title}</title>${canvasStyles()}<style>${EXTRA}</style></head><body class="${document.body.className}" data-preview-page="${id}">${siteHTML(id)}${jump}</body></html>`;
+                const isSticky = checkSticky();
+                const stickyAttr = isSticky ? 'true' : 'false';
+                let bodyClass = (document.body.className || '').trim();
+                if (!isSticky) {
+                    bodyClass = bodyClass.replace(/\bis-sticky-header\b/g, '').trim();
+                }
+                const jump = '<script>' +
+                    'document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";if(/^(tel:|mailto:)/i.test(h))return;e.preventDefault();var host=window.opener||window.parent;if(host&&host!==window&&host.__kitPreviewGo)host.__kitPreviewGo(h,document);},true);' +
+                    'window.addEventListener("scroll",function(){' +
+                        'var on=document.body.dataset.stickyHeader==="true"||document.body.dataset.stickyHeader==="on";' +
+                        'var header=document.querySelector(".site-header");' +
+                        'if(!on){if(header)header.classList.remove("is-stuck");return;}' +
+                        'var top=window.pageYOffset||document.documentElement.scrollTop||0;' +
+                        'if(header){if(top>20){header.classList.add("is-stuck");}else{header.classList.remove("is-stuck");}}' +
+                    '},{passive:true});' +
+                    'var initHeader=document.querySelector(".site-header");if(initHeader&&!(document.body.dataset.stickyHeader==="true"||document.body.dataset.stickyHeader==="on")){initHeader.classList.remove("is-stuck");}' +
+                '<\/script>';
+                return `<!doctype html><html lang="en" style="${rootStyle}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><base href="${base}"><title>${title}</title>${canvasStyles()}<style>${EXTRA}</style></head><body class="${bodyClass}" data-preview-page="${id}" data-sticky-header="${stickyAttr}">${siteHTML(id)}${jump}</body></html>`;
             };
             /* sizes the kit measures with JS at the current width: re-measure them at the preview's width (same rule as applyPanel) */
             function relayout(doc) {
-                const w = doc.defaultView, mobile = w.innerWidth <= 768, pos = typeof panelPos === 'string' ? panelPos : 'bottom';
+                if (!doc) return;
+                const w = doc.defaultView || window, mobile = (w.innerWidth || 1200) <= 768, pos = typeof panelPos === 'string' ? panelPos : 'bottom';
                 const eff = pos === 'off' ? 'off' : (mobile ? 'bottom' : pos);
                 ['off', 'bottom', 'left', 'right'].forEach(v => doc.body.classList.toggle('panel-' + v, eff === v));
                 doc.querySelectorAll('.hero').forEach(h => { const p = h.querySelector(':scope > .biz-panel');
@@ -12549,7 +12817,9 @@ if (typeof document !== 'undefined') {
             /* links inside a preview must not leave it: in a preview document "#services" means the kit file, so it would load the kit into the frame */
             function renderPreview(doc, pageId) {
                 const id = pageId || activePageId();
+                const isSticky = checkSticky();
                 doc.body.dataset.previewPage = id;
+                doc.body.dataset.stickyHeader = isSticky ? 'true' : 'false';
                 doc.body.innerHTML = siteHTML(id);
                 markActiveNav(doc, id);
                 relayout(doc);
@@ -12573,7 +12843,7 @@ if (typeof document !== 'undefined') {
             };
             /* links inside a preview must not leave it: in a preview document "#services" means the kit file, so it would load the kit into the frame */
             function guard(doc) {
-                if (!doc || doc.__kitGuard) return; doc.__kitGuard = true;
+                if (!doc || typeof doc.addEventListener !== 'function' || doc.__kitGuard) return; doc.__kitGuard = true;
                 doc.addEventListener('click', e => {
                     const a = e.target.closest('a[href]'); if (!a) return;
                     const h = a.getAttribute('href') || '';
@@ -12608,19 +12878,20 @@ if (typeof document !== 'undefined') {
                 set(doc.documentElement, 'height', 'auto');
                 set(doc.documentElement, 'min-height', '100%');
                 set(doc.documentElement, 'max-height', 'none');
-                set(doc.documentElement, 'overflow', 'auto');
                 set(doc.documentElement, 'overflow-y', 'auto');
-                set(doc.documentElement, 'overflow-x', 'hidden');
+                set(doc.documentElement, 'overflow-x', 'clip');
                 set(doc.body, 'height', 'auto');
                 set(doc.body, 'min-height', '100%');
                 set(doc.body, 'max-height', 'none');
-                set(doc.body, 'overflow', 'auto');
-                set(doc.body, 'overflow-y', 'auto');
-                set(doc.body, 'overflow-x', 'hidden');
+                set(doc.body, 'overflow', 'visible');
+                set(doc.body, 'overflow-x', 'visible');
+                set(doc.body, 'overflow-y', 'visible');
                 const page = doc.getElementById('preview-page');
                 set(page, 'display', 'block');
                 set(page, 'height', 'auto');
                 set(page, 'overflow', 'visible');
+                set(page, 'overflow-x', 'visible');
+                set(page, 'overflow-y', 'visible');
                 ['services', 'about', 'solutions', 'trust-bar', 'reviews', 'quote', 'faq', 'promo', 'contact', 'cta', 'page-repairs', 'page-insurance', 'page-emergency', 'page-warranty', 'page-contact', 'page-about', 'footer'].forEach(id => {
                     const el = doc.getElementById(id);
                     if (!el) return;
@@ -12679,10 +12950,12 @@ if (typeof document !== 'undefined') {
                 if (!win || win.closed) win = window.open('about:blank', '_blank');
                 if (!win) { const b = document.getElementById('kitWin'); b.querySelector('span').textContent = 'Allow new tabs'; b.dataset.tip = 'Allow a new tab to preview your website'; return; }
                 const pageId = activePageId();
+                const isSticky = checkSticky();
                 win.document.open();
                 win.document.write(docHTML('Preview', pageId));
                 win.document.close();
                 win.document.body.dataset.previewPage = pageId;
+                win.document.body.dataset.stickyHeader = isSticky ? 'true' : 'false';
                 markActiveNav(win.document, pageId);
                 guard(win.document);
                 relayout(win.document);

@@ -1819,3 +1819,31 @@ body[data-mode="builder"] #kit-drawer > .drawer-side > .cfg {
 .war-hero figure.is-frame-on,
 .war-film.is-frame-on,
 .war-photo.is-frame-on { outline: 2px solid #7c6cff; outline-offset: -2px; }
+
+/* Ensure dark sidebar tree always maintains readable contrast */
+.kit-drawer:not([data-theme="light"]) .drawer-side,
+.kit-drawer:not([data-theme="light"]) .drawer-side .cfg,
+.kit-drawer:not([data-theme="light"]) .drawer-side .cfg-bar,
+.kit-drawer:not([data-theme="light"]) .kit-sections {
+    color: var(--ed-text, #f2f3f5);
+}
+
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-bucket-name,
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-count {
+    color: var(--ed-muted, #9aa0a8) !important;
+}
+
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)) .cfg-name {
+    color: var(--ed-text, #f2f3f5) !important;
+}
+
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row.is-here,
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row.is-picked,
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:has(> .cfg-tab.is-active) {
+    background: var(--ed-select, #ffffff) !important;
+}
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row.is-here .cfg-name,
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row.is-picked .cfg-name,
+.kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:has(> .cfg-tab.is-active) .cfg-name {
+    color: var(--ed-select-on, #17191c) !important;
+}

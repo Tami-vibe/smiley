@@ -5214,29 +5214,61 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     background: transparent;
     color: var(--ed-muted);
     cursor: pointer;}
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here > .cfg-tab .cfg-num,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here > .cfg-tab .cfg-num .ms,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked > .cfg-tab .cfg-num,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked > .cfg-tab .cfg-num .ms,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) > .cfg-tab .cfg-num,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) > .cfg-tab .cfg-num .ms,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here .cfg-name,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked .cfg-name,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) .cfg-name,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here .kit-eye,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here .kit-eye .ms,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked .kit-eye,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked .kit-eye .ms,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-eye,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-eye .ms {
-    color: var(--ed-select-on) !important;
-    -webkit-text-fill-color: var(--ed-select-on) !important;}
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-here .kit-preset,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row.is-picked .kit-preset,
-#kit-drawer[data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-preset {
-    background: var(--ed-select-on);
-    color: var(--ed-select);
-    -webkit-text-fill-color: var(--ed-select);}
+#kit-drawer .kit-sections .kit-row.is-here,
+#kit-drawer .kit-sections .kit-row.is-picked,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) {
+    border-radius: 8px !important;
+    background: var(--ed-select, #ffffff) !important;
+    color: var(--ed-select-on, #17191c) !important;
+}
+#kit-drawer .kit-sections .kit-row.is-here:hover,
+#kit-drawer .kit-sections .kit-row.is-picked:hover,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active):hover {
+    background: var(--ed-select, #ffffff) !important;
+    color: var(--ed-select-on, #17191c) !important;
+}
+#kit-drawer .kit-sections .kit-row.is-here > .cfg-tab .cfg-num,
+#kit-drawer .kit-sections .kit-row.is-here > .cfg-tab .cfg-num .ms,
+#kit-drawer .kit-sections .kit-row.is-picked > .cfg-tab .cfg-num,
+#kit-drawer .kit-sections .kit-row.is-picked > .cfg-tab .cfg-num .ms,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) > .cfg-tab .cfg-num,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) > .cfg-tab .cfg-num .ms,
+#kit-drawer .kit-sections .kit-row.is-here .cfg-name,
+#kit-drawer .kit-sections .kit-row.is-picked .cfg-name,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) .cfg-name,
+#kit-drawer .kit-sections .kit-row.is-here .kit-eye,
+#kit-drawer .kit-sections .kit-row.is-here .kit-eye .ms,
+#kit-drawer .kit-sections .kit-row.is-picked .kit-eye,
+#kit-drawer .kit-sections .kit-row.is-picked .kit-eye .ms,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-eye,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-eye .ms {
+    color: var(--ed-select-on, #17191c) !important;
+    -webkit-text-fill-color: var(--ed-select-on, #17191c) !important;
+}
+#kit-drawer .kit-sections .kit-row.is-here .kit-preset,
+#kit-drawer .kit-sections .kit-row.is-picked .kit-preset,
+#kit-drawer .kit-sections .kit-row:has(> .cfg-tab.is-active) .kit-preset {
+    background: var(--ed-select-on, #17191c) !important;
+    color: var(--ed-select, #ffffff) !important;
+    -webkit-text-fill-color: var(--ed-select, #ffffff) !important;
+}
+
+/* Ensure unselected rows always have crisp light text on dark sidebar */
+#kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)) {
+    background: transparent !important;
+    color: var(--ed-text, #f2f3f5) !important;
+}
+#kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)):hover {
+    background: var(--ed-hover, #262a31) !important;
+}
+#kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)) .cfg-name {
+    color: var(--ed-text, #f2f3f5) !important;
+    -webkit-text-fill-color: var(--ed-text, #f2f3f5) !important;
+}
+#kit-drawer:not([data-theme="light"]) .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)) :is(.cfg-num, .ms, .kit-eye) {
+    color: var(--ed-muted, #9aa0a8) !important;
+    -webkit-text-fill-color: var(--ed-muted, #9aa0a8) !important;
+}
 .kit-eye .ms { font-size: 20px;}
 
 #kit-drawer[data-kit-rail="open"] #kit-page-host { display: none !important;}
@@ -5260,9 +5292,9 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
 .kit-canvas-bar { z-index: 40;}
 .kit-page-menu {
     position: absolute;
-    z-index: 8;
+    z-index: 99999;
     top: calc(100% + 4px);
-    left: 0;
+    left: auto;
     width: 280px;
     max-height: 320px;
     overflow: auto;
@@ -5341,11 +5373,11 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     background: var(--ed-bg);
     box-shadow: inset 0 -1px 0 var(--ed-border);}
 #kit-drawer .kit-canvas-bar > .kit-crumbs {
-    position: static;
+    position: relative;
     flex: 1 1 auto;
     min-width: 0;
     max-width: none;
-    overflow: hidden;}
+    overflow: visible;}
 #kit-drawer .kit-canvas-bar > .kit-crumbs .kit-project {
     flex: 1 1 auto;
     min-width: 0;
@@ -5476,9 +5508,8 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     background: var(--ed-select) !important;
     color: var(--ed-select-on) !important;
     box-shadow: none !important;}
-#kit-drawer[data-theme="dark"][data-kit-rail="open"] .kit-sections .kit-row:hover,
-#kit-drawer[data-theme="dark"][data-kit-rail="open"] .kit-sections .kit-row:has(> .cfg-tab.is-active) {
-    background: var(--ed-bg2);}
+#kit-drawer[data-theme="dark"][data-kit-rail="open"] .kit-sections .kit-row:not(.is-here):not(.is-picked):not(:has(> .cfg-tab.is-active)):hover {
+    background: var(--ed-hover, #262a31);}
 #kit-drawer .kit-canvas-bar > .kit-canvas-tools {
     align-items: center;
     gap: 2px;

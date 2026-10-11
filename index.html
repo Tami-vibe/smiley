@@ -6,9 +6,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Design System + Automotive Heroes v102</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="./css/tokens-base.css?v=tow-cycle">
+<link rel="stylesheet" href="./css/tokens-base.css?v=v103-sticky-unified2">
 <link rel="stylesheet" href="./css/builder-rail.css?v=warranty-media">
-<link rel="stylesheet" href="./css/editor-inspector.css?v=preview-frame127">
+<link rel="stylesheet" href="./css/editor-inspector.css?v=page-anchor">
 <link rel="stylesheet" href="./css/services-components.css?v=preview-frame33">
 <link rel="stylesheet" href="./css/daisyui-components.css">
 <link rel="stylesheet" href="./css/about-timeline.css?v=preview-frame88">
@@ -25,10 +25,12 @@
 <!-- Layout 1: white reviews · title · subtext · 1 button · no panel -->
 <section class="hero hero-gradient" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
 <div class="hero-label">Layout 1: Gradient Centered</div>
-<div class="hero-content">
-<div class="label">Step Into The Green</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Step Into The Green</div>
 <h1>Experience the Future of Mobility</h1>
-<p data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
+</div>
+<p class="subtext" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
 <div class="cta-group">
 <div class="cta-row">
 <button class="btn cta-btn cta-primary">Book a Test Drive</button>
@@ -40,10 +42,12 @@
 <!-- Layout 2: black reviews · title · subtext · 2 buttons · panel RIGHT -->
 <section class="hero hero-fullbleed" data-panel="right" data-reviews="black" data-ctas="2" data-cta-style="fill">
 <div class="hero-label">Layout 2: Full Bleed</div>
-<div class="hero-content">
-<div class="label">Unlock Performance</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Unlock Performance</div>
 <h1>Unlock Next Level Performance</h1>
-<p data-tagline-size="medium">Experience the power of cutting-edge technology and engineering excellence.</p>
+</div>
+<p class="subtext" data-tagline-size="medium">Experience the power of cutting-edge technology and engineering excellence.</p>
 <div class="cta-group">
 <div class="cta-row">
 <button class="btn cta-btn cta-primary">Explore Now →</button>
@@ -59,10 +63,12 @@
                  <video src="..." autoplay muted loop playsinline></video> inside .hero-media -->
 <div class="hero-media"></div>
 <div class="hero-label">Layout 3: Centered Full</div>
-<div class="hero-content">
-<div class="label">Next-Gen Automotive</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Next-Gen Automotive</div>
 <h1>Build a Life in Performance</h1>
-<p data-tagline-size="long">Streamline your experience and boost confidence with intuitive solutions. Speed, safety, and simplicity—all in one vehicle.</p>
+</div>
+<p class="subtext" data-tagline-size="long">Streamline your experience and boost confidence with intuitive solutions. Speed, safety, and simplicity—all in one vehicle.</p>
 <div class="cta-group">
 <div class="cta-row">
 <button class="btn cta-btn cta-primary">Get Started</button>
@@ -76,7 +82,7 @@
 <div class="hero-label">Layout 4: Bottom sidebar menu</div>
 <aside class="sidebar">
 <div>
-<div class="label">Brand</div>
+<div class="label overline">Brand</div>
 <p class="sidebar-title">Logo</p>
 </div>
 <nav aria-label="Bottom sidebar menu" class="sidebar-nav" id="framedSidebarNav">
@@ -87,10 +93,12 @@
 <a href="#">Item5</a>
 </nav>
 </aside>
-<div class="hero-content">
-<div class="label">Right Column</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Right Column</div>
 <h1>Build a Life in Performance</h1>
-<p data-tagline-size="long">Supporting content for the right side column.</p>
+</div>
+<p class="subtext" data-tagline-size="long">Supporting content for the right side column.</p>
 <div class="cta-group">
 <div class="cta-row">
 <button class="btn cta-btn cta-primary">Action Button</button>
@@ -102,10 +110,12 @@
 <!-- Layout 5: black reviews · 96px+ title · subtext · 2 outline buttons · no panel -->
 <section class="hero hero-aerial" data-panel="off" data-reviews="black" data-ctas="2" data-cta-style="outline">
 <div class="hero-label">Layout 5: Bold Minimal</div>
-<div class="hero-content">
-<div class="label">Innovation</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Innovation</div>
 <h1>Beast Mode</h1>
-<p data-tagline-size="medium">Self-driving freight is here. The future of logistics starts now.</p>
+</div>
+<p class="subtext" data-tagline-size="medium">Self-driving freight is here. The future of logistics starts now.</p>
 <div class="cta-group">
 <div class="cta-row">
 <button class="btn cta-btn cta-primary">Enter Now</button>
@@ -125,10 +135,12 @@
 <div class="hb-slide">Image / video 4</div>
 </div>
 <div class="hero-label">Layout 6: Business Info</div>
-<div class="hero-content">
-<div class="label">Body Shop in Milan</div>
+<div class="hero-content header-group">
+<div class="title-wrap">
+<div class="label overline">Body Shop in Milan</div>
 <h1>Your car in safe hands.</h1>
-<p data-tagline-size="short">Repairs, paint and insurance claims.</p>
+</div>
+<p class="subtext" data-tagline-size="short">Repairs, paint and insurance claims.</p>
 <div aria-label="Slides" class="hb-dots" role="group"></div>
 </div>
 <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews" href="#reviews">
@@ -144,10 +156,12 @@
 </section>
 <section aria-labelledby="svc-title" class="svc" id="services">
 <div class="svc-badge">Section: Services</div>
-<div class="svc-head">
-<div class="svc-label">Our services</div>
+<div class="svc-head header-group">
+<div class="title-wrap">
+<div class="svc-label label overline">Our services</div>
 <h2 id="svc-title">Everything your car needs after an accident.</h2>
-<p>From the first call to the final polish, one workshop takes care of it all.</p>
+</div>
+<p class="subtext">From the first call to the final polish, one workshop takes care of it all.</p>
 </div>
 <ul class="svc-grid" role="list"><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path> <path d="M14 8v-2"></path> <path d="M19 12h2"></path> <path d="M17.5 15.5l1.5 1.5"></path> <path d="M17.5 8.5l1.5 -1.5"></path></svg><h3>Collision repair</h3><p>Frame and body restored to factory specs after any accident.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 12a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2l0 -7"></path> <path d="M6 10v-4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4"></path> <path d="M15 7h.01"></path> <path d="M18 9h.01"></path> <path d="M18 5h.01"></path> <path d="M21 3h.01"></path> <path d="M21 7h.01"></path> <path d="M21 11h.01"></path> <path d="M10 7h1"></path></svg><h3>Paint &amp; refinishing</h3><p>Computer colour matching and a showroom finish.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.414 10l-7.383 7.418a2.091 2.091 0 0 0 0 2.967a2.11 2.11 0 0 0 2.976 0l7.407 -7.385"></path> <path d="M18.121 15.293l2.586 -2.586a1 1 0 0 0 0 -1.414l-7.586 -7.586a1 1 0 0 0 -1.414 0l-2.586 2.586a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0"></path></svg><h3>Dent removal</h3><p>Paintless repair for hail damage and parking dents.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path> <path d="M15 19l2 2l4 -4"></path></svg><h3>Insurance claims</h3><p>We handle the paperwork directly with your insurer.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M7 18h8m4 0h2v-6a5 5 0 0 0 -5 -5h-1l1.5 5h4.5"></path> <path d="M12 18v-11h3"></path> <path d="M3 17v-5h9"></path> <path d="M4 12v-6l18 -3v2"></path> <path d="M8 12v-4l-4 -2"></path></svg><h3>24/7 towing</h3><p>Roadside pickup and transport to our workshop.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11 18a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path> <path d="M3 9l5.5 5.5a5 5 0 0 1 7 0l5.5 -5.5a12 12 0 0 0 -18 0"></path> <path d="M12 18l-2.2 -12.8"></path></svg><h3>Windshield &amp; glass</h3><p>Chip repair and full windshield replacement.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22a3 3 0 1 1 0 -6a3 3 0 0 1 0 6"></path> <path d="M12 16v-12"></path> <path d="M13 2h-2v2h2v-2"></path> <path d="M9 11l6 -1"></path> <path d="M9 14l6 -1"></path> <path d="M9 8l6 -1"></path></svg><h3>Frame &amp; suspension</h3><p>Alignment checks after impacts and potholes.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M15 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M5 20h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path> <path d="M3 6l9 -4l9 4"></path></svg><h3>Courtesy car</h3><p>Keep moving while we repair your vehicle.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -10"></path> <path d="M6 5v-2"></path> <path d="M18 3v2"></path> <path d="M6.5 12h3"></path> <path d="M14.5 12h3"></path> <path d="M16 10.5v3"></path></svg><h3>Battery &amp; electrics</h3><p>Testing, replacement and electrical repairs.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li><li class="svc-card"><a class="svc-link" href="#services"><svg aria-hidden="true" class="svc-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path> <path d="M3 12h6"></path> <path d="M15 12h6"></path> <path d="M13.6 9.4l3.4 -4.8"></path> <path d="M10.4 14.6l-3.4 4.8"></path> <path d="M7 4.6l3.4 4.8"></path> <path d="M13.6 14.6l3.4 4.8"></path></svg><h3>Wheels &amp; tyres</h3><p>Rim repair, tyre fitting and balancing.</p><span class="svc-more">Learn more <svg aria-hidden="true" class="svc-arrow" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li></ul>
 <div class="svc-all"><a class="btn svc-all-btn" href="#services">See all services</a></div>
@@ -350,7 +364,7 @@
 </section>
 <section id="pains" class="ks ks-pains" data-look="a" aria-labelledby="pains-title">
 <div class="svc-badge ks-badge">Section: Customer Pains</div>
-<div class="svc-head ks-head"><h2 id="pains-title">What gets in the way</h2></div>
+<div class="svc-head ks-head header-group"><div class="title-wrap"><h2 id="pains-title">What gets in the way</h2></div></div>
 <div class="pains-grid">
 <article><h3>Insurance wait</h3><p>The claim sits for weeks while the car stays undrivable.</p></article>
 <article><h3>Surprise bill</h3><p>A supplement shows up after the work has already started.</p></article>
@@ -363,10 +377,12 @@
 </section>
 <section aria-labelledby="rc-title" class="rc" data-headgap="tight" data-tabring="1" id="solutions">
 <div class="svc-badge rc-badge">Section: Repairs &amp; claims</div>
-<div class="svc-head rc-head">
-<div class="svc-label">How we work</div>
+<div class="svc-head rc-head header-group">
+<div class="title-wrap">
+<div class="svc-label label overline">How we work</div>
 <h2 id="rc-title">From damage to done, without the stress.</h2>
-<p>Real repairs, simple insurance claims and a clear process.</p>
+</div>
+<p class="subtext">Real repairs, simple insurance claims and a clear process.</p>
 </div>
 <div aria-label="Repairs and claims" class="tabs tabs-box rc-tabs" role="tablist">
 <input aria-label="Before &amp; After" checked="" class="tab" name="rc_tabs" type="radio"/>
@@ -409,7 +425,7 @@
 </section>
 <section aria-labelledby="rev-title" class="ks ks-reviews" id="reviews">
 <div class="svc-badge ks-badge">Section: Reviews</div>
-<div class="svc-head ks-head"><div class="svc-label">Reviews</div><h2 id="rev-title">What our customers say.</h2></div>
+<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">Reviews</div><h2 id="rev-title">What our customers say.</h2></div></div>
 <div class="rev-wrap">
 <div class="rev-summary">
 <div class="rev-score">4.8</div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span>
@@ -417,7 +433,7 @@
 <span class="rev-src"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945"></path></svg> Google reviews</span>
 <a class="btn ks-btn-outline" href="#reviews">Read all reviews</a>
 </div>
-<ul class="rev-list" role="list"><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">M</span><div><b>Marco R.</b><small>2 weeks ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Perfect paint match on my bumper. Friendly team, fair price.</p></li></ul>
+<ul class="rev-list" role="list"><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">M</span><div><b>Marco R.</b><small>2 weeks ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Perfect paint match on my bumper. Friendly team, fair price.</p></li></ul>
 </div>
 <p class="ks-note">Sample reviews for the demo. Real sites show only real, verifiable reviews.</p>
 </section>
@@ -442,7 +458,7 @@
 <section aria-labelledby="faq-title" class="ks ks-faq" id="faq">
 <div class="svc-badge ks-badge">Section: FAQ</div>
 <div class="faq-grid">
-<div class="svc-head ks-head"><div class="svc-label">FAQ</div><h2 id="faq-title">Quick answers.</h2><p>Still unsure? Call or WhatsApp us.</p></div>
+<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">FAQ</div><h2 id="faq-title">Quick answers.</h2></div><p class="subtext">Still unsure? Call or WhatsApp us.</p></div>
 <div class="faq-list"><details class="faq-item" open=""><summary>Do I have to use the body shop my insurer suggests?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Placeholder answer — the final text comes from the Italy insurance research.</p></details><details class="faq-item"><summary>How long does a repair take?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Most repairs take a few working days. We confirm the time with your quote.</p></details><details class="faq-item"><summary>Do you offer a courtesy car?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Yes, ask us when you book. Availability depends on the day.</p></details><details class="faq-item"><summary>Can you match my car’s original paint?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Yes. We use computer colour matching for factory colours.</p></details><details class="faq-item"><summary>How do I get a quote?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Send photos with the form above or by WhatsApp. We reply within 24 hours.</p></details></div>
 <div class="faq-collapse">
 <div class="collapse faq-cl"><input type="checkbox" aria-label="Do I have to use the body shop my insurer suggests?" checked/><div class="collapse-title">Do I have to use the body shop my insurer suggests?</div><div class="collapse-content"><p>Placeholder answer — the final text comes from the Italy insurance research.</p></div></div>
@@ -471,7 +487,7 @@
 <div class="svc-badge ks-badge">Section: Contact + map</div>
 <div class="contact-grid">
 <div class="contact-info">
-<div class="svc-head ks-head"><div class="svc-label">Contact</div><h2 id="contact-title">Visit or call us.</h2></div>
+<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">Contact</div><h2 id="contact-title">Visit or call us.</h2></div></div>
 <ul class="contact-list" role="list">
 <li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><div><b>Via Nazionale, 42</b><span>20123 Milan (MI)</span></div></li>
 <li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg><div><b><a href="tel:+390212345678">+39 02 1234 5678</a></b><span>Mon–Fri 08:00–18:30 · Sat 08:00–12:30</span></div></li>
@@ -484,40 +500,23 @@
 </div>
 </div>
 </section>
-<section aria-labelledby="final-title" class="ks ks-final" id="cta">
+<section aria-labelledby="final-title" class="ks ks-final" id="cta" data-height="default" data-align="center">
 <div class="svc-badge ks-badge">Section: Final call-to-action</div>
-<div class="final-inner">
+<div class="final-inner header-group">
+<div class="title-wrap">
 <h2 id="final-title">Had an accident? We’ll take it from here.</h2>
-<p>Free quote, insurance handled, your car back like new.</p>
+</div>
+<p class="subtext">Free quote, insurance handled, your car back like new.</p>
 <div class="final-ctas"><a class="btn ks-btn" href="#quote">Get a free quote</a><a class="btn ks-btn-outline" href="tel:+390212345678"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg> Call now</a></div>
 </div>
 </section>
 <section aria-labelledby="repairs-page-title" class="ks page-sheet rep-page" hidden id="page-repairs">
-<div class="rep-hero">
-<input checked id="rep-s1" name="rep-slide" type="radio"/>
-<input id="rep-s2" name="rep-slide" type="radio"/>
-<input id="rep-s3" name="rep-slide" type="radio"/>
-<input id="rep-s4" name="rep-slide" type="radio"/>
-<div class="rep-photo">
-<img alt="The car in the workshop bay" class="for-s1" src="./media/showcase/workshop-bay.jpg"/>
-<img alt="A door panel under repair" class="for-s2" src="./media/showcase/bodywork-door-repair.jpg"/>
-<img alt="The written repair plan" class="for-s3" src="./media/showcase/service-authorization.jpg"/>
-<img alt="A finished car back on the road" class="for-s4" src="./media/showcase/highway-suv.jpg"/>
-</div>
-<div class="rep-notes">
+<div class="tow-hero rep-hero">
+<video autoplay muted loop playsinline src="./media/showcase/mountain-sports-car.mp4" poster="./media/showcase/workshop-bay.jpg"></video>
+<div class="tow-hero-copy">
 <p class="svc-label">Repairs</p>
 <h2 id="repairs-page-title">From the first photo to the day you drive away.</h2>
-<p class="rep-sub">Collision work is done in our own booth, on your car, by the same crew that quoted it.</p>
-<article class="for-s1"><h3>Look and measure</h3><p>We photograph the damage and measure the frame before a panel comes off.</p></article>
-<article class="for-s2"><h3>Structural repair</h3><p>Bent rails and pillars go back to factory points, then we weld where the metal tore.</p></article>
-<article class="for-s3"><h3>The written plan</h3><p>You get the plan before any panel comes off. Paint is mixed for your car and baked in our booth.</p></article>
-<article class="for-s4"><h3>Detail and handoff</h3><p>Panels are fitted, lights aimed, and you walk the car with us before you leave.</p></article>
-<div class="rep-dots">
-<label for="rep-s1">1</label>
-<label for="rep-s2">2</label>
-<label for="rep-s3">3</label>
-<label for="rep-s4">4</label>
-</div>
+<p>Collision work is done in our own booth, on your car, by the same crew that quoted it. You get a written plan before any panel comes off, and you walk the car with us before you drive away.</p>
 </div>
 </div>
 <div class="rep-band">
@@ -557,37 +556,12 @@
 </div>
 </section>
 <section aria-labelledby="insurance-page-title" class="ks page-sheet ins-page" hidden id="page-insurance">
-<div class="ins-band">
-<div class="ins-inner">
-<header class="ins-head">
+<div class="tow-hero ins-hero">
+<video autoplay muted loop playsinline src="./media/ai-images/car-driving.mp4" poster="./media/showcase/service-authorization.jpg"></video>
+<div class="tow-hero-copy">
 <p class="svc-label">Insurance</p>
 <h2 id="insurance-page-title">You choose the shop. We deal with the claim.</h2>
-<p class="ins-sub">Your insurer can suggest a shop. You do not have to use it.</p>
-</header>
-<div class="ins-hero">
-<input checked id="ins-s1" name="ins-slide" type="radio"/>
-<input id="ins-s2" name="ins-slide" type="radio"/>
-<input id="ins-s3" name="ins-slide" type="radio"/>
-<input id="ins-s4" name="ins-slide" type="radio"/>
-<div class="ins-photo">
-<img alt="The car in the workshop bay" class="for-s1" src="./media/showcase/workshop-bay.jpg"/>
-<img alt="The written estimate" class="for-s2" src="./media/showcase/service-authorization.jpg"/>
-<img alt="A door panel under repair" class="for-s3" src="./media/showcase/bodywork-door-repair.jpg"/>
-<img alt="A car back on the road" class="for-s4" src="./media/showcase/highway-suv.jpg"/>
-</div>
-<div class="ins-notes">
-<article class="for-s1"><h3>The arrival</h3><p>We photograph the car as it comes in, before a panel comes off.</p></article>
-<article class="for-s2"><h3>The claim</h3><p>We send the claim number, the photos, and the estimate.</p></article>
-<article class="for-s3"><h3>The supplement</h3><p>Hidden damage is written up and sent to the insurer before we repair it.</p></article>
-<article class="for-s4"><h3>While it is here</h3><p>Ask about a courtesy car for the days you are off the road.</p></article>
-<div class="ins-dots" role="tablist">
-<label for="ins-s1">1</label>
-<label for="ins-s2">2</label>
-<label for="ins-s3">3</label>
-<label for="ins-s4">4</label>
-</div>
-</div>
-</div>
+<p>Your insurer can suggest a shop. You do not have to use it. We deal directly with the insurer, handle photographic damage documentation, and manage all supplemental claims so you stay on the road.</p>
 </div>
 </div>
 <div class="ins-band">
@@ -889,6 +863,14 @@
               </button>
             </div>
           </div>
+          <div class="control-group" data-context="section" data-when="hero" data-prop="headerSticky">
+            <label>Sticky Header</label>
+            <div class="button-group" role="group" aria-label="Header sticky behavior">
+              <button type="button" class="tier-btn active" data-val="off">Static</button>
+              <button type="button" class="tier-btn" data-val="on">Sticky</button>
+            </div>
+            <p class="shade-note">Sticky = stays pinned to the top when scrolling.</p>
+          </div>
           <div class="control-group" data-context="section" data-when="hero" data-prop="headerBtns">
             <label>Header Buttons</label>
             <div class="button-group">
@@ -1005,6 +987,15 @@
               <button type="button" class="tier-btn is-icon" data-val="right" title="Right" aria-label="Right">
                 <span class="ms" aria-hidden="true">format_align_right</span>
               </button>
+            </div>
+          </div>
+          <div class="control-group" data-context="section" data-prop="height">
+            <label>Section Height</label>
+            <div class="button-group" role="group" aria-label="Section height presets">
+              <button type="button" class="tier-btn" data-val="compact" title="Compact">Compact</button>
+              <button type="button" class="tier-btn active" data-val="default" title="Default">Default</button>
+              <button type="button" class="tier-btn" data-val="tall" title="Tall">Tall</button>
+              <button type="button" class="tier-btn" data-val="full" title="Full Screen">Full</button>
             </div>
           </div>
           <div class="control-group" data-context="section" data-prop="scheme">
@@ -1658,6 +1649,12 @@
 <button class="tier-btn active" data-opt="show" data-val="on">On</button>
 <button class="tier-btn" data-opt="show" data-val="off">Off</button>
 </div>
+</div><div class="control-group">
+<label>Sticky Header</label>
+<div class="button-group">
+<button class="tier-btn active" data-opt="sticky" data-val="on">On</button>
+<button class="tier-btn" data-opt="sticky" data-val="off">Off</button>
+</div>
 </div><div class="control-group" data-when="bar">
 <label>Bar style</label>
 <div class="button-group">
@@ -1885,6 +1882,6 @@
 </section></div></div><div aria-labelledby="tab-icons" class="cfg-panel" hidden="" id="panel-icons" role="tabpanel"><p class="cfg-empty">Icons come next: Tabler (MIT) as the main set, Material Symbols (Apache 2.0) for the gaps.</p></div></div></div>
 </div>
 </div>
-<script type="module" src="./js/app.js?v=tow-cycle"></script>
+<script type="module" src="./js/app.js?v=v105-sticky-proven"></script>
 </body>
 </html>
