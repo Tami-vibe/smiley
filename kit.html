@@ -735,6 +735,145 @@
     .kit-svc-brand-card:hover .svc-arrow {
       transform: translateX(6px);
     }
+
+    /* Mini Heroes Space Optimized Grid */
+    .kit-mini-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+    .kit-mini-hero-card {
+      background: var(--kit-card-inner);
+      border: 1px solid var(--kit-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .kit-mini-hero-head {
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--kit-border);
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .kit-mini-hero-viewport {
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Business Panel Component Showcase */
+    .kit-biz-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: 16px;
+      width: 100%;
+    }
+    .kit-biz-panel.panel-solid {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .kit-biz-panel.panel-outline {
+      background: rgba(17, 24, 39, 0.4);
+      border: 1.5px solid var(--active-400, #38bdf8);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.12);
+    }
+    .kit-biz-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      padding-right: 16px;
+    }
+    .kit-biz-cell:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .kit-biz-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--active-400, #38bdf8);
+    }
+    .kit-biz-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .kit-biz-sub {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    /* Header Formats */
+    .kit-header-mockup {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      border-radius: 12px;
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+    }
+    .kit-header-pill-mockup {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 22px;
+      border-radius: 999px;
+      gap: 20px;
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .kit-header-pill-brand {
+      background: var(--active-600, #0472f1);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(4, 114, 241, 0.35);
+    }
+    .kit-header-pill-white {
+      background: #ffffff;
+      color: #111827;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .kit-header-pill-dark {
+      background: #182030;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .kit-header-pill-outline {
+      background: rgba(18, 24, 38, 0.7);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+      border: 1.5px solid var(--active-400, #38bdf8);
+    }
+
+    /* Format Grid 2-col & 3-col */
+    .kit-format-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+    .kit-format-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
   </style>
 </head>
 <body class="kit-standalone-page">
@@ -745,19 +884,24 @@
   <header class="kit-nav-top">
     <a href="/" class="kit-nav-brand">
       <span class="material-symbols-outlined">settings_heart</span>
-      <span>Pandino Living UI Kit &amp; Recipe Showroom</span>
+      <span>Pandino Living UI Kit &amp; Theme Showroom</span>
     </a>
 
     <!-- Category Filter Pills -->
     <nav class="kit-nav-pills" aria-label="Showroom Navigation">
       <a href="#sec-tokens" class="kit-nav-pill active">1. Color Ramp</a>
-      <a href="#sec-buttons" class="kit-nav-pill">2. Premium Buttons</a>
+      <a href="#sec-buttons" class="kit-nav-pill">2. Buttons</a>
       <a href="#sec-typography" class="kit-nav-pill">3. Typography</a>
-      <a href="#sec-cards" class="kit-nav-pill">4. Card Primitives &amp; Services</a>
-      <a href="#sec-heroes" class="kit-nav-pill">5. Homepage Hero Layouts</a>
-      <a href="#sec-about" class="kit-nav-pill">6. Our Story Timeline</a>
-      <a href="#sec-recipes" class="kit-nav-pill">7. Section Recipes</a>
-      <a href="#sec-forms" class="kit-nav-pill">8. Form Controls</a>
+      <a href="#sec-cards" class="kit-nav-pill">4. Service Cards</a>
+      <a href="#sec-headers" class="kit-nav-pill">5. Headers</a>
+      <a href="#sec-heroes" class="kit-nav-pill">6. Hero Layouts &amp; Biz Panel</a>
+      <a href="#sec-about" class="kit-nav-pill">7. About Formats</a>
+      <a href="#sec-solutions" class="kit-nav-pill">8. Solutions &amp; Workflow</a>
+      <a href="#sec-reviews" class="kit-nav-pill">9. Reviews</a>
+      <a href="#sec-faq" class="kit-nav-pill">10. FAQ</a>
+      <a href="#sec-promo-quote" class="kit-nav-pill">11. Promo &amp; Estimate</a>
+      <a href="#sec-footer" class="kit-nav-pill">12. CTA &amp; Footers</a>
+      <a href="#sec-forms" class="kit-nav-pill">13. Form Controls</a>
     </nav>
 
     <!-- Top Controls -->
@@ -1190,204 +1334,366 @@
     </section>
 
     <!-- =========================================================
-         5. ALL HOMEPAGE HERO SECTION LAYOUT OPTIONS (6 TOTAL)
+         5. SITE HEADER FORMATS & VARIATIONS
+         ========================================================= -->
+    <section id="sec-headers">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 5</span>
+          <h2>Header Layout &amp; Navigation Formats</h2>
+          <p>The 3 architectural navigation models plus floating Pill capsule styles from the Leftside Bar Builder.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+        
+        <!-- Header 1: Bar & Links -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Header Layout 1</span>
+              <h4 class="kit-recipe-title">Bar &amp; Links (data-header-layout="bar")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="site-header" data-header-layout="bar"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 24px;">
+            <div class="kit-header-mockup">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 26px;">car_repair</span>
+                <span style="font-family: var(--headline-font); font-size: 1.15rem; font-weight: 700; color: #fff;">PANDINO BODY SHOP</span>
+              </div>
+              <nav style="display: flex; align-items: center; gap: 24px;">
+                <a href="#services" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Repairs</a>
+                <a href="#insurance" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Insurance</a>
+                <a href="#emergency" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Emergency Towing</a>
+                <a href="#warranty" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Warranty</a>
+                <a href="#reviews" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Reviews</a>
+              </nav>
+              <div>
+                <a class="btn ks-btn btn-sm" href="#quote">Get Estimate</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header 2: Split Logo -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Header Layout 2</span>
+              <h4 class="kit-recipe-title">Split Logo (data-header-layout="split")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="site-header" data-header-layout="split"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 24px;">
+            <div class="kit-header-mockup" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;">
+              <nav style="display: flex; gap: 20px;">
+                <a href="#repairs" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Collision</a>
+                <a href="#paint" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Paint Booth</a>
+                <a href="#chassis" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Frame Alignment</a>
+              </nav>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 26px;">stars</span>
+                <span style="font-family: var(--headline-font); font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;">OFFICINA MILANO</span>
+              </div>
+              <div style="display: flex; gap: 20px; justify-content: flex-end; align-items: center;">
+                <a href="#reviews" style="color: #cbd5e1; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Reviews</a>
+                <a class="btn ks-btn-outline btn-sm" style="color: #fff !important; border-color: rgba(255,255,255,0.3);" href="#contact">Emergency Desk</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header 3: Foldout / Minimal -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Header Layout 3</span>
+              <h4 class="kit-recipe-title">Foldout Menu (data-header-layout="foldout")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="site-header" data-header-layout="foldout"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 24px;">
+            <div class="kit-header-mockup">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 26px;">tune</span>
+                <span style="font-family: var(--headline-font); font-size: 1.15rem; font-weight: 700; color: #fff;">PANDINO VINTAGE &amp; EV</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span style="font-size: 0.85rem; color: #94a3b8;">Via Nazionale, 42 · Milano</span>
+                <button type="button" class="btn ks-btn-outline btn-sm" style="color: #fff !important; border-color: rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 6px;">
+                  <span class="material-symbols-outlined" style="font-size: 18px;">menu</span>
+                  <span>Menu</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Pill Capsule Variations -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Header Style</span>
+              <h4 class="kit-recipe-title">Floating Capsule Pills (data-header-style="pill")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>Brand · White · Dark · Outline</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport gradient-viewport" style="display: flex; flex-direction: column; gap: 20px; padding: 36px 24px;">
+            
+            <!-- Brand Pill -->
+            <div class="kit-header-pill-mockup kit-header-pill-brand">
+              <span style="font-family: var(--headline-font); font-weight: 700; font-size: 0.95rem;">Brand Pill</span>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; font-weight: 600;">
+                <span>Repairs</span><span>Insurance</span><span>Reviews</span>
+              </div>
+              <button class="btn btn-sm" style="background: #ffffff; color: #111; border: none; border-radius: 999px; font-weight: 700; padding-inline: 14px;">Book Now</button>
+            </div>
+
+            <!-- White Pill -->
+            <div class="kit-header-pill-mockup kit-header-pill-white">
+              <span style="font-family: var(--headline-font); font-weight: 700; font-size: 0.95rem;">White Pill</span>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; font-weight: 600; color: #475569;">
+                <span>Repairs</span><span>Insurance</span><span>Reviews</span>
+              </div>
+              <button class="btn ks-btn btn-sm" style="border-radius: 999px; padding-inline: 14px;">Get Estimate</button>
+            </div>
+
+            <!-- Dark Pill -->
+            <div class="kit-header-pill-mockup kit-header-pill-dark">
+              <span style="font-family: var(--headline-font); font-weight: 700; font-size: 0.95rem; color: #fff;">Dark Pill</span>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; font-weight: 600; color: #94a3b8;">
+                <span>Repairs</span><span>Insurance</span><span>Reviews</span>
+              </div>
+              <button class="btn ks-btn btn-sm" style="border-radius: 999px; padding-inline: 14px;">Contact Us</button>
+            </div>
+
+            <!-- Outline Pill -->
+            <div class="kit-header-pill-mockup kit-header-pill-outline">
+              <span style="font-family: var(--headline-font); font-weight: 700; font-size: 0.95rem; color: #fff;">Outline Pill</span>
+              <div style="display: flex; gap: 16px; font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">
+                <span>Repairs</span><span>Insurance</span><span>Reviews</span>
+              </div>
+              <button class="btn btn-sm" style="background: var(--active-500); color: #fff; border: none; border-radius: 999px; font-weight: 700; padding-inline: 14px;">Book Visit</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. HOMEPAGE HERO MINI LAYOUTS & BUSINESS PANEL
          ========================================================= -->
     <section id="sec-heroes">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 5</span>
-          <h2>Homepage Hero Section Layout Options</h2>
-          <p>The complete 6 hero architectural layouts supported in the builder. Switch anytime via Inspector.</p>
+          <span class="kit-chapter-tag">Chapter 6</span>
+          <h2>Homepage Hero Mini Layouts &amp; Business Panel</h2>
+          <p>Space-optimized compact previews of all 6 hero layouts, plus the dedicated Business Panel in Solid and Outline looks.</p>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 40px;">
-
-        <!-- HERO OPTION 1: SOFT GRADIENT CENTERED -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 1</span>
-              <h4 class="kit-recipe-title">Soft Center Gradient (data-hmhero="0")</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-gradient" data-panel="off"</code>
-            </div>
+      <!-- BUSINESS PANEL SHOWCASE (FILL vs OUTLINE) -->
+      <div class="kit-recipe-box" style="margin-bottom: 32px;">
+        <div class="kit-recipe-header">
+          <div class="kit-recipe-id">
+            <span class="kit-recipe-badge">Hero Component</span>
+            <h4 class="kit-recipe-title">Business Panel Component: Solid (Fill) vs Outline</h4>
           </div>
-          <div class="kit-recipe-viewport gradient-viewport" style="text-align: center; padding: 70px 24px;">
-            <div class="header-group" style="max-width: 720px; margin: 0 auto;">
-              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8); font-weight: 700;">Step Into The Green</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 8px 0; color: #ffffff; letter-spacing: -0.02em;">Experience the Future of Mobility</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.15rem; line-height: 1.55; margin-top: 12px;">
-                Advanced technology meets stunning design. Premium automotive experience awaits you in Milan.
-              </p>
-              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 28px; flex-wrap: wrap;">
-                <button class="btn ks-btn">Book a Test Drive</button>
-                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
-              </div>
-            </div>
+          <div class="kit-recipe-actions">
+            <code>.biz-panel · Bottom Bar / Float Left / Float Right</code>
           </div>
         </div>
-
-        <!-- HERO OPTION 2: FULL-BLEED VIDEO WITH BUSINESS PANEL -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 2</span>
-              <h4 class="kit-recipe-title">Full-Bleed Media + Floating Business Panel (data-hmhero="1")</h4>
+        <div class="kit-recipe-viewport dark-viewport" style="display: flex; flex-direction: column; gap: 24px; padding: 32px 24px;">
+          
+          <!-- Solid / Fill Panel -->
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--active-400); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">check_circle</span>
+              <span>1. Solid Fill Style (data-pstyle="solid")</span>
             </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-fullbleed" data-panel="right"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport" style="background: url(./media/hero/highway-suv.jpg) center/cover no-repeat; min-height: 420px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; padding: 50px 36px;">
-            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.88) 100%); pointer-events: none;"></div>
-            
-            <div class="header-group" style="position: relative; z-index: 2; max-width: 540px;">
-              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8); font-weight: 700;">Unlock Performance</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2rem, 3.5vw, 2.7rem); color: #ffffff; margin: 8px 0; letter-spacing: -0.02em;">Unlock Next Level Performance</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-top: 8px; line-height: 1.5;">Experience the power of cutting-edge technology and engineering excellence.</p>
-              <div style="display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap;">
-                <button class="btn ks-btn">Explore Now →</button>
-                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
-              </div>
-            </div>
-
-            <!-- Floating Biz Panel -->
-            <div style="position: relative; z-index: 2; background: rgba(18, 24, 38, 0.9); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.15); border-radius: 18px; padding: 24px; width: 320px; display: flex; flex-direction: column; gap: 12px;">
-              <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--active-400);">Operating Hours</span>
-              <div style="font-size: 1rem; font-weight: 700; color: #ffffff;">Mon - Fri: 08:00 - 18:30</div>
-              <div style="font-size: 0.875rem; color: #94a3b8;">Via Nazionale 42, Milan · Booth #1</div>
-              <a href="tel:+390212345678" style="color: var(--active-400); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; margin-top: 4px;">
-                <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
-                <span>+39 02 1234 5678</span>
-              </a>
-            </div>
-            
-            <div style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 120px; background: var(--active-500); border-radius: 3px 0 0 3px;"></div>
-          </div>
-        </div>
-
-        <!-- HERO OPTION 3: CENTERED PHOTO / FRAMED -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 3</span>
-              <h4 class="kit-recipe-title">Centered Framed Media Card (data-hmhero="2")</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-centered" data-panel="left"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
-            <div style="position: relative; min-height: 400px; border-radius: 20px; overflow: hidden; background: url(./media/showcase/workshop-bay.jpg) center/cover no-repeat; display: flex; align-items: flex-end; padding: 40px 32px; border: 2px solid rgba(255,255,255,0.12);">
-              <div style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 100%);"></div>
-              <div class="header-group" style="position: relative; z-index: 2; max-width: 600px;">
-                <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Next-Gen Automotive</span>
-                <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.4rem; color: #ffffff; margin: 6px 0;">Build a Life in Performance</h2>
-                <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.5;">Streamline your experience and boost confidence with intuitive solutions. Speed, safety, and simplicity—all in one vehicle.</p>
-                <div style="display: flex; gap: 12px; margin-top: 20px;">
-                  <button class="btn ks-btn">Get Started</button>
-                  <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+            <div class="kit-biz-panel panel-solid">
+              <div class="kit-biz-cell" style="display: flex; flex-direction: row; align-items: center; gap: 12px;">
+                <img src="./media/hero/ev-lift-diagnostic.jpg" alt="Workshop thumb" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; flex-shrink: 0;" />
+                <div>
+                  <span class="kit-biz-kicker">Address</span>
+                  <div class="kit-biz-val">Via Nazionale, 42</div>
+                  <div class="kit-biz-sub">20123 Milan (MI)</div>
                 </div>
               </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Workshop Floor</span>
+                <div class="kit-biz-val">Carrozzeria Milano Srl</div>
+                <div class="kit-biz-sub">VAT No. IT12345678901</div>
+              </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Direct Contact</span>
+                <div class="kit-biz-val"><a href="tel:+390212345678" style="color: #fff; text-decoration: none;">+39 02 1234 5678</a></div>
+                <div class="kit-biz-sub">Call or WhatsApp 24/7</div>
+              </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Operating Hours</span>
+                <div class="kit-biz-val">Mon - Fri: 08:00 - 18:30</div>
+                <div class="kit-biz-sub">Saturday: 08:30 - 12:30</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Outline Panel -->
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--active-400); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">crop_free</span>
+              <span>2. Outline Style (data-pstyle="outline")</span>
+            </div>
+            <div class="kit-biz-panel panel-outline">
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Address</span>
+                <div class="kit-biz-val">Via Nazionale, 42</div>
+                <div class="kit-biz-sub">20123 Milan (MI)</div>
+              </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Workshop Floor</span>
+                <div class="kit-biz-val">Carrozzeria Milano Srl</div>
+                <div class="kit-biz-sub">Certified Body &amp; Paint</div>
+              </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Direct Contact</span>
+                <div class="kit-biz-val">+39 02 1234 5678</div>
+                <div class="kit-biz-sub">Dedicated Claim Agent</div>
+              </div>
+              <div class="kit-biz-cell">
+                <span class="kit-biz-kicker">Operating Hours</span>
+                <div class="kit-biz-val">Mon - Fri: 08:00 - 18:30</div>
+                <div class="kit-biz-sub">Emergency Dropoff Open</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SPACE-OPTIMIZED MINI HEROES GRID (ALL 6 LAYOUTS) -->
+      <div class="kit-mini-hero-grid">
+
+        <!-- Mini Hero 1: Gradient -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 1</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Soft Center Gradient (data-hmhero="0")</span>
+          </div>
+          <div class="kit-mini-hero-viewport gradient-viewport" style="text-align: center;">
+            <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--active-400); letter-spacing: 0.08em;">Step Into The Green</span>
+            <h3 style="font-family: var(--headline-font); font-size: 1.35rem; color: #fff; margin: 6px 0 8px;">Experience Future Mobility</h3>
+            <p style="font-size: 0.8rem; color: #cbd5e1; margin: 0 0 14px; line-height: 1.4;">Advanced technology meets stunning automotive design.</p>
+            <div style="display: flex; gap: 8px; justify-content: center;">
+              <button class="btn ks-btn btn-sm">Book Test Drive</button>
+              <button class="btn ks-btn-outline btn-sm" style="color: #fff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
             </div>
           </div>
         </div>
 
-        <!-- HERO OPTION 4: SIDE MENU / FRAMED SIDEBAR -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 4</span>
-              <h4 class="kit-recipe-title">Framed Sidebar Navigation Menu (data-hmhero="3")</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-framed" data-panel="bottom"</code>
-            </div>
+        <!-- Mini Hero 2: Fullbleed with Biz Panel -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 2</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Full-Bleed Media (data-hmhero="1")</span>
           </div>
-          <div class="kit-recipe-viewport dark-viewport" style="padding: 44px 32px; display: grid; grid-template-columns: minmax(180px, 240px) 1fr; gap: 40px; align-items: center;">
-            <!-- Left Sidebar Navigation -->
-            <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
-              <div>
-                <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--active-400); letter-spacing: 0.08em;">Navigation</span>
-                <h4 style="margin: 4px 0 0; font-size: 1.15rem; color: #fff;">Workshop Index</h4>
+          <div class="kit-mini-hero-viewport" style="background: url(./media/hero/highway-suv.jpg) center/cover no-repeat;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%);"></div>
+            <div style="position: relative; z-index: 2;">
+              <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--active-400);">Unlock Performance</span>
+              <h3 style="font-family: var(--headline-font); font-size: 1.35rem; color: #fff; margin: 4px 0 8px;">Precision Engineering</h3>
+              <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                <button class="btn ks-btn btn-sm">Explore Now →</button>
               </div>
-              <nav style="display: flex; flex-direction: column; gap: 4px;">
-                <a href="#" style="padding: 8px 12px; border-radius: 8px; background: rgba(255,255,255,0.08); color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 600;">01. Collision Bay</a>
-                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">02. Paint Oven</a>
-                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">03. Frame Jig</a>
-                <a href="#" style="padding: 8px 12px; border-radius: 8px; color: #94a3b8; text-decoration: none; font-size: 0.9rem; font-weight: 500;">04. Loaner Fleet</a>
-              </nav>
-            </div>
-
-            <!-- Right Content Column -->
-            <div class="header-group" style="max-width: 580px;">
-              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Right Column</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.3rem; color: #ffffff; margin: 8px 0;">Build a Life in Performance</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.55;">Supporting content for the right side column. Distinct dual-column architecture for modern automotive portals.</p>
-              <div style="display: flex; gap: 12px; margin-top: 22px;">
-                <button class="btn ks-btn">Action Button</button>
-                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">Learn More</button>
+              <div style="background: rgba(17,24,39,0.85); backdrop-filter: blur(8px); border-radius: 8px; padding: 6px 10px; border: 1px solid rgba(255,255,255,0.15); display: flex; justify-content: space-between; font-size: 0.72rem; color: #fff;">
+                <span>Mon-Fri: 08:00 - 18:30</span>
+                <span style="color: var(--active-400); font-weight: 700;">Open Today</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- HERO OPTION 5: BOLD LINE / MINIMALIST -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 5</span>
-              <h4 class="kit-recipe-title">Bold Minimal / 96px+ Typography (data-hmhero="4")</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-aerial" data-panel="off"</code>
-            </div>
+        <!-- Mini Hero 3: Centered Frame -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 3</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Centered Photo (data-hmhero="2")</span>
           </div>
-          <div class="kit-recipe-viewport dark-viewport" style="background: #090e17; padding: 60px 36px; text-align: left;">
-            <div class="header-group" style="max-width: 800px;">
-              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700; font-size: 0.95rem;">Innovation</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.95; font-weight: 800; color: #ffffff; margin: 12px 0 16px; letter-spacing: -0.04em;">Beast Mode</h2>
-              <p class="subtext" style="color: #94a3b8; font-size: 1.25rem; line-height: 1.5; max-width: 580px;">Self-driving freight is here. The future of logistics starts now.</p>
-              <div style="display: flex; gap: 14px; margin-top: 28px;">
-                <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: #ffffff; padding: 12px 28px;">Enter Now</button>
-                <button class="btn ks-btn-outline" style="color: rgba(255,255,255,0.7) !important; border-color: rgba(255,255,255,0.2); padding: 12px 28px;">Learn More</button>
+          <div class="kit-mini-hero-viewport dark-viewport" style="align-items: center; text-align: center;">
+            <div style="position: relative; width: 90%; height: 160px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15);">
+              <img src="./media/hero/ev-lift-diagnostic.jpg" alt="Framed Card" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px;">
+                <h4 style="font-family: var(--headline-font); font-size: 1.15rem; color: #fff; margin: 0 0 6px;">Build a Life in Performance</h4>
+                <button class="btn ks-btn btn-sm" style="border-radius: 999px;">Discover Build →</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- HERO OPTION 6: PHOTO BESIDE WORDS / BUSINESS INFO -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Hero Layout 6</span>
-              <h4 class="kit-recipe-title">Business Info / Split Photo Stage (data-hmhero="5")</h4>
+        <!-- Mini Hero 4: Side Menu Framed -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 4</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Side Menu (data-hmhero="3")</span>
+          </div>
+          <div class="kit-mini-hero-viewport dark-viewport" style="display: grid; grid-template-columns: 90px 1fr; gap: 14px; align-items: center;">
+            <div style="border-right: 1px solid rgba(255,255,255,0.1); padding-right: 10px; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; font-weight: 700; color: #94a3b8;">
+              <span style="color: var(--active-400);">01 Collision</span>
+              <span>02 Painting</span>
+              <span>03 ADAS</span>
+              <span>04 Towing</span>
             </div>
-            <div class="kit-recipe-actions">
-              <code>class="hero hero-business" data-panel="bottom"</code>
+            <div>
+              <span style="font-size: 0.7rem; font-weight: 800; color: var(--active-400); text-transform: uppercase;">Italian Craftsmanship</span>
+              <h4 style="font-family: var(--headline-font); font-size: 1.15rem; color: #fff; margin: 4px 0 8px;">Bodywork Mastered</h4>
+              <button class="btn ks-btn btn-sm">Explore Services</button>
             </div>
           </div>
-          <div class="kit-recipe-viewport dark-viewport" style="padding: 44px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-            <!-- Left Media Stage with Interactive Slide Dots -->
-            <div style="position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 16/10; box-shadow: 0 12px 32px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
-              <img src="./media/showcase/mountain-road.jpg" alt="Business Hero Stage" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <div style="position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
-                <span style="width: 24px; height: 6px; border-radius: 3px; background: #ffffff;"></span>
-                <span style="width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.4);"></span>
-                <span style="width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.4);"></span>
-              </div>
-            </div>
+        </div>
 
-            <!-- Right Business Content -->
-            <div class="header-group">
-              <span class="svc-label label overline" style="color: var(--active-400); font-weight: 700;">Body Shop in Milan</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.3rem; color: #ffffff; margin: 8px 0; letter-spacing: -0.02em;">Your car in safe hands.</h2>
-              <p class="subtext" style="color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.5;">Repairs, paint and insurance claims. Certified technician team with full manufacturer calibration rigs.</p>
-              <div style="margin-top: 22px;">
-                <button class="btn ks-btn">Call Workshop Floor</button>
-              </div>
+        <!-- Mini Hero 5: Aerial Beast Mode -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 5</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Bold Line / Beast Mode (data-hmhero="4")</span>
+          </div>
+          <div class="kit-mini-hero-viewport dark-viewport" style="background: radial-gradient(circle at 80% 20%, #1e293b 0%, #090d14 100%);">
+            <div style="font-family: var(--headline-font); font-size: 2.4rem; font-weight: 900; line-height: 0.95; letter-spacing: -0.04em; color: #fff; text-transform: uppercase;">
+              BEAST<br/><span style="color: var(--active-400);">MODE.</span>
+            </div>
+            <p style="font-size: 0.78rem; color: #94a3b8; margin: 8px 0 10px;">Raw uncompromised power.</p>
+            <div>
+              <button class="btn ks-btn btn-sm">Configure Unit</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Hero 6: Business Info Stage -->
+        <div class="kit-mini-hero-card">
+          <div class="kit-mini-hero-head">
+            <span class="kit-recipe-badge">Hero 6</span>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #fff;">Photo Beside Words (data-hmhero="5")</span>
+          </div>
+          <div class="kit-mini-hero-viewport dark-viewport" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center;">
+            <div style="height: 140px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+              <img src="./media/showcase/mountain-road.jpg" alt="Split stage" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div>
+              <span style="font-size: 0.7rem; font-weight: 800; color: var(--active-400); text-transform: uppercase;">Milan Body Shop</span>
+              <h4 style="font-family: var(--headline-font); font-size: 1.1rem; color: #fff; margin: 4px 0 6px;">In Safe Hands.</h4>
+              <p style="font-size: 0.75rem; color: #94a3b8; margin: 0 0 10px; line-height: 1.3;">Repairs, paint &amp; claims.</p>
+              <button class="btn ks-btn btn-sm">Call Floor</button>
             </div>
           </div>
         </div>
@@ -1396,399 +1702,301 @@
     </section>
 
     <!-- =========================================================
-         6. OUR STORY MILESTONE TIMELINE (THEME ACCORD IMAGE 2)
+         7. ABOUT FORMAT LAYOUTS (ALL BUILDER OPTIONS)
          ========================================================= -->
     <section id="sec-about">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 6</span>
-          <h2>Our Story: Interactive Milestone Timeline</h2>
-          <p>The exact vertical milestone timeline from the theme (#about.ks-about-timeline). Alternating media cards with central axis and milestone nodes.</p>
+          <span class="kit-chapter-tag">Chapter 7</span>
+          <h2>About Format Layouts (The Complete Showroom)</h2>
+          <p>All formats supported in the Leftside Bar Builder: Pillars, Principles, Numbers/Proof, Showcase/Team, Milestones Timeline, and Mission Media.</p>
         </div>
       </div>
 
-      <div class="kit-recipe-box">
-        <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 70px 24px;">
-          <!-- Alternating Timeline Container -->
-          <div class="timeline-container" data-container="boxed">
-            <div class="timeline-header" style="text-align: center; margin-bottom: 70px;">
-              <h2 class="timeline-headline" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: clamp(2.4rem, 4vw, 3.4rem); color: #ffffff; font-weight: 400; margin: 0; letter-spacing: -0.02em;">Our story</h2>
+      <div style="display: flex; flex-direction: column; gap: 36px;">
+
+        <!-- FORMAT 1: PILLARS -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">About Format 1</span>
+              <h4 class="kit-recipe-title">Pillars: Dark Surface Cards (data-layout="pillars")</h4>
             </div>
-
-            <div class="timeline-track" style="position: relative; max-width: 980px; margin: 0 auto;">
-              <!-- Central Axis -->
-              <div class="timeline-axis" aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #262626; transform: translateX(-50%);"></div>
-
-              <!-- Row 1: 2021 (Left Media, Right Content) -->
-              <div class="timeline-row row-left-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
-                <div class="timeline-media" style="grid-column: 1; justify-self: end; padding-right: 40px; width: 100%; max-width: 380px;">
-                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                    <img src="./media/showcase/bodywork-door-repair.jpg" alt="2021 First Prototype" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-                  </div>
-                </div>
-                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
-                <div class="timeline-content" style="grid-column: 3; justify-self: start; padding-left: 40px; max-width: 380px;">
-                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2021</h3>
-                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
-                    First prototype launched. Focused on solving core workflow bottlenecks for early adopters and establishing foundational standards.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Row 2: 2022 (Left Content, Right Media) -->
-              <div class="timeline-row row-right-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
-                <div class="timeline-content" style="grid-column: 1; justify-self: end; text-align: left; padding-right: 40px; max-width: 380px;">
-                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2022</h3>
-                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
-                    Expanded core engineering team, deployed version 2.0 with improved responsiveness, and reached critical adoption across initial sectors.
-                  </p>
-                </div>
-                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
-                <div class="timeline-media" style="grid-column: 3; justify-self: start; padding-left: 40px; width: 100%; max-width: 380px;">
-                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                    <img src="./media/showcase/diagnostic-scanner.jpg" alt="2022 Diagnostic Scanner" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Row 3: 2023 (Left Media, Right Content) -->
-              <div class="timeline-row row-left-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 80px;">
-                <div class="timeline-media" style="grid-column: 1; justify-self: end; padding-right: 40px; width: 100%; max-width: 380px;">
-                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                    <img src="./media/showcase/workshop-bay.jpg" alt="2023 Operations Expansion" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-                  </div>
-                </div>
-                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
-                <div class="timeline-content" style="grid-column: 3; justify-self: start; padding-left: 40px; max-width: 380px;">
-                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2023</h3>
-                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
-                    Rolled out advanced customization capabilities, modular integrations, and expanded client support for enterprise operations.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Row 4: 2024 / Today (Left Content, Right Media) -->
-              <div class="timeline-row row-right-media" style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center;">
-                <div class="timeline-content" style="grid-column: 1; justify-self: end; text-align: left; padding-right: 40px; max-width: 380px;">
-                  <h3 class="timeline-year" style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 20px; font-weight: 500; color: #ffffff; margin: 0 0 10px;">2024</h3>
-                  <p class="timeline-desc" style="font-family: var(--body-font, 'Manrope', sans-serif); font-size: 16px; line-height: 1.6; color: #a1a1aa; margin: 0;">
-                    Key milestone year: complete architectural redesign, sub-second rendering pipelines, and rapid expansion into global multi-sector markets.
-                  </p>
-                </div>
-                <div class="timeline-node" aria-hidden="true" style="grid-column: 2; justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
-                <div class="timeline-media" style="grid-column: 3; justify-self: start; padding-left: 40px; width: 100%; max-width: 380px;">
-                  <div class="timeline-img-wrap" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-                    <img src="./media/hero/ev-lift-diagnostic.jpg" alt="2024 Architecture Redesign" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-                  </div>
-                </div>
-              </div>
-
+            <div class="kit-recipe-actions">
+              <code>class="ks-about-timeline" data-layout="pillars"</code>
             </div>
           </div>
-
-          <!-- Mission Video with Glass Play Pill -->
-          <div style="margin-top: 80px; max-width: 860px; margin-inline: auto;">
-            <div style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);">
-              <img src="./media/showcase/service-authorization.jpg" alt="Mission Poster" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;">
-                <button type="button" class="about-glass-play-pill" aria-label="Discover Our Journey" style="display: inline-flex; align-items: center; gap: 14px; padding: 12px 24px; border-radius: 999px; background: rgba(255,255,255,0.15); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.3); color: #fff; cursor: pointer;">
-                  <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #ffffff; color: #111;">
-                    <span class="material-symbols-outlined" style="font-size: 22px;">play_arrow</span>
-                  </span>
-                  <div style="text-align: left;">
-                    <div style="font-size: 0.95rem; font-weight: 700;">Discover Our Journey</div>
-                    <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7);">1 MIN VIDEO OVERVIEW</div>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pillars Proof Grid -->
-          <div style="margin-top: 60px; max-width: 860px; margin-inline: auto;">
-            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
-              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+          <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 48px 24px; text-align: center;">
+            <h2 style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 2.2rem; color: #fff; margin: 0 0 36px; letter-spacing: -0.02em;">
+              The standard we hold <span style="color: #22c55e;">ourselves</span> to.
+            </h2>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1020px; margin: 0 auto; text-align: left;">
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
                 <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">verified</span>
-                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">A clear promise</h4>
-                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">Every job is scoped before it starts, so the price you hear is the price you pay.</p>
+                <h3 style="margin: 12px 0 6px; font-size: 1.15rem; color: #fff; font-weight: 700;">A clear promise</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">Every job is scoped before it starts, so the price you hear is the price you pay.</p>
               </div>
-              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
                 <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">shield</span>
-                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">Work you can check</h4>
-                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">You see the estimate, the parts, and the date. Nothing moves without you.</p>
+                <h3 style="margin: 12px 0 6px; font-size: 1.15rem; color: #fff; font-weight: 700;">Work you can check</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">You see the estimate, the parts, and the date. Nothing moves without you.</p>
               </div>
-              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px;">
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
                 <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">support_agent</span>
-                <h4 style="margin: 10px 0 6px; font-size: 1.1rem; color: #fff;">A person on the line</h4>
-                <p style="margin: 0; font-size: 0.9rem; color: #a1a1aa; line-height: 1.5;">One contact stays with the job from the first call to the handoff.</p>
+                <h3 style="margin: 12px 0 6px; font-size: 1.15rem; color: #fff; font-weight: 700;">A person on the line</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">One contact stays with the job from the first call to the handoff.</p>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- FORMAT 2: PRINCIPLES -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">About Format 2</span>
+              <h4 class="kit-recipe-title">Principles: Minimal Columns (data-layout="principles")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="ks-about-timeline" data-layout="principles"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 48px 24px; text-align: center;">
+            <h2 style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 2.2rem; color: #fff; margin: 0 0 8px; letter-spacing: -0.02em;">
+              How the work <span style="color: #22c55e;">gets done</span>
+            </h2>
+            <p style="color: #a1a1aa; font-size: 1.05rem; margin: 0 0 40px;">Three habits we keep on every job.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; max-width: 980px; margin: 0 auto; text-align: center;">
+              <div>
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 32px;">hub</span>
+                <h3 style="margin: 12px 0 8px; font-size: 1.2rem; color: #fff; font-weight: 700;">In one place</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">The estimate, the photos, and the date live together, so nobody is chasing a thread.</p>
+              </div>
+              <div>
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 32px;">diversity_3</span>
+                <h3 style="margin: 12px 0 8px; font-size: 1.2rem; color: #fff; font-weight: 700;">Open to everyone</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">Clear language, readable type, and a path that does not assume you already know the trade.</p>
+              </div>
+              <div>
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 32px;">schedule</span>
+                <h3 style="margin: 12px 0 8px; font-size: 1.2rem; color: #fff; font-weight: 700;">On your clock</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #a1a1aa; line-height: 1.5;">We fit the work around the day you already have, not the other way around.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMAT 3: NUMBERS / PROOF -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">About Format 3</span>
+              <h4 class="kit-recipe-title">Numbers: Proof Metric Counters (data-layout="numbers")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="ks-about-timeline" data-layout="numbers"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 48px 24px; text-align: left;">
+            <div style="max-width: 980px; margin: 0 auto;">
+              <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #a1a1aa;">PROOF</span>
+              <h2 style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 2.2rem; color: #fff; margin: 10px 0 40px; letter-spacing: -0.02em;">
+                We measure the work <span style="color: #22c55e;">by the outcome</span>.
+              </h2>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 32px;">
+                <div>
+                  <div style="font-family: var(--headline-font); font-size: clamp(2.8rem, 4vw, 3.8rem); font-weight: 900; color: #ffffff; letter-spacing: -0.03em;">2,400+</div>
+                  <div style="font-size: 1rem; font-weight: 700; color: var(--active-400); margin-top: 4px;">Customers</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--headline-font); font-size: clamp(2.8rem, 4vw, 3.8rem); font-weight: 900; color: #ffffff; letter-spacing: -0.03em;">70+</div>
+                  <div style="font-size: 1rem; font-weight: 700; color: var(--active-400); margin-top: 4px;">Cities</div>
+                </div>
+                <div>
+                  <div style="font-family: var(--headline-font); font-size: clamp(2.8rem, 4vw, 3.8rem); font-weight: 900; color: #ffffff; letter-spacing: -0.03em;">98%</div>
+                  <div style="font-size: 1rem; font-weight: 700; color: var(--active-400); margin-top: 4px;">On-time handoffs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMAT 4: SHOWCASE / OUR TEAM -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">About Format 4</span>
+              <h4 class="kit-recipe-title">Showcase: Team &amp; Workshop Gallery (data-layout="showcase")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="ks-about-timeline" data-layout="showcase"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 48px 24px; text-align: center;">
+            <div style="max-width: 980px; margin: 0 auto;">
+              <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #a1a1aa;">OUR TEAM</span>
+              <h2 style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 2.2rem; color: #fff; margin: 8px 0 10px; letter-spacing: -0.02em;">People that make the work</h2>
+              <p style="color: #a1a1aa; font-size: 1.05rem; margin: 0 0 24px;">The people on the floor, and the places the work gets done.</p>
+              <div style="margin-bottom: 36px;">
+                <button class="btn btn-sm" style="background: #fff; color: #000; border-radius: 999px; font-weight: 700; padding: 10px 24px;">We are hiring</button>
+              </div>
+
+              <!-- Gallery Grid (Row 1 & Row 2) -->
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                <img src="./media/showcase/diagnostic-scanner.jpg" alt="Team 1" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/showcase/workshop-bay.jpg" alt="Team 2" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/hero/ev-lift-diagnostic.jpg" alt="Team 3" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/showcase/bodywork-door-repair.jpg" alt="Team 4" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/hero/highway-suv.jpg" alt="Team 5" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 12px;">
+                <img src="./media/showcase/mountain-road.jpg" alt="Team 6" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/showcase/service-authorization.jpg" alt="Team 7" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/hero/driver-cockpit.jpg" alt="Team 8" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/showcase/workshop-bay.jpg" alt="Team 9" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+                <img src="./media/showcase/bodywork-door-repair.jpg" alt="Team 10" style="width: 100%; height: 95px; border-radius: 12px; object-fit: cover;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMAT 5: MILESTONE TIMELINE -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">About Format 5</span>
+              <h4 class="kit-recipe-title">Timeline: Alternating Milestones (data-layout="timeline")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="ks-about-timeline" data-layout="timeline"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: #000000; padding: 48px 24px;">
+            <div style="text-align: center; margin-bottom: 48px;">
+              <h2 style="font-family: var(--headline-font, 'Google Sans', sans-serif); font-size: 2.2rem; color: #fff; margin: 0;">Our story</h2>
+            </div>
+            <div style="position: relative; max-width: 860px; margin: 0 auto;">
+              <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #262626; transform: translateX(-50%);"></div>
+              
+              <!-- 2021 -->
+              <div style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center; margin-bottom: 48px;">
+                <div style="justify-self: end; padding-right: 32px; width: 100%; max-width: 320px;">
+                  <img src="./media/showcase/bodywork-door-repair.jpg" alt="2021" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; object-fit: cover; border: 1px solid rgba(255,255,255,0.12);" />
+                </div>
+                <div style="justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div style="justify-self: start; padding-left: 32px; max-width: 320px;">
+                  <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 6px;">2021</h3>
+                  <p style="font-size: 0.9rem; color: #a1a1aa; margin: 0; line-height: 1.5;">First prototype launched. Focused on core repair workflow bottlenecks.</p>
+                </div>
+              </div>
+
+              <!-- 2022 -->
+              <div style="display: grid; grid-template-columns: 1fr 40px 1fr; align-items: center;">
+                <div style="justify-self: end; text-align: left; padding-right: 32px; max-width: 320px;">
+                  <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin: 0 0 6px;">2022</h3>
+                  <p style="font-size: 0.9rem; color: #a1a1aa; margin: 0; line-height: 1.5;">Expanded engineering team, deployed version 2.0 with improved response time.</p>
+                </div>
+                <div style="justify-self: center; width: 9px; height: 9px; border-radius: 50%; background: #52525b; z-index: 2;"></div>
+                <div style="justify-self: start; padding-left: 32px; width: 100%; max-width: 320px;">
+                  <img src="./media/showcase/diagnostic-scanner.jpg" alt="2022" style="width: 100%; aspect-ratio: 4/3; border-radius: 14px; object-fit: cover; border: 1px solid rgba(255,255,255,0.12);" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- =========================================================
-         7. SECTION RECIPES SHOWROOM (EVERY SECTION IN THE THEME)
+         8. SOLUTIONS & WORKFLOW STEPPER LAYOUTS
          ========================================================= -->
-    <section id="sec-recipes">
+    <section id="sec-solutions">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 7</span>
-          <h2>The Recipe Section Library</h2>
-          <p>Live interactive previews of every section recipe. See what each section looks like in advance before requesting it to be added to your site.</p>
+          <span class="kit-chapter-tag">Chapter 8</span>
+          <h2>Solutions &amp; Workflow Layout Options</h2>
+          <p>Different presentation formats for Services and Repairs workflows from the Leftside Bar Builder.</p>
         </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 32px;">
 
-        <!-- RECIPE 1: SERVICES TABBED SHOWCASE -->
+        <!-- 1. Card Stack Layout -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #01</span>
-              <h4 class="kit-recipe-title">Services: Tabbed Showcase (.svc-tabbed-showcase)</h4>
+              <span class="kit-recipe-badge">Solutions Format 1</span>
+              <h4 class="kit-recipe-title">Card Stack: Full-Width Horizontal Rows (data-layout="stack")</h4>
             </div>
             <div class="kit-recipe-actions">
-              <code>#services[data-layout="showcase"]</code>
+              <code>#services[data-layout="stack"]</code>
             </div>
           </div>
-          <div class="kit-recipe-viewport light-viewport" style="background: #ffffff; padding: 48px 24px;">
-            <div class="svc-tabbed-showcase" style="display: block !important;">
-              <div class="showcase-eyebrow" style="text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--active-500, #007aff);">Precision Work</div>
-              <h2 class="showcase-title" style="font-family: var(--headline-font); font-size: 2rem; font-weight: 700; text-align: center; margin: 0 0 28px; color: #111827;">Certified Factory Procedures</h2>
-              
-              <div class="showcase-tabs" style="display: flex; justify-content: center; gap: 16px; margin-bottom: 28px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                <button type="button" class="tier-btn active" style="font-weight: 700;">Paint Booth</button>
-                <button type="button" class="tier-btn">Structural Pull</button>
-                <button type="button" class="tier-btn">ADAS Sensor Calibration</button>
-                <button type="button" class="tier-btn">Glass Handoff</button>
+          <div class="kit-recipe-viewport dark-viewport" style="display: flex; flex-direction: column; gap: 14px; padding: 32px 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">car_crash</span>
+                <div>
+                  <h4 style="margin: 0; font-size: 1.1rem; color: #fff;">Collision &amp; Structural Realignment</h4>
+                  <p style="margin: 4px 0 0; font-size: 0.85rem; color: #94a3b8;">Factory spec electronic jig measurements and unibody pull rigs.</p>
+                </div>
               </div>
+              <span class="material-symbols-outlined" style="color: #64748b;">arrow_forward</span>
+            </div>
 
-              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
-                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
-                  <img src="./media/showcase/workshop-bay.jpg" alt="Spray Bay" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
-                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Sealed Downdraft Booth</div>
-                </div>
-                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
-                  <img src="./media/showcase/bodywork-door-repair.jpg" alt="Panel Match" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
-                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Spectrophotometer Scan</div>
-                </div>
-                <div style="border-radius: 14px; overflow: hidden; border: 1px solid #e2e8f0;">
-                  <img src="./media/hero/ev-lift-diagnostic.jpg" alt="Final Bake" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;" />
-                  <div style="padding: 14px; font-size: 0.95rem; font-weight: 700; color: #111827;">Heated Ceramic Clearcoat</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">format_paint</span>
+                <div>
+                  <h4 style="margin: 0; font-size: 1.1rem; color: #fff;">Computerized Color Matching &amp; Spray Booth</h4>
+                  <p style="margin: 4px 0 0; font-size: 0.85rem; color: #94a3b8;">Downdraft heated ceramic bake with computerized spectrophotometer scan.</p>
                 </div>
               </div>
+              <span class="material-symbols-outlined" style="color: #64748b;">arrow_forward</span>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);">
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <span class="material-symbols-outlined" style="color: var(--active-400); font-size: 28px;">sensors</span>
+                <div>
+                  <h4 style="margin: 0; font-size: 1.1rem; color: #fff;">ADAS Radar &amp; Optical Calibration</h4>
+                  <p style="margin: 4px 0 0; font-size: 0.85rem; color: #94a3b8;">Target board alignment for radar, lane assist, and 360 camera safety systems.</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined" style="color: #64748b;">arrow_forward</span>
             </div>
           </div>
         </div>
 
-        <!-- RECIPE 2: PAINS & PROBLEMS SECTION -->
+        <!-- 2. Workflow Simple Steps vs Photo Steps -->
         <div class="kit-recipe-box">
           <div class="kit-recipe-header">
             <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #02</span>
-              <h4 class="kit-recipe-title">Pains &amp; Problems: The 4 Common Repair Traps</h4>
+              <span class="kit-recipe-badge">Workflow Format</span>
+              <h4 class="kit-recipe-title">Repairs Workflow: 3-Step Progress Indicator (data-look="simple")</h4>
             </div>
             <div class="kit-recipe-actions">
-              <code>id="pains" class="ks ks-pains"</code>
+              <code>#repairs[data-look="simple"]</code>
             </div>
           </div>
-          <div class="kit-recipe-viewport dark-viewport">
-            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
-              <span class="svc-label label overline" style="color: #f87171;">What Drivers Hate</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Surprise Invoices &amp; Mismatched Tones</h2>
-              <p class="subtext" style="color: #94a3b8;">Here is why typical collision shops fail—and how we do the exact opposite.</p>
-            </div>
-            <div class="kit-telemetry-grid">
-              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
-                <b style="color: #f87171; font-size: 1.05rem;">The Surprise Bill</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Work starts without written authorization, leading to extra charges at pickup.</p>
-                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Zero work without written authorization.</span>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 40px 24px; text-align: center;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 920px; margin: 0 auto; position: relative;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">1</div>
+                <h4 style="margin: 0; color: #fff; font-size: 1.1rem;">Written Estimate</h4>
+                <p style="margin: 0; font-size: 0.85rem; color: #94a3b8;">Damage scan &amp; insurance approval.</p>
               </div>
-              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
-                <b style="color: #f87171; font-size: 1.05rem;">Color Mismatch</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Stock paint tins sprayed in dusty bays cause peeling and tint differences.</p>
-                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Downdraft booth mixed to VIN code.</span>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">2</div>
+                <h4 style="margin: 0; color: #fff; font-size: 1.1rem;">Precision Repair</h4>
+                <p style="margin: 0; font-size: 0.85rem; color: #94a3b8;">Factory panels, robotic welding &amp; paint.</p>
               </div>
-              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
-                <b style="color: #f87171; font-size: 1.05rem;">Refused Insurance Claims</b>
-                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Insurers dispute estimates that lack proper maker procedure records.</p>
-                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Itemized line items accepted by all major carriers.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECIPE 3: LIFECYCLE & REPAIRS STEPPER -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #03</span>
-              <h4 class="kit-recipe-title">Repairs Stepper: Four Steps to Handoff</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>#repairs .ls-simple-steps</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport" style="padding: 48px 24px;">
-            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
-              <span class="svc-label label overline" style="color: var(--active-400);">Step by Step</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Clear Milestones Before You Drive Away</h2>
-              <p class="subtext" style="color: #94a3b8;">Every repair is trackable live through our customer coordination desk.</p>
-            </div>
-
-            <div style="display: flex; justify-content: center; align-items: center; gap: 24px; max-width: 760px; margin: 0 auto 36px; position: relative;">
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">1</div>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #fff;">Call Dispatch</span>
-              </div>
-              <div style="flex: 1; height: 2px; background: var(--active-500);"></div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--active-500); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">2</div>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #fff;">3D Scan</span>
-              </div>
-              <div style="flex: 1; height: 2px; background: rgba(255,255,255,0.2);"></div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 700;">3</div>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Booth Spray</span>
-              </div>
-              <div style="flex: 1; height: 2px; background: rgba(255,255,255,0.2);"></div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 700;">4</div>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #94a3b8;">Key Handoff</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECIPE 4: TRUST PROOF & CUSTOMER REVIEWS -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #04</span>
-              <h4 class="kit-recipe-title">Trust Bar &amp; Verified Customer Reviews</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>id="reviews" class="ks ks-reviews"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport light-viewport">
-            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
-              <span class="svc-label label overline" style="color: var(--active-600);">Real Feedback</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #111827;">What Drivers Say Before Driving Away</h2>
-              <p class="subtext" style="color: #475569;">Over 450 verified 5-star ratings across Google and local auto clubs.</p>
-            </div>
-            <div class="kit-reviews-grid">
-              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
-                <div class="kit-stars">★★★★★</div>
-                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
-                  “The color on the rear quarter panel matches perfectly. You cannot tell where the damage was. The written estimate did not change by a single euro.”
-                </p>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                  <b style="font-size: 0.9rem; color: #0f172a;">Marco Rossi · Alfa Romeo Giulia</b>
-                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
-                </div>
-              </div>
-              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
-                <div class="kit-stars">★★★★★</div>
-                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
-                  “They dealt with the insurance company directly. I just dropped the car, got a replacement vehicle, and picked it up washed and aligned.”
-                </p>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                  <b style="font-size: 0.9rem; color: #0f172a;">Elena Bianchi · BMW 3 Series</b>
-                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
-                </div>
-              </div>
-              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
-                <div class="kit-stars">★★★★★</div>
-                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
-                  “Fastest quote in town. Sent 3 photos, had a price by lunch, and car was in the booth by Thursday. Highly recommended workshop.”
-                </p>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                  <b style="font-size: 0.9rem; color: #0f172a;">Davide Moretti · Audi A4 Avant</b>
-                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECIPE 5: FAQ ACCORDION -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #05</span>
-              <h4 class="kit-recipe-title">FAQ: Questions &amp; Clear Answers</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>id="faq" class="ks ks-faq"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport">
-            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
-              <span class="svc-label label overline" style="color: var(--active-400);">Questions Drivers Ask</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Clear Answers Before Any Key Hand-off</h2>
-            </div>
-            <div style="max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
-              <div class="kit-faq-item">
-                <div class="kit-faq-q">
-                  <span>Do I have to use the repair shop chosen by my insurer?</span>
-                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
-                </div>
-                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
-                  No. Under Italian and EU antitrust regulations, you have the legal right to choose any certified repair shop. We handle the paperwork directly with your insurer so you don’t pay out of pocket.
-                </p>
-              </div>
-              <div class="kit-faq-item">
-                <div class="kit-faq-q">
-                  <span>How do you guarantee the paint will match?</span>
-                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
-                </div>
-                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
-                  We use an optical spectrophotometer to scan the current fade level of your car’s actual clearcoat, then mix the exact tint formula in-house rather than using a standard tin.
-                </p>
-              </div>
-              <div class="kit-faq-item">
-                <div class="kit-faq-q">
-                  <span>What warranty comes with the repair?</span>
-                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
-                </div>
-                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
-                  All structural frame realignment and booth paint handoffs carry our full 5-year written craftsmanship warranty.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECIPE 6: HIGH IMPACT CLOSING CTA -->
-        <div class="kit-recipe-box">
-          <div class="kit-recipe-header">
-            <div class="kit-recipe-id">
-              <span class="kit-recipe-badge">Recipe #06</span>
-              <h4 class="kit-recipe-title">Final Closing CTA: Conversion Engine</h4>
-            </div>
-            <div class="kit-recipe-actions">
-              <code>id="cta" class="ks ks-final"</code>
-            </div>
-          </div>
-          <div class="kit-recipe-viewport dark-viewport" style="background: radial-gradient(circle at 50% 50%, #152033 0%, #0a0e17 100%); text-align: center; padding: 60px 24px;">
-            <div class="header-group" style="max-width: 680px; margin: 0 auto;">
-              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Get Started Today</span>
-              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 8px 0; color: #fff;">Send 3 Photos. Get a Guaranteed Price.</h2>
-              <p class="subtext" style="color: #94a3b8; font-size: 1.15rem; margin-top: 10px;">
-                No unexpected extras. We answer on working days before the shop floor closes.
-              </p>
-              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 28px; flex-wrap: wrap;">
-                <button class="btn ks-btn" style="padding: 12px 28px; font-size: 1rem;">
-                  <span class="material-symbols-outlined">camera_alt</span>
-                  <span>Upload Vehicle Photos</span>
-                </button>
-                <button class="btn ks-btn-outline" style="padding: 12px 28px; font-size: 1rem; color: #fff !important; border-color: rgba(255,255,255,0.25);">
-                  <span class="material-symbols-outlined">phone</span>
-                  <span>Call +39 02 1234 5678</span>
-                </button>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="width: 44px; height: 44px; border-radius: 50%; background: #334155; color: #94a3b8; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;">3</div>
+                <h4 style="margin: 0; color: #fff; font-size: 1.1rem;">Key Handoff</h4>
+                <p style="margin: 0; font-size: 0.85rem; color: #94a3b8;">Final QC check and lifetime warranty.</p>
               </div>
             </div>
           </div>
@@ -1798,12 +2006,394 @@
     </section>
 
     <!-- =========================================================
+         9. REVIEWS & TESTIMONIALS FORMATS
+         ========================================================= -->
+    <section id="sec-reviews">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 9</span>
+          <h2>Reviews &amp; Testimonial Formats</h2>
+          <p>Card Grid, Carousel Slider, and Spotlight Quote callout options.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+
+        <!-- Reviews Format 1: Card Grid with Rating Badge -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Reviews Format 1</span>
+              <h4 class="kit-recipe-title">Card Grid + Trust Score (data-look="a")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>#reviews[data-look="a"]</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+              <div>
+                <span class="svc-label label overline" style="color: var(--active-400);">Driver Feedback</span>
+                <h3 style="font-family: var(--headline-font); font-size: 1.8rem; color: #fff; margin: 4px 0;">Trusted by 2,400+ Vehicle Owners</h3>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.06); padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12);">
+                <span style="font-size: 1.4rem; font-weight: 900; color: #fbbf24;">4.9 ★</span>
+                <span style="font-size: 0.85rem; color: #cbd5e1;">Google Reviews Verified</span>
+              </div>
+            </div>
+            <div class="kit-reviews-grid">
+              <div class="kit-review-card">
+                <div class="kit-stars" style="color: #fbbf24; font-size: 18px;">★★★★★</div>
+                <p style="margin: 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.55;">
+                  "Had a severe rear collision on my Alfa Giulia. The shop arranged a free courtesy car, fought with the insurer for OEM parts, and returned the car in mint showroom condition."
+                </p>
+                <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--active-600); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">MR</div>
+                  <div>
+                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Marco Rossi</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8;">Alfa Romeo Giulia Owner</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kit-review-card">
+                <div class="kit-stars" style="color: #fbbf24; font-size: 18px;">★★★★★</div>
+                <p style="margin: 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.55;">
+                  "Color match on pearl metallic paint is virtually impossible for most garages. These folks matched the factory tint identically using computer spectrophotometers."
+                </p>
+                <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background: #334155; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">EB</div>
+                  <div>
+                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Elena Bianchi</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8;">Porsche Macan GTS</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kit-review-card">
+                <div class="kit-stars" style="color: #fbbf24; font-size: 18px;">★★★★★</div>
+                <p style="margin: 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.55;">
+                  "Super transparent estimate with line-by-line parts breakdown. Handed over on the exact date agreed without a single euro of extra surprise costs."
+                </p>
+                <div style="display: flex; align-items: center; gap: 12px; margin-top: auto;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--active-700); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">GL</div>
+                  <div>
+                    <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">Giuseppe Leone</div>
+                    <div style="font-size: 0.75rem; color: #94a3b8;">BMW 330e Touring</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Format 2: Spotlight Quote -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Reviews Format 2</span>
+              <h4 class="kit-recipe-title">Spotlight Quote: Hero Callout (data-look="c")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>#reviews[data-look="c"]</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="text-align: center; padding: 48px 32px; background: radial-gradient(circle at 50% 50%, #1e293b 0%, #090d14 100%);">
+            <div style="font-size: 64px; color: var(--active-400); line-height: 1; font-family: Georgia, serif;">“</div>
+            <p style="font-family: var(--headline-font); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: #fff; max-width: 780px; margin: 0 auto 20px; line-height: 1.4;">
+              The only body repair facility in Milan where craftsmanship and modern digital insurance workflows meet seamlessly.
+            </p>
+            <div style="font-weight: 700; color: var(--active-400); font-size: 1rem;">Corrado Valli</div>
+            <div style="font-size: 0.85rem; color: #94a3b8;">Fleet Manager · Lombardy Logistics</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         10. FAQ FORMAT LAYOUTS
+         ========================================================= -->
+    <section id="sec-faq">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 10</span>
+          <h2>FAQ Layout Formats</h2>
+          <p>Accordion Collapsible (data-look="b"), Side-by-Side (data-look="a"), and 2-Column Cards (data-look="c").</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+
+        <!-- Accordion Format -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">FAQ Format 1</span>
+              <h4 class="kit-recipe-title">Interactive Accordion (data-look="b")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>#faq[data-look="b"]</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px;">
+              <details class="kit-faq-item" open>
+                <summary class="kit-faq-summary">
+                  <span>Do I have to pay upfront if the accident is covered by insurance?</span>
+                  <span class="material-symbols-outlined kit-faq-arrow">expand_more</span>
+                </summary>
+                <div class="kit-faq-answer">
+                  No. We have direct billing agreements with all major insurance carriers (Allianz, Generali, UnipolSai, AXA). Once you provide the claim number, we handle the settlement directly with no upfront payment from you.
+                </div>
+              </details>
+
+              <details class="kit-faq-item">
+                <summary class="kit-faq-summary">
+                  <span>How long will the repair take, and do you offer a replacement vehicle?</span>
+                  <span class="material-symbols-outlined kit-faq-arrow">expand_more</span>
+                </summary>
+                <div class="kit-faq-answer">
+                  Minor bodywork takes 2-3 business days. Heavy collision or unibody repairs take 5-8 business days. We provide a courtesy replacement car free of charge for the entire duration of certified repairs.
+                </div>
+              </details>
+
+              <details class="kit-faq-item">
+                <summary class="kit-faq-summary">
+                  <span>Is your paint finish covered under guarantee?</span>
+                  <span class="material-symbols-outlined kit-faq-arrow">expand_more</span>
+                </summary>
+                <div class="kit-faq-answer">
+                  Yes. All paintwork carried out in our sealed downdraft booth carries a full lifetime workmanship warranty against peeling, cracking, or color fading.
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         11. PROMO & BOOK ESTIMATE FORMATS
+         ========================================================= -->
+    <section id="sec-promo-quote">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 11</span>
+          <h2>Promo Banner &amp; Book Estimate Formats</h2>
+          <p>Special offer promo banner (.ks-promo) and interactive instant estimate calculator (.ks-quote).</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+
+        <!-- Promo Banner -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Promo Format</span>
+              <h4 class="kit-recipe-title">Seasonal Promo Banner (.ks-promo)</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>section.ks-promo #promo</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="display: grid; grid-template-columns: 1fr 280px; gap: 28px; align-items: center; max-width: 920px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 28px;">
+              <div>
+                <span class="promo-tag" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: rgba(234, 179, 8, 0.15); color: #fbbf24; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px;">
+                  ★ Spring Offer · Valid Until 31 May
+                </span>
+                <h3 style="font-family: var(--headline-font); font-size: 1.8rem; color: #fff; margin: 0 0 8px;">Polycarbonate Headlight Restoration</h3>
+                <div style="display: flex; align-items: baseline; gap: 12px; margin: 12px 0;">
+                  <b style="font-size: 2.2rem; color: var(--active-400); font-weight: 900;">€49</b>
+                  <s style="font-size: 1.2rem; color: #64748b;">€79</s>
+                  <span style="font-size: 0.8rem; color: #a1a1aa;">Both lenses included</span>
+                </div>
+                <p style="margin: 0 0 20px; font-size: 0.85rem; color: #94a3b8;">Restores night visibility to 100% factory optical clarity with UV clearcoat sealant.</p>
+                <div style="display: flex; gap: 12px;">
+                  <button class="btn ks-btn">Book This Offer</button>
+                  <button class="btn ks-btn-outline" style="color: #fff !important; border-color: rgba(255,255,255,0.3);">Terms &amp; Conditions</button>
+                </div>
+              </div>
+              <div style="height: 180px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15);">
+                <img src="./media/hero/driver-cockpit.jpg" alt="Headlight Offer" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book Estimate Form -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Estimate Format</span>
+              <h4 class="kit-recipe-title">Instant Written Estimate Calculator (.ks-quote)</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>section.ks-quote #quote</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="max-width: 820px; margin: 0 auto; background: #131926; border: 1px solid var(--kit-border); border-radius: 20px; padding: 32px;">
+              <div style="text-align: center; margin-bottom: 24px;">
+                <span class="svc-label label overline" style="color: var(--active-400);">Instant Scope</span>
+                <h3 style="font-family: var(--headline-font); font-size: 1.8rem; color: #fff; margin: 4px 0;">Request a Formal Repair Estimate</h3>
+                <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">Legally binding under standard automotive repair code. No surprise invoices.</p>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+                <div class="kit-form-field">
+                  <label>License Plate</label>
+                  <input type="text" class="kit-form-input" placeholder="e.g. AB 123 CD" value="MI 942 ZZ" style="font-family: monospace; font-size: 1.1rem; letter-spacing: 0.1em; text-transform: uppercase;" />
+                </div>
+                <div class="kit-form-field">
+                  <label>Insurance Carrier</label>
+                  <select class="kit-form-input">
+                    <option>Allianz Direct</option>
+                    <option>Generali Italia</option>
+                    <option>UnipolSai</option>
+                    <option>Private / Out-of-pocket</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-top: 18px;" class="kit-form-field">
+                <label>Damage Description</label>
+                <textarea class="kit-form-input" rows="3" placeholder="Brief note on what hit the vehicle..."></textarea>
+              </div>
+              <button class="btn ks-btn" style="width: 100%; margin-top: 20px; padding: 14px; font-size: 1rem;">Get Written Estimate in 2 Hours</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         12. FINAL CTA & FOOTER FORMATS
+         ========================================================= -->
+    <section id="sec-footer">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 12</span>
+          <h2>Call to Action &amp; Footer Formats</h2>
+          <p>High-conversion final banner and 3 footer layouts (Columns, Simple Bar, Centered Stack).</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 32px;">
+
+        <!-- Final Call to Action -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">CTA Format</span>
+              <h4 class="kit-recipe-title">Final Call to Action (.ks-final)</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>section.ks-final #cta</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="text-align: center; padding: 60px 24px; background: radial-gradient(circle at 50% 30%, #1e3a8a 0%, #090d14 100%);">
+            <span class="svc-label label overline" style="color: var(--active-300); font-weight: 800;">Get Started Today</span>
+            <h2 style="font-family: var(--headline-font); font-size: clamp(2rem, 3.5vw, 2.8rem); color: #fff; margin: 10px 0 14px; letter-spacing: -0.02em;">
+              Restore your vehicle to factory perfection.
+            </h2>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; max-width: 620px; margin: 0 auto 28px; line-height: 1.5;">
+              Free loaner car, direct insurance claim handling, and certified lifetime workmanship warranty.
+            </p>
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn ks-btn">Book Repair Online</button>
+              <button class="btn ks-btn-outline" style="color: #fff !important; border-color: rgba(255,255,255,0.3);">Call Workshop Floor</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer 1: Columns Layout -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Footer Format 1</span>
+              <h4 class="kit-recipe-title">Columns Footer (data-look="a")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>footer.ks-footer[data-look="a"]</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 36px 24px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <div>
+                <b style="color: #fff; font-size: 1.05rem;">PANDINO BODY SHOP</b>
+                <p style="font-size: 0.85rem; color: #94a3b8; margin: 8px 0 0; line-height: 1.5;">
+                  Certified collision and refinishing workshop in Milan since 1988.
+                </p>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
+                <b style="color: #fff;">Services</b>
+                <a href="#services" style="color: #94a3b8; text-decoration: none;">Collision Repair</a>
+                <a href="#services" style="color: #94a3b8; text-decoration: none;">Paint &amp; Refinishing</a>
+                <a href="#services" style="color: #94a3b8; text-decoration: none;">Chassis Alignment</a>
+                <a href="#services" style="color: #94a3b8; text-decoration: none;">ADAS Calibration</a>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
+                <b style="color: #fff;">Company</b>
+                <a href="#about" style="color: #94a3b8; text-decoration: none;">Our Story</a>
+                <a href="#team" style="color: #94a3b8; text-decoration: none;">Team &amp; Facility</a>
+                <a href="#warranty" style="color: #94a3b8; text-decoration: none;">Lifetime Warranty</a>
+                <a href="#careers" style="color: #94a3b8; text-decoration: none;">Careers</a>
+              </div>
+              <div style="font-size: 0.85rem; color: #94a3b8;">
+                <b style="color: #fff;">Workshop Floor</b>
+                <p style="margin: 8px 0 4px;">Via Nazionale, 42 · 20123 Milan</p>
+                <p style="margin: 0 0 4px;">Phone: +39 02 1234 5678</p>
+                <p style="margin: 0; color: var(--active-400);">Mon-Fri: 08:00 - 18:30</p>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; font-size: 0.78rem; color: #64748b; flex-wrap: wrap; gap: 12px;">
+              <span>© 2026 Pandino Carrozzeria S.r.l. Tutti i diritti riservati. P.IVA IT12345678901</span>
+              <div style="display: flex; gap: 16px;">
+                <a href="#privacy" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+                <a href="#cookie" style="color: inherit; text-decoration: none;">Cookie Preferences</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer 2: Simple Bar -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Footer Format 2</span>
+              <h4 class="kit-recipe-title">Simple Bar Footer (data-look="c")</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>footer.ks-footer[data-look="c"]</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <span style="font-family: var(--headline-font); font-weight: 800; color: #fff;">PANDINO BODY SHOP</span>
+              <div style="display: flex; gap: 20px; font-size: 0.85rem; font-weight: 600;">
+                <a href="#services" style="color: #cbd5e1; text-decoration: none;">Services</a>
+                <a href="#about" style="color: #cbd5e1; text-decoration: none;">Our Story</a>
+                <a href="#reviews" style="color: #cbd5e1; text-decoration: none;">Reviews</a>
+                <a href="#contact" style="color: #cbd5e1; text-decoration: none;">Contact</a>
+              </div>
+              <span style="font-size: 0.8rem; color: #64748b;">© 2026 Pandino Milano</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+<!-- =========================================================
          8. FORM & INTERACTIVE CONTROLS
          ========================================================= -->
     <section id="sec-forms">
       <div class="kit-sec-head">
         <div>
-          <span class="kit-chapter-tag">Chapter 8</span>
+          <span class="kit-chapter-tag">Chapter 13</span>
           <h2>Form &amp; Interactive Calculator Primitives</h2>
           <p>Input controls, estimate sliders, and photo upload dropzones.</p>
         </div>
