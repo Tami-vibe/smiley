@@ -12617,6 +12617,7 @@ if (typeof document !== 'undefined') {
                 const parentRect = (pageMenu.offsetParent || document.body).getBoundingClientRect();
                 pageMenu.style.setProperty('left', Math.round(rect.left - parentRect.left) + 'px', 'important');
                 pageMenu.style.setProperty('top', Math.round(rect.bottom - parentRect.top + 4) + 'px', 'important');
+                pageMenu.style.setProperty('z-index', '9999999', 'important');
             };
             const togglePageMenu = e => {
                 e.stopPropagation();

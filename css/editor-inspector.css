@@ -5289,10 +5289,14 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
 #kitProject[readonly] { pointer-events: none; }
 #kitPage { cursor: pointer; }
 
-.kit-canvas-bar { z-index: 40;}
+.kit-canvas-bar {
+    position: relative !important;
+    z-index: 1000000 !important;
+    overflow: visible !important;
+}
 .kit-page-menu {
-    position: absolute;
-    z-index: 99999;
+    position: absolute !important;
+    z-index: 9999999 !important;
     top: calc(100% + 4px);
     left: auto;
     width: 280px;
