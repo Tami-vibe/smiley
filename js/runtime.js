@@ -10205,11 +10205,10 @@ if (typeof document !== 'undefined') {
                     }
                 });
 
-                // 2. Ensure page-sheet wrappers are never flagged as is-darkbg
+                // 2. Ensure page-sheet wrappers are never flagged as is-darkbg or is-lightbg
                 root.querySelectorAll('.page-sheet, section.page-sheet, #page-repairs, #page-insurance, #page-emergency, #page-warranty, #page-contact, #page-about').forEach(sheet => {
-                    sheet.classList.remove('is-darkbg');
-                    sheet.classList.add('is-lightbg');
-                    sheet.dataset.contrast = 'light';
+                    sheet.classList.remove('is-darkbg', 'is-lightbg');
+                    delete sheet.dataset.contrast;
                 });
 
                 // 3. Evaluate specific atomic surfaces individually

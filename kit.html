@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="kit-standalone-page">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,11 +23,14 @@
       --kit-text: #0f172a;
       --kit-muted: #64748b;
     }
-    html, body {
+    html.kit-standalone-page,
+    body.kit-standalone-page {
       overflow-y: auto !important;
       overflow-x: hidden !important;
       height: auto !important;
-      min-height: 100vh;
+      min-height: 100vh !important;
+      overscroll-behavior: auto !important;
+      position: static !important;
     }
     body {
       margin: 0;
@@ -247,7 +250,7 @@
     }
   </style>
 </head>
-<body>
+<body class="kit-standalone-page">
 
   <!-- TOP HEADER -->
   <header class="kit-nav-top">

@@ -167,7 +167,7 @@
            3. BASE
            ========================================================= */
 
-html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+html:not(.kit-standalone-page), body:not(.kit-standalone-page) { height: 100%; overflow: hidden; overscroll-behavior: none; }
 
 body {
             font-family: var(--body-font);
@@ -7913,22 +7913,6 @@ body[data-editor-page="about"] #page-about { display: block !important; height: 
    Guarantees that dark containers, night videos, and overlays
    never render dark text. Text is strictly protected to light/white.
    ========================================================= */
-:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) {
-    color: #ffffff !important;
-}
-
-:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(h1, h2, h3, h4, h5, h6, b, strong) {
-    color: #ffffff !important;
-}
-
-:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.subtext, p, li, .desc, .lead, .page-lead, .ins-sub, .rep-sub, .war-sub) {
-    color: rgba(255, 255, 255, 0.88) !important;
-}
-
-:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.label, .overline, .svc-label) {
-    color: var(--active-400, #4ade80) !important;
-}
-
 /* LIGHT SURFACE CONTRAST PROTECTION
    Guarantees that white/light content bands (like .rep-band, .ins-band)
    strictly default to dark charcoal/black text (#111827 / --surface-ink) */
@@ -7948,6 +7932,23 @@ body[data-editor-page="about"] #page-about { display: block !important; height: 
 
 :is(.rep-band:not(.rep-cta), .ins-band, .war-band:not(.war-close), .tow-band:not(.tow-cta), [data-contrast="light"], .is-lightbg) :is(.label, .overline, .svc-label) {
     color: var(--active-600, #0472f1) !important;
+}
+
+/* DARK SURFACE CONTRAST PROTECTION (Placed AFTER to guarantee dark surfaces, even if nested inside light containers, always win) */
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) {
+    color: #ffffff !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(h1, h2, h3, h4, h5, h6, b, strong) {
+    color: #ffffff !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.subtext, p, li, .desc, .lead, .page-lead, .ins-sub, .rep-sub, .war-sub) {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+:is([data-theme="dark"], .theme-dark, .scheme-dark, .is-darkbg, [data-contrast="dark"], .war-close, .rep-cta, .ins-close, .war-film, .rep-film, .tow-hero, .hero-fullbleed, .hero-aerial, .hero-business) :is(.label, .overline, .svc-label) {
+    color: var(--active-400, #4ade80) !important;
 }
 
 /* Sidebar contrast mode setting: Adaptive vs Monochrome */
@@ -7984,19 +7985,17 @@ body[data-contrast-mode="monochrome"] :is([data-contrast="dark"], .is-darkbg, .w
     line-height: 1;
 }
 .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined' !important;
-    font-weight: normal !important;
-    font-style: normal !important;
-    font-size: 24px;
+    font-family: "Material Symbols Outlined";
+    font-weight: 400;
+    font-style: normal;
     line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
     display: inline-block;
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: "liga";
     -webkit-font-smoothing: antialiased;
+    user-select: none;
 }
 @container (max-width: 900px) { .war-hero { grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 0; } }
 @container (max-width: 560px) { .war-hero { grid-template-columns: 1fr; } }
