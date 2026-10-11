@@ -3,26 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pandino UI Kit &amp; Design System Showcase (/kit)</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" />
+  <title>Pandino Design System · Complete Theme UI Kit &amp; Recipe Showroom</title>
+  
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="./css/tokens-base.css?v=kit-showcase" />
-  <link rel="stylesheet" href="./css/services-components.css?v=kit-showcase" />
+  
+  <!-- Core Design System CSS Sheets -->
+  <link rel="stylesheet" href="./css/tokens-base.css?v=kit-master" />
+  <link rel="stylesheet" href="./css/services-components.css?v=kit-master" />
+  <link rel="stylesheet" href="./css/about-timeline.css?v=kit-master" />
+  <link rel="stylesheet" href="./css/daisyui-components.css?v=kit-master" />
+  <link rel="stylesheet" href="./css/editor-inspector.css?v=kit-master" />
+  <link rel="stylesheet" href="./css/builder-rail.css?v=kit-master" />
+
   <style>
+    /* =========================================================
+       SHOWROOM THEME VARIABLES & BASE
+       ========================================================= */
     :root {
-      --kit-bg: #0b0f17;
-      --kit-card-bg: #111827;
+      --kit-bg: #090d14;
+      --kit-canvas: #0e131d;
+      --kit-card-bg: #131926;
+      --kit-card-inner: #1a2234;
       --kit-border: rgba(255, 255, 255, 0.08);
+      --kit-border-subtle: rgba(255, 255, 255, 0.04);
       --kit-text: #f8fafc;
       --kit-muted: #94a3b8;
+      --kit-wash: rgba(255, 255, 255, 0.04);
+      --kit-accent: var(--active-600, #0472f1);
+      --kit-accent-glow: rgba(4, 114, 241, 0.25);
+      --kit-font-headline: 'Syne', sans-serif;
+      --kit-font-body: 'Manrope', sans-serif;
     }
+
     body.kit-showroom-light {
-      --kit-bg: #f8fafc;
+      --kit-bg: #f4f6f9;
+      --kit-canvas: #ffffff;
       --kit-card-bg: #ffffff;
+      --kit-card-inner: #f8fafc;
       --kit-border: rgba(0, 0, 0, 0.08);
+      --kit-border-subtle: rgba(0, 0, 0, 0.04);
       --kit-text: #0f172a;
       --kit-muted: #64748b;
+      --kit-wash: rgba(0, 0, 0, 0.03);
     }
+
     html.kit-standalone-page,
     body.kit-standalone-page {
       overflow-y: auto !important;
@@ -32,100 +58,181 @@
       overscroll-behavior: auto !important;
       position: static !important;
     }
+
     body {
       margin: 0;
       padding: 0;
       background: var(--kit-bg);
       color: var(--kit-text);
       font-family: var(--body-font, 'Manrope', sans-serif);
-      transition: background-color .2s ease, color .2s ease;
+      transition: background-color .25s ease, color .25s ease;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* Top Chrome Sticky Header */
     .kit-nav-top {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: color-mix(in oklab, var(--kit-bg) 85%, transparent);
-      backdrop-filter: blur(12px);
+      z-index: 1000;
+      background: color-mix(in oklab, var(--kit-bg) 88%, transparent);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--kit-border);
-      padding: 12px 24px;
+      padding: 12px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
+
     .kit-nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.1rem;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
       text-decoration: none;
       color: var(--kit-text);
+      font-family: var(--headline-font, 'Syne', sans-serif);
     }
+
     .kit-nav-brand .material-symbols-outlined {
       color: var(--active-500, #0472f1);
-      font-size: 24px;
+      font-size: 26px;
+      line-height: 1;
     }
+
+    .kit-nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .kit-nav-pill {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--kit-muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .kit-nav-pill:hover,
+    .kit-nav-pill.active {
+      color: var(--kit-text);
+      background: var(--kit-wash);
+      border-color: var(--kit-border);
+    }
+
     .kit-nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
-    .kit-btn {
+
+    .kit-btn-tool {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
+      padding: 8px 14px;
       border-radius: 8px;
       border: 1px solid var(--kit-border);
       background: var(--kit-card-bg);
       color: var(--kit-text);
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
       transition: all .15s ease;
     }
-    .kit-btn:hover {
-      border-color: var(--active-400, #0472f1);
-      color: var(--active-400, #0472f1);
+
+    .kit-btn-tool:hover {
+      border-color: var(--active-500, #0472f1);
+      color: var(--active-500, #0472f1);
+      transform: translateY(-1px);
     }
+
+    /* Container */
     .kit-container {
-      max-width: 1200px;
+      max-width: 1360px;
       margin: 0 auto;
-      padding: 32px 24px 80px;
+      padding: 40px 28px 120px;
       display: flex;
       flex-direction: column;
-      gap: 48px;
+      gap: 64px;
     }
+
+    /* Section Headers */
     .kit-sec-head {
       border-bottom: 1px solid var(--kit-border);
-      padding-bottom: 12px;
-      margin-bottom: 24px;
+      padding-bottom: 16px;
+      margin-bottom: 28px;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
     }
+
     .kit-sec-head h2 {
       margin: 0;
       font-family: var(--headline-font, 'Syne', sans-serif);
-      font-size: 1.6rem;
+      font-size: 1.85rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
+      color: var(--kit-text);
     }
+
     .kit-sec-head p {
-      margin: 4px 0 0;
+      margin: 6px 0 0;
       color: var(--kit-muted);
       font-size: 0.95rem;
     }
-    /* Brand Tint / Shade Grid */
+
+    .kit-chapter-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--active-500, #0472f1);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* Palette picker */
+    .kit-palette-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .kit-color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 99px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .kit-color-dot:hover, .kit-color-dot.active {
+      transform: scale(1.18);
+      border-color: #ffffff;
+    }
+
+    /* Swatches Grid */
     .kit-swatches-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px;
     }
+
     .kit-swatch-card {
       background: var(--kit-card-bg);
       border: 1px solid var(--kit-border);
@@ -135,15 +242,51 @@
       flex-direction: column;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
+
     .kit-swatch-box {
-      height: 70px;
+      height: 72px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.875rem;
     }
+
+    /* Surface Comparison Box */
+    .kit-surface-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .kit-surface-demo { grid-template-columns: 1fr; }
+    }
+    .kit-surface-box {
+      border-radius: 18px;
+      padding: 36px 32px;
+      border: 1px solid var(--kit-border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .kit-surface-box.light {
+      background: #ffffff !important;
+      color: #111827 !important;
+    }
+    .kit-surface-box.dark {
+      background: #111315 !important;
+      color: #ffffff !important;
+    }
+    .kit-surface-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
     .kit-swatch-meta {
       padding: 10px 12px;
       display: flex;
@@ -151,18 +294,21 @@
       gap: 4px;
       font-size: 0.8rem;
     }
+
     .kit-swatch-meta strong {
       font-size: 0.9rem;
       color: var(--kit-text);
     }
+
     .kit-swatch-meta code {
       font-family: monospace;
       color: var(--kit-muted);
     }
+
     .kit-badge {
       display: inline-flex;
       align-items: center;
-      padding: 2px 6px;
+      padding: 3px 7px;
       border-radius: 4px;
       font-size: 0.725rem;
       font-weight: 700;
@@ -172,98 +318,378 @@
     .kit-badge.pass { background: #064e3b; color: #6ee7b7; }
     .kit-badge.fail { background: #7f1d1d; color: #fca5a5; }
 
-    /* Surface Demo Box */
-    .kit-surface-demo {
+    /* =========================================================
+       PREMIUM BUTTON PRIMITIVES & TIERS (Design System Source)
+       ========================================================= */
+    .btn-showcase-matrix {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 24px;
     }
-    @media (max-width: 860px) {
-      .kit-surface-demo { grid-template-columns: 1fr; }
-    }
-    .kit-surface-box {
-      border-radius: 16px;
-      padding: 32px 28px;
+
+    .btn-showcase-card {
+      background: var(--kit-card-bg);
       border: 1px solid var(--kit-border);
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
-    .kit-surface-box.light {
+
+    .btn-showcase-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--kit-muted);
+      border-bottom: 1px solid var(--kit-border-subtle);
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-showcase-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* AUTHENTIC PREMIUM BUTTON CLASSES */
+    .btn.ks-btn,
+    .btn.cta-primary {
+      background: var(--active-600, #0472f1) !important;
+      color: #ffffff !important;
+      font-family: var(--body-font, 'Manrope', sans-serif);
+      font-weight: 600;
+      font-size: 0.925rem;
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 1px solid color-mix(in oklab, var(--active-600, #0472f1) 85%, #000);
+      box-shadow: 0 4px 14px color-mix(in oklab, var(--active-600, #0472f1) 35%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .btn.ks-btn:hover,
+    .btn.cta-primary:hover {
+      transform: translateY(-2px);
+      background: var(--active-500, #2aa7ff) !important;
+      box-shadow: 0 8px 22px color-mix(in oklab, var(--active-600, #0472f1) 45%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      color: #ffffff !important;
+    }
+
+    .btn.ks-btn:active,
+    .btn.cta-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px color-mix(in oklab, var(--active-600, #0472f1) 35%, transparent);
+    }
+
+    .btn.ks-btn-outline,
+    .btn.cta-second {
+      background: color-mix(in oklab, var(--surface-wash, #ffffff) 6%, transparent) !important;
+      color: currentColor !important;
+      font-family: var(--body-font, 'Manrope', sans-serif);
+      font-weight: 600;
+      font-size: 0.925rem;
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: 1.5px solid color-mix(in oklab, currentColor 28%, transparent);
+      backdrop-filter: blur(8px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      line-height: 1.2;
+    }
+
+    .btn.ks-btn-outline:hover,
+    .btn.cta-second:hover {
+      background: color-mix(in oklab, var(--active-500, #0472f1) 14%, transparent) !important;
+      border-color: var(--active-500, #0472f1) !important;
+      color: var(--active-500, #0472f1) !important;
+      transform: translateY(-2px);
+    }
+
+    .btn.btn-pill {
+      border-radius: 999px !important;
+    }
+
+    .btn.btn-square-corner {
+      border-radius: 0px !important;
+    }
+
+    /* Segmented Tier Buttons */
+    .tier-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid var(--kit-border);
+      background: var(--kit-wash);
+      color: var(--kit-muted);
+      cursor: pointer;
+      transition: all .15s ease;
+      font-family: var(--body-font, 'Manrope', sans-serif);
+    }
+
+    .tier-btn:hover {
+      color: var(--kit-text);
+      border-color: var(--kit-border);
+      background: color-mix(in oklab, var(--kit-wash) 150%, transparent);
+    }
+
+    .tier-btn.active {
+      background: var(--active-600, #0472f1) !important;
+      color: #ffffff !important;
+      border-color: var(--active-500, #2aa7ff) !important;
+      box-shadow: 0 2px 10px color-mix(in oklab, var(--active-600) 35%, transparent);
+    }
+
+    /* Step Badges */
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: color-mix(in oklab, var(--active-500, #0472f1) 14%, #ffffff);
+      color: var(--active-600, #0472f1);
+      font-weight: 700;
+      font-size: 0.8125rem;
+      line-height: 1;
+    }
+
+    /* =========================================================
+       RECIPE PREVIEW WRAPPERS
+       ========================================================= */
+    .kit-recipe-box {
+      background: var(--kit-card-bg);
+      border: 1px solid var(--kit-border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      transition: border-color .2s ease;
+    }
+
+    .kit-recipe-box:hover {
+      border-color: color-mix(in oklab, var(--active-500) 40%, var(--kit-border));
+    }
+
+    .kit-recipe-header {
+      padding: 16px 24px;
+      background: color-mix(in oklab, var(--kit-card-bg) 95%, #000);
+      border-bottom: 1px solid var(--kit-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .kit-recipe-id {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .kit-recipe-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: color-mix(in oklab, var(--active-500) 15%, transparent);
+      color: var(--active-400, #38bdf8);
+      border: 1px solid color-mix(in oklab, var(--active-500) 25%, transparent);
+    }
+
+    .kit-recipe-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+      font-family: var(--headline-font, 'Syne', sans-serif);
+      color: var(--kit-text);
+    }
+
+    .kit-recipe-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kit-recipe-viewport {
+      padding: 40px 32px;
+      position: relative;
+    }
+
+    .kit-recipe-viewport.dark-viewport {
+      background: #0d1117;
+      color: #ffffff;
+    }
+
+    .kit-recipe-viewport.light-viewport {
       background: #ffffff;
       color: #111827;
     }
-    .kit-surface-box.dark {
-      background: #111315;
+
+    .kit-recipe-viewport.gradient-viewport {
+      background: radial-gradient(circle at 50% 30%, #151b28 0%, #090c12 100%);
       color: #ffffff;
     }
-    .kit-surface-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      opacity: 0.6;
-    }
 
-    /* Primitives Showcase */
-    .kit-primitives-grid {
+    /* Subpage Card Grid in Showroom */
+    .kit-steps-grid {
       display: grid;
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      width: 100%;
     }
 
-    /* Cards Showcase Grid */
-    .kit-cards-grid {
+    /* Telemetry grid */
+    .kit-telemetry-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    /* Buttons Row */
-    .kit-buttons-row {
+    .kit-telemetry-card {
+      background: color-mix(in oklab, var(--surface-wash, #ffffff) 4%, transparent);
+      border: 1px solid var(--kit-border);
+      border-radius: 14px;
+      padding: 20px;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      padding: 18px;
-      background: var(--kit-card-bg);
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Reviews Showcase */
+    .kit-reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .kit-review-card {
+      background: var(--kit-card-inner);
+      border: 1px solid var(--kit-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .kit-stars {
+      display: flex;
+      gap: 4px;
+      color: #f59e0b;
+      font-size: 18px;
+    }
+
+    /* FAQ item */
+    .kit-faq-item {
+      background: var(--kit-card-inner);
       border: 1px solid var(--kit-border);
       border-radius: 12px;
-    }
-    .kit-palette-picker {
+      padding: 18px 22px;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 8px;
+    }
+
+    .kit-faq-q {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      margin-top: 12px;
-    }
-    .kit-color-dot {
-      width: 28px;
-      height: 28px;
-      border-radius: 99px;
-      border: 2px solid transparent;
+      font-weight: 700;
+      font-size: 1.05rem;
       cursor: pointer;
-      transition: transform .15s ease, border-color .15s ease;
     }
-    .kit-color-dot:hover, .kit-color-dot.active {
-      transform: scale(1.15);
-      border-color: #ffffff;
+
+    /* Form Showcase */
+    .kit-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .kit-form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .kit-form-field label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--kit-muted);
+    }
+
+    .kit-form-input {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--kit-border);
+      background: var(--kit-card-inner);
+      color: var(--kit-text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color .15s ease;
+    }
+
+    .kit-form-input:focus {
+      border-color: var(--active-500, #0472f1);
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--active-500) 20%, transparent);
     }
   </style>
 </head>
 <body class="kit-standalone-page">
 
-  <!-- TOP HEADER -->
+  <!-- =========================================================
+       SHOWROOM STICKY NAVIGATION BAR
+       ========================================================= -->
   <header class="kit-nav-top">
     <a href="/" class="kit-nav-brand">
       <span class="material-symbols-outlined">settings_heart</span>
-      <span>Pandino Design System · UI Kit</span>
+      <span>Pandino Living UI Kit &amp; Recipe Showroom</span>
     </a>
+
+    <!-- Category Filter Pills -->
+    <nav class="kit-nav-pills" aria-label="Showroom Navigation">
+      <a href="#sec-tokens" class="kit-nav-pill active">1. Color Ramp</a>
+      <a href="#sec-buttons" class="kit-nav-pill">2. Premium Buttons</a>
+      <a href="#sec-typography" class="kit-nav-pill">3. Typography</a>
+      <a href="#sec-cards" class="kit-nav-pill">4. Card Primitives</a>
+      <a href="#sec-recipes" class="kit-nav-pill">5. Section Recipes</a>
+      <a href="#sec-forms" class="kit-nav-pill">6. Form Controls</a>
+    </nav>
+
+    <!-- Top Controls -->
     <div class="kit-nav-actions">
-      <button type="button" class="kit-btn" id="btnToggleShowroomTheme">
+      <button type="button" class="kit-btn-tool" id="btnToggleShowroomTheme">
         <span class="material-symbols-outlined">light_mode</span>
         <span>Canvas Mode</span>
       </button>
-      <a href="/" class="kit-btn">
+      <a href="/" class="kit-btn-tool">
         <span class="material-symbols-outlined">arrow_back</span>
         <span>Back to Builder</span>
       </a>
@@ -273,18 +699,18 @@
   <div class="kit-container">
 
     <!-- HERO INTRO -->
-    <div class="header-group" style="text-align: center; max-width: 780px; margin: 0 auto;">
+    <div class="header-group" style="text-align: center; max-width: 840px; margin: 0 auto;">
       <div class="title-wrap">
-        <span class="svc-label label overline" style="color: var(--active-500, #0472f1);">Living Styleguide &amp; Architectural Protection</span>
-        <h1 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 3.5vw, 3.2rem); margin: 0;">Component Kit Showcase (/kit)</h1>
+        <span class="svc-label label overline" style="color: var(--active-500, #0472f1);">Complete Recipe Theme Architecture</span>
+        <h1 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.3rem, 4vw, 3.4rem); margin: 0; letter-spacing: -0.03em;">Living Component &amp; Section Showroom</h1>
       </div>
-      <p class="subtext" style="color: var(--kit-muted); font-size: 1.15rem; margin-top: 8px;">
-        Single source of truth for color tokens, contrast compliance, live typographic primitives, and standardized card components.
+      <p class="subtext" style="color: var(--kit-muted); font-size: 1.15rem; margin-top: 10px; line-height: 1.6;">
+        Inspect every token, premium button tier, card primitive, and section recipe before applying it in the builder. Fully reactive to active brand palette and surface contrast protection.
       </p>
 
-      <!-- Palette Switcher -->
-      <div class="kit-palette-picker" style="justify-content: center; margin-top: 18px;">
-        <span style="font-size: 0.85rem; font-weight: 600; color: var(--kit-muted); margin-right: 6px;">Active Brand Palette:</span>
+      <!-- Active Brand Palette Picker -->
+      <div class="kit-palette-picker" style="justify-content: center; margin-top: 20px;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--kit-muted); margin-right: 6px;">Switch Theme Brand Ramp:</span>
         <button type="button" class="kit-color-dot active" data-color="azure" style="background: #007aff;" title="Azure Radiance"></button>
         <button type="button" class="kit-color-dot" data-color="blue" style="background: #2563eb;" title="Blue"></button>
         <button type="button" class="kit-color-dot" data-color="rose" style="background: #f43f5e;" title="Rose"></button>
@@ -297,138 +723,261 @@
       </div>
     </div>
 
-    <!-- 1. COLOR TOKENS & CONTRAST -->
-    <section>
+    <!-- =========================================================
+         1. COLOR TOKENS & 12 SHADE SCALE
+         ========================================================= -->
+    <section id="sec-tokens">
       <div class="kit-sec-head">
         <div>
-          <h2>1. Theme Tokens &amp; 12 Shade Scale</h2>
-          <p>Dynamically computed from active brand color. Shows contrast ratio and surface text default rules.</p>
+          <span class="kit-chapter-tag">Chapter 1</span>
+          <h2>Theme Tokens &amp; 12 Shade Scale</h2>
+          <p>Mathematical luminance ramp and WCAG AA/AAA compliance tags for text protection.</p>
         </div>
       </div>
       <div class="kit-swatches-grid" id="kitSwatchesGrid">
-        <!-- Dynamically painted by script -->
+        <!-- Dynamically painted -->
       </div>
     </section>
 
-    <!-- 2. LIVE TYPOGRAPHY & PRIMITIVES -->
-    <section>
+    <!-- =========================================================
+         2. PREMIUM BUTTON & ACTION TIERS (FIXED & EXPANDED)
+         ========================================================= -->
+    <section id="sec-buttons">
       <div class="kit-sec-head">
         <div>
-          <h2>2. Live Typography Primitives (.header-group, .title-wrap)</h2>
-          <p>Side-by-side verification: Light surfaces strictly render dark ink (#111827), dark surfaces render crisp white (#ffffff).</p>
+          <span class="kit-chapter-tag">Chapter 2</span>
+          <h2>Premium Button &amp; Action Tiers</h2>
+          <p>Elevated, branded action primitives with smooth micro-interactions, distinct hierarchy, and shape variants.</p>
+        </div>
+      </div>
+
+      <div class="btn-showcase-matrix">
+        
+        <!-- CARD 1: PRIMARY ACTION TIERS -->
+        <div class="btn-showcase-card">
+          <div class="btn-showcase-title">
+            <span>Primary Brand Solid Actions</span>
+            <code>.btn.ks-btn / .cta-primary</code>
+          </div>
+          <p style="margin: 0; font-size: 0.875rem; color: var(--kit-muted);">
+            High-contrast solid brand gradient with subtle glow, elevation, and hover lift.
+          </p>
+          <div class="btn-showcase-row">
+            <button class="btn ks-btn">
+              <span>Book Appointment</span>
+              <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+            </button>
+            <button class="btn ks-btn btn-pill">
+              <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
+              <span>Call Workshop</span>
+            </button>
+            <button class="btn ks-btn btn-square-corner">Sharp Corner</button>
+          </div>
+        </div>
+
+        <!-- CARD 2: SECONDARY OUTLINE TIERS -->
+        <div class="btn-showcase-card">
+          <div class="btn-showcase-title">
+            <span>Secondary Outline &amp; Glass</span>
+            <code>.btn.ks-btn-outline / .cta-second</code>
+          </div>
+          <p style="margin: 0; font-size: 0.875rem; color: var(--kit-muted);">
+            Translucent backdrop blur with subtle perimeter border that activates on hover.
+          </p>
+          <div class="btn-showcase-row">
+            <button class="btn ks-btn-outline">
+              <span>View Repair Specs</span>
+            </button>
+            <button class="btn ks-btn-outline btn-pill">
+              <span class="material-symbols-outlined" style="font-size: 18px;">shield</span>
+              <span>Warranty Rights</span>
+            </button>
+            <button class="btn ks-btn-outline" style="padding: 10px 14px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">upload_file</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3: SEGMENTED CONTROLS & FILTER PILLS -->
+        <div class="btn-showcase-card">
+          <div class="btn-showcase-title">
+            <span>Segmented Tiers &amp; Filters</span>
+            <code>.tier-btn / .active</code>
+          </div>
+          <p style="margin: 0; font-size: 0.875rem; color: var(--kit-muted);">
+            Refined segmented tabs used across inspectors, filters, and step pickers.
+          </p>
+          <div class="btn-showcase-row">
+            <button class="tier-btn active">
+              <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+              <span>All Services</span>
+            </button>
+            <button class="tier-btn">Collision</button>
+            <button class="tier-btn">Paint Booth</button>
+            <button class="tier-btn">Chassis</button>
+          </div>
+        </div>
+
+        <!-- CARD 4: BADGES & STEP INDICATORS -->
+        <div class="btn-showcase-card">
+          <div class="btn-showcase-title">
+            <span>Badges &amp; Step Indicators</span>
+            <code>.step-badge / .svc-badge</code>
+          </div>
+          <p style="margin: 0; font-size: 0.875rem; color: var(--kit-muted);">
+            Step indicators and proof badges with brand tint backgrounds.
+          </p>
+          <div class="btn-showcase-row">
+            <span class="step-badge">01</span>
+            <span class="step-badge">02</span>
+            <span class="step-badge">03</span>
+            <span class="step-badge">04</span>
+            <span class="svc-badge" style="background: color-mix(in oklab, var(--active-500) 15%, transparent); color: var(--active-400); padding: 5px 12px; border-radius: 99px; font-weight: 700; font-size: 0.775rem;">OEM Certified</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. LIVE TYPOGRAPHY PRIMITIVES (.header-group, .title-wrap)
+         ========================================================= -->
+    <section id="sec-typography">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 3</span>
+          <h2>Live Typography Primitives (.header-group, .title-wrap)</h2>
+          <p>Verified side-by-side surface contrast. Notice the premium button actions embedded within each context.</p>
         </div>
       </div>
 
       <div class="kit-surface-demo">
+        
         <!-- Light Surface -->
         <div class="kit-surface-box light" data-contrast="light">
           <span class="kit-surface-title">Light Surface (data-contrast="light" · White / --surface-wash)</span>
           <div class="header-group">
             <div class="title-wrap">
-              <span class="svc-label label overline">Standard Overline</span>
-              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem;">Precision Body Repair &amp; Spray Booth</h2>
+              <span class="svc-label label overline" style="color: var(--active-600, #0472f1);">Precision Craftsmanship</span>
+              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.2rem; line-height: 1.15; color: #111827;">Factory Paint Booth &amp; Laser Alignment</h2>
             </div>
-            <p class="subtext">Factory tolerances verified by laser measuring equipment before and after paint handoff.</p>
+            <p class="subtext" style="color: #475569; font-size: 1.05rem; line-height: 1.5;">
+              Factory tolerances verified by laser measuring equipment before and after paint handoff. Written guarantee with every job.
+            </p>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span class="step-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #ffffff); color: var(--active-600, #0472f1); font-weight: 700; font-size: 0.8125rem;">01</span>
-            <span class="svc-badge">Certified Workshop</span>
-            <button class="tier-btn active">Primary Filter</button>
-            <button class="tier-btn">Secondary Filter</button>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <span class="step-badge">01</span>
+            <button class="btn ks-btn">
+              <span>Book Repair</span>
+              <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+            </button>
+            <button class="btn ks-btn-outline" style="color: #111827 !important; border-color: rgba(0,0,0,0.18);">
+              <span>Compare Procedures</span>
+            </button>
           </div>
         </div>
 
         <!-- Dark Surface -->
         <div class="kit-surface-box dark is-darkbg" data-contrast="dark">
-          <span class="kit-surface-title" style="color: rgba(255, 255, 255, 0.6);">Dark Surface (data-contrast="dark" · Charcoal / Video Hero / Film)</span>
+          <span class="kit-surface-title" style="color: rgba(255, 255, 255, 0.6);">Dark Surface (data-contrast="dark" · Night Charcoal / Video Hero / Film)</span>
           <div class="header-group">
             <div class="title-wrap">
-              <span class="svc-label label overline">Standard Overline</span>
-              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem;">Precision Body Repair &amp; Spray Booth</h2>
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Precision Craftsmanship</span>
+              <h2 style="margin: 0; font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.2rem; line-height: 1.15; color: #ffffff;">Factory Paint Booth &amp; Laser Alignment</h2>
             </div>
-            <p class="subtext">Factory tolerances verified by laser measuring equipment before and after paint handoff.</p>
+            <p class="subtext" style="color: rgba(255, 255, 255, 0.85); font-size: 1.05rem; line-height: 1.5;">
+              Factory tolerances verified by laser measuring equipment before and after paint handoff. Written guarantee with every job.
+            </p>
           </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span class="step-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: rgba(255, 255, 255, 0.15); color: #ffffff; font-weight: 700; font-size: 0.8125rem;">01</span>
-            <span class="svc-badge" style="background: #ffffff; color: #111315;">Certified Workshop</span>
-            <button class="tier-btn active" style="background: var(--active-600, #0472f1); color: #ffffff;">Primary Filter</button>
-            <button class="tier-btn" style="background: rgba(255,255,255,0.1); color: #ffffff; border-color: rgba(255,255,255,0.2);">Secondary Filter</button>
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <span class="step-badge" style="background: rgba(255,255,255,0.15); color: #fff;">01</span>
+            <button class="btn ks-btn">
+              <span>Book Repair</span>
+              <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+            </button>
+            <button class="btn ks-btn-outline" style="color: #ffffff !important; border-color: rgba(255,255,255,0.25);">
+              <span>Compare Procedures</span>
+            </button>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- 3. OFFICIAL CARD VARIATIONS -->
-    <section>
+    <!-- =========================================================
+         4. OFFICIAL CARD PRIMITIVES & VARIATIONS
+         ========================================================= -->
+    <section id="sec-cards">
       <div class="kit-sec-head">
         <div>
-          <h2>3. Official Card Primitives &amp; Variations</h2>
-          <p>Standardized card tokens: --surface-wash fill, var(--card-radius), borders, and hover elevation.</p>
+          <span class="kit-chapter-tag">Chapter 4</span>
+          <h2>Official Card Primitives &amp; Variations</h2>
+          <p>Standardized card tokens: surface wash fill, standard 16px radius, borders, and hover elevation.</p>
         </div>
       </div>
 
-      <!-- STEP CARDS (.rep-cards / .ins-cards) -->
-      <h3 style="margin: 0 0 12px; font-size: 1.15rem; color: var(--kit-text);">A. Subpage Step Cards (ul.rep-cards / ul.ins-cards)</h3>
-      <div class="rep-band" style="background: var(--kit-card-bg); padding: 24px; border-radius: 16px; border: 1px solid var(--kit-border);">
+      <!-- A. SUBPAGE STEP CARDS -->
+      <h3 style="margin: 0 0 14px; font-size: 1.15rem; color: var(--kit-text);">A. Subpage Step Cards (ul.rep-cards &amp; ul.ins-cards)</h3>
+      <div class="rep-band" style="background: var(--kit-card-bg); padding: 28px; border-radius: 18px; border: 1px solid var(--kit-border);">
         <ul class="rep-cards">
           <li>
-            <b>Look and measure</b>
+            <b>01. Look and measure</b>
             <span>We photograph the damage, measure the frame, and tell you what can be saved.</span>
           </li>
           <li>
-            <b>Structural repair</b>
+            <b>02. Structural repair</b>
             <span>Bent rails and pillars are pulled back to factory points, then welded where metal tore.</span>
           </li>
           <li>
-            <b>Paint in our booth</b>
+            <b>03. Paint in our booth</b>
             <span>Colour is matched to the car’s code and baked, not blended in the parking lot.</span>
           </li>
           <li>
-            <b>Detail and handoff</b>
+            <b>04. Detail and handoff</b>
             <span>Panels are fitted, lights aimed, and you walk the car with us before you leave.</span>
           </li>
         </ul>
       </div>
 
-      <!-- SERVICE CARDS (.svc-card in .svc-grid) -->
-      <h3 style="margin: 32px 0 12px; font-size: 1.15rem; color: var(--kit-text);">B. Standard Service Cards (.svc-card / .svc-grid)</h3>
-      <div class="svc" data-card="fill" data-corner="rounded" style="--svc-fill: var(--active-100); --svc-card-fg: #1e242c; --svc-radius: 16px; --svc-gap: 16px;">
+      <!-- B. SERVICE CARDS (.svc-card in .svc-grid) -->
+      <h3 style="margin: 36px 0 14px; font-size: 1.15rem; color: var(--kit-text);">B. Standard Service Cards (.svc-card / .svc-grid)</h3>
+      <div class="svc" data-card="fill" data-corner="rounded">
         <ul class="svc-grid" role="list">
           <li class="svc-card">
-            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
-              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 26px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 14px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
                 <span class="material-symbols-outlined">build</span>
               </span>
-              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Collision Repair</h3>
-              <p style="margin: 0; font-size: 0.95rem; color: #475569;">Frame and body restored to factory specs after any collision.</p>
-              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
-                <span>Learn more</span>
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Collision Repair</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">Frame and body restored to factory specs after any collision.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>Explore process</span>
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
           </li>
           <li class="svc-card">
-            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
-              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 26px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 14px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
                 <span class="material-symbols-outlined">shield</span>
               </span>
-              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Insurance Claims</h3>
-              <p style="margin: 0; font-size: 0.95rem; color: #475569;">We handle the paperwork and itemized quotes directly with your insurer.</p>
-              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
-                <span>Learn more</span>
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Insurance Direct</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">We handle the paperwork and itemized quotes directly with your insurer.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>Insurance claims</span>
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
           </li>
           <li class="svc-card">
-            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 24px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 12px;">
-              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
+            <a class="svc-link" href="#services" style="background: var(--surface-wash, #f1f5f9); border: 1px solid var(--card-border, rgba(0,0,0,0.08)); border-radius: 16px; padding: 26px; text-decoration: none; color: #111827; display: flex; flex-direction: column; gap: 14px;">
+              <span class="svc-icwrap" style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: color-mix(in oklab, var(--active-500, #0472f1) 12%, #fff); color: var(--active-600, #0472f1);">
                 <span class="material-symbols-outlined">speed</span>
               </span>
-              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 700;">Suspension &amp; Alignment</h3>
-              <p style="margin: 0; font-size: 0.95rem; color: #475569;">Alignment checks and chassis balancing after pothole or curb strikes.</p>
-              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
-                <span>Learn more</span>
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Laser Alignment</h3>
+              <p style="margin: 0; font-size: 0.95rem; color: #475569; line-height: 1.5;">Alignment checks and chassis balancing after pothole or curb strikes.</p>
+              <span class="svc-more" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.9rem; color: var(--active-600, #0472f1); margin-top: auto;">
+                <span>View telemetry</span>
                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
               </span>
             </a>
@@ -437,47 +986,349 @@
       </div>
     </section>
 
-    <!-- 4. CTA BLOCKS & BUTTON TIERS -->
-    <section>
+    <!-- =========================================================
+         5. SECTION RECIPES SHOWROOM (EVERY SECTION IN THE THEME)
+         ========================================================= -->
+    <section id="sec-recipes">
       <div class="kit-sec-head">
         <div>
-          <h2>4. CTA Blocks &amp; Button Tiers</h2>
-          <p>Official CTA blocks (dark and light) plus primary, secondary, and tier button variants.</p>
+          <span class="kit-chapter-tag">Chapter 5</span>
+          <h2>The Recipe Section Library</h2>
+          <p>Live interactive previews of every section recipe. See what each section looks like in advance before requesting it to be added to your site.</p>
         </div>
       </div>
 
-      <!-- CTA Dark Block -->
-      <div class="rep-band rep-cta is-darkbg" data-contrast="dark" style="background: #111315; border-radius: 20px; padding: 36px 32px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px;">
-        <div class="rep-inner" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
-          <header class="rep-head header-group" style="text-align: left; margin: 0;">
-            <div class="title-wrap">
-              <span class="svc-label label overline" style="color: var(--active-400, #4ade80);">Estimate &amp; Inspection</span>
-              <h2 style="color: #ffffff !important; margin: 0; font-size: 2rem;">Ask for an itemized repair plan.</h2>
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+
+        <!-- RECIPE 1: HERO GRADIENT CENTERED -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #01</span>
+              <h4 class="kit-recipe-title">Hero: Soft Gradient Centered</h4>
             </div>
-            <p class="subtext" style="color: #c9cdd3 !important; margin: 6px 0 0;">Send three photos. We reply with a written plan before any panel comes off.</p>
-          </header>
-          <div class="cta-row" style="display: flex; gap: 12px; align-items: center;">
-            <button class="btn cta-btn cta-primary">Upload Photos</button>
-            <button class="btn cta-btn cta-primary cta-second">Call Workshop</button>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-gradient"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport gradient-viewport" style="text-align: center; padding: 60px 24px;">
+            <div class="header-group" style="max-width: 680px; margin: 0 auto;">
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Step Into The Future</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2rem, 3.5vw, 3rem); margin: 8px 0; color: #ffffff;">Experience the Next Level of Automotive Care</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.5;">
+                Advanced technology meets stunning craftsmanship. Precision body repair and factory paint matching in Milan.
+              </p>
+              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 24px;">
+                <button class="btn ks-btn">Book A Service</button>
+                <button class="btn ks-btn-outline" style="color: #fff !important; border-color: rgba(255,255,255,0.25);">Explore Booth</button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- RECIPE 2: HERO FULLBLEED WITH BUSINESS PANEL -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #02</span>
+              <h4 class="kit-recipe-title">Hero: Fullbleed Video + Floating Business Panel</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>class="hero hero-fullbleed" data-panel="right"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: url(./media/showcase/night-city-sedan.jpg) center/cover no-repeat; min-height: 380px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 24px; position: relative; padding: 48px 36px;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%); pointer-events: none;"></div>
+            
+            <div class="header-group" style="position: relative; z-index: 2; max-width: 520px;">
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Night &amp; Emergency Dispatch</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2.2rem; color: #fff; margin: 6px 0;">On the road. The record travels with the car.</h2>
+              <p class="subtext" style="color: rgba(255,255,255,0.8); margin-top: 8px;">24/7 towing and factory repairs verified by laser measuring.</p>
+              <div style="margin-top: 18px;">
+                <button class="btn ks-btn">Request Immediate Tow</button>
+              </div>
+            </div>
+
+            <!-- Floating Biz Panel -->
+            <div style="position: relative; z-index: 2; background: rgba(18, 24, 38, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 22px; width: 300px; display: flex; flex-direction: column; gap: 12px;">
+              <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--active-400);">Workshop Hours</span>
+              <div style="font-size: 0.95rem; font-weight: 700;">Mon - Fri: 08:00 - 18:30</div>
+              <div style="font-size: 0.85rem; color: #94a3b8;">Via Nazionale 42, Milan</div>
+              <a href="tel:+390212345678" style="color: var(--active-400); font-weight: 700; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">phone</span>
+                <span>+39 02 1234 5678</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECIPE 3: PAINS & PROBLEMS SECTION -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #03</span>
+              <h4 class="kit-recipe-title">Pains &amp; Problems: The 4 Common Repair Traps</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>id="pains" class="ks ks-pains"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport">
+            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
+              <span class="svc-label label overline" style="color: #f87171;">What Drivers Hate</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Surprise Invoices &amp; Mismatched Tones</h2>
+              <p class="subtext" style="color: #94a3b8;">Here is why typical collision shops fail—and how we do the exact opposite.</p>
+            </div>
+            <div class="kit-telemetry-grid">
+              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
+                <b style="color: #f87171; font-size: 1.05rem;">The Surprise Bill</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Work starts without written authorization, leading to extra charges at pickup.</p>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Zero work without written authorization.</span>
+              </div>
+              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
+                <b style="color: #f87171; font-size: 1.05rem;">Color Mismatch</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Stock paint tins sprayed in dusty bays cause peeling and tint differences.</p>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Downdraft booth mixed to VIN code.</span>
+              </div>
+              <div class="kit-telemetry-card" style="border-left: 3px solid #ef4444;">
+                <b style="color: #f87171; font-size: 1.05rem;">Refused Insurance Claims</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Insurers dispute estimates that lack proper maker procedure records.</p>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">OUR ANCHOR: Itemized line items accepted by all major carriers.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECIPE 4: INTERACTIVE TIMELINE & WORKSHOP STORY -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #04</span>
+              <h4 class="kit-recipe-title">About &amp; Craftsmanship: Interactive Story Timeline</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>id="about" class="ks-about-timeline"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport">
+            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
+              <span class="svc-label label overline" style="color: var(--active-400);">Heritage &amp; Proof</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">A Family Booth in Milan Since 2001</h2>
+              <p class="subtext" style="color: #94a3b8;">Over two decades of precision repair and community trust.</p>
+            </div>
+            <div class="kit-steps-grid">
+              <div class="kit-telemetry-card">
+                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2001</span>
+                <b style="font-size: 1.15rem; color: #fff;">First Downdraft Booth</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Opened Via Nazionale with our first sealed heated spray booth.</p>
+              </div>
+              <div class="kit-telemetry-card">
+                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2012</span>
+                <b style="font-size: 1.15rem; color: #fff;">Laser Chassis Bench</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Upgraded frame realignment with computerized 3D laser measuring.</p>
+              </div>
+              <div class="kit-telemetry-card">
+                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">YEAR 2020</span>
+                <b style="font-size: 1.15rem; color: #fff;">ADAS Radar Calibration</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Equipped static and dynamic target boards for lane-assist and radar sensors.</p>
+              </div>
+              <div class="kit-telemetry-card">
+                <span style="font-size: 0.8rem; font-weight: 800; color: var(--active-400);">TODAY</span>
+                <b style="font-size: 1.15rem; color: #fff;">12,000+ Vehicles Restored</b>
+                <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Trusted by local families, collectors, and corporate fleets across Lombardy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECIPE 5: TRUST PROOF & CUSTOMER REVIEWS -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #05</span>
+              <h4 class="kit-recipe-title">Trust Bar &amp; Verified Customer Reviews</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>id="reviews" class="ks ks-reviews"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport light-viewport">
+            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
+              <span class="svc-label label overline" style="color: var(--active-600);">Real Feedback</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #111827;">What Drivers Say Before Driving Away</h2>
+              <p class="subtext" style="color: #475569;">Over 450 verified 5-star ratings across Google and local auto clubs.</p>
+            </div>
+            <div class="kit-reviews-grid">
+              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
+                <div class="kit-stars">★★★★★</div>
+                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
+                  “The color on the rear quarter panel matches perfectly. You cannot tell where the damage was. The written estimate did not change by a single euro.”
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                  <b style="font-size: 0.9rem; color: #0f172a;">Marco Rossi · Alfa Romeo Giulia</b>
+                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
+                </div>
+              </div>
+              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
+                <div class="kit-stars">★★★★★</div>
+                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
+                  “They dealt with the insurance company directly. I just dropped the car, got a replacement vehicle, and picked it up washed and aligned.”
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                  <b style="font-size: 0.9rem; color: #0f172a;">Elena Bianchi · BMW 3 Series</b>
+                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
+                </div>
+              </div>
+              <div class="kit-review-card" style="background: #f8fafc; border-color: rgba(0,0,0,0.08);">
+                <div class="kit-stars">★★★★★</div>
+                <p style="margin: 0; font-size: 0.95rem; color: #334155; line-height: 1.5;">
+                  “Fastest quote in town. Sent 3 photos, had a price by lunch, and car was in the booth by Thursday. Highly recommended workshop.”
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                  <b style="font-size: 0.9rem; color: #0f172a;">Davide Moretti · Audi A4 Avant</b>
+                  <span style="font-size: 0.75rem; font-weight: 700; color: #16a34a;">Verified Customer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECIPE 6: FAQ ACCORDION -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #06</span>
+              <h4 class="kit-recipe-title">FAQ: Questions &amp; Clear Answers</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>id="faq" class="ks ks-faq"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport">
+            <div class="header-group" style="text-align: center; max-width: 680px; margin: 0 auto 32px;">
+              <span class="svc-label label overline" style="color: var(--active-400);">Questions Drivers Ask</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: 2rem; color: #fff;">Clear Answers Before Any Key Hand-off</h2>
+            </div>
+            <div style="max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px;">
+              <div class="kit-faq-item">
+                <div class="kit-faq-q">
+                  <span>Do I have to use the repair shop chosen by my insurer?</span>
+                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
+                </div>
+                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
+                  No. Under Italian and EU antitrust regulations, you have the legal right to choose any certified repair shop. We handle the paperwork directly with your insurer so you don’t pay out of pocket.
+                </p>
+              </div>
+              <div class="kit-faq-item">
+                <div class="kit-faq-q">
+                  <span>How do you guarantee the paint will match?</span>
+                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
+                </div>
+                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
+                  We use an optical spectrophotometer to scan the current fade level of your car’s actual clearcoat, then mix the exact tint formula in-house rather than using a standard tin.
+                </p>
+              </div>
+              <div class="kit-faq-item">
+                <div class="kit-faq-q">
+                  <span>What warranty comes with the repair?</span>
+                  <span class="material-symbols-outlined" style="color: var(--active-400);">expand_more</span>
+                </div>
+                <p style="margin: 4px 0 0; font-size: 0.925rem; color: #94a3b8;">
+                  All structural frame realignment and booth paint handoffs carry our full 5-year written craftsmanship warranty.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECIPE 7: HIGH IMPACT CLOSING CTA -->
+        <div class="kit-recipe-box">
+          <div class="kit-recipe-header">
+            <div class="kit-recipe-id">
+              <span class="kit-recipe-badge">Recipe #07</span>
+              <h4 class="kit-recipe-title">Final Closing CTA: Conversion Engine</h4>
+            </div>
+            <div class="kit-recipe-actions">
+              <code>id="cta" class="ks ks-final"</code>
+            </div>
+          </div>
+          <div class="kit-recipe-viewport dark-viewport" style="background: radial-gradient(circle at 50% 50%, #152033 0%, #0a0e17 100%); text-align: center; padding: 60px 24px;">
+            <div class="header-group" style="max-width: 680px; margin: 0 auto;">
+              <span class="svc-label label overline" style="color: var(--active-400, #38bdf8);">Get Started Today</span>
+              <h2 style="font-family: var(--headline-font, 'Syne', sans-serif); font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin: 8px 0; color: #fff;">Send 3 Photos. Get a Guaranteed Price.</h2>
+              <p class="subtext" style="color: #94a3b8; font-size: 1.15rem; margin-top: 10px;">
+                No unexpected extras. We answer on working days before the shop floor closes.
+              </p>
+              <div style="display: flex; gap: 14px; justify-content: center; align-items: center; margin-top: 28px; flex-wrap: wrap;">
+                <button class="btn ks-btn" style="padding: 12px 28px; font-size: 1rem;">
+                  <span class="material-symbols-outlined">camera_alt</span>
+                  <span>Upload Vehicle Photos</span>
+                </button>
+                <button class="btn ks-btn-outline" style="padding: 12px 28px; font-size: 1rem; color: #fff !important; border-color: rgba(255,255,255,0.25);">
+                  <span class="material-symbols-outlined">phone</span>
+                  <span>Call +39 02 1234 5678</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. FORM & INTERACTIVE CONTROLS
+         ========================================================= -->
+    <section id="sec-forms">
+      <div class="kit-sec-head">
+        <div>
+          <span class="kit-chapter-tag">Chapter 6</span>
+          <h2>Form &amp; Interactive Calculator Primitives</h2>
+          <p>Input controls, estimate sliders, and photo upload dropzones.</p>
+        </div>
       </div>
 
-      <!-- Button Tiers Bar -->
-      <div class="kit-buttons-row">
-        <span style="font-size: 0.85rem; font-weight: 700; color: var(--kit-muted); margin-right: 8px;">Button Primitives:</span>
-        <button class="btn cta-btn cta-primary">CTA Primary</button>
-        <button class="btn cta-btn cta-primary cta-second">CTA Secondary</button>
-        <button class="tier-btn active">Tier Active</button>
-        <button class="tier-btn">Tier Default</button>
-        <button class="btn-pill" style="padding: 6px 14px; border-radius: 99px; background: var(--active-600, #0472f1); color: #fff; border: 0; font-weight: 600; font-size: 0.85rem; cursor: pointer;">Pill Button</button>
+      <div class="kit-recipe-box">
+        <div class="kit-recipe-viewport dark-viewport">
+          <div class="kit-form-grid">
+            <div class="kit-form-field">
+              <label>Full Name</label>
+              <input type="text" class="kit-form-input" placeholder="e.g. Alessandro Rossi" value="Alessandro Rossi" />
+            </div>
+            <div class="kit-form-field">
+              <label>Phone Number</label>
+              <input type="tel" class="kit-form-input" placeholder="+39 333 1234567" value="+39 333 1234567" />
+            </div>
+            <div class="kit-form-field">
+              <label>Vehicle Make &amp; Model</label>
+              <input type="text" class="kit-form-input" placeholder="e.g. Porsche 911 GT3" value="Porsche 911 GT3" />
+            </div>
+            <div class="kit-form-field">
+              <label>Service Type</label>
+              <select class="kit-form-input">
+                <option>Collision Body Repair</option>
+                <option>Spray Booth Respray</option>
+                <option>Laser Frame Alignment</option>
+                <option>Insurance Inspection</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Upload Dropzone -->
+          <div style="margin-top: 24px; border: 2px dashed var(--kit-border); border-radius: 14px; padding: 32px; text-align: center; background: var(--kit-wash); display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 36px; color: var(--active-500);">add_photo_alternate</span>
+            <b style="font-size: 1rem; color: #fff;">Drop 3 vehicle photos here or tap to select</b>
+            <span style="font-size: 0.825rem; color: var(--kit-muted);">One of each damaged side, and one of the license plate</span>
+            <button class="btn ks-btn btn-sm" style="margin-top: 6px;">Select Photos</button>
+          </div>
+        </div>
       </div>
     </section>
 
   </div>
 
+  <!-- SCRIPT -->
   <script>
-    // Palettes defined in design system
     const PALETTES = {
       azure: { 50:'#eff6ff', 100:'#dbeafe', 200:'#bfdbfe', 300:'#93c5fd', 400:'#60a5fa', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a', 950:'#172554' },
       blue: { 50:'#f0f9ff', 100:'#e0f2fe', 200:'#bae6fd', 300:'#7dd3fc', 400:'#38bdf8', 500:'#0ea5e9', 600:'#0284c7', 700:'#0369a1', 800:'#075985', 900:'#0c4a6e', 950:'#082f49' },
@@ -518,7 +1369,7 @@
 
       const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
       const whiteLum = 1.0;
-      const inkLum = getLuminance(17, 24, 39); // #111827
+      const inkLum = getLuminance(17, 24, 39);
 
       steps.forEach(step => {
         const hex = pal[step];
@@ -548,7 +1399,7 @@
         grid.appendChild(card);
       });
 
-      // Update root active variables
+      // Update document root tokens dynamically
       const root = document.documentElement;
       steps.forEach(s => {
         root.style.setProperty(`--active-${s}`, pal[s]);
@@ -556,12 +1407,12 @@
       root.style.setProperty('--active-brand', pal[500]);
     }
 
-    // Toggle Canvas Light / Dark
+    // Canvas Mode Switcher
     document.getElementById('btnToggleShowroomTheme').addEventListener('click', () => {
       document.body.classList.toggle('kit-showroom-light');
     });
 
-    // Palette dots
+    // Palette Click Handler
     document.querySelectorAll('.kit-color-dot').forEach(dot => {
       dot.addEventListener('click', () => {
         document.querySelectorAll('.kit-color-dot').forEach(d => d.classList.remove('active'));
@@ -570,7 +1421,7 @@
       });
     });
 
-    // Initial paint
+    // Initial render
     paintSwatches('azure');
   </script>
 </body>
