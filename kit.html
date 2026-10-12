@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" class="kit-standalone-page">
+<html lang="en" class="kit-standalone-page" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pandino Design System · Living UI Kit &amp; Builder Showroom</title>
   
-  <!-- Typography & Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <!-- official daisyUI v5 & Tailwind 4 CDN blocks -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   
-  <!-- Core Design System Sheets -->
-  <link rel="stylesheet" href="./css/tokens-base.css?v=kit-master" />
-  <link rel="stylesheet" href="./css/services-components.css?v=kit-master" />
-  <link rel="stylesheet" href="./css/about-timeline.css?v=kit-master" />
-  <link rel="stylesheet" href="./css/daisyui-components.css?v=kit-master" />
-  <link rel="stylesheet" href="./css/editor-inspector.css?v=kit-master" />
-  <link rel="stylesheet" href="./css/builder-rail.css?v=kit-master" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  
 
   <style>
     /* =========================================================
@@ -34,8 +31,6 @@
       --kit-wash: rgba(255, 255, 255, 0.03);
       --kit-accent: var(--active-600, #0472f1);
       --kit-accent-glow: rgba(4, 114, 241, 0.2);
-      --kit-font-headline: 'Syne', sans-serif;
-      --kit-font-body: 'Manrope', sans-serif;
     }
 
     body.kit-showroom-light {
@@ -57,7 +52,6 @@
       padding: 0;
       background: var(--kit-bg);
       color: var(--kit-text);
-      font-family: var(--kit-font-body);
       overflow-y: auto !important;
       overflow-x: hidden !important;
       height: auto !important;
@@ -65,28 +59,11 @@
       scroll-behavior: smooth;
     }
 
-    /* 2-Column Desktop Shell: Fixed Left Sidebar + Scrollable Right Showroom */
-    .kit-shell {
-      display: flex;
-      min-height: 100vh;
-      width: 100%;
-    }
-
-    /* Left Sidebar */
     .kit-sidebar {
-      width: 280px;
-      flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      background: var(--kit-sidebar-bg);
-      border-right: 1px solid var(--kit-border);
-      padding: 1.5rem 1rem 3rem;
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
-      z-index: 100;
       box-sizing: border-box;
     }
 
@@ -197,16 +174,6 @@
     }
 
     @media (max-width: 1024px) {
-      .kit-shell {
-        flex-direction: column;
-      }
-      .kit-sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid var(--kit-border);
-      }
       .kit-main {
         padding: 1.5rem 1.25rem 4rem;
       }
@@ -1169,108 +1136,33 @@
 </head>
 <body class="kit-standalone-page">
 
-  <div class="kit-shell">
-    <!-- =========================================================
-         FIXED LEFT SIDEBAR MENU (STARTS WITH HEADER MENUS)
-         ========================================================= -->
-    <aside class="kit-sidebar">
-      <div class="kit-sidebar-brand">
-        <h2 class="kit-sidebar-title">
-          <span class="material-symbols-outlined" style="color:#0472f1;">layers</span>
-          UI Kit Showroom
-        </h2>
-        <p class="kit-sidebar-sub">Living components &amp; builder formats</p>
+  <div class="drawer lg:drawer-open kit-drawer" id="kit-drawer">
+    <input id="sidebar-toggle" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content flex flex-col min-h-screen bg-base-200">
+      <!-- NATIVE DAISYUI HEADER PANEL -->
+      <div class="navbar bg-base-100 border-b border-base-300 px-4">
+        <div class="flex-1 items-center gap-2">
+          <label for="sidebar-toggle" class="btn btn-square btn-ghost drawer-button lg:hidden kit-open" role="button" tabindex="0" aria-label="open sidebar">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </label>
+          <span class="font-bold text-lg">SaaS Template Tool</span>
+        </div>
+        <div class="flex-none flex items-center gap-2">
+          <!-- Put responsive device buttons, viewport switches, and user modals here -->
+          <a href="./index.html" class="btn btn-sm btn-ghost gap-1">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            <span>Back to Builder</span>
+          </a>
+          <button type="button" class="btn btn-sm btn-outline gap-1" id="btnToggleShowroomTheme">
+            <span class="material-symbols-outlined text-base">light_mode</span>
+            <span class="hidden sm:inline">Toggle Theme</span>
+          </button>
+        </div>
       </div>
 
-      <div class="kit-sidebar-actions">
-        <button type="button" class="kit-mode-btn" id="btnToggleShowroomTheme">
-          <span class="material-symbols-outlined" style="font-size:1rem;">light_mode</span>
-          Toggle Theme
-        </button>
-      </div>
-
-      <!-- Navigation Links -->
-      <nav class="kit-nav-group">
-        <span class="kit-nav-group-title">Navigation &amp; Heroes</span>
-        <a href="#sec-headers" class="kit-nav-link active">
-          <span class="material-symbols-outlined">web</span>
-          Header Menus &amp; Pills
-        </a>
-        <a href="#sec-heroes" class="kit-nav-link">
-          <span class="material-symbols-outlined">view_carousel</span>
-          Hero &amp; Business Panel
-        </a>
-        <a href="#sec-subpage-heroes" class="kit-nav-link">
-          <span class="material-symbols-outlined">emergency</span>
-          Subpage Heroes (Emergency &amp; Tow)
-        </a>
-
-        <span class="kit-nav-group-title">Design Foundation</span>
-        <a href="#sec-colors" class="kit-nav-link">
-          <span class="material-symbols-outlined">palette</span>
-          Brand Colors &amp; Palettes
-        </a>
-        <a href="#sec-buttons" class="kit-nav-link">
-          <span class="material-symbols-outlined">smart_button</span>
-          Button Primitives
-        </a>
-        <a href="#sec-typography" class="kit-nav-link">
-          <span class="material-symbols-outlined">match_case</span>
-          Typography Primitives
-        </a>
-        <a href="#sec-cards" class="kit-nav-link">
-          <span class="material-symbols-outlined">dashboard</span>
-          Service Card Variations
-        </a>
-
-        <span class="kit-nav-group-title">Builder Formats</span>
-        <a href="#sec-about" class="kit-nav-link">
-          <span class="material-symbols-outlined">info</span>
-          About Format Layouts
-        </a>
-        <a href="#sec-repairs-solutions" class="kit-nav-link">
-          <span class="material-symbols-outlined">compare</span>
-          Repairs, Claims &amp; Diff
-        </a>
-        <a href="#sec-warranty" class="kit-nav-link">
-          <span class="material-symbols-outlined">verified</span>
-          Warranty Page Hero
-        </a>
-        <a href="#sec-reviews" class="kit-nav-link">
-          <span class="material-symbols-outlined">star</span>
-          Reviews &amp; Trust Badges
-        </a>
-        <a href="#sec-contact" class="kit-nav-link">
-          <span class="material-symbols-outlined">pin_drop</span>
-          Shop Location &amp; Hours
-        </a>
-        <a href="#sec-faq" class="kit-nav-link">
-          <span class="material-symbols-outlined">help</span>
-          Interactive FAQ Formats
-        </a>
-        <a href="#sec-promo-quote" class="kit-nav-link">
-          <span class="material-symbols-outlined">calculate</span>
-          Promo &amp; Book Estimate
-        </a>
-        <a href="#sec-final-cta" class="kit-nav-link">
-          <span class="material-symbols-outlined">campaign</span>
-          Final Call to Action
-        </a>
-        <a href="#sec-footers" class="kit-nav-link">
-          <span class="material-symbols-outlined">vertical_align_bottom</span>
-          DaisyUI &amp; Site Footers
-        </a>
-        <a href="#sec-forms" class="kit-nav-link">
-          <span class="material-symbols-outlined">format_shapes</span>
-          Form Controls &amp; Dropzone
-        </a>
-      </nav>
-    </aside>
-
-    <!-- =========================================================
-         RIGHT MAIN SHOWROOM AREA
-         ========================================================= -->
-    <main class="kit-main">
+      <!-- RESPONSIVE FLEX ITEM GRID WRAPPER FOR PREVIEW SCREENS -->
+      <div class="flex-1 grid grid-cols-1 overflow-y-auto w-full">
+        <main class="kit-main p-4 lg:p-8 max-w-7xl mx-auto w-full">
 
       <!-- SECTION 1: HEADER FORMATS & PILL MENUS -->
       <section class="kit-sec" id="sec-headers">
@@ -1286,22 +1178,24 @@
             <code>.sh-pill-mode [data-pill="dark"]</code>
           </div>
           <div class="kit-box-body" style="background:#05080f; padding: 2.5rem 1.5rem;">
-            <div class="kit-pill-header-mockup">
-              <div class="kit-pill-nav">
-                <div class="kit-pill-brand">
-                  <span class="kit-pill-icon"></span>
-                  Business Name
-                </div>
-                <div class="kit-pill-links">
-                  <a href="#sec-repairs-solutions" class="kit-pill-link">Repairs</a>
-                  <a href="#sec-repairs-solutions" class="kit-pill-link">Insurance</a>
-                  <a href="#sec-contact" class="kit-pill-link">Emergency</a>
-                  <a href="#sec-warranty" class="kit-pill-link">Warranty</a>
+            <div class="kit-pill-header-mockup navbar">
+              <div class="navbar-start">
+                <div class="kit-pill-nav">
+                  <div class="kit-pill-brand">
+                    <span class="kit-pill-icon"></span>
+                    Business Name
+                  </div>
+                  <ul class="kit-pill-links menu menu-horizontal">
+                    <li><a href="#sec-repairs-solutions" class="kit-pill-link">Repairs</a></li>
+                    <li><a href="#sec-repairs-solutions" class="kit-pill-link">Insurance</a></li>
+                    <li><a href="#sec-contact" class="kit-pill-link">Emergency</a></li>
+                    <li><a href="#sec-warranty" class="kit-pill-link">Warranty</a></li>
+                  </ul>
                 </div>
               </div>
-              <div style="display:flex; align-items:center; gap:0.5rem;">
-                <a href="#sec-reviews" class="kit-pill-badge-rev">Reviews</a>
-                <button type="button" class="kit-pill-cta">Book Now</button>
+              <div class="navbar-end" style="display:flex; align-items:center; gap:0.5rem;">
+                <a href="#sec-reviews" class="kit-pill-badge-rev btn btn-ghost btn-sm">Reviews</a>
+                <button type="button" class="kit-pill-cta btn btn-primary btn-sm">Book Now</button>
               </div>
             </div>
 
@@ -1330,18 +1224,24 @@
             <code>header.sh-bar [data-layout="bar"]</code>
           </div>
           <div class="kit-box-body" style="padding:0; background:#0e1420;">
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:1.25rem 2rem; border-bottom:1px solid var(--kit-border);">
-              <div style="font-weight:800; font-size:1.1rem; color:#fff; display:flex; align-items:center; gap:0.6rem;">
-                <span style="width:18px; height:18px; background:#0472f1; border-radius:4px;"></span>
-                PANDINO BODY SHOP
+            <div class="navbar bg-base-100 shadow-sm" style="padding:1rem 2rem; border-bottom:1px solid var(--kit-border);">
+              <div class="navbar-start">
+                <div style="font-weight:800; font-size:1.1rem; color:#fff; display:flex; align-items:center; gap:0.6rem;">
+                  <span style="width:18px; height:18px; background:#0472f1; border-radius:4px;"></span>
+                  PANDINO BODY SHOP
+                </div>
               </div>
-              <div style="display:flex; gap:1.5rem; font-size:0.85rem; font-weight:600; color:#cbd5e1;">
-                <a href="#sec-repairs-solutions" style="color:inherit; text-decoration:none;">Collision Repair</a>
-                <a href="#sec-repairs-solutions" style="color:inherit; text-decoration:none;">Paint &amp; Refinish</a>
-                <a href="#sec-warranty" style="color:inherit; text-decoration:none;">Warranty</a>
-                <a href="#sec-contact" style="color:inherit; text-decoration:none;">Location &amp; Hours</a>
+              <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1 gap-2 text-sm font-semibold">
+                  <li><a href="#sec-repairs-solutions">Collision Repair</a></li>
+                  <li><a href="#sec-repairs-solutions">Paint &amp; Refinish</a></li>
+                  <li><a href="#sec-warranty">Warranty</a></li>
+                  <li><a href="#sec-contact">Location &amp; Hours</a></li>
+                </ul>
               </div>
-              <button type="button" class="kit-hero-cta-btn" style="padding:0.5rem 1.15rem; font-size:0.825rem;">+39 02 1234 5678</button>
+              <div class="navbar-end">
+                <button type="button" class="btn btn-primary btn-sm">+39 02 1234 5678</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1814,12 +1714,12 @@
             <code>.btn, .ks-btn, .ks-btn-outline</code>
           </div>
           <div class="kit-box-body" style="display:flex; flex-wrap:wrap; gap:1rem; align-items:center;">
-            <button type="button" class="btn" style="background:#0472f1; color:#fff; padding:0.65rem 1.4rem; border-radius:8px; font-weight:700; border:none; cursor:pointer;">Primary Solid</button>
-            <button type="button" class="btn" style="background:transparent; color:#fff; border:2px solid #0472f1; padding:0.65rem 1.4rem; border-radius:8px; font-weight:700; cursor:pointer;">Secondary Outline</button>
-            <button type="button" class="btn" style="background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.12); padding:0.65rem 1.4rem; border-radius:8px; font-weight:700; cursor:pointer;">Dark Fill</button>
-            <button type="button" class="btn" style="background:#0472f1; color:#fff; padding:0.65rem 1.75rem; border-radius:999px; font-weight:700; border:none; cursor:pointer;">Modern Pill</button>
-            <button type="button" class="btn" style="background:rgba(4, 114, 241, 0.15); color:#0472f1; padding:0.65rem 1.25rem; border-radius:8px; font-weight:700; border:none; cursor:pointer;">Soft Tint</button>
-            <button type="button" class="btn" disabled style="opacity:0.4; cursor:not-allowed; background:rgba(255,255,255,0.05); color:#fff; padding:0.65rem 1.4rem; border-radius:8px; font-weight:700; border:1px solid rgba(255,255,255,0.1);">Disabled</button>
+            <button type="button" class="btn btn-primary">Primary Solid</button>
+            <button type="button" class="btn btn-outline btn-primary">Secondary Outline</button>
+            <button type="button" class="btn btn-neutral">Dark Fill</button>
+            <button type="button" class="btn btn-accent rounded-full">Modern Pill</button>
+            <button type="button" class="btn btn-soft btn-primary">Soft Tint</button>
+            <button type="button" class="btn btn-disabled" disabled>Disabled</button>
           </div>
         </div>
       </section>
@@ -1861,33 +1761,45 @@
           <div class="kit-box-body">
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
               <!-- Card 1 -->
-              <div style="background:#131926; border:1px solid var(--kit-border); border-radius:14px; padding:1.5rem; transition:transform 0.2s, border-color 0.2s;">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#0472f1; margin-bottom:1rem; display:block;">minor_crash</span>
-                <h3 style="font-size:1.15rem; font-weight:800; color:#fff; margin:0 0 0.5rem;">Collision Repair</h3>
-                <p style="font-size:0.85rem; color:var(--kit-muted); margin:0 0 1.25rem; line-height:1.5;">Frame and body restored to factory specs after any accident.</p>
-                <span style="font-size:0.825rem; font-weight:700; color:#0472f1; display:flex; align-items:center; gap:0.35rem;">
-                  Learn more <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
-                </span>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-2">minor_crash</span>
+                  <h3 class="card-title text-base font-bold text-base-content">Collision Repair</h3>
+                  <p class="text-sm opacity-80 mb-4">Frame and body restored to factory specs after any accident.</p>
+                  <div class="card-actions">
+                    <span class="text-sm font-bold text-primary flex items-center gap-1">
+                      Learn more <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <!-- Card 2 -->
-              <div style="background:#131926; border:1px solid var(--kit-border); border-radius:14px; padding:1.5rem;">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#0472f1; margin-bottom:1rem; display:block;">format_paint</span>
-                <h3 style="font-size:1.15rem; font-weight:800; color:#fff; margin:0 0 0.5rem;">Paint &amp; Refinishing</h3>
-                <p style="font-size:0.85rem; color:var(--kit-muted); margin:0 0 1.25rem; line-height:1.5;">Computer colour matching and a showroom finish in a heated booth.</p>
-                <span style="font-size:0.825rem; font-weight:700; color:#0472f1; display:flex; align-items:center; gap:0.35rem;">
-                  Learn more <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
-                </span>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-2">format_paint</span>
+                  <h3 class="card-title text-base font-bold text-base-content">Paint &amp; Refinishing</h3>
+                  <p class="text-sm opacity-80 mb-4">Computer colour matching and a showroom finish in a heated booth.</p>
+                  <div class="card-actions">
+                    <span class="text-sm font-bold text-primary flex items-center gap-1">
+                      Learn more <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <!-- Card 3 -->
-              <div style="background:#131926; border:1px solid var(--kit-border); border-radius:14px; padding:1.5rem;">
-                <span class="material-symbols-outlined" style="font-size:2rem; color:#0472f1; margin-bottom:1rem; display:block;">security</span>
-                <h3 style="font-size:1.15rem; font-weight:800; color:#fff; margin:0 0 0.5rem;">Insurance Claims</h3>
-                <p style="font-size:0.85rem; color:var(--kit-muted); margin:0 0 1.25rem; line-height:1.5;">We handle the paperwork and direct billing with your insurer.</p>
-                <span style="font-size:0.825rem; font-weight:700; color:#0472f1; display:flex; align-items:center; gap:0.35rem;">
-                  Learn more <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
-                </span>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-3xl mb-2">security</span>
+                  <h3 class="card-title text-base font-bold text-base-content">Insurance Claims</h3>
+                  <p class="text-sm opacity-80 mb-4">We handle the paperwork and direct billing with your insurer.</p>
+                  <div class="card-actions">
+                    <span class="text-sm font-bold text-primary flex items-center gap-1">
+                      Learn more <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1912,20 +1824,26 @@
               The standard we hold <span style="color:#22c55e;">ourselves</span> to.
             </h2>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1.25rem; text-align:left; max-width:1000px; margin:0 auto;">
-              <div style="background:#0f141f; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:1.75rem;">
-                <span class="material-symbols-outlined" style="color:#38bdf8; font-size:1.75rem; margin-bottom:1rem; display:block;">verified</span>
-                <h4 style="font-weight:800; font-size:1.05rem; color:#fff; margin:0 0 0.5rem;">A clear promise</h4>
-                <p style="font-size:0.825rem; color:var(--kit-muted); margin:0; line-height:1.5;">Every job is scoped before it starts, so the price you hear is the price you pay.</p>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-2xl mb-2">verified</span>
+                  <h4 class="card-title text-base font-bold text-base-content">A clear promise</h4>
+                  <p class="text-sm opacity-80">Every job is scoped before it starts, so the price you hear is the price you pay.</p>
+                </div>
               </div>
-              <div style="background:#0f141f; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:1.75rem;">
-                <span class="material-symbols-outlined" style="color:#38bdf8; font-size:1.75rem; margin-bottom:1rem; display:block;">shield</span>
-                <h4 style="font-weight:800; font-size:1.05rem; color:#fff; margin:0 0 0.5rem;">Work you can check</h4>
-                <p style="font-size:0.825rem; color:var(--kit-muted); margin:0; line-height:1.5;">You see the estimate, the parts, and the date. Nothing moves without you.</p>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-2xl mb-2">shield</span>
+                  <h4 class="card-title text-base font-bold text-base-content">Work you can check</h4>
+                  <p class="text-sm opacity-80">You see the estimate, the parts, and the date. Nothing moves without you.</p>
+                </div>
               </div>
-              <div style="background:#0f141f; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:1.75rem;">
-                <span class="material-symbols-outlined" style="color:#38bdf8; font-size:1.75rem; margin-bottom:1rem; display:block;">support_agent</span>
-                <h4 style="font-weight:800; font-size:1.05rem; color:#fff; margin:0 0 0.5rem;">A person on the line</h4>
-                <p style="font-size:0.825rem; color:var(--kit-muted); margin:0; line-height:1.5;">One contact stays with the job from the first call to the handoff.</p>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <span class="material-symbols-outlined text-primary text-2xl mb-2">support_agent</span>
+                  <h4 class="card-title text-base font-bold text-base-content">A person on the line</h4>
+                  <p class="text-sm opacity-80">One contact stays with the job from the first call to the handoff.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -2005,8 +1923,8 @@
                 <h2 class="about-proof-title" id="about-showcase-title">People that make the work</h2>
                 <p class="about-lead">The people on the floor, and the places the work gets done.</p>
                 <div class="about-show-actions">
-                  <a class="about-show-btn" href="#contact">We are hiring</a>
-                  <a class="about-show-btn is-outline" href="#contact">Meet the team</a>
+                  <a class="btn btn-primary" href="#contact">We are hiring</a>
+                  <a class="btn btn-outline btn-primary" href="#contact">Meet the team</a>
                 </div>
               </div>
               <div class="about-show-rows">
@@ -2123,28 +2041,30 @@
                 </div>
 
                 <!-- Case Details Card -->
-                <div class="kit-diff-case">
-                  <div>
-                    <h3>Rear bumper &amp; tailgate</h3>
-                    <p>Drag the handle to compare the car before and after the repair.</p>
+                <div class="kit-diff-case card bg-base-100 shadow-sm border border-base-200">
+                  <div class="card-body">
+                    <h3 class="card-title text-base font-bold">Rear bumper &amp; tailgate</h3>
+                    <p class="text-sm opacity-80">Drag the handle to compare the car before and after the repair.</p>
+                    <ul class="kit-diff-specs">
+                      <li class="kit-diff-spec-row">
+                        <span>Repair time</span>
+                        <b>3 days</b>
+                      </li>
+                      <li class="kit-diff-spec-row">
+                        <span>Paid by</span>
+                        <b>Insurance</b>
+                      </li>
+                      <li class="kit-diff-spec-row">
+                        <span>Paint</span>
+                        <b>Factory color match</b>
+                      </li>
+                    </ul>
+                    <div class="card-actions mt-2">
+                      <a href="#sec-cards" class="text-sm font-bold text-primary flex items-center gap-1 no-underline">
+                        See all repairs <span class="material-symbols-outlined text-base">arrow_forward</span>
+                      </a>
+                    </div>
                   </div>
-                  <ul class="kit-diff-specs">
-                    <li class="kit-diff-spec-row">
-                      <span>Repair time</span>
-                      <b>3 days</b>
-                    </li>
-                    <li class="kit-diff-spec-row">
-                      <span>Paid by</span>
-                      <b>Insurance</b>
-                    </li>
-                    <li class="kit-diff-spec-row">
-                      <span>Paint</span>
-                      <b>Factory color match</b>
-                    </li>
-                  </ul>
-                  <a href="#sec-cards" style="color:#0472f1; font-weight:700; text-decoration:none; font-size:0.9rem; display:flex; align-items:center; gap:0.4rem;">
-                    See all repairs <span class="material-symbols-outlined" style="font-size:1rem;">arrow_forward</span>
-                  </a>
                 </div>
               </div>
             </div>
@@ -2152,48 +2072,56 @@
             <!-- TAB 2: INSURANCE CLAIMS ANIMATED CARDS -->
             <div class="kit-rc-panel-view" id="rcTabClaims">
               <div class="kit-claims-cards-grid">
-                <div class="kit-claim-card">
-                  <div class="kit-claim-head">
-                    <span style="font-weight:800; color:#fff; font-size:0.9rem;">1. Send photos</span>
-                    <span class="kit-claim-num">1</span>
+                <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+                  <div class="card-body p-4">
+                    <div class="kit-claim-head">
+                      <span style="font-weight:800; color:#fff; font-size:0.9rem;">1. Send photos</span>
+                      <span class="kit-claim-num">1</span>
+                    </div>
+                    <div class="kit-claim-stage">
+                      <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">photo_camera</span>
+                    </div>
+                    <span style="font-size:0.8rem; color:var(--kit-muted);">Take photos with your phone. Fast 2 min upload.</span>
                   </div>
-                  <div class="kit-claim-stage">
-                    <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">photo_camera</span>
-                  </div>
-                  <span style="font-size:0.8rem; color:var(--kit-muted);">Take photos with your phone. Fast 2 min upload.</span>
                 </div>
 
-                <div class="kit-claim-card">
-                  <div class="kit-claim-head">
-                    <span style="font-weight:800; color:#fff; font-size:0.9rem;">2. We assess</span>
-                    <span class="kit-claim-num">2</span>
+                <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+                  <div class="card-body p-4">
+                    <div class="kit-claim-head">
+                      <span style="font-weight:800; color:#fff; font-size:0.9rem;">2. We assess</span>
+                      <span class="kit-claim-num">2</span>
+                    </div>
+                    <div class="kit-claim-stage">
+                      <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">receipt_long</span>
+                    </div>
+                    <span style="font-size:0.8rem; color:var(--kit-muted);">We inspect the car and write a clear, binding estimate.</span>
                   </div>
-                  <div class="kit-claim-stage">
-                    <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">receipt_long</span>
-                  </div>
-                  <span style="font-size:0.8rem; color:var(--kit-muted);">We inspect the car and write a clear, binding estimate.</span>
                 </div>
 
-                <div class="kit-claim-card">
-                  <div class="kit-claim-head">
-                    <span style="font-weight:800; color:#fff; font-size:0.9rem;">3. Insurance handled</span>
-                    <span class="kit-claim-num">3</span>
+                <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+                  <div class="card-body p-4">
+                    <div class="kit-claim-head">
+                      <span style="font-weight:800; color:#fff; font-size:0.9rem;">3. Insurance handled</span>
+                      <span class="kit-claim-num">3</span>
+                    </div>
+                    <div class="kit-claim-stage">
+                      <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">verified_user</span>
+                    </div>
+                    <span style="font-size:0.8rem; color:var(--kit-muted);">You sign one authorization. We deal with the insurer.</span>
                   </div>
-                  <div class="kit-claim-stage">
-                    <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">verified_user</span>
-                  </div>
-                  <span style="font-size:0.8rem; color:var(--kit-muted);">You sign one authorization. We deal with the insurer.</span>
                 </div>
 
-                <div class="kit-claim-card">
-                  <div class="kit-claim-head">
-                    <span style="font-weight:800; color:#fff; font-size:0.9rem;">4. Repair &amp; keys</span>
-                    <span class="kit-claim-num">4</span>
+                <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+                  <div class="card-body p-4">
+                    <div class="kit-claim-head">
+                      <span style="font-weight:800; color:#fff; font-size:0.9rem;">4. Repair &amp; keys</span>
+                      <span class="kit-claim-num">4</span>
+                    </div>
+                    <div class="kit-claim-stage">
+                      <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">key</span>
+                    </div>
+                    <span style="font-size:0.8rem; color:var(--kit-muted);">Car repaired, cleaned, tested and keys returned.</span>
                   </div>
-                  <div class="kit-claim-stage">
-                    <span class="material-symbols-outlined" style="color:#38bdf8; font-size:2rem;">key</span>
-                  </div>
-                  <span style="font-size:0.8rem; color:var(--kit-muted);">Car repaired, cleaned, tested and keys returned.</span>
                 </div>
               </div>
             </div>
@@ -2397,26 +2325,30 @@
             </div>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
-              <div style="background:#131926; border:1px solid var(--kit-border); border-radius:14px; padding:1.5rem;">
-                <div style="color:#f59e0b; margin-bottom:0.75rem;">★★★★★</div>
-                <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5; margin:0 0 1.25rem;">"Had a severe rear collision on my Alfa Giulia. The shop arranged a free courtesy car, fought with the insurer for OEM parts, and returned the car in mint showroom condition."</p>
-                <div style="display:flex; align-items:center; gap:0.65rem;">
-                  <span style="width:32px; height:32px; border-radius:50%; background:#0472f1; color:#fff; font-weight:800; font-size:0.75rem; display:grid; place-items:center;">MR</span>
-                  <div>
-                    <b style="color:#fff; font-size:0.825rem; display:block;">Marco Rossi</b>
-                    <span style="font-size:0.72rem; color:var(--kit-muted);">Alfa Romeo Giulia Owner</span>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <div style="color:#f59e0b; margin-bottom:0.75rem;">★★★★★</div>
+                  <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5; margin:0 0 1.25rem;">"Had a severe rear collision on my Alfa Giulia. The shop arranged a free courtesy car, fought with the insurer for OEM parts, and returned the car in mint showroom condition."</p>
+                  <div style="display:flex; align-items:center; gap:0.65rem;">
+                    <span style="width:32px; height:32px; border-radius:50%; background:#0472f1; color:#fff; font-weight:800; font-size:0.75rem; display:grid; place-items:center;">MR</span>
+                    <div>
+                      <b style="color:#fff; font-size:0.825rem; display:block;">Marco Rossi</b>
+                      <span style="font-size:0.72rem; color:var(--kit-muted);">Alfa Romeo Giulia Owner</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div style="background:#131926; border:1px solid var(--kit-border); border-radius:14px; padding:1.5rem;">
-                <div style="color:#f59e0b; margin-bottom:0.75rem;">★★★★★</div>
-                <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5; margin:0 0 1.25rem;">"Color match on pearl metallic paint is virtually impossible for most garages. These folks matched the factory tint identically using computer spectrophotometers."</p>
-                <div style="display:flex; align-items:center; gap:0.65rem;">
-                  <span style="width:32px; height:32px; border-radius:50%; background:#0472f1; color:#fff; font-weight:800; font-size:0.75rem; display:grid; place-items:center;">EB</span>
-                  <div>
-                    <b style="color:#fff; font-size:0.825rem; display:block;">Elena Bianchi</b>
-                    <span style="font-size:0.72rem; color:var(--kit-muted);">Porsche Macan GTS</span>
+              <div class="card bg-base-100 shadow-sm border border-base-200">
+                <div class="card-body">
+                  <div style="color:#f59e0b; margin-bottom:0.75rem;">★★★★★</div>
+                  <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5; margin:0 0 1.25rem;">"Color match on pearl metallic paint is virtually impossible for most garages. These folks matched the factory tint identically using computer spectrophotometers."</p>
+                  <div style="display:flex; align-items:center; gap:0.65rem;">
+                    <span style="width:32px; height:32px; border-radius:50%; background:#0472f1; color:#fff; font-weight:800; font-size:0.75rem; display:grid; place-items:center;">EB</span>
+                    <div>
+                      <b style="color:#fff; font-size:0.825rem; display:block;">Elena Bianchi</b>
+                      <span style="font-size:0.72rem; color:var(--kit-muted);">Porsche Macan GTS</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2451,7 +2383,7 @@
                 </ul>
               </div>
               <div class="contact-map">
-                <div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn ks-btn-outline" type="button">Show map</button></div>
+                <div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn btn-outline btn-primary ks-btn-outline" type="button">Show map</button></div>
               </div>
             </div>
           </div>
@@ -2476,7 +2408,7 @@
                   </ul>
                 </div>
                 <div class="contact-map">
-                  <div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn ks-btn-outline" type="button">Show map</button></div>
+                  <div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn btn-outline btn-primary ks-btn-outline" type="button">Show map</button></div>
                 </div>
               </div>
             </section>
@@ -2498,14 +2430,20 @@
           </div>
           <div class="kit-box-body">
             <div style="display:flex; flex-direction:column; gap:0.75rem; max-width:800px; margin:0 auto;">
-              <details style="background:#131926; border:1px solid var(--kit-border); border-radius:12px; padding:1.15rem 1.25rem;" open>
-                <summary style="font-weight:800; color:#fff; cursor:pointer; font-size:0.95rem;">Do you deal directly with my insurance company?</summary>
-                <p style="font-size:0.85rem; color:var(--kit-muted); margin:0.75rem 0 0; line-height:1.5;">Yes. Once you authorize us, we produce digital photographic evidence, submit the computerized estimate via standard claim portals, and collect payment directly with no out-of-pocket delays.</p>
-              </details>
-              <details style="background:#131926; border:1px solid var(--kit-border); border-radius:12px; padding:1.15rem 1.25rem;">
-                <summary style="font-weight:800; color:#fff; cursor:pointer; font-size:0.95rem;">Can I have a courtesy loaner car while my vehicle is being painted?</summary>
-                <p style="font-size:0.85rem; color:var(--kit-muted); margin:0.75rem 0 0; line-height:1.5;">Absolutely. We provide immediate replacement fleet vehicles on site for all major collision and structural repairs.</p>
-              </details>
+              <div class="collapse collapse-plus bg-base-100 border border-base-200">
+                <input type="radio" name="kit-faq" checked="checked" />
+                <div class="collapse-title text-base font-bold">Do you deal directly with my insurance company?</div>
+                <div class="collapse-content text-sm opacity-80">
+                  <p>Yes. Once you authorize us, we produce digital photographic evidence, submit the computerized estimate via standard claim portals, and collect payment directly with no out-of-pocket delays.</p>
+                </div>
+              </div>
+              <div class="collapse collapse-plus bg-base-100 border border-base-200">
+                <input type="radio" name="kit-faq" />
+                <div class="collapse-title text-base font-bold">Can I have a courtesy loaner car while my vehicle is being painted?</div>
+                <div class="collapse-content text-sm opacity-80">
+                  <p>Absolutely. We provide immediate replacement fleet vehicles on site for all major collision and structural repairs.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -2534,7 +2472,7 @@
                   <span style="font-size:1.1rem; color:var(--kit-muted); text-decoration:line-through;">€79</span>
                   <span style="font-size:0.8rem; color:var(--kit-muted);">Both lenses included</span>
                 </div>
-                <button type="button" class="kit-hero-cta-btn" style="padding:0.6rem 1.4rem;">Book This Offer</button>
+                <button type="button" class="btn btn-primary kit-hero-cta-btn">Book This Offer</button>
               </div>
               <div style="width:300px; border-radius:12px; overflow:hidden;">
                 <img src="./media/showcase/mountain-road.jpg" style="width:100%; aspect-ratio:16/10; object-fit:cover;" alt="Car" />
@@ -2562,7 +2500,7 @@
                   <label style="font-size:0.75rem; font-weight:700; color:var(--kit-muted); display:block; margin-bottom:0.35rem;">DAMAGE DESCRIPTION</label>
                   <textarea placeholder="Describe the damage..." style="width:100%; box-sizing:border-box; background:#0b0f17; border:1px solid var(--kit-border); border-radius:8px; padding:0.65rem; color:#fff; font-size:0.85rem; height:80px;"></textarea>
                 </div>
-                <button type="button" class="kit-hero-cta-btn" style="width:100%; margin-top:0.5rem;">Get Written Estimate in 2 Hours</button>
+                <button type="button" class="btn btn-primary kit-hero-cta-btn w-full mt-2">Get Written Estimate in 2 Hours</button>
               </div>
             </div>
           </div>
@@ -2586,8 +2524,8 @@
             <h2 style="font-family:var(--kit-font-headline); font-size:2.4rem; font-weight:800; color:#fff; margin:0.4rem 0 1rem;">Restore your vehicle to factory perfection.</h2>
             <p style="font-size:0.95rem; color:#cbd5e1; margin:0 0 2rem; max-width:600px; margin-inline:auto;">Free loaner car, direct insurance claim handling, and certified lifetime workmanship warranty.</p>
             <div style="display:flex; justify-content:center; gap:0.75rem;">
-              <button type="button" class="kit-hero-cta-btn">Book Repair Online</button>
-              <button type="button" class="btn" style="background:transparent; border:1px solid rgba(255,255,255,0.3); color:#fff; font-weight:700; padding:0.75rem 1.5rem; border-radius:8px; cursor:pointer;">Call Workshop Floor</button>
+              <button type="button" class="btn btn-primary kit-hero-cta-btn">Book Repair Online</button>
+              <button type="button" class="btn btn-outline btn-primary">Call Workshop Floor</button>
             </div>
           </div>
         </div>
@@ -2744,14 +2682,118 @@
               <span class="material-symbols-outlined" style="font-size:3rem; color:#0472f1; margin-bottom:0.75rem; display:block;">cloud_upload</span>
               <h4 style="font-size:1.1rem; font-weight:800; color:#fff; margin:0 0 0.35rem;">Drag and drop vehicle damage photos here</h4>
               <p style="font-size:0.85rem; color:var(--kit-muted); margin:0 0 1.25rem;">Supports JPG, PNG, WEBP, or HEIC up to 25MB each.</p>
-              <button type="button" class="btn" style="background:rgba(255,255,255,0.08); color:#fff; border:1px solid var(--kit-border); padding:0.55rem 1.25rem; border-radius:8px; font-weight:700; cursor:pointer;">Select Files</button>
+              <button type="button" class="btn btn-primary">Select Files</button>
             </div>
           </div>
         </div>
       </section>
 
-    </main>
-  </div>
+        </main>
+      </div><!-- .grid -->
+    </div><!-- .drawer-content -->
+
+    <!-- THE LEFT SIDE LAYOUT (drawer-side Sidebar) -->
+    <div class="drawer-side border-r border-base-300 z-30">
+      <label for="sidebar-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
+      <div class="w-80 min-h-full bg-base-100 p-4 text-base-content flex flex-col gap-4 overflow-y-auto">
+        <aside class="kit-sidebar flex flex-col gap-4 w-full">
+          <div class="kit-sidebar-brand flex items-center justify-between pb-2 border-b border-base-300">
+            <div>
+              <h2 class="kit-sidebar-title flex items-center gap-2 text-base font-bold text-base-content">
+                <span class="material-symbols-outlined text-primary">layers</span>
+                UI Kit Showroom
+              </h2>
+              <p class="kit-sidebar-sub text-xs text-base-content/60">Living components &amp; builder formats</p>
+            </div>
+          </div>
+
+          <div class="kit-sidebar-actions">
+            <button type="button" class="btn btn-sm btn-outline w-full gap-2 kit-mode-btn" onclick="document.body.classList.toggle('kit-showroom-light');">
+              <span class="material-symbols-outlined text-base">light_mode</span>
+              Toggle Theme
+            </button>
+          </div>
+
+          <!-- Navigation Links -->
+          <nav class="kit-nav-group menu w-full p-0 gap-1">
+            <span class="kit-nav-group-title text-xs font-bold text-base-content/50 uppercase tracking-wider px-2">Navigation &amp; Heroes</span>
+            <a href="#sec-headers" class="kit-nav-link active">
+              <span class="material-symbols-outlined">web</span>
+              Header Menus &amp; Pills
+            </a>
+            <a href="#sec-heroes" class="kit-nav-link">
+              <span class="material-symbols-outlined">view_carousel</span>
+              Hero &amp; Business Panel
+            </a>
+            <a href="#sec-subpage-heroes" class="kit-nav-link">
+              <span class="material-symbols-outlined">emergency</span>
+              Subpage Heroes (Emergency &amp; Tow)
+            </a>
+
+            <span class="kit-nav-group-title text-xs font-bold text-base-content/50 uppercase tracking-wider px-2 mt-2">Design Foundation</span>
+            <a href="#sec-colors" class="kit-nav-link">
+              <span class="material-symbols-outlined">palette</span>
+              Brand Colors &amp; Palettes
+            </a>
+            <a href="#sec-buttons" class="kit-nav-link">
+              <span class="material-symbols-outlined">smart_button</span>
+              Button Primitives
+            </a>
+            <a href="#sec-typography" class="kit-nav-link">
+              <span class="material-symbols-outlined">match_case</span>
+              Typography Primitives
+            </a>
+            <a href="#sec-cards" class="kit-nav-link">
+              <span class="material-symbols-outlined">dashboard</span>
+              Service Card Variations
+            </a>
+
+            <span class="kit-nav-group-title text-xs font-bold text-base-content/50 uppercase tracking-wider px-2 mt-2">Builder Formats</span>
+            <a href="#sec-about" class="kit-nav-link">
+              <span class="material-symbols-outlined">info</span>
+              About Format Layouts
+            </a>
+            <a href="#sec-repairs-solutions" class="kit-nav-link">
+              <span class="material-symbols-outlined">compare</span>
+              Repairs, Claims &amp; Diff
+            </a>
+            <a href="#sec-warranty" class="kit-nav-link">
+              <span class="material-symbols-outlined">verified</span>
+              Warranty Page Hero
+            </a>
+            <a href="#sec-reviews" class="kit-nav-link">
+              <span class="material-symbols-outlined">star</span>
+              Reviews &amp; Trust Badges
+            </a>
+            <a href="#sec-contact" class="kit-nav-link">
+              <span class="material-symbols-outlined">pin_drop</span>
+              Shop Location &amp; Hours
+            </a>
+            <a href="#sec-faq" class="kit-nav-link">
+              <span class="material-symbols-outlined">help</span>
+              Interactive FAQ Formats
+            </a>
+            <a href="#sec-promo-quote" class="kit-nav-link">
+              <span class="material-symbols-outlined">calculate</span>
+              Promo &amp; Book Estimate
+            </a>
+            <a href="#sec-final-cta" class="kit-nav-link">
+              <span class="material-symbols-outlined">campaign</span>
+              Final Call to Action
+            </a>
+            <a href="#sec-footers" class="kit-nav-link">
+              <span class="material-symbols-outlined">vertical_align_bottom</span>
+              DaisyUI &amp; Site Footers
+            </a>
+            <a href="#sec-forms" class="kit-nav-link">
+              <span class="material-symbols-outlined">format_shapes</span>
+              Form Controls &amp; Dropzone
+            </a>
+          </nav>
+        </aside>
+      </div>
+    </div><!-- .drawer-side -->
+  </div><!-- #kit-drawer -->
 
   <!-- Interactive Scripts -->
   <script>
