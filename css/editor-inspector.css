@@ -1,6 +1,5 @@
 /* Editor inspector: palette, style picker, preset cards, layout controls. */
 .kit-drawer { --pit-card-w: 250px; }
-.button-group { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .color-btn {
             width: 40px;
@@ -53,67 +52,13 @@
 .tier-btn:active { transform: none; }
 }
 
-.shade-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-
-.shade-controls select,
-        .shade-controls input {
-            height: 40px; padding: 0 12px; border-radius: 6px;
-            border: 2px solid var(--ed-border, var(--ui-mid)); background: var(--ed-surface, #1a1a1a); color: var(--ed-text, #ffffff);
-            font: 600 13px/1 var(--body-font, sans-serif);
-        }
-
-.shade-controls input { width: 140px; }
-
-.shade-controls select:focus-visible,
-        .shade-controls input:focus-visible { outline: 2px solid var(--ed-text, #ffffff); outline-offset: 2px; }
-
-.shade-note { width: 100%; font-size: 12px; color: var(--ui-muted); min-height: 1em; }
-
-.shade-note.error { color: #f87171; }
-
-body:not(.scheme-white):not(.scheme-dark) .shade-group { opacity: .45; }
-
 .control-group.is-locked .button-group { opacity: .45; pointer-events: none; }
-
-.palettes-section { max-width: 1400px; margin: 40px auto; padding: 0 var(--pad-x); }
-
-.palettes-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--ui-ink); }
 
 @media (prefers-reduced-motion: reduce) {
 .cta-btn, .color-btn { transition: none; }
 }
 
 /* Segmented controls — recessed track with diagonal pin-dot texture */
-
-.cfg .button-group:has(> .tier-btn) {
-            display: inline-flex; flex-wrap: wrap; gap: 2px;
-            border: 1px solid var(--ed-border, #3a3f47); border-radius: 10px;
-            padding: 3px; overflow: visible;
-            --ed-track-base: color-mix(in oklab, #000 28%, var(--ed-surface, #1c1f24));
-            --ed-track-dot: color-mix(in oklab, #fff 11%, transparent);
-            background-color: var(--ed-track-base);
-            background-image:
-                radial-gradient(circle, var(--ed-track-dot) 0.65px, transparent 0.7px),
-                radial-gradient(circle, var(--ed-track-dot) 0.65px, transparent 0.7px);
-            background-size: 5px 5px;
-            background-position: 0 0, 2.5px 2.5px;
-            box-shadow: inset 0 1px 2px color-mix(in oklab, #000 35%, transparent);
-        }
-
-.cfg .button-group > .tier-btn {
-            border: 0; border-radius: 7px; border-right: 0;
-            padding: 8px 14px; background: transparent;
-            color: color-mix(in oklab, var(--ed-muted, #9aa0a8) 88%, transparent);
-            font-weight: 600;
-            transition: background .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease, opacity .18s ease;
-        }
-
-.cfg .button-group > .tier-btn:last-child { border-right: 0; }
-
-.cfg .button-group > .tier-btn:hover {
-            color: var(--ed-text, #fff);
-            background: color-mix(in oklab, var(--ed-text, #fff) 10%, transparent);
-        }
 
 .cfg .button-group > .tier-btn.active {
             background: var(--ed-select, #ffffff);
@@ -134,42 +79,11 @@ body:not(.scheme-white):not(.scheme-dark) .shade-group { opacity: .45; }
 
 .cfg .color-btn { width: 32px; height: 32px; }
 
-.cfg .button-group:has(> .tier-btn) { max-width: 100%; }
-
 /* Typography: even chip grid — no broken wrap borders */
-
-.cfg .button-group.tier-pick {
-            display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px;
-            width: 100%; max-width: 100%; border: 0; border-radius: 0; overflow: visible; background: transparent;
-        }
-
-.cfg .button-group.tier-pick > .tier-btn {
-            grid-column: span 2; width: 100%; min-width: 0; flex: none;
-            border: 1px solid var(--ed-border, #3a3f47); border-radius: 8px; border-right-color: var(--ed-border, #3a3f47);
-            padding: 10px 8px; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-
-.cfg .button-group.tier-pick > .tier-btn:nth-child(n+4) { grid-column: span 3; }
-
-.cfg .button-group.tier-pick > .tier-btn:last-child { border-right: 1px solid var(--ed-border, #3a3f47); }
 
 .cfg .button-group.tier-pick > .tier-btn.active { border-color: var(--ed-on, #ffffff); }
 
-.type-card {
-            display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; align-items: center;
-            width: 100%; padding: 10px 12px; border-radius: 10px; cursor: pointer; text-align: left;
-            border: 1px solid var(--ed-border, #3a3f47); background: var(--ed-surface, #1c1f24); color: var(--ed-text, #f2f3f5);
-        }
-
-.type-card .type-aa { grid-row: 1 / span 2; font-size: 28px; font-weight: 700; line-height: 1; }
-
-.type-card b { display: block; font-size: 18px; font-weight: 700; line-height: 1.2; }
-
-.type-card .type-copy > span { display: block; margin-top: 2px; font-size: 18px; font-weight: 400; line-height: 1.3; color: var(--ed-muted, #b4b9c1); }
-
 .type-card.active { border-color: var(--ed-text, #fff); box-shadow: inset 0 0 0 1px var(--ed-text, #fff); }
-
-.type-card:focus-visible { outline: 2px solid var(--ed-text, #fff); outline-offset: 2px; }
 
 .cfg .control-group:has(.tier-btn:nth-child(4)),
         .cfg .control-group:has(.color-btn) { grid-column: span 2; }
@@ -178,7 +92,7 @@ body:not(.scheme-white):not(.scheme-dark) .shade-group { opacity: .45; }
 
 /* Hero buttons: non-relevant choices stay visible but die (light / muted) */
 
-body:is(.cta-one, .cta-none) [data-when="two"],
+
         body.cta-none #panel-hero .control-group:has([data-bshape]),
         body.cta-none #panel-hero .control-group:has([data-sp="bshape"]),
         body.cta-none #panel-hero .control-group:has([data-spd="bshape"]),
@@ -188,7 +102,7 @@ body:is(.cta-one, .cta-none) [data-when="two"],
             filter: grayscale(.15);
         }
 
-body:is(.cta-one, .cta-none) [data-when="two"] .tier-btn.active,
+
         body.cta-none #panel-hero .control-group:has([data-bshape]) .tier-btn.active,
         body.cta-none #panel-hero .control-group:has([data-sp="bshape"]) .tier-btn.active,
         .control-group.is-dead .tier-btn.active {
@@ -199,16 +113,12 @@ body:is(.cta-one, .cta-none) [data-when="two"] .tier-btn.active,
             border-color: transparent !important;
         }
 
-body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .tier-btn.active,
+
         body.cta-none .kit-drawer[data-theme="light"] #panel-hero .control-group:has([data-bshape]) .tier-btn.active,
         body.cta-none .kit-drawer[data-theme="light"] #panel-hero .control-group:has([data-sp="bshape"]) .tier-btn.active,
         .kit-drawer[data-theme="light"] .control-group.is-dead .tier-btn.active {
             background: color-mix(in oklab, var(--ed-text) 6%, var(--ed-chrome)) !important;
             color: var(--ed-muted) !important;}
-
-.duo-group .button-group { display: none !important; }
-
-.cfg .button-group > .tier-btn { font-size: 15px; padding: 10px 16px; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 42px; }
 
 .cfg .tier-btn.is-icon { min-width: 48px; padding: 8px 12px; }
 
@@ -227,10 +137,6 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
             flex: none;
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
         }
-
-.duo-pick select, .shade-controls select, .shade-controls input { font-size: 15px; height: 42px; }
-
-.cfg .shade-note { font-size: 13px; color: var(--ed-muted, #9aa0aa); }
 
 /* =========================================================
            24. ICONS TAB — verified library (Tabler MIT + Material Symbols Apache 2.0)
@@ -284,44 +190,20 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
 
 /* Shade tiles — beat later .pit-grid / .tier-btn compact rules */
 
-.cfg .button-group:has(> [data-svc="fillshade"]),
-        .cfg .button-group:has(> [data-pit="fillshade"]),
-        .cfg .pit-grid .button-group:has(> [data-pit="fillshade"]),
-        .cfg .button-group.shade-pick {
-            display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 6px !important;
-            width: 100%; border: 0 !important; border-radius: 0 !important; overflow: visible !important; background: transparent !important;
-        }
-
-.cfg .shade-seg,
-        .cfg .button-group > .tier-btn[data-svc="fillshade"],
-        .cfg .button-group > .tier-btn[data-pit="fillshade"],
-        .cfg .pit-grid .button-group > .tier-btn[data-pit="fillshade"] {
-            display: grid !important; place-items: center; align-content: center; gap: 6px !important;
-            min-height: 76px !important; width: 100% !important; padding: 12px 8px !important; margin: 0 !important;
-            border: 0 !important; border-radius: 12px !important; border-right: 0 !important; border-bottom: 0 !important;
-            background: var(--seg, var(--active-500)) !important; color: var(--seg-fg, #fff) !important;
-            font: 800 18px/1 var(--headline-font, sans-serif) !important;
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
-            transition: transform .15s ease, box-shadow .15s ease;
-        }
-
 .cfg .shade-seg .svc-sw,
         .cfg [data-svc="fillshade"] .svc-sw,
         .cfg [data-pit="fillshade"] .svc-sw { display: none !important; }
 
-.cfg .shade-seg > span,
-        .cfg [data-svc="fillshade"] > span,
-        .cfg [data-pit="fillshade"] > span { font: inherit; color: inherit; }
 
-.cfg .shade-seg small,
-        .cfg [data-svc="fillshade"] small,
-        .cfg [data-pit="fillshade"] small {
+        .cfg [data-svc="fillshade"] > span { font: inherit; color: inherit; }
+
+
+        .cfg [data-svc="fillshade"] small {
             font: 700 12px/1 var(--body-font, sans-serif) !important; letter-spacing: .04em; opacity: .88; color: inherit;
         }
 
-.cfg .shade-seg:hover,
-        .cfg [data-svc="fillshade"]:hover,
-        .cfg [data-pit="fillshade"]:hover { transform: translateY(-2px); filter: saturate(1.06); }
+
+        .cfg [data-svc="fillshade"]:hover { transform: translateY(-2px); filter: saturate(1.06); }
 
 .cfg .shade-seg.active,
         .cfg [data-svc="fillshade"].active,
@@ -341,12 +223,6 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
 .cfg .svc-step .tier-btn { min-width: 28px; padding: 4px 6px; }
 
 .cfg .cfg-subs .color-btn { width: 24px; height: 24px; border-radius: 6px; }
-
-.cfg .cfg-subs .button-group:has(.color-btn) { gap: 6px; }
-
-.cfg .cfg-subs .duo-pick select, .cfg .cfg-subs .shade-controls select, .cfg .cfg-subs .shade-controls input { height: 32px; font-size: 12px; }
-
-.cfg .cfg-subs .shade-note { font-size: 11px; }
 
 .svc-sub > .control-group:has(.color-btn),
         .svc-sub > .control-group:has([data-tier]),
@@ -389,8 +265,6 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
 
 /* Notes in the control panel: readable */
 
-.cfg .shade-note, .cfg .cfg-subs .shade-note { font-size: 13px; line-height: 1.4; color: var(--ed-muted, #c9cdd3); }
-
 /* =========================================================
            SERVICES — STYLE PICKER mode (pick a look, tune it, apply) + Designer mode
            ========================================================= */
@@ -413,15 +287,9 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
 
 .pit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
 
-.pit-grid .control-group.wide { grid-column: 1 / -1 !important; }
-
 /* beats the older .cfg .control-group { grid-column: auto !important } */
 
 .pit-grid .control-group label { font-size: 10.5px; margin-bottom: 5px; }
-
-.cfg .pit-grid .button-group > .tier-btn { min-height: 30px; padding: 4px 9px; font-size: 12px; gap: 4px; }
-
-.cfg .pit-grid .button-group:has(> .tier-btn) { flex-wrap: wrap; }
 
 #svcPit[data-preset="image"]   .control-group[data-for]:not([data-for~="image"]),
         #svcPit[data-preset="fill"]    .control-group[data-for]:not([data-for~="fill"]),
@@ -545,8 +413,6 @@ body:is(.cta-one, .cta-none) .kit-drawer[data-theme="light"] [data-when="two"] .
 
 #panel-brand .bshade { grid-column: 1 / -1 !important; grid-template-columns: 1fr; }
 
-.brand-hex-row .tier-btn { min-height: 42px; }
-
 body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:has(.color-btn),
         body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .brand-custom { opacity: .55; }
 
@@ -580,21 +446,15 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 #panel-repairs .svc-sub:has(.rc-bg-group) { grid-template-columns: repeat(2, max-content); }
 }
 
-.cfg .cc-box .button-group > .tier-btn { min-height: 30px; padding: 4px 9px; font-size: 12px; gap: 4px; }
-
 /* controls */
 
 #panel-more .cfg-subs { grid-template-columns: minmax(0, 1fr); }
-
-.more-rows { display: grid; gap: 10px; }
 
 .more-row {
             display: grid; grid-template-columns: minmax(7rem, 9rem) auto minmax(0, 1fr) auto auto;
             justify-content: start; gap: 10px 12px; align-items: center;
             padding: 12px 0; border-bottom: 1px solid var(--ed-line, #2b2f35);
         }
-
-.more-row .button-group { width: max-content; max-width: 100%; }
 
 .cfg .more-row .more-go { border: 1px solid var(--ed-border, #3a3f47); border-radius: 8px; }
 
@@ -606,19 +466,7 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 
 .more-row:not(.is-brand) .more-shade { visibility: hidden; }
 
-.cfg .subpane .button-group > .tier-btn { min-height: 32px; padding: 5px 11px; font-size: 12.5px; gap: 5px; }
-
 /* control panel: look picker tiles (tiny schematic drawings, flat) */
-
-.look-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; max-width: 360px; }
-
-.look-tile { display: grid; gap: 8px; justify-items: center; padding: 10px 6px 9px; border-radius: 12px; border: 2px solid var(--ed-line, #2b2f35); background: var(--ed-bg, #141518); color: var(--ed-muted, #c9cdd3); cursor: pointer; font: 700 11px/1.15 var(--body-font, sans-serif); text-align: center; }
-
-.look-tile:hover { border-color: var(--ed-border, #4a515b); }
-
-.look-tile[aria-pressed="true"] { border-color: var(--ed-text, #ffffff); color: var(--ed-text, #ffffff); background: var(--ed-surface, #1f2328); }
-
-.look-tile:focus-visible { outline: 2px solid #5aa3f7; outline-offset: 2px; }
 
 /* control panel */
 
@@ -631,37 +479,6 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 #panel-hero .hm-box { grid-column: 1 / -1 !important; grid-template-columns: 1fr !important; }
 
 .hm-heroes .tier-btn { min-height: 30px; padding: 4px 9px; font-size: 12px; }
-
-.kit-drawer #sps-all .more-box {
-            border: 0 !important; border-radius: 0 !important; background: transparent !important;
-            padding: 0 !important; margin: 0 !important; overflow: visible;}
-
-.kit-drawer #sps-all .more-box > h4 { display: none !important;}
-
-.kit-drawer #sps-all .more-box,
-        .kit-drawer #sps-all .more-rows { min-width: 0; width: 100%; max-width: 100%; margin: 0 !important;}
-
-.kit-drawer #sps-all .more-rows {
-            display: flex; flex-direction: column; gap: 0;
-            border: 0; border-radius: 0; background: transparent;}
-
-.kit-drawer #sps-all .more-row {
-            display: flex; flex-direction: column; align-items: stretch; gap: 0;
-            min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box;
-            margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent;}
-
-.kit-drawer #sps-all .more-row[hidden] { display: none !important;}
-
-.kit-drawer #sps-all .more-row:not([hidden]) ~ .more-row:not([hidden]) {
-            border-top: 0;}
-
-.kit-drawer #sps-all .more-row > b {
-            display: flex; align-items: center; gap: 8px;
-            width: 100%; min-height: 32px; margin: 2px 0; padding: 6px 8px !important; box-sizing: border-box;
-            border: 0; border-radius: 6px; cursor: pointer;
-            background: transparent !important; color: var(--ed-text) !important;
-            font: 500 13px/1.2 "Google Sans", sans-serif !important;}
-.kit-drawer #sps-all .more-row > b:hover { background: var(--ed-hover) !important;}
 .kit-drawer #sps-all .more-row.is-open > b,
 .kit-drawer #sps-all .more-row.is-picked > b {
             background: var(--ed-hover) !important;
@@ -672,51 +489,9 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 
 .kit-drawer #sps-all .more-row.is-off > b svg { opacity: 0.45;}
 
-.kit-drawer #sps-all .more-row > b svg { width: 14px; height: 14px; flex: none;}
-
-.kit-drawer #sps-all .more-row > b::after {
-            content: ""; margin-left: auto; flex: none;
-            width: 6px; height: 6px; opacity: 0.55;
-            border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-            border-left: 0; border-top: 0;
-            transform: rotate(45deg); transition: transform 150ms ease-out;}
-
-.kit-drawer #sps-all .more-row > b[aria-expanded="true"]::after { transform: rotate(-135deg);}
-
-@media (prefers-reduced-motion: reduce) {
-.kit-drawer #sps-all .more-row > b::after { transition: none;}
-}
-
-.kit-drawer #sps-all .more-acts > .tier-btn { flex: 1 1 0; min-height: 36px; justify-content: center;}
-
-.kit-drawer #sps-all .more-row > .button-group,
-        .kit-drawer #sps-all .more-row > .more-shade,
-        .kit-drawer #sps-all .more-row > .kit-dd,
-        .kit-drawer #sps-all .more-row > .more-go,
-        .kit-drawer #sps-all .more-row > .more-acts,
-        .kit-drawer #sps-all .more-status,
-        .kit-drawer #sps-all .acc-edit { display: none !important;}
-
-.kit-drawer #sps-all .acc-editor { min-width: 0; width: 100%; max-width: 100%;}
-
 .kit-drawer #sps-all .more-row.is-open > .acc-editor { padding: 4px 12px 12px 0;}
 
-.kit-drawer #sps-all .acc-editor > .cfg-panel,
-        .kit-drawer #sps-all .acc-editor > .sp-sec {
-            display: block !important; position: relative !important;
-            width: 100% !important; max-width: 100% !important; min-width: 0 !important;
-            box-sizing: border-box;
-            padding-left: 0 !important; padding-right: 0 !important;}
 
-.kit-drawer #sps-all .acc-editor .pit,
-        .kit-drawer #sps-all .acc-editor .pit-controls,
-        .kit-drawer #sps-all .acc-editor .pit-grid {
-            width: 100% !important; max-width: 100% !important; min-width: 0 !important;
-            box-sizing: border-box !important;}
-
-.kit-drawer #sps-all .acc-editor .pit-controls { padding-right: 0 !important;}
-
-.kit-drawer #sps-all .acc-editor .pit-stage,
         .kit-drawer #sps-all .acc-editor #panel-hero .pit-stage,
         .kit-drawer #sps-all .acc-editor #panel-repairs .pit-stage,
         .kit-drawer #sps-all .acc-editor #panel-services .pit-stage,
@@ -730,42 +505,13 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
             overflow-x: auto !important;
             overflow-y: hidden !important;}
 
-.kit-drawer #sps-all .acc-editor .pit-look,
+
         .kit-drawer #sps-all .acc-editor #panel-hero .pit-look,
         .kit-drawer #sps-all .acc-editor #panel-repairs .pit-look,
         .kit-drawer #sps-all .acc-editor #panel-services .pit-look,
         .kit-drawer #sps-all .acc-editor #panel-about .pit-look,
         .kit-drawer #sps-all .acc-editor #panel-reviews .pit-look {
             width: 100% !important; min-width: 0 !important; max-width: 100% !important;}
-
-.kit-drawer #sps-all .acc-editor .control-group,
-        .kit-drawer #sps-all .acc-editor .button-group {
-            width: 100% !important; min-width: 0 !important; max-width: 100% !important;
-            box-sizing: border-box !important;}
-
-.kit-drawer #sps-all .acc-editor .control-group { padding: 8px !important;}
-
-.kit-drawer #sps-all .acc-editor .button-group.shade-pick,
-        .kit-drawer #sps-all .acc-editor .button-group:has(> [data-pit="fillshade"]),
-        .kit-drawer #sps-all .acc-editor .button-group:has(> [data-svc="fillshade"]) {
-            display: grid !important;
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;}
-
-.kit-drawer #sps-all .acc-editor .pit-grid > .control-group {
-            grid-column: 1 / -1 !important;}
-
-.kit-drawer #sps-all .acc-editor .button-group:has(> .tier-btn):not(.shade-pick):not(:has(> .shade-seg)):not(:has(.color-chip)) {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            width: 100% !important;
-            min-width: 0 !important;
-        }
-
-.kit-drawer #sps-all .acc-editor .button-group:has(> .tier-btn):not(.shade-pick):not(:has(> .shade-seg)):not(:has(.color-chip)) > .tier-btn {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            white-space: nowrap !important;
-        }
 
 /* =========================================================
            28. STYLE PICKER + DESIGNER for Hero, Repairs & claims, More sections
@@ -854,13 +600,6 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 
 .sp-g[hidden], .sp-dz .control-group[hidden] { display: none !important; }
 
-.cfg .pit-grid .sp-shade .button-group.shade-pick,
-        .cfg .sp-dz .sp-shade .button-group.shade-pick {
-            display: grid !important;
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            gap: 6px !important;
-        }
-
 /* previews */
 
 .sp-frame { position: relative; overflow: hidden; border-radius: 10px; background: var(--ed-frame, #0f1113); }
@@ -922,8 +661,6 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 
 .sp-dz .control-group { margin: 0; }
 
-.cfg .sp-dz .button-group > .tier-btn { min-height: 32px; padding: 5px 11px; font-size: 12.5px; gap: 5px; }
-
 .sp-dz-head { flex: 1 1 100%; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ed-muted, #9aa0aa); }
 
 .sp-dz-head b { color: var(--ed-text, #fff); font-size: 15px; }
@@ -937,8 +674,7 @@ body.duo-pair:not(.scheme-white):not(.scheme-dark) #panel-brand .control-group:h
 .kit-drawer .kit-foot > .pit-actions {
             display: contents !important;}
 
-body:is([data-mode="builder"], [data-mode="editor"]) #kit-drawer .cfg-panels .pit-actions,
-body:is([data-mode="builder"], [data-mode="editor"]) #kit-drawer .acc-editor .pit-actions {
+body:is([data-mode="builder"], [data-mode="editor"]) #kit-drawer .cfg-panels .pit-actions {
             display: none !important;}
 
 .kit-drawer .kit-foot .pit-apply { grid-column: 2;}
@@ -1021,29 +757,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 #panel-brand .brand-face-type > .control-group > label,
         #panel-brand .brand-face-color > .control-group:has(.color-btn) > label { display: none !important; }
 
-.palette-list {
-            display: grid !important; grid-template-columns: minmax(0, 1fr); gap: 8px;
-            max-height: min(52vh, 440px); overflow-y: auto; padding-right: 2px;
-        }
-
-.palette-card {
-            display: grid; gap: 6px; padding: 8px 8px 10px;
-            border: 1px solid var(--ed-line, #e5e7eb); border-radius: 10px; background: #fff;
-        }
-
-.palette-card:has(.color-btn.active) { box-shadow: inset 0 0 0 1.5px #17191c; }
-
-.palette-name { font: 700 12px/1.2 var(--body-font, sans-serif); color: #17191c; }
-
-.palette-strip { display: flex; height: 28px; border-radius: 6px; overflow: hidden; }
-
-.cfg .cfg-subs .palette-strip .color-btn {
-            width: auto; flex: 1 1 0; height: 28px; min-width: 0; margin: 0; padding: 0;
-            border: 0; border-radius: 0; transform: none; box-shadow: none;
-        }
-
-.palette-strip .color-btn:hover { transform: none; }
-
 .palette-strip .color-btn.active { box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px #17191c; }
 
 .kit-drawer #panel-brand .svc-sub,
@@ -1093,7 +806,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
         .kit-drawer .kit-head .kit-btn svg,
         .kit-drawer .cfg-panels .tier-btn svg,
         .kit-drawer .cfg-panels .svc-sub h4 svg,
-        .kit-drawer .cfg-panels .subtab svg,
         .kit-drawer .cfg-panels .sp-dz-head svg,
         .kit-drawer .cfg-panels .pit-editing svg,
         .kit-drawer .cfg-panels label svg {
@@ -1101,8 +813,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             height: var(--ed-icon) !important;
             flex: none;}
 
-.kit-drawer .cfg-panels .tier-btn.is-icon,
-        .kit-drawer .cfg-panels .button-group > .tier-btn:not(:has(span, b, small, i.svc-sw)):has(svg) {
+.kit-drawer .cfg-panels .tier-btn.is-icon {
             min-width: var(--ed-hit) !important;
             min-height: var(--ed-hit) !important;
             width: var(--ed-hit) !important;
@@ -1253,60 +964,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             pointer-events: none;}
 
 /* Look tiles: fluid 3-col so Card never clips in the 285px panel */
-
-.kit-drawer .cfg-panels .look-tiles {
-            display: grid !important;
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            gap: 10px !important;
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            padding-right: 2px;}
-
-.kit-drawer .cfg-panels .look-tile {
-            min-width: 0 !important;
-            width: 100% !important;
-            max-width: 100%;
-            padding: 10px 6px 8px !important;
-            box-sizing: border-box;
-            overflow: hidden;
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 6px !important;
-            text-align: center;}
-
-.kit-drawer .cfg-panels .look-tile .lt-host {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 100%;
-            height: 28px;
-            overflow: hidden;
-            flex: none;
-            margin: 0 auto;
-            position: relative;}
-
-.kit-drawer .cfg-panels .look-tile .lt-art {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 96px;
-            height: 44px;
-            max-width: none;
-            transform: translate(-50%, -50%) scale(.42);
-            transform-origin: center center;
-            margin: 0;
-            flex: none;}
-
-.kit-drawer .cfg-panels .look-tile .lt-lab {
-            display: block;
-            width: 100%;
-            text-align: center;
-            font: inherit;
-            line-height: 1.2;}
 
 .kit-drawer .cfg-panels .svc-modes:not(.kit-chrome-modes) .tier-btn {
             font-size: 12px !important;
@@ -1528,12 +1185,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Shade tiles: breathing room inside the tinted well */
 
-.kit-drawer .cfg-panels .button-group.shade-pick,
-        .kit-drawer .cfg-panels [data-when="svcfillshade"] .button-group,
-        .kit-drawer .cfg-panels .control-group:has([data-svc="fillshade"]) .button-group {
-            padding: 10px !important;
-            box-sizing: border-box;}
-
 .kit-drawer .cfg-panels .svc-modes { margin-left: 0; margin-right: 0;}
 
 .kit-drawer #panel-repairs .subtabs,
@@ -1546,8 +1197,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Subtabs must honor [hidden] — display:grid !important was stacking all topics */
 
-.kit-drawer #panel-repairs .rc-flat-topics > .svc-sub[hidden],
-        .kit-drawer .subpane[hidden] {
+.kit-drawer #panel-repairs .rc-flat-topics > .svc-sub[hidden] {
             display: none !important;}
 
 .kit-drawer .cfg-panel:not([hidden]),
@@ -1576,7 +1226,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 .kit-drawer .cfg-panels .svc-sub,
         .kit-drawer .cfg-panels .cfg-subs > *,
         .kit-drawer .cfg-panels .sp-host,
-        .kit-drawer .cfg-panels .pit,
         .kit-drawer .cfg-panels .sp-picker,
         .kit-drawer .cfg-panels .sp-designer,
         .kit-drawer .cfg-panels .pit-slot {
@@ -1620,7 +1269,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 .kit-drawer #panel-hero .svc-sub > .control-group:has([data-panel]) {
             padding-bottom: 4px !important;}
 
-.kit-drawer .cfg-panels .pit > *,
+
         .kit-drawer .cfg-panels .sp-picker > *,
         .kit-drawer .cfg-panels .pit-stage,
         .kit-drawer .cfg-panels .pit-controls,
@@ -1673,7 +1322,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             min-width: 0;
             margin: 0;}
 
-.kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group.wide,
+
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="cardcolor"]),
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="fillshade"]),
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="badge"]),
@@ -1683,10 +1332,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group.pit-shade {
             grid-column: 1 / -1 !important;
         }
-
-.kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group:has(> .tier-btn) {
-            width: auto !important;
-            max-width: 100%;}
 
 /* Style Picker pit: short pairs share a row (span 1 of 2) */
 
@@ -1989,19 +1634,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Rows / Text-size groups: never wrap pills onto a second line */
 
-.kit-drawer .cfg-panels .control-group:has([data-svc="rows"]) .button-group,
-        .kit-drawer .cfg-panels .control-group:has([data-lsopt="tsize"]) .button-group {
-            flex-wrap: nowrap !important;
-            width: max-content;
-            max-width: 100%;}
-
-.kit-drawer .cfg-panels .control-group:has([data-lsopt="tsize"]) .button-group > .tier-btn {
-            flex: 0 0 auto !important;
-            width: 30px !important;
-            min-width: 30px !important;
-            max-width: 30px !important;
-            padding-inline: 0 !important;}
-
 .kit-drawer #panel-repairs .rc-flat-topics > .svc-sub > .control-group:has([data-lsopt="tsize"]) {
             grid-column: 1 / -1 !important;
             min-width: 0;}
@@ -2230,22 +1862,10 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Reviews / long Layout labels: keep pills readable */
 
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="look"] .button-group {
-            flex-wrap: wrap !important;
-            gap: 6px !important;
-            width: 100%;}
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="look"] .button-group > .tier-btn {
-            flex: 0 0 auto !important;
-            white-space: nowrap !important;}
-
 /* Section | Layout share one row; title stays a clear header above */
 
 .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group:has([data-spd="show"]):has(+ .control-group[data-k="look"]) {
             grid-column: span 1 !important;}
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group:has([data-spd="show"]) + .control-group[data-k="look"] {
-            grid-column: span 3 !important;}
 
 .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .sp-dz-head span { display: none;}
 
@@ -2258,27 +1878,11 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Full-span: backgrounds / shades. Layout is full unless packed beside Section (rules below). */
 
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group.wide,
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="scheme"],
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="shade"],
-        .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group.wide,
-        .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group[data-k="scheme"],
-        .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group[data-k="shade"] {
-            grid-column: 1 / -1 !important;}
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="look"],
-        .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group[data-k="look"] {
-            grid-column: 1 / -1 !important;}
-
 /* Beat full-span Layout when Section sits immediately before it */
 
 .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group:has([data-spd="show"]):has(+ .control-group[data-k="look"]),
         .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group:has([data-spd="show"]):has(+ .control-group[data-k="look"]) {
             grid-column: span 1 !important;}
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group:has([data-spd="show"]) + .control-group[data-k="look"],
-        .kit-drawer .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group:has([data-spd="show"]) + .control-group[data-k="look"] {
-            grid-column: span 3 !important;}
 
 /* Short icon/toggle groups: half row (2 of 4) — packs beside a partner */
 
@@ -2306,17 +1910,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Trust: Badges | Numbers | Text — one row (3 of 4 cols) */
 
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="logos"]:has(+ .control-group[data-k="num"]),
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="logos"] + .control-group[data-k="num"],
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="num"] + .control-group[data-k="align"] {
-            grid-column: span 1 !important;}
-
 /* FAQ: Open icon | Question size | Corners — one row */
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="icon"]:has(+ .control-group[data-k="qsize"]),
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="icon"] + .control-group[data-k="qsize"],
-        .kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="qsize"] + .control-group[data-k="corner"] {
-            grid-column: span 1 !important;}
 
 .kit-drawer #panel-repairs .rc-topic-hint {
             display: none !important;}
@@ -2663,7 +2257,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             box-shadow: 0 -8px 16px -12px color-mix(in oklab, var(--ed-text) 18%, transparent);}
 
 .kit-drawer .cfg-panels .sp-picker > .pit-actions,
-        .kit-drawer .cfg-panels .pit > .pit-actions,
         .kit-drawer #panel-services .pit-actions {
             margin: 0 -12px 0 !important;
             width: calc(100% + 24px) !important;
@@ -2778,22 +2371,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             box-shadow: none !important;}
 
 /* Look cards: default list chrome — Style Picker cards override below */
-
-.kit-drawer .cfg-panels .pit:not(.sp-picker) .pit-slot {
-            border-radius: 0 !important;
-            padding: 8px 14px !important;
-            background: transparent !important;
-            border: 0 !important;
-            border-bottom: 1px solid var(--ed-line) !important;
-            box-shadow: none !important;
-            gap: 6px !important;}
-
-.kit-drawer .cfg-panels .pit:not(.sp-picker) .pit-slot:hover { background: color-mix(in oklab, var(--ed-surface) 55%, transparent) !important;}
-
-.kit-drawer .cfg-panels .pit:not(.sp-picker) .pit-slot[aria-checked="true"] {
-            background: color-mix(in oklab, var(--ed-on) 8%, transparent) !important;
-            border-color: var(--ed-line) !important;
-            box-shadow: inset 2px 0 0 var(--ed-on) !important;}
 
 .kit-drawer .cfg-panels .pit-slot-name { font-size: 12.5px;}
 
@@ -2991,8 +2568,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             padding: 16px 24px;
             gap: 12px;}
 
-.kit-drawer .cfg-panels .sp-picker .sp-mh-bar .acts b.ghost { display: none;}
-
 .kit-drawer .cfg-panels .sp-picker .pit-slot-head,
         .kit-drawer .cfg-panels .sp-picker .pit-slot-tag,
         .kit-drawer .cfg-panels .sp-picker > .pit-editing {
@@ -3041,272 +2616,11 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Drawer pills: hug content, never touch neighbors */
 
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn) {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 10px !important;
-            row-gap: 10px !important;
-            column-gap: 10px !important;
-            max-width: 100%;
-            width: auto !important;
-            border: 0 !important;
-            overflow: visible !important;
-            background: transparent !important;}
-
 /* Short option sets → iOS recessed segmented control (H4 Common Region) */
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            gap: 0 !important;
-            width: 100% !important;
-            padding: 3px !important;
-            border-radius: 8px !important;
-            background: var(--ed-bg2) !important;
-            box-shadow: none !important;
-            overflow: hidden !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn:not(.active) {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            width: auto !important;
-            border: 0 !important;
-            border-radius: 7px !important;
-            background: transparent !important;
-            color: var(--ed-muted) !important;
-            box-shadow: none !important;
-            margin: 0 !important;
-            padding-inline: 8px !important;
-            padding-block: 6px !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 0 !important;
-            position: relative;
-            z-index: 1;
-            isolation: isolate;
-            min-width: 36px !important;
-            min-height: 32px !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn svg {
-            width: 16px !important;
-            height: 16px !important;
-            flex: none !important;
-            display: block !important;
-            pointer-events: none;
-            position: relative;
-            z-index: 2;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn:hover {
-            color: var(--ed-text) !important;
-            background: color-mix(in oklab, var(--ed-text) 6%, transparent) !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn.active {
-            background: color-mix(in oklab, var(--ed-surface) 92%, var(--ed-text)) !important;
-            color: var(--ed-text) !important;
-            box-shadow: 0 1px 2px color-mix(in oklab, var(--ed-text) 30%, transparent), inset 0 1px 0 color-mix(in oklab, var(--ed-bg) 8%, transparent) !important;}
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) {
-            background: var(--ed-bg2) !important;
-            border-radius: 8px !important;
-            box-shadow: none !important;}
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn:not(.active) {
-            color: var(--ed-muted) !important;
-            background: transparent !important;
-            border: 0 !important;}
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]),
-            :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]),
-            :has([data-svc="ssize"]),
-            :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]),
-            :has([data-svc="showicon"]),
-            :has([data-svc="morepos"]),
-            :has([data-pit="align"]),
-            :has([data-pit="tsize"]),
-            :has([data-pit="showicon"]),
-            :has([data-pit="icsize"]),
-            :has([data-sp="align"]),
-            :has([data-spd="align"])
-        ) > .tier-btn.active {
-            background: var(--ed-surface) !important;
-            color: var(--ed-text) !important;
-            box-shadow: 0 1px 2px color-mix(in oklab, var(--ed-text) 10%, transparent), inset 0 1px 0 var(--ed-bg) !important;}
 
 /* Color Duo uses .duo-pick select — keep pill list hidden (drawer flex would otherwise show it) */
 
-.kit-drawer .cfg-panels .duo-group .button-group,
-        .kit-drawer .cfg-panels .duo-group .button-group:has(> .tier-btn) {
-            display: none !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn) > .tier-btn {
-            flex: 0 0 auto !important;
-            min-width: 0 !important;
-            width: auto !important;
-            max-width: 100%;
-            border: 1px solid var(--ed-border) !important;
-            border-radius: 8px !important;
-            white-space: nowrap !important;
-            overflow: visible !important;
-            text-overflow: clip !important;
-            justify-content: center;
-            padding-inline: 9px !important;
-            margin: 0 !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn) > .tier-btn:last-child {
-            border-right: 1px solid var(--ed-border) !important;}
-
 /* Re-assert iOS segments after general pill borders (must win) */
-
-.kit-drawer .cfg-panels .button-group.kit-seg > .tier-btn:not(.active),
-        .kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]), :has([data-svc="ssize"]), :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="tsize"]), :has([data-pit="showicon"]), :has([data-pit="icsize"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn:not(.active) {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            width: auto !important;
-            border: 0 !important;
-            border-right: 0 !important;
-            border-radius: 7px !important;
-            background: transparent !important;
-            box-shadow: none !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]), :has([data-svc="ssize"]), :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="tsize"]), :has([data-pit="showicon"]), :has([data-pit="icsize"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn.active {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            width: auto !important;
-            background: color-mix(in oklab, var(--ed-surface) 92%, var(--ed-text)) !important;
-            color: var(--ed-text) !important;
-            box-shadow: 0 1px 2px color-mix(in oklab, var(--ed-text) 30%, transparent), inset 0 1px 0 color-mix(in oklab, var(--ed-bg) 8%, transparent) !important;}
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]), :has([data-svc="ssize"]), :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="tsize"]), :has([data-pit="showicon"]), :has([data-pit="icsize"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn.active {
-            background: var(--ed-surface) !important;
-            color: var(--ed-text) !important;
-            box-shadow: 0 1px 2px color-mix(in oklab, var(--ed-text) 10%, transparent), inset 0 1px 0 var(--ed-bg) !important;}
 
 /* Journey lsopt segments — must beat hug-content pills (Speed Slow|Normal|Fast) */
 
@@ -3392,8 +2706,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Icon-only (svg, no label text) — compact square-ish hit target */
 
-.kit-drawer .cfg-panels .button-group > .tier-btn.is-icon,
-        .kit-drawer .cfg-panels .button-group > .tier-btn:not(:has(span, b, small, i.svc-sw)):has(svg) {
+.kit-drawer .cfg-panels .button-group > .tier-btn.is-icon {
             flex: 0 0 auto !important;
             min-width: 36px !important;
             width: auto !important;
@@ -3403,91 +2716,12 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Icon segments inside recessed tracks — equal split, never overlap (beat is-icon fixed box) */
 
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="showicon"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn.is-icon,
-        .kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="showicon"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn:not(:has(span, b, small, i.svc-sw)):has(svg) {
-            flex: 1 1 0 !important;
-            min-width: 40px !important;
-            max-width: none !important;
-            width: auto !important;
-            height: auto !important;
-            min-height: 32px !important;
-            padding: 6px 8px !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            place-items: unset !important;
-            overflow: visible !important;
-            position: relative !important;
-            z-index: 1;
-        }
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]),
-            :has([data-svc="align"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="showicon"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn svg {
-            width: 16px !important;
-            height: 16px !important;
-            flex: none !important;
-            display: block !important;
-            position: relative !important;
-            z-index: 2;
-            margin: 0 !important;}
-
 /* Single-glyph / Aa / digit / px tokens */
-
-.kit-drawer .cfg-panels .button-group > .tier-btn:is(
-            [data-ctacount],
-            [data-ring], [data-ring2],
-            [data-svc="tsize"], [data-svc="tweight"], [data-svc="ssize"], [data-svc="sweight"],
-            [data-svc="rows"], [data-svc="icsize"],
-            [data-pit="tsize"], [data-pit="corner"], [data-pit="align"],
-            [data-lsopt="tsize"],
-            [data-hmtime], [data-hmspeed], [data-hmmspeed]
-        ) {
-            min-width: 34px !important;
-            padding-inline: 7px !important;}
-
-.kit-drawer .cfg-panels .button-group > .tier-btn:is(
-            [data-ctacount="1"], [data-ctacount="2"],
-            [data-svc="rows"]:not([data-v="all"]),
-            [data-ring], [data-ring2]
-        ) {
-            min-width: 36px !important;
-            padding-inline: 6px !important;
-        }
 
 /* Chip groups: 2×2 grid so Charcoal / long labels never clip */
 
-.kit-drawer .cfg-panels .button-group:has([data-scheme]),
-        .kit-drawer .cfg-panels .button-group:has([data-rcscheme]),
-        .kit-drawer .cfg-panels .button-group:has([data-more="scheme"]),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="scheme"]),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="scheme"]),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="card"].color-chip),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="card"].color-chip),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clc"]),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clc"]),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clo"]),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clo"]),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="color"]),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="color"]),
-        .kit-drawer .cfg-panels .button-group:has([data-svc="cardcolor"]),
-        .kit-drawer .cfg-panels .button-group:has([data-pit="cardcolor"]),
-        .kit-drawer .cfg-panels .rc-bg-group > .button-group,
-        .kit-drawer .cfg-panels .subpane .button-group:has([data-rcscheme]),
-        .kit-drawer .cfg-panels .button-group.chip-group {
+
+        .kit-drawer .cfg-panels .rc-bg-group > .button-group {
             display: grid !important;
             grid-template-columns: 1fr 1fr !important;
             gap: 10px !important;
@@ -3502,24 +2736,8 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             flex-wrap: unset !important;
         }
 
-.kit-drawer .cfg-panels .button-group:has([data-scheme]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-rcscheme]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-more="scheme"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-sp="scheme"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-spd="scheme"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-sp="card"].color-chip) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-spd="card"].color-chip) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clc"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clc"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clo"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clo"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-sp="color"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-spd="color"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-svc="cardcolor"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has([data-pit="cardcolor"]) > .tier-btn,
-        .kit-drawer .cfg-panels .rc-bg-group > .button-group > .tier-btn,
-        .kit-drawer .cfg-panels .subpane .button-group:has([data-rcscheme]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group.chip-group > .tier-btn {
+
+        .kit-drawer .cfg-panels .rc-bg-group > .button-group > .tier-btn {
             width: 100% !important;
             min-width: 0 !important;
             max-width: none !important;
@@ -3534,38 +2752,9 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Exactly 3 color chips → one row (Brand | Charcoal | White) */
 
-.kit-drawer .cfg-panels .button-group.chip-group:has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="card"].color-chip):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="card"].color-chip):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-svc="cardcolor"]):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-pit="cardcolor"]):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clc"]):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-spd="clo"]):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clc"]):has(> .tier-btn:nth-child(3):last-child),
-        .kit-drawer .cfg-panels .button-group:has([data-sp="clo"]):has(> .tier-btn:nth-child(3):last-child) {
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        }
-
 /* Full-fill color chips — no tiny swatch that vanishes on active Charcoal */
 
-.kit-drawer .cfg-panels .tier-btn.color-chip {
-            min-height: 40px !important;
-            padding: 8px 12px !important;
-            background: var(--chip, #17191c) !important;
-            color: #fff !important;
-            border: 1px solid color-mix(in oklab, #000 18%, transparent) !important;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,.12) !important;
-            font-weight: 700 !important;
-            letter-spacing: -.01em;
-        }
-
 .kit-drawer .cfg-panels .tier-btn.color-chip .svc-sw { display: none !important; }
-
-.kit-drawer .cfg-panels .tier-btn.color-chip[data-v="white"],
-        .kit-drawer .cfg-panels .tier-btn.color-chip[data-v="page"] {
-            color: #17191c !important;
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,.14) !important;
-        }
 
 .kit-drawer .cfg-panels .tier-btn.color-chip.active {
             outline: 2px solid var(--ed-fg, #f3f4f6);
@@ -3644,7 +2833,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             width: 100% !important;
             box-sizing: border-box;}
 
-.kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group.wide,
+
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp="panel"]),
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp-select="panel"]),
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp="scheme"]),
@@ -3656,7 +2845,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp="b2"]),
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp="pstyle"]),
         .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group.sp-shade,
-        .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group.wide,
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="cardcolor"]),
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="fillshade"]),
         .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) > .control-group:has([data-pit="badge"]),
@@ -3675,77 +2863,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 .kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:has([data-sp="bshape"]) {
             grid-column: 2 !important;}
 
-.kit-drawer .cfg-panels .pit-grid.sp-flat .button-group:has(> .tier-btn),
-        .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group:has(> .tier-btn) {
-            width: 100%;
-            max-width: 100%;
-            flex-wrap: wrap !important;}
-
-.kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group:has(> .tier-btn):is(
-            :has([data-pit="showicon"]), :has([data-pit="align"]), :has([data-pit="arrow"]), :has([data-pit="corner"]),
-            :has([data-svc="showicon"]), :has([data-svc="align"]), :has([data-svc="corner"])
-        ),
-        .kit-drawer .cfg-panels .sp-dz .button-group:has(> .tier-btn):is(
-            :has([data-svc="showicon"]), :has([data-svc="align"]), :has([data-svc="corner"])
-        ) {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            width: 100% !important;
-            max-width: 100% !important;}
-
-.kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group:has(> .tier-btn):is(
-            :has([data-pit="showicon"]), :has([data-pit="align"]), :has([data-pit="arrow"]), :has([data-pit="corner"]),
-            :has([data-svc="showicon"]), :has([data-svc="align"]), :has([data-svc="corner"])
-        ) > .tier-btn,
-        .kit-drawer .cfg-panels .sp-dz .button-group:has(> .tier-btn):is(
-            :has([data-svc="showicon"]), :has([data-svc="align"]), :has([data-svc="corner"])
-        ) > .tier-btn {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            width: auto !important;}
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat .button-group > .tier-btn {
-            flex: 0 1 auto !important;
-            min-width: max-content !important;
-            justify-content: center;
-            padding-inline: 10px !important;
-            white-space: nowrap !important;
-            overflow: visible !important;
-            text-overflow: clip !important;
-            font-size: 12.5px !important;}
-
 /* Styles mode brand shade: same Aa cards as the brand shade grid, not a squeezed chip row */
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat .button-group.shade-pick:has(> .shade-seg),
-        .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group.shade-pick:has(> .shade-seg),
-        .kit-drawer .cfg-panels .sp-dz .button-group.shade-pick:has(> .shade-seg) {
-            display: grid !important;
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            gap: 6px !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            flex-wrap: unset !important;
-        }
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat .button-group.shade-pick > .tier-btn.shade-seg,
-        .kit-drawer .cfg-panels .pit-grid:not(.sp-acc-grid) .button-group.shade-pick > .tier-btn.shade-seg,
-        .kit-drawer .cfg-panels .sp-dz .button-group.shade-pick > .tier-btn.shade-seg {
-            flex: none !important;
-            min-width: 0 !important;
-            width: 100% !important;
-            min-height: 76px !important;
-            padding: 12px 8px !important;
-            font: 800 18px/1 var(--headline-font, sans-serif) !important;
-            white-space: normal !important;
-            display: grid !important;
-            place-items: center;
-            align-content: center;
-            gap: 6px !important;
-        }
-
-.kit-drawer .cfg-panels .button-group.shade-pick > .shade-seg > small {
-            font: 700 12px/1 var(--body-font, sans-serif) !important;
-        }
 
 .kit-drawer .cfg-panels .pit-grid.sp-flat .button-group > .tier-btn.is-icon {
             flex: 0 0 auto !important;
@@ -3833,17 +2951,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Short pills hug content (1, 2, Off, 1px…) — don't stretch into the neighbor */
 
-.kit-drawer #panel-hero .sp-designer .svc-sub > .control-group:is(:has([data-rev]), :has([data-b2]), :has([data-ring2])) .button-group:has(> .tier-btn) {
-            flex-wrap: nowrap !important;
-            width: 100% !important;}
-
-.kit-drawer #panel-hero .sp-designer .svc-sub > .control-group:is(:has([data-rev]), :has([data-b2]), :has([data-ring2])) .button-group > .tier-btn {
-            flex: 1 1 0 !important;
-            min-width: 0 !important;
-            width: auto !important;}
-
-.rev-sw { display: block; width: 14px; height: 14px; border-radius: 2px; }
-
 .rev-sw.is-white { background: #ffffff; border: 1px solid #d1d5db; }
 
 .rev-sw.is-black { background: #17191c; }
@@ -3863,14 +2970,10 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 .kit-drawer #panel-hero .sp-designer .svc-sub > .control-group .button-group > .tier-btn:is(
             [data-ctacount],
-            [data-ring],
-            [data-ring2],
             [data-rev="off"],
             [data-opt="marquee"],
             [data-logostrip],
-            [data-pstyle],
-            [data-b2]
-        ) {
+            [data-pstyle]) {
             padding-inline: 8px !important;
             min-width: 32px !important;}
 
@@ -4125,16 +3228,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
         .kit-drawer #panel-repairs .svc-sub:has(.rc-bg-group) > .control-group.rc-bg-group {
             grid-column: 1 / -1 !important;}
 
-.kit-drawer .cfg-panels .button-group:has(> [data-svc="fillshade"]),
-        .kit-drawer .cfg-panels .button-group:has(> [data-pit="fillshade"]),
-        .kit-drawer .cfg-panels .button-group.shade-pick {
-            display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 6px !important;
-            overflow: visible !important; border: 0 !important; width: 100% !important;}
-
-.kit-drawer .cfg-panels .button-group:has(> [data-svc="fillshade"]) > .tier-btn,
-        .kit-drawer .cfg-panels .button-group:has(> [data-pit="fillshade"]) > .tier-btn {
-            flex: none !important; min-width: 0 !important;}
-
 /* Repairs flat topics: 2-col for Tabs pairs; full-width elsewhere */
 
 .kit-drawer #panel-repairs .rc-flat-topics > .svc-sub {
@@ -4204,17 +3297,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             color: var(--ed-muted) !important;
             border-bottom: 1px solid var(--ed-line) !important;}
 
-.kit-drawer .cfg-panels .button-group:has([data-scheme]) {
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;}
-
-.kit-drawer .cfg-panels .button-group:has([data-svc="cardcolor"]),
-        .kit-drawer .cfg-panels .button-group:has([data-pit="cardcolor"]) {
-            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        }
-
 /* All sections: stacked cards — no overlapping Show/Hide + scheme */
-
-.kit-drawer .cfg-panels .more-rows { gap: 12px;}
 
 .kit-drawer .cfg-panels .more-row {
             grid-template-columns: 1fr;
@@ -4237,24 +3320,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             border-radius: 6px;
             font: 700 12px/1.2 "Google Sans", sans-serif !important;
             letter-spacing: -.01em;}
-
-.kit-drawer .cfg-panels .more-row .button-group { width: 100%; max-width: 100%;}
-
-.kit-drawer .cfg-panels .more-row .button-group:has(> .tier-btn) {
-            display: flex; flex-wrap: wrap; gap: 6px;
-            border: 0; overflow: visible; background: transparent;}
-
-.kit-drawer .cfg-panels .more-row .button-group > .tier-btn {
-            flex: 1 1 auto; min-width: max-content;
-            border: 1px solid var(--ed-border); border-radius: 8px;
-            border-right: 1px solid var(--ed-border);
-            justify-content: center;}
-
-.kit-drawer .cfg-panels .more-row .button-group > .tier-btn:last-child {
-            border-right: 1px solid var(--ed-border);}
-
-.kit-drawer .cfg-panels .more-row .button-group:has([data-more="show"]) > .tier-btn {
-            flex: 1 1 calc(50% - 3px);}
 
 .kit-drawer .cfg-panels .more-row .more-shade {
             visibility: visible; width: 100%; height: 36px; max-width: none;}
@@ -4334,13 +3399,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
         .kit-drawer[data-theme="light"] .cfg .button-group > .tier-btn.active,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group > .tier-btn.active,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn) > .tier-btn.active,
-        .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]), :has([data-svc="ssize"]), :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="tsize"]), :has([data-pit="showicon"]), :has([data-pit="icsize"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ) > .tier-btn.active,
         .kit-drawer[data-theme="light"] #panel-repairs .rc-flat-topics > .svc-sub .button-group:has([data-lsopt]) > .tier-btn.active,
         .kit-drawer[data-theme="light"] #panel-repairs .subtab[aria-selected="true"],
         .kit-drawer[data-theme="light"] #panel-hero .hm-tabs button[aria-selected="true"] {
@@ -4405,34 +3463,9 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             row-gap: 8px !important;
         }
 
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(
-            :has([data-svc="align"]), :has([data-svc="vpos"]),
-            :has([data-svc="tweight"]), :has([data-svc="ssize"]), :has([data-svc="sweight"]),
-            :has([data-svc="icpos"]), :has([data-svc="showicon"]), :has([data-svc="morepos"]),
-            :has([data-pit="align"]), :has([data-pit="tsize"]), :has([data-pit="showicon"]), :has([data-pit="icsize"]),
-            :has([data-sp="align"]), :has([data-spd="align"])
-        ),
+
         .kit-drawer[data-theme="light"] #panel-repairs .rc-flat-topics > .svc-sub .button-group:has([data-lsopt]) {
             gap: 2px !important;}
-
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn) {
-            --ed-track-base: var(--ed-bg2);
-            background-color: var(--ed-bg2) !important;
-            background-image: none !important;
-            border: 0 !important;
-            border-radius: 8px !important;
-            box-shadow: none !important;}
-
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn) > .tier-btn:not(.active):not(.color-chip):not(.shade-seg) {
-            color: var(--ed-muted) !important;
-            background: transparent !important;
-            opacity: 1;
-        }
-
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn) > .tier-btn:hover {
-            color: var(--ed-text) !important;
-            background: transparent !important;
-            opacity: 1;}
 
 .kit-drawer:not([data-theme="light"]) .cfg-panels .tier-btn.active,
         .kit-drawer:not([data-theme="light"]) .cfg .button-group > .tier-btn.active,
@@ -4453,9 +3486,7 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 /* Shade tiles: Aa + step use ink() (ramp 950 or white). Chrome must not restyle them. */
 
 .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg,
-        .kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg:hover,
-        .kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg:hover,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active,
         .kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active:hover,
@@ -4469,54 +3500,25 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 
 /* Color chips show the chosen brand. The track around them stays the Builder palette. */
 
-.kit-drawer .cfg-panels .button-group > .tier-btn.color-chip,
+
 .kit-drawer .cfg-panels .button-group > .tier-btn.color-chip.active {
             background: var(--chip, #17191c) !important;
             color: #ffffff !important;
         }
 
-.kit-drawer .cfg-panels .button-group > .tier-btn.color-chip[data-v="white"],
+
 .kit-drawer .cfg-panels .button-group > .tier-btn.color-chip[data-v="white"].active,
-.kit-drawer .cfg-panels .button-group > .tier-btn.color-chip[data-v="page"],
 .kit-drawer .cfg-panels .button-group > .tier-btn.color-chip[data-v="page"].active {
             color: #17191c !important;
         }
 
 /* Card color chips preview Brand / Dark / White. The track around them stays slate. */
 
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="brand"],
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="brand"] {
-            background-color: var(--pill-accent, var(--active-700)) !important;
-            color: var(--pill-accent-fg, #ffffff) !important;
-        }
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="charcoal"]:not(.color-chip):not(.shade-seg),
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="charcoal"]:not(.color-chip):not(.shade-seg) {
-            background: #17191c !important;
-            color: #ffffff !important;
-        }
-
-.kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="white"]:not(.color-chip):not(.shade-seg),
-.kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .tier-btn):is(:has([data-svc="cardcolor"]), :has([data-pit="cardcolor"])) > .tier-btn[data-v="white"]:not(.color-chip):not(.shade-seg) {
-            background: #ffffff !important;
-            color: #17191c !important;
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14) !important;
-        }
-
 .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active,
         .kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active,
         .kit-drawer[data-theme="light"] .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active:hover,
         .kit-drawer:not([data-theme="light"]) .cfg-panels .button-group:has(> .shade-seg) > .tier-btn.shade-seg.active:hover {
             box-shadow: 0 0 0 2px var(--ed-bg), 0 0 0 4px var(--ed-text), 0 8px 18px color-mix(in oklab, var(--ed-text) 28%, transparent) !important;
-        }
-
-.kit-drawer .cfg-panels .shade-seg > span,
-        .kit-drawer .cfg-panels .shade-seg > small,
-        .kit-drawer .bshade-seg,
-        .kit-drawer .bshade-seg > span,
-        .kit-drawer .bshade-seg > small {
-            color: inherit !important;
-            opacity: 1 !important;
         }
 
 .kit-drawer[data-theme="light"] .cfg-panels .pit-actions {
@@ -4543,19 +3545,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 .kit-drawer .sp-dz.sp-flat-dz > .sp-dz-head {
   display: none !important;}
 
-.kit-drawer .sp-dz.sp-flat-dz > .control-group.wide,
-.kit-drawer .sp-dz.sp-flat-dz > .control-group[data-k=scheme],
-.kit-drawer .sp-dz.sp-flat-dz > .control-group[data-k=shade] {
-  grid-column: 1 / -1 !important;
-  padding-inline: 0 !important;
-  border-right: 0 !important;}
-
-.kit-drawer .sp-dz.sp-flat-dz > .control-group[data-k=look] {
-  grid-column: 1 / -1 !important;}
-
-.kit-drawer .sp-dz.sp-flat-dz > .control-group:has([data-spd=show]) + .control-group[data-k=look] {
-  grid-column: span 3 !important;}
-
 .kit-drawer .sp-dz.sp-flat-dz > .control-group:has([data-spd=show]):has(+ .control-group[data-k=look]) {
   grid-column: span 1 !important;}
 
@@ -4567,10 +3556,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 }
 
 /* FAQ Open icon / Corners stay a half row. Question size is a full-width size control. */
-
-.kit-drawer .cfg-panels .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group[data-k="icon"],
-.kit-drawer .cfg-panels .sp-host .sp-dz.sp-flat-dz.sp-designer > .control-group[data-k="corner"] {
-  grid-column: span 2 !important;}
 
 /* Standard / Large get the whole row so the words sit in one even control */
 
@@ -4599,10 +3584,6 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
 .kit-drawer .cfg-panels .control-group.is-size > .button-group > .tier-btn[data-v="l"] { font-size: 16px !important; }
 
 /* Trust: Badges and Text share a row. Numbers is the full-width size control above. */
-
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="logos"],
-.kit-drawer .cfg-panels .sp-dz.sp-flat-dz > .control-group[data-k="align"] {
-  grid-column: span 2 !important;}
 
 /* A hidden section takes its icons and layout with it */
 
@@ -4642,30 +3623,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
   flex-direction: column !important;
   overflow: visible !important;}
 
-.kit-drawer .cfg-panels .button-group:has(.color-chip) {
-  display: grid !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-.kit-drawer .sp-dz.sp-flat-dz > .control-group .button-group:has(> .tier-btn) {
-  display: flex;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-  flex-wrap: wrap !important;}
-
-.kit-drawer .sp-dz.sp-flat-dz > .control-group .button-group:has(.color-chip) {
-  display: grid !important;
-}
-
-.kit-drawer .sp-dz.sp-flat-dz > .control-group .button-group > .tier-btn:not(.color-chip) {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  padding-inline: 8px !important;
-}
-
 /* Style picker: display:flex !important was beating [hidden], so Closed/Open color
    stayed on Side by side and overlapped inside the narrow column. */
 
@@ -4682,69 +3639,7 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
   min-width: 0;
 }
 
-.kit-drawer .cfg-panels .pit-grid .button-group:has(.color-chip) {
-  display: grid !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow: hidden;
-}
-
-.kit-drawer .cfg-panels .pit-grid .button-group:has(.color-chip):has(> .tier-btn:nth-child(3):last-child) {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-}
-
-.kit-drawer .cfg-panels .pit-grid .button-group:has(.color-chip):has(> .tier-btn:nth-child(4)) {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}
-
-.kit-drawer .cfg-panels .pit-grid .button-group:has(.color-chip) > .tier-btn {
-  min-width: 0 !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  flex: none !important;
-  white-space: nowrap !important;
-}
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:not(:has(.color-chip)) .button-group:has(> .tier-btn) {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group:not(:has(.color-chip)) .button-group > .tier-btn:not(.is-icon) {
-  flex: 1 1 0 !important;
-  min-width: 0 !important;
-  width: auto !important;
-  padding-inline: 8px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
 /* Final CTA (and every Styles brand shade): 3-column Aa cards, not one squeezed row */
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group.sp-shade .button-group.shade-pick:has(> .shade-seg) {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  flex-wrap: unset !important;
-  gap: 6px !important;
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.kit-drawer .cfg-panels .pit-grid.sp-flat > .control-group.sp-shade .button-group.shade-pick > .tier-btn.shade-seg {
-  flex: none !important;
-  min-width: 0 !important;
-  width: 100% !important;
-  max-width: none !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-  white-space: normal !important;
-  min-height: 76px !important;
-  padding: 12px 8px !important;
-  font: 800 18px/1 var(--headline-font, sans-serif) !important;
-}
 
 /* 4+ option rows become a dropdown. Later flex rules were winning and painting the old chips on top of the field. */
 
@@ -4856,9 +3751,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
   height: auto !important;}
 
 /* Every recessed control track is rounded. Shade tiles keep their own card radius. */
-
-.kit-drawer .cfg-panels .button-group:has(> .tier-btn):not(.shade-pick) {
-  border-radius: 8px !important;}
 
 /* Services Styles: the panel is the scrollport. Inner height:100% was clipping the form. */
 
@@ -4973,30 +3865,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
   letter-spacing: 0;
   text-transform: none;
   color: var(--ed-muted);}
-
-.about-grad-row {
-  display: grid;
-  gap: 8px;
-  margin: 0 0 12px;
-}
-
-.about-grad-angle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.about-grad-angle input[type="range"] { flex: 1; min-width: 0; }
-
-.about-grad-angle output { min-width: 48px; font-size: 12px; }
-
-.about-grad-color {
-  width: 36px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
 
 /* Section boxes off every tool — beats the light restamp and the id rules above */
 
@@ -5354,14 +4222,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     font: 500 13px/1.2 "Google Sans", sans-serif;
     cursor: pointer;}
 
-.kit-drawer #sps-all .kit-acc-bucket {
-    padding: 14px 12px 4px;
-    font: 600 11px/1 "Google Sans", sans-serif;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    color: var(--ed-muted2);}
-.kit-drawer #sps-all .kit-acc-bucket[hidden] { display: none !important;}
-
 .ks-pains .pains-grid,
 .ks-pains .pains-split { display: grid; gap: 16px; }
 .ks-pains .pains-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -5567,8 +4427,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     background: var(--ed-select) !important;
     color: var(--ed-select-on) !important;}
 #kit-drawer #kit-foot .pit-apply.is-saved { background: var(--ed-on) !important; color: var(--ed-on-fg) !important;}
-
-#kit-drawer[data-kit-account="open"] .cfg-bar > :not(#kit-account) { display: none !important;}
 #kit-account {
     display: none;
     grid-column: 1 / -1;
@@ -5577,7 +4435,6 @@ body:not([data-mode="builder"]) .kit-drawer .cfg-panels:has(#panel-more.sp-all:n
     min-height: 0;
     width: 100%;
     color: var(--ed-text);}
-#kit-drawer[data-kit-account="open"] #kit-account { display: flex !important;}
 #kit-account[hidden] { display: none !important;}
 .kit-account-head { display: flex; align-items: center; gap: 8px;}
 .kit-account-back {
@@ -5735,11 +4592,7 @@ details.kit-global[open] > .kit-global-menu {
     gap: 2px;
     flex: none;}
 #kit-drawer .kit-page-loc .ms { font-size: 18px; width: 18px; height: 18px; line-height: 18px;}
-#kit-drawer .kit-page-loc[data-place="header"] { color: var(--ed-select);}
-#kit-drawer .kit-page-loc[data-place="footer"] { color: var(--ed-muted);}
-#kit-drawer .kit-page-loc[data-place="both"] { color: var(--ed-select);}
 #kit-drawer .kit-page-loc[data-place="both"] .is-foot { color: var(--ed-muted);}
-#kit-drawer .kit-page-loc[data-place="hidden"] { color: var(--ed-art);}
 #kit-drawer .kit-page-draft {
     margin-left: auto;
     flex: none;
@@ -5854,19 +4707,6 @@ details.kit-global[open] > .kit-global-menu {
 #kit-drawer[data-theme="dark"] #panel-hero #heroMenuItems li { background: var(--ed-bg2); color: var(--ed-text);}
 
 /* Selected chrome is one fill and one ink. Icons take that ink. Primary actions use the same fill, not a green with a dark stroke. Sliders use the same accent. */
-
-#kit-drawer .img-btn-primary {
-    background: var(--ed-select) !important;
-    color: var(--ed-select-on) !important;
-    border-color: var(--ed-select) !important;}
-#kit-drawer .img-btn-primary svg {
-    color: var(--ed-select-on);
-    stroke: currentColor;}
-#kit-drawer .img-btn:not(.img-btn-primary) {
-    background: var(--ed-surface);
-    color: var(--ed-text);
-    border-color: var(--ed-border);}
-#kit-drawer input[type="range"] { accent-color: var(--ed-select); }
 #kit-drawer #panel-hero .hm-pane .button-group > .tier-btn.active,
 #kit-drawer #panel-hero .hm-tabs button[aria-selected="true"] {
     background: var(--ed-select) !important;
@@ -5958,10 +4798,6 @@ details.kit-global[open] > .kit-global-menu {
     overflow: hidden !important;
     background: var(--ed-bg2) !important;
     animation: kit-look-in .22s ease;}
-
-#kit-drawer .sp-designer .control-group[data-k="look"],
-#kit-drawer .sp-designer .ls-look-group {
-    display: none !important;}
 
 /* Hero: the layout strip is the chooser. Clean / Trusted / Bold / Layout 4 is not a second row. Menu, then the scroller and Media, then the other controls. */
 
@@ -6161,8 +4997,6 @@ details.kit-global[open] > .kit-global-menu {
     min-width: 0 !important;
     min-height: 32px !important;
     white-space: nowrap !important;}
-
-body:is(.cta-one, .cta-none) #panel-hero .control-group[data-when="two"]:has([data-b2]) { display: none !important; }
 
 #kit-drawer #panel-hero.mode-pit > .sp-picker > .pit-controls { display: none !important; }
 
@@ -6560,62 +5394,6 @@ body:is(.cta-one, .cta-none) #panel-hero .control-group[data-when="two"]:has([da
 .kit-drawer #panel-about .about-line > .kit-dd > .kit-dd-trig .about-tex-sample {
     width: 100%;}
 
-.about-tex-sample {
-    display: block;
-    width: 88px;
-    height: 16px;
-    border-radius: 4px;
-    background-color: #fff;
-    background-repeat: repeat;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18);}
-
-.about-tex-sample[data-tex="circles-1"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Ccircle%20cx%3D%271%27%20cy%3D%271%27%20r%3D%271%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="circles-5"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Ccircle%20cx%3D%273%27%20cy%3D%273%27%20r%3D%273%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="diagonal-stripe-1"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Cpath%20d%3D%27M-1%201%20l2%20-2%20M0%2010%20l10%20-10%20M9%2011%20l2%20-2%27%20stroke%3D%27black%27%20stroke-width%3D%271%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="diagonal-stripe-5"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Cpath%20d%3D%27M-1%201%20l2%20-2%20M0%2010%20l10%20-10%20M9%2011%20l2%20-2%27%20stroke%3D%27black%27%20stroke-width%3D%272%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="dots-1"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%271%27%20height%3D%271%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="dots-5"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2710%27%20height%3D%2710%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%275%27%20height%3D%275%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 10px 10px;}
-
-.about-tex-sample[data-tex="smalldot"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%275%27%20height%3D%275%27%3E%3Crect%20width%3D%271%27%20height%3D%271%27%20fill%3D%27black%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 5px 5px;}
-
-.about-tex-sample[data-tex="lightstripe"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%275%27%20height%3D%275%27%3E%3Cpath%20d%3D%27M0%205%20L5%200%20M6%204%20L4%206%20M-1%201%20L1%20-1%27%20stroke%3D%27black%27%20stroke-width%3D%271%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 5px 5px;}
-
-.about-tex-sample[data-tex="grain"] {
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27180%27%20height%3D%27180%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.8%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23n)%27%2F%3E%3C%2Fsvg%3E");
-    background-size: 64px 64px;}
-
-body > .kit-dd-menu[data-about-tex] {
-    padding: 6px;}
-
-body > .kit-dd-menu[data-about-tex] [role="option"] {
-    padding: 4px;}
-
-body > .kit-dd-menu[data-about-tex] .about-tex-sample,
-.kit-dd-menu[data-about-tex] .about-tex-sample {
-    width: 100%;
-    height: 16px;}
-
 .kit-drawer #panel-about .about-frame-row {
     display: flex;
     align-items: center;
@@ -6648,48 +5426,6 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ed-text, #fff) 18%, transparent), 0 1px 2px rgba(0, 0, 0, .12);
     cursor: pointer;}
 
-.about-color-pop {
-    position: fixed;
-    z-index: 80;
-    width: 220px;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 12px;
-    background: #1c1f26;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, .12);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, .35);}
-
-.about-color-pop[hidden] { display: none !important; }
-
-.about-step-pop {
-    position: fixed;
-    z-index: 80;
-    width: 196px;
-    padding: 10px;
-    border-radius: 12px;
-    background: #1c1f26;
-    border: 1px solid rgba(255, 255, 255, .12);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, .35);}
-
-.about-step-pop[hidden] { display: none !important; }
-
-.about-step-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 6px;}
-
-.about-step {
-    height: 22px;
-    padding: 0;
-    border: 0;
-    border-radius: 6px;
-    background: var(--seg, #111);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22);
-    cursor: pointer;}
-
 .about-step.is-dark { background: #050505; }
 .about-step.is-white { background: #fff; }
 
@@ -6704,21 +5440,6 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
     height: 26px;
     padding: 0 6px;
     font-size: 12px;}
-
-.about-color-pop .about-tex-strength {
-    display: grid;
-    grid-template-columns: 76px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    font: 600 12px/1 var(--body-font, sans-serif);}
-
-.about-color-pop [data-oklch="h"] {
-    background: linear-gradient(90deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
-    border-radius: 999px;}
-
-.about-color-hex {
-    font: 600 12px/1 ui-monospace, monospace;}
 
 .kit-drawer #panel-about .about-thumb.is-on { border-color: var(--ed-text, #fff); }
 .kit-drawer #panel-about .about-thumb.is-off { opacity: .4; }
@@ -6844,8 +5565,7 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
     min-height: 32px;
     padding: 0 10px;}
 
-.kit-drawer #panel-about .about-swatch,
-.kit-dd-menu .about-swatch {
+.kit-drawer #panel-about .about-swatch {
     width: 22px;
     height: 22px;
     display: block;}
@@ -7474,15 +6194,6 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
 }
 
 /* Universal Section Scrim & Pattern Overlays */
-.section-scrim-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: var(--scrim-opacity, 0.4);
-  mix-blend-mode: var(--scrim-blend, multiply);
-  transition: opacity 0.15s ease, mix-blend-mode 0.15s ease;
-}
 
 /* When media chrome mounts on the hero root (Gradient/Fullbleed/Framed/Aerial),
    keep copy + header above the overlays — same contract as .hero-scrim-layer.
@@ -7507,15 +6218,10 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
 .hero-media > .hm {
   z-index: 0;
 }
-.hb-media > .section-scrim-layer,
-.hb-media > .section-pattern-layer,
+
 .hero-media > .section-scrim-layer,
 .hero-media > .section-pattern-layer {
   z-index: 2;
-}
-
-[data-scrim-fill="off"] .section-scrim-layer {
-  display: none !important;
 }
 /* Clear every wash when Fill = Off (section scrim + .hm veil + legacy hero scrim) */
 [data-scrim-fill="off"] .hm-veil,
@@ -7526,174 +6232,19 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
   opacity: 0 !important;
 }
 
-[data-scrim-fill="solid"] .section-scrim-layer {
-  background: var(--scrim-color, var(--active-950, #123159)) !important;
-  background-image: none !important;
-}
-
 /* Classic angled wash when no edge strengths are set */
-[data-scrim-fill="gradient"] .section-scrim-layer,
-:not([data-scrim-fill]) .section-scrim-layer {
-  background-color: transparent !important;
-  background-image: linear-gradient(var(--scrim-angle, 180deg), transparent 0%, var(--scrim-color, var(--active-950, #123159)) 100%) !important;
-}
 
 /* Area / edge gradient — top header, bottom foot, left, right bands */
-[data-scrim-fill="gradient"][data-scrim-mode="edges"] .section-scrim-layer,
-[data-scrim-fill="solid"][data-scrim-mode="edges"] .section-scrim-layer {
-  background-color: transparent !important;
-  background-image:
-    linear-gradient(to bottom, color-mix(in srgb, var(--scrim-color, var(--active-950, #123159)) calc(var(--scrim-top, 0) * 100%), transparent) 0%, transparent 55%),
-    linear-gradient(to top, color-mix(in srgb, var(--scrim-color, var(--active-950, #123159)) calc(var(--scrim-bottom, 0) * 100%), transparent) 0%, transparent 55%),
-    linear-gradient(to right, color-mix(in srgb, var(--scrim-color, var(--active-950, #123159)) calc(var(--scrim-left, 0) * 100%), transparent) 0%, transparent 50%),
-    linear-gradient(to left, color-mix(in srgb, var(--scrim-color, var(--active-950, #123159)) calc(var(--scrim-right, 0) * 100%), transparent) 0%, transparent 50%) !important;
-}
-
-.section-pattern-layer {
-  position: absolute;
-  inset: -8%;
-  z-index: 2;
-  pointer-events: none;
-  opacity: var(--texture-opacity, 0.35);
-  transition: opacity 0.15s ease;
-  will-change: transform, background-position, opacity, filter;
-  /* Inherit --texture-gain / --tex-flick from host — do not reset here */
-  --tex-px: 0px;
-  --tex-py: 0px;
-  transform: translate3d(var(--tex-px), var(--tex-py), 0);
-}
-
-[data-pattern="none"] .section-pattern-layer {
-  display: none !important;
-}
 
 /* Spaced dots — strength scales size + contrast; Drift/Flicker animate position */
-[data-pattern="dots"] .section-pattern-layer {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.85) calc(1.1px + var(--texture-gain, 1) * 0.7px), transparent calc(1.8px + var(--texture-gain, 1) * 0.85px)) !important;
-  background-size: max(6px, calc(20px - var(--texture-gain, 1) * 3.5px)) max(6px, calc(20px - var(--texture-gain, 1) * 3.5px)) !important;
-  mix-blend-mode: soft-light;
-  opacity: 1 !important;
-  filter: contrast(calc(0.85 + var(--texture-gain, 1) * 0.7)) brightness(1.08);
-}
 
 /*
   Film grain — hard, visible noise. Strength 100–300% boosts contrast + flicker amp.
 */
-[data-pattern="grain"] .section-pattern-layer {
-  background-color: transparent !important;
-  background-image:
-    url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E") !important;
-  background-size: calc(160px - 20px * var(--texture-gain, 1)) calc(160px - 20px * var(--texture-gain, 1)), calc(110px - 12px * var(--texture-gain, 1)) calc(110px - 12px * var(--texture-gain, 1)) !important;
-  mix-blend-mode: overlay;
-  opacity: 1 !important;
-  filter: contrast(calc(0.45 + var(--texture-gain, 1) * 1.05)) brightness(calc(1.02 + var(--texture-gain, 1) * 0.12));
-}
-
-[data-pattern="stripes"] .section-pattern-layer {
-  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22) 2px, transparent 2px, transparent 11px) !important;
-  opacity: 1 !important;
-  filter: contrast(calc(0.9 + var(--texture-gain, 1) * 0.35));
-}
-
-[data-pattern="grid"] .section-pattern-layer {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px) !important;
-  background-size: 22px 22px !important;
-  opacity: 1 !important;
-  filter: contrast(calc(0.9 + var(--texture-gain, 1) * 0.35));
-}
-
-[data-pattern="noise"] .section-pattern-layer {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") !important;
-  background-size: 140px 140px !important;
-  mix-blend-mode: soft-light;
-  opacity: 1 !important;
-  filter: contrast(calc(0.7 + var(--texture-gain, 1) * 1.05)) brightness(1.08);
-  --tex-flick: var(--texture-gain, 1);
-}
 
 /* Flicker — jump amp from --tex-flick (Flicker Strength), not texture gain alone */
-[data-texture-motion="on"] .section-pattern-layer {
-  animation: sec-tex-flicker 0.22s steps(2) infinite;
-}
 
 /* Drift — direction via data-texture-drift */
-[data-texture-motion="drift"] .section-pattern-layer {
-  animation: sec-tex-drift-diag calc(3.2s - 0.4s * var(--texture-gain, 1)) linear infinite;
-}
-[data-texture-motion="drift"][data-texture-drift="x"] .section-pattern-layer,
-[data-texture-drift="x"][data-texture-motion="drift"] .section-pattern-layer {
-  animation-name: sec-tex-drift-x;
-}
-[data-texture-motion="drift"][data-texture-drift="y"] .section-pattern-layer,
-[data-texture-drift="y"][data-texture-motion="drift"] .section-pattern-layer {
-  animation-name: sec-tex-drift-y;
-}
-[data-texture-motion="drift"][data-texture-drift="soft"] .section-pattern-layer,
-[data-texture-drift="soft"][data-texture-motion="drift"] .section-pattern-layer {
-  animation-name: sec-tex-drift-soft;
-  animation-duration: 5.5s;
-  animation-timing-function: ease-in-out;
-  animation-direction: alternate;
-}
-[data-texture-motion="drift"][data-texture-drift="diag"] .section-pattern-layer,
-[data-texture-drift="diag"][data-texture-motion="drift"] .section-pattern-layer {
-  animation-name: sec-tex-drift-diag;
-}
-
-[data-texture-motion="follow"] .section-pattern-layer {
-  transition: transform 0.08s linear;
-  animation: sec-tex-idle 1.2s steps(2) infinite;
-}
-
-@keyframes sec-tex-flicker {
-  0% {
-    background-position: 0 0, 0 0;
-    transform: translate3d(var(--tex-px), var(--tex-py), 0);
-    filter: contrast(calc(0.4 + var(--texture-gain, 1) * 0.95)) brightness(1);
-    opacity: 1;
-  }
-  50% {
-    background-position: calc(-28px * var(--tex-flick, 1)) calc(22px * var(--tex-flick, 1)), calc(20px * var(--tex-flick, 1)) calc(-24px * var(--tex-flick, 1));
-    transform: translate3d(calc(var(--tex-px) - 2.5% * var(--tex-flick, 1)), calc(var(--tex-py) + 2.5% * var(--tex-flick, 1)), 0);
-    filter: contrast(calc(0.85 + var(--texture-gain, 1) * 1.35)) brightness(1.12);
-    opacity: calc(0.55 + 0.15 * var(--tex-flick, 1));
-  }
-  100% {
-    background-position: calc(22px * var(--tex-flick, 1)) calc(-16px * var(--tex-flick, 1)), calc(-24px * var(--tex-flick, 1)) calc(14px * var(--tex-flick, 1));
-    transform: translate3d(var(--tex-px), var(--tex-py), 0);
-    filter: contrast(calc(0.4 + var(--texture-gain, 1) * 0.95)) brightness(1);
-    opacity: 1;
-  }
-}
-
-@keyframes sec-tex-drift-diag {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: calc(160px + 70px * var(--texture-gain, 1)) calc(120px + 50px * var(--texture-gain, 1)), calc(-120px - 50px * var(--texture-gain, 1)) calc(140px + 55px * var(--texture-gain, 1)); }
-}
-@keyframes sec-tex-drift-x {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: calc(200px + 80px * var(--texture-gain, 1)) 0, calc(-160px - 60px * var(--texture-gain, 1)) 0; }
-}
-@keyframes sec-tex-drift-y {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 calc(200px + 80px * var(--texture-gain, 1)), 0 calc(-160px - 60px * var(--texture-gain, 1)); }
-}
-@keyframes sec-tex-drift-soft {
-  0% { background-position: 0 0, 0 0; transform: translate3d(var(--tex-px), var(--tex-py), 0); }
-  100% { background-position: 48px 32px, -36px 40px; transform: translate3d(calc(var(--tex-px) + 1%), calc(var(--tex-py) - 1%), 0); }
-}
-
-@keyframes sec-tex-idle {
-  0%, 100% { filter: contrast(calc(0.55 + var(--texture-gain, 1) * 0.85)); }
-  50% { filter: contrast(calc(0.7 + var(--texture-gain, 1) * 0.95)); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-texture-motion] .section-pattern-layer {
-    animation: none !important;
-  }
-}
 
 /* Inactive / N/A inspector groups (zero header buttons, etc.) */
 #panel-inspector .control-group.is-inactive {
@@ -7706,32 +6257,6 @@ body > .kit-dd-menu[data-about-tex] .about-tex-sample,
 }
 
 /* Area Strength sliders — keep thumbs inside the panel (no right cutoff) */
-.scrim-edge-grid {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-  gap: 10px 12px !important;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  padding-inline: 2px 6px;
-  overflow: hidden;
-}
-.scrim-edge-grid > label {
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.scrim-edge-grid input[type="range"] {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
 #panel-inspector .media-layer-stack .control-group,
 #panel-inspector .media-layer-stack .scrim-edge-grid {
   min-width: 0;
@@ -7899,7 +6424,6 @@ body > .kit-dd-menu .material-symbols-outlined {
 }
 
 #kit-drawer .cfg-panels .button-group:has(> .tier-btn) > .tier-btn.active:not(.shade-seg):not(.color-chip),
-#kit-drawer .cfg-panels .button-group:has(> .tier-btn) > .tier-btn[aria-pressed="true"]:not(.shade-seg):not(.color-chip),
 #panel-inspector .button-group > .tier-btn.active:not(.shade-seg):not(.color-chip) {
   background: var(--ed-select, #fff) !important;
   color: var(--ed-select-on, #17191c) !important;
