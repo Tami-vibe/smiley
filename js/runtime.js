@@ -1,8 +1,24 @@
-import { MS, sectorIcon, railIcons, setAutoBodyIcons } from "./sector-icons.js";
 import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite, FONT_TIERS, hexToRgb, SHADE_STEPS, rampFromHex, ROUTES, applyRecipe, populateServiceDetail } from "./storage.js";
 /* =========================================================
    PANDINO RUNTIME: DECLARATIVE DATA-MAPPER ENGINE (DAISYUI 5)
    ========================================================= */
+export const MS = { brand: 'palette', header: 'toolbar', icons: 'interests', hero: 'web_asset', services: 'handyman', about: 'history_edu', repairs: 'healing', more: 'widgets', type: 'text_fields', assets: 'perm_media', plus: 'add', page: 'description', all: 'home', templates: 'dashboard_customize', privacy: 'shield', terms: 'gavel', cookie: 'cookie', trust: 'verified', reviews: 'star', quote: 'request_quote', faq: 'help', promo: 'sell', contact: 'map', 'final-cta': 'ads_click', footer: 'bottom_navigation', home: 'home', emergency: 'emergency' };
+export const railIcons = { override: {} };
+export function setAutoBodyIcons(on) { railIcons.override = on ? { services: 'car_crash', repairs: 'shield_with_heart', emergency: 'car_repair' } : {}; }
+export function sectorIcon(id) { return railIcons.override[id] || MS[id] || 'description'; }
+export function mountWarHero(root = document) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    root.querySelectorAll(".war-hero figure video").forEach(video => {
+        video.loop = false; video.removeAttribute("loop");
+        if (reduce) { video.removeAttribute("autoplay"); video.pause(); return; }
+        video.closest("figure")?.addEventListener("pointermove", () => {
+            if (!video.paused && !video.ended) return;
+            try { video.currentTime = 0; } catch (_) {}
+            video.play()?.catch?.(() => {});
+        });
+    });
+}
+mountWarHero();
 // --- 1. Canvas Target Resolution & 1:1 Bindings ---
 export function getCanvasDocument() {
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
@@ -33,9 +49,6 @@ export function byId(id) {
     const doc = getCanvasDocument();
     return doc?.getElementById(id) || document.getElementById(id);
 }
-export function normalizeSecId(id) {
-    return id || "";
-}
 export function heroSections() {
     return [...getCanvasDocument().querySelectorAll("main.heroes-container > .hero")];
 }
@@ -59,7 +72,7 @@ export function applyBrandPalette(hex) {
     if (contrastEl) contrastEl.textContent = contrastFg === "#ffffff" ? "White text" : "Dark text";
     const hexNorm = hex.toLowerCase();
     document.querySelectorAll("[data-color].color-btn").forEach(btn => {
-        const m = (btn.getAttribute("style") || "").match(/#([0-9a-fA-F]{6})/), on = m ? ("#" + m[1].toLowerCase() === hexNorm) : false;
+        const bHex = btn.dataset.hex?.toLowerCase() || (btn.getAttribute("style") || "").match(/#([0-9a-fA-F]{6})/)?.[0]?.toLowerCase(), on = bHex === hexNorm;
         ["active", "border-2", "border-white", "ring-2", "ring-primary", "shadow-xs"].forEach(c => btn.classList.toggle(c, on));
         btn.classList.toggle("border-white/20", !on);
     });
@@ -131,7 +144,7 @@ export function applyHeroPanel(pos) {
 export function applyHeroPanelStyle(style) {
     state.panelStyle = style; safeWriteSiteData();
     getCanvasBodyTargets().forEach(b => ["solid", "outline"].forEach(k => b.classList.toggle("panel-" + k, style === k)));
-    syncActiveGroup("[data-pstyle]", "data-pstyle", style);
+    syncActiveGroup("[data-pvariant], [data-pstyle]", "data-pvariant", style);
 }
 export function applyCtaCount(count) {
     state.ctas = count; safeWriteSiteData();
@@ -306,6 +319,7 @@ const DISPATCH_MAP = {
     hmhero: v => setHeroIndex(Number(v)),
     rev: v => applyReviews(v),
     panel: v => applyHeroPanel(v),
+    pvariant: v => applyHeroPanelStyle(v),
     pstyle: v => applyHeroPanelStyle(v),
     ctacount: v => applyCtaCount(Number(v)),
     painsCtacount: v => applyPainsCtaCount(Number(v)),
@@ -323,7 +337,7 @@ const DISPATCH_MAP = {
     opt: (v, btn) => {
         const val = btn.dataset.val;
         if (v === "type") return setHeaderStyle(val);
-        if (v === "style") { state.headerSurface = val; safeWriteSiteData(); syncActiveGroup('[data-opt="style"]', "data-val", val); getCanvasDocument().querySelectorAll(".site-header").forEach(h => h.setAttribute("data-style", val)); }
+        if (v === "surface" || v === "style") { state.headerSurface = val; safeWriteSiteData(); syncActiveGroup('[data-opt="surface"], [data-opt="style"]', "data-val", val); getCanvasDocument().querySelectorAll(".site-header, #header").forEach(h => { h.setAttribute("data-surface", val); h.setAttribute("data-style", val); }); }
         else if (v === "count") { const n = Number(val); syncActiveGroup('[data-opt="count"]', "data-val", n); getCanvasDocument().querySelectorAll(".site-header nav a").forEach((a, i) => a.style.display = i < n ? "" : "none"); }
         else if (v === "buttons") { syncActiveGroup('[data-opt="buttons"]', "data-val", val); getCanvasDocument().querySelectorAll(".site-header .sh-cta, .site-header .sh-actions").forEach(el => el.style.display = val === "none" ? "none" : "flex"); }
     },
@@ -377,7 +391,7 @@ function initGlobalDispatchListeners() {
         for (const k in btn.dataset) { if (DISPATCH_MAP[k]) return DISPATCH_MAP[k](btn.dataset[k], btn); }
         if (btn.classList.contains("color-btn")) {
             e.stopPropagation();
-            let hex = (btn.getAttribute("style") || "").match(/#([0-9a-fA-F]{6})/)?.[0];
+            let hex = btn.dataset.hex || (btn.getAttribute("style") || "").match(/#([0-9a-fA-F]{6})/)?.[0];
             if (!hex) {
                 const comp = window.getComputedStyle(btn).backgroundColor, rgbM = comp.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
                 if (rgbM) hex = "#" + [1, 2, 3].map(i => parseInt(rgbM[i], 10).toString(16).padStart(2, "0")).join("");
@@ -503,7 +517,7 @@ export function initRuntime() {
     if (saved) Object.assign(state, saved);
     const sumBrand = document.getElementById("sum-brand");
     if (sumBrand && state.brandColor) {
-        const matchingBtn = document.querySelector(`[data-color].color-btn[style*="${state.brandColor}"]`);
+        const matchingBtn = document.querySelector(`[data-color].color-btn[data-hex="${state.brandColor}"]`) || document.querySelector(`[data-color].color-btn[style*="${state.brandColor}"]`);
         if (matchingBtn?.dataset.color) sumBrand.textContent = matchingBtn.dataset.color.charAt(0).toUpperCase() + matchingBtn.dataset.color.slice(1);
     }
     initGlobalDispatchListeners();
