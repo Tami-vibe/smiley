@@ -1,6 +1,4 @@
 import { MS, sectorIcon, railIcons, setAutoBodyIcons } from './sector-icons.js';
-import { kitMode as kitModeCore, clearDrawerWidth as clearDrawerWidthCore, applyMode as applyModeCore, createRefresh } from './state-mode.js?v=hide-editor';
-import { mountShowcase } from './showcase.js';
 import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite } from './storage.js';
 
 /* =========================================================
@@ -1903,9 +1901,6 @@ export function initRuntime() {
     // 4. Initial state mappings
     syncCanvasState();
     syncBuilderUiControls();
-
-    // 5. Mount showcase if showcase container is present
-    mountShowcase();
 
     // 6. Expose global hooks for backward compatibility
     window.__heroMedia = {
