@@ -2571,7 +2571,8 @@ body[data-mode="editor"] .kit-copy input:not([type="file"]),
             [data-sec="footer"]
         ) .sp-picker .pit-stage .pit-slot-card {
             max-height: none !important;
-            /* no height: — would beat fit()’s scaled inline height */ !important}
+            /* no height: — would beat fit()’s scaled inline height */
+        }
 
 /* panel-more Styles: nest flex so stage X-scrolls, controls Y-scroll, Save pins */
 
