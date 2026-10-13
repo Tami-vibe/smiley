@@ -3881,12 +3881,12 @@ a.btn {
 
 .ks-pains .pains-container,
 .ks-pains > div {
-  max-width: 1320px !important;
-  margin-inline: auto !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
+  max-width: 72rem;
+  margin-inline: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .ks-pains .pains-grid {
