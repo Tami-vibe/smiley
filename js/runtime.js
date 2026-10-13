@@ -1,7 +1,7 @@
 import { MS, sectorIcon, railIcons, setAutoBodyIcons } from './sector-icons.js';
 import { kitMode as kitModeCore, clearDrawerWidth as clearDrawerWidthCore, applyMode as applyModeCore, createRefresh } from './state-mode.js?v=hide-editor';
 import { mountShowcase } from './showcase.js';
-import { readSiteData, writeSiteData } from './storage.js';
+import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite } from './storage.js';
 
 /* =========================================================
    PANDINO RUNTIME: DECLARATIVE DATA-MAPPER ENGINE (DAISYUI 5)
@@ -31,6 +31,31 @@ export function getCanvasDocument() {
     return document;
 }
 
+export function getCanvasTargets() {
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    if (frame) {
+        try {
+            const doc = frame.contentDocument || frame.contentWindow?.document;
+            if (doc && doc.documentElement) return [doc.documentElement];
+        } catch (e) {}
+        return [];
+    }
+    return [document.documentElement];
+}
+
+export function getCanvasBodyTargets() {
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    if (frame) {
+        try {
+            const doc = frame.contentDocument || frame.contentWindow?.document;
+            if (doc && doc.body) return [doc.body];
+        } catch (e) {}
+        return [];
+    }
+    return [document.body];
+}
+
+let lastCanvasHeight = 0;
 export function syncCanvasHeight() {
     const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
     if (!frame) return;
@@ -38,7 +63,10 @@ export function syncCanvasHeight() {
         const doc = frame.contentDocument || frame.contentWindow?.document;
         if (doc && doc.body) {
             const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 700);
-            frame.style.height = `${h}px`;
+            if (Math.abs(h - lastCanvasHeight) > 15 && h < 25000) {
+                lastCanvasHeight = h;
+                frame.style.height = `${h}px`;
+            }
         }
     } catch (e) {}
 }
@@ -159,11 +187,16 @@ export function applyBrandPalette(hex) {
     if (!hex) return;
     const ramp = rampFromHex(hex);
     if (!ramp) return;
-    const targets = [document.documentElement];
-    const canvasDoc = getCanvasDocument();
-    if (canvasDoc && canvasDoc.documentElement && canvasDoc !== document) {
-        targets.push(canvasDoc.documentElement);
+    const targets = getCanvasTargets();
+
+    // Relative luminance calculation for intelligent text contrast
+    const rgb = hexToRgb(hex);
+    let contrastFg = '#ffffff';
+    if (rgb) {
+        const lum = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+        contrastFg = lum > 0.62 ? '#17191c' : '#ffffff';
     }
+
     targets.forEach(root => {
         SHADE_STEPS.forEach(step => {
             if (ramp[step]) {
@@ -176,7 +209,57 @@ export function applyBrandPalette(hex) {
         root.style.setProperty('--primary-color', p500);
         root.style.setProperty('--active-500', p500);
         root.style.setProperty('--p', p500);
+        root.style.setProperty('--pill-accent', p500);
+        root.style.setProperty('--tone-mid', ramp['700'] || p500);
         root.style.setProperty('--brand-ink', hex);
+        root.style.setProperty('--brand-contrast-fg', contrastFg);
+        root.style.setProperty('--color-primary-content', contrastFg);
+    });
+
+    state.brandColor = hex;
+    try { writeSiteData(state); } catch (e) {}
+
+    // Update Brand Shade Swatch in UI
+    const bshadeSwatch = document.getElementById('bshadeSwatch');
+    if (bshadeSwatch) {
+        bshadeSwatch.style.background = hex;
+        bshadeSwatch.style.color = contrastFg;
+    }
+    const bshadeHex = document.getElementById('bshadeHex');
+    if (bshadeHex) bshadeHex.textContent = hex;
+    const bshadeContrast = document.getElementById('bshadeContrast');
+    if (bshadeContrast) bshadeContrast.textContent = contrastFg === '#ffffff' ? 'White text' : 'Dark text';
+}
+
+export function applyColorScheme(scheme) {
+    if (!scheme) return;
+    state.scheme = scheme;
+    try { writeSiteData(state); } catch (e) {}
+    const roots = getCanvasTargets();
+    const bodies = getCanvasBodyTargets();
+
+    const isLight = (scheme === 'white');
+    const themeName = isLight ? 'light' : 'dark';
+
+    roots.forEach(r => {
+        r.setAttribute('data-scheme', scheme);
+        r.setAttribute('data-theme', themeName);
+    });
+
+    bodies.forEach(b => {
+        if (!b) return;
+        b.classList.remove('scheme-white', 'scheme-dark', 'scheme-brand');
+        b.classList.add(`scheme-${scheme}`);
+        b.setAttribute('data-theme', themeName);
+    });
+
+    const canvasFrame = document.querySelector('.kit-canvas-frame');
+    if (canvasFrame) {
+        canvasFrame.setAttribute('data-theme', themeName);
+    }
+
+    document.querySelectorAll('[data-scheme]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.scheme === scheme);
     });
 }
 
@@ -191,11 +274,7 @@ export const FONT_TIERS = {
 
 export function applyTypographyPreset(tier) {
     const fonts = FONT_TIERS[tier] || FONT_TIERS.tier1;
-    const targets = [document.documentElement];
-    const canvasDoc = getCanvasDocument();
-    if (canvasDoc && canvasDoc.documentElement && canvasDoc !== document) {
-        targets.push(canvasDoc.documentElement);
-    }
+    const targets = getCanvasTargets();
     targets.forEach(root => {
         root.style.setProperty('--headline-font', fonts.headline);
         root.style.setProperty('--body-font', fonts.body);
@@ -209,6 +288,9 @@ export function applyTypographyPreset(tier) {
         b.classList.toggle('btn-primary', active);
         b.setAttribute('aria-pressed', String(active));
     });
+
+    state.typographyTier = tier;
+    try { writeSiteData(state); } catch (e) {}
 }
 
 // --- 4. Reactive State Model ---
@@ -222,8 +304,20 @@ const state = {
     panel: 'bottom',
     panelStyle: 'solid',
     brandColor: '#16a34a',
-    theme: 'dark'
+    theme: 'dark',
+    painsLook: 'a',
+    painsAlign: 'center',
+    accountName: '',
+    accountEmail: ''
 };
+
+let isSyncing = false;
+export function safeWriteSiteData() {
+    if (isSyncing) return;
+    try {
+        writeSiteData(state);
+    } catch (e) {}
+}
 
 // --- 5. Hero Data-Mapper ---
 const LAYOUT_HINTS = {
@@ -240,6 +334,7 @@ export function setHeroIndex(idx) {
     if (!heroes.length) return;
     idx = Math.max(0, Math.min(idx, heroes.length - 1));
     state.heroIndex = idx;
+    safeWriteSiteData();
 
     heroes.forEach((hero, i) => {
         const on = i === idx;
@@ -280,8 +375,8 @@ export function setHeroIndex(idx) {
 
 export function applyReviews(style) {
     state.reviews = style;
-    const doc = getCanvasDocument();
-    [doc.body, document.body].forEach(b => {
+    try { writeSiteData(state); } catch (e) {}
+    getCanvasBodyTargets().forEach(b => {
         if (!b) return;
         b.classList.toggle('reviews-on', style !== 'off');
         b.classList.toggle('reviews-white', style === 'white');
@@ -296,31 +391,37 @@ export function applyReviews(style) {
 
 export function applyHeroPanel(pos) {
     state.panel = pos;
-    const doc = getCanvasDocument();
+    try { writeSiteData(state); } catch (e) {}
+    const canvasBodies = getCanvasBodyTargets();
     ['off', 'bottom', 'left', 'right'].forEach(v => {
-        doc.body?.classList.toggle('panel-' + v, pos === v);
-        document.body.classList.toggle('panel-' + v, pos === v);
+        canvasBodies.forEach(b => b.classList.toggle('panel-' + v, pos === v));
     });
     document.querySelectorAll('[data-panel]').forEach(b => {
         const on = b.dataset.panel === pos;
         b.classList.toggle('active', on);
         b.classList.toggle('btn-primary', on);
     });
+    const doc = getCanvasDocument();
     doc.querySelectorAll('.biz-panel, .hb-info').forEach(panel => {
-        panel.hidden = (pos === 'off');
+        if (pos === 'off') {
+            panel.setAttribute('hidden', '');
+            panel.hidden = true;
+        } else {
+            panel.removeAttribute('hidden');
+            panel.hidden = false;
+        }
         panel.classList.toggle('self-end', pos === 'bottom');
     });
-    document.querySelectorAll('.biz-panel, .hb-info').forEach(panel => {
-        panel.hidden = (pos === 'off');
-        panel.classList.toggle('self-end', pos === 'bottom');
+    doc.querySelectorAll('.hero').forEach(hero => {
+        hero.setAttribute('data-panel', pos);
     });
     syncCanvasHeight();
 }
 
 export function applyHeroPanelStyle(style) {
     state.panelStyle = style;
-    const doc = getCanvasDocument();
-    [doc.body, document.body].forEach(b => {
+    try { writeSiteData(state); } catch (e) {}
+    getCanvasBodyTargets().forEach(b => {
         if (!b) return;
         b.classList.toggle('panel-solid', style === 'solid');
         b.classList.toggle('panel-outline', style === 'outline');
@@ -334,6 +435,7 @@ export function applyHeroPanelStyle(style) {
 
 export function applyCtaCount(count) {
     state.ctas = count;
+    try { writeSiteData(state); } catch (e) {}
     heroSections().forEach(hero => {
         const primary = hero.querySelector('.cta-primary:not(.cta-second)');
         const second = hero.querySelector('.cta-second');
@@ -345,14 +447,41 @@ export function applyCtaCount(count) {
         b.classList.toggle('active', on);
         b.classList.toggle('btn-primary', on);
     });
+    if (state.painsCtas === undefined) {
+        applyPainsCtaCount(count, false);
+    }
+    syncCanvasHeight();
+}
+
+export function applyPainsCtaCount(count, persist = true) {
+    state.painsCtas = count;
+    if (persist) { try { writeSiteData(state); } catch (e) {} }
+    const doc = getCanvasDocument();
+    const pains = doc?.getElementById('pains') || doc?.querySelector('.ks-pains');
+    if (pains) {
+        const ctas = pains.querySelector('.pains-ctas');
+        const primary = pains.querySelector('.pains-cta-primary, .cta-primary:not(.cta-second)');
+        const second = pains.querySelector('.pains-cta-second, .cta-second');
+        if (ctas) {
+            ctas.style.display = count > 0 ? 'flex' : 'none';
+            ctas.setAttribute('data-pains-ctas', String(count));
+        }
+        if (primary) primary.style.display = count >= 1 ? '' : 'none';
+        if (second) second.style.display = count >= 2 ? '' : 'none';
+    }
+    document.querySelectorAll('[data-pains-ctacount]').forEach(b => {
+        const on = Number(b.dataset.painsCtacount) === count;
+        b.classList.toggle('active', on);
+        b.classList.toggle('btn-primary', on);
+    });
     syncCanvasHeight();
 }
 
 // --- 6. Navigation & Header Data-Mapper ---
 export function setHeaderSticky(sticky) {
     state.headerSticky = !!sticky;
-    const doc = getCanvasDocument();
-    [doc.body, document.body].forEach(b => {
+    try { writeSiteData(state); } catch (e) {}
+    getCanvasBodyTargets().forEach(b => {
         if (!b) return;
         b.classList.toggle('is-sticky-header', state.headerSticky);
         b.dataset.stickyHeader = String(state.headerSticky);
@@ -368,6 +497,7 @@ export function setHeaderSticky(sticky) {
 
 export function setHeaderStyle(style) {
     state.headerStyle = style;
+    try { writeSiteData(state); } catch (e) {}
     const doc = getCanvasDocument();
     [doc, document].forEach(d => {
         d.querySelectorAll('.site-header').forEach(h => {
@@ -379,43 +509,100 @@ export function setHeaderStyle(style) {
     });
 }
 
-// --- 7. Inspector Tabs & Drawer Rail Data-Mapper ---
-export function activateTab(tabId) {
-    const tabs = document.querySelectorAll('.cfg-tab');
-    const panels = document.querySelectorAll('.cfg-panel');
-    let matchedPanel = null;
+export function scrollToCanvasSection(secId) {
+    if (!secId) return;
+    const doc = getCanvasDocument();
+    const alias = ID_ALIASES[secId];
+    const target = doc.getElementById(secId) || (alias ? doc.getElementById(alias) : null);
+    if (!target) return;
 
-    tabs.forEach(t => {
-        const id = t.id.replace(/^(tab-|rail-)/, '');
-        const on = (t.id === tabId || id === tabId || t.dataset.tab === tabId || t.dataset.sec === tabId);
+    if (target.hidden) {
+        target.hidden = false;
+        syncCanvasHeight();
+    }
+
+    // Highlight target section inside canvas
+    try {
+        doc.querySelectorAll('.is-canvas-selected').forEach(el => el.classList.remove('is-canvas-selected'));
+        target.classList.add('is-canvas-selected');
+    } catch (e) {}
+
+    const scroller = document.querySelector('.kit-canvas-scroll');
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    
+    if (scroller && frame) {
+        const scrollerRect = scroller.getBoundingClientRect();
+        const frameRect = frame.getBoundingClientRect();
+        const frameTop = frameRect.top - scrollerRect.top + scroller.scrollTop;
+        const targetTopInFrame = target.getBoundingClientRect().top + (doc.defaultView?.scrollY || doc.documentElement.scrollTop || 0);
+        const targetScroll = frameTop + targetTopInFrame - 24;
+        scroller.scrollTo({
+            top: Math.max(0, targetScroll),
+            behavior: 'smooth'
+        });
+    } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// --- 7. Inspector Tabs & In-Place Accordion Data-Mapper ---
+export function activateTab(tabId, opts = {}) {
+    if (!tabId) return;
+    let cleanId = String(tabId).replace(/^(tab-|rail-|acc-)/, '').toLowerCase();
+    
+    // Normalization mapping
+    const sectionMap = {
+        'type': 'typography',
+        'font': 'typography',
+        'fonts': 'typography',
+        'color': 'colors',
+        'colours': 'colors',
+        'brand': 'colors',
+        'repairs': 'solutions',
+        'trust-bar': 'trust',
+        'final-cta': 'cta',
+        'cta-final': 'cta'
+    };
+    if (sectionMap[cleanId]) cleanId = sectionMap[cleanId];
+
+    // Find the accordion element in left sidebar
+    const targetAcc = document.getElementById('acc-' + cleanId) || 
+                      document.querySelector(`.more-row[data-sec="${cleanId}"]`) ||
+                      document.getElementById(tabId);
+
+    if (targetAcc) {
+        // Open parent bucket if enclosed
+        const bucket = targetAcc.closest('.kit-bucket');
+        if (bucket) bucket.open = true;
+
+        // Open target accordion if it's a details element
+        if (targetAcc.tagName.toLowerCase() === 'details') {
+            targetAcc.open = true;
+        }
+
+        // Smooth scroll to the target controls inside left sidebar
+        targetAcc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Highlight ring animation to visually guide user
+        targetAcc.classList.add('ring-2', 'ring-primary');
+        setTimeout(() => targetAcc.classList.remove('ring-2', 'ring-primary'), 1400);
+    }
+
+    // Set active states on buttons/tabs
+    document.querySelectorAll('.cfg-tab').forEach(t => {
+        const tid = t.id.replace(/^(tab-|rail-)/, '');
+        const on = (t.id === tabId || tid === cleanId || t.dataset.sec === cleanId);
         t.classList.toggle('is-active', on);
         t.setAttribute('aria-selected', String(on));
-        if (on) {
-            const ctrl = t.getAttribute('aria-controls') || t.dataset.kitPanel || ('panel-' + (t.dataset.tab || id));
-            matchedPanel = document.getElementById(ctrl);
-            if (!matchedPanel) {
-                // Fallback resolution for sub-sections and aliases
-                if (t.dataset.tab === 'more' || ['faq', 'pains', 'trust', 'reviews', 'quote', 'promo', 'final-cta', 'contact', 'footer', 'all'].includes(t.dataset.sec)) {
-                    matchedPanel = document.getElementById('panel-more');
-                } else if (t.dataset.tab === 'about' || t.dataset.sec === 'about') {
-                    matchedPanel = document.getElementById('panel-hero');
-                } else if (t.dataset.tab === 'repairs' || t.dataset.sec === 'repairs') {
-                    matchedPanel = document.getElementById('panel-services');
-                } else if (t.dataset.sec === 'assets') {
-                    matchedPanel = document.getElementById('panel-icons');
-                }
-            }
-        }
     });
 
-    if (matchedPanel) {
-        panels.forEach(p => {
-            const isTarget = (p === matchedPanel);
-            p.hidden = !isTarget;
-            p.classList.toggle('hidden', !isTarget);
-            p.style.display = isTarget ? 'flex' : 'none';
-        });
-        matchedPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Scroll canvas to target section if not initiated from canvas click
+    if (!opts.fromCanvas) {
+        let canvasTarget = cleanId;
+        if (['header', 'colors', 'typography'].includes(cleanId)) {
+            canvasTarget = cleanId === 'header' ? 'header' : 'hero';
+        }
+        scrollToCanvasSection(canvasTarget);
     }
 }
 
@@ -429,11 +616,18 @@ function initHeroListeners() {
     // Headline input live mapping
     const promise = document.getElementById('hero-promise');
     if (promise) {
+        const deferredHeroPromise = createDeferredWrite(() => {
+            state.heroPromise = promise.value;
+            try { writeSiteData(state); } catch (e) {}
+        }, 150);
         promise.addEventListener('input', e => {
+            const val = e.target.value;
             const doc = getCanvasDocument();
             const hero = doc.querySelector('main.heroes-container > .hero.is-live-hero') || doc.querySelector('main.heroes-container > .hero');
             const h1 = hero?.querySelector('.hero-content h1');
-            if (h1) h1.textContent = e.target.value;
+            if (h1) h1.textContent = val;
+            state.heroPromise = val;
+            deferredHeroPromise();
         });
     }
 
@@ -446,10 +640,11 @@ function initHeroListeners() {
     document.querySelectorAll('[data-halign]').forEach(b => {
         b.addEventListener('click', () => {
             const align = b.dataset.halign;
-            const doc = getCanvasDocument();
+            state.halign = align;
+            try { writeSiteData(state); } catch (e) {}
+            const canvasBodies = getCanvasBodyTargets();
             ['left', 'center', 'right'].forEach(a => {
-                doc.body?.classList.toggle('hero-halign-' + a, a === align);
-                document.body.classList.toggle('hero-halign-' + a, a === align);
+                canvasBodies.forEach(b => b.classList.toggle('hero-halign-' + a, a === align));
             });
             document.querySelectorAll('[data-halign]').forEach(btn => btn.classList.toggle('active', btn === b));
         });
@@ -460,6 +655,11 @@ function initHeroListeners() {
         b.addEventListener('click', () => applyCtaCount(Number(b.dataset.ctacount)));
     });
 
+    // Pains & Problems CTA buttons count
+    document.querySelectorAll('[data-pains-ctacount]').forEach(b => {
+        b.addEventListener('click', () => applyPainsCtaCount(Number(b.dataset.painsCtacount)));
+    });
+
     // Panel position & style
     document.querySelectorAll('[data-panel]').forEach(b => {
         b.addEventListener('click', () => applyHeroPanel(b.dataset.panel));
@@ -467,6 +667,55 @@ function initHeroListeners() {
     document.querySelectorAll('[data-pstyle]').forEach(b => {
         b.addEventListener('click', () => applyHeroPanelStyle(b.dataset.pstyle));
     });
+
+    // Secondary Hero Toggles
+    const toggleHeroMarquee = document.getElementById('toggleHeroMarquee');
+    if (toggleHeroMarquee) {
+        toggleHeroMarquee.addEventListener('change', () => {
+            state.heroMarquee = toggleHeroMarquee.checked;
+            try { writeSiteData(state); } catch (e) {}
+            const doc = getCanvasDocument();
+            const ls = doc.getElementById('logostrip');
+            if (ls) ls.hidden = !toggleHeroMarquee.checked;
+            syncCanvasHeight();
+        });
+    }
+
+    const toggleHeroReveal = document.getElementById('toggleHeroReveal');
+    if (toggleHeroReveal) {
+        toggleHeroReveal.addEventListener('change', () => {
+            state.heroReveal = toggleHeroReveal.checked;
+            try { writeSiteData(state); } catch (e) {}
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.hero').forEach(h => {
+                h.classList.toggle('hm-reveal', toggleHeroReveal.checked);
+            });
+        });
+    }
+
+    const toggleHeroBlur = document.getElementById('toggleHeroBlur');
+    if (toggleHeroBlur) {
+        toggleHeroBlur.addEventListener('change', () => {
+            state.heroBlur = toggleHeroBlur.checked;
+            try { writeSiteData(state); } catch (e) {}
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.hero-content').forEach(hc => {
+                hc.classList.toggle('backdrop-blur-md', toggleHeroBlur.checked);
+            });
+        });
+    }
+
+    const toggleHeroLogostrip = document.getElementById('toggleHeroLogostrip');
+    if (toggleHeroLogostrip) {
+        toggleHeroLogostrip.addEventListener('change', () => {
+            state.heroMarquee = toggleHeroLogostrip.checked;
+            try { writeSiteData(state); } catch (e) {}
+            const doc = getCanvasDocument();
+            const ls = doc.getElementById('logostrip');
+            if (ls) ls.hidden = !toggleHeroLogostrip.checked;
+            syncCanvasHeight();
+        });
+    }
 
     // Hero guide accordion (if guide triggers exist)
     document.querySelectorAll('.hero-guide-trigger').forEach(trigger => {
@@ -491,9 +740,35 @@ function initDrawerAndRailListeners() {
         p.style.display = p.hidden ? 'none' : 'flex';
     });
 
+    // In-place section accordions toggle listener
+    document.querySelectorAll('.kit-bucket details').forEach(d => {
+        d.addEventListener('toggle', () => {
+            if (d.open) {
+                const sec = d.dataset.sec || d.id.replace(/^acc-/, '');
+                if (sec) {
+                    let canvasSec = sec;
+                    if (['colors', 'typography'].includes(canvasSec)) canvasSec = 'hero';
+                    scrollToCanvasSection(canvasSec);
+                }
+            }
+        });
+    });
+
     // Drawer tabs
     document.querySelectorAll('.cfg-tab').forEach(tab => {
-        tab.addEventListener('click', () => activateTab(tab.id));
+        tab.addEventListener('click', (e) => {
+            e.stopPropagation();
+            activateTab(tab.id);
+        });
+    });
+
+    // Full row clickability for sidebar items (except eyes)
+    document.querySelectorAll('.kit-row').forEach(row => {
+        row.addEventListener('click', (e) => {
+            if (e.target.closest('.kit-eye') || e.target.closest('input[type="checkbox"]')) return;
+            const btn = row.querySelector('.cfg-tab');
+            if (btn) activateTab(btn.id || row.dataset.sec);
+        });
     });
 
     // Controls collapse button
@@ -503,7 +778,14 @@ function initDrawerAndRailListeners() {
             const cfg = document.getElementById('cfg');
             const isCol = cfg?.classList.toggle('is-collapsed');
             collapseBtn.setAttribute('aria-expanded', String(!isCol));
-            collapseBtn.textContent = isCol ? 'Show controls' : 'Hide controls';
+            collapseBtn.dataset.tip = isCol ? 'Show controls' : 'Hide controls';
+            collapseBtn.setAttribute('aria-label', isCol ? 'Show controls' : 'Hide controls');
+            const lbl = document.getElementById('cfgCollapseLabel');
+            if (lbl) {
+                lbl.textContent = isCol ? 'Show' : 'Hide controls';
+            }
+            const ic = collapseBtn.querySelector('.material-symbols-outlined');
+            if (ic) ic.textContent = isCol ? 'visibility' : 'visibility_off';
         });
     }
 
@@ -549,8 +831,12 @@ function initDrawerAndRailListeners() {
             const canvasDoc = getCanvasDocument();
             if (canvasDoc && canvasDoc.documentElement) {
                 canvasDoc.documentElement.setAttribute('data-theme', theme);
+                if (canvasDoc.body) canvasDoc.body.setAttribute('data-theme', theme);
             }
+            const canvasFrame = document.querySelector('.kit-canvas-frame');
+            if (canvasFrame) canvasFrame.setAttribute('data-theme', theme);
             state.theme = theme;
+            try { writeSiteData(state); } catch (e) {}
         });
     }
 
@@ -565,11 +851,25 @@ function initDrawerAndRailListeners() {
             });
             const scroller = document.querySelector('.kit-canvas-scroll');
             const frame = document.querySelector('.kit-canvas-frame');
+            const deviceWrapper = document.querySelector('.kit-canvas-device');
             if (scroller) scroller.dataset.device = dev;
+            if (deviceWrapper) {
+                deviceWrapper.dataset.device = dev;
+                if (dev === 'desktop') {
+                    deviceWrapper.style.maxWidth = '';
+                    deviceWrapper.style.width = '100%';
+                } else if (dev === 'tablet') {
+                    deviceWrapper.style.maxWidth = '768px';
+                    deviceWrapper.style.width = '768px';
+                } else if (dev === 'phone') {
+                    deviceWrapper.style.maxWidth = '390px';
+                    deviceWrapper.style.width = '390px';
+                }
+            }
             if (frame) {
                 frame.dataset.device = dev;
                 if (dev === 'desktop') {
-                    frame.style.maxWidth = '1024px';
+                    frame.style.maxWidth = '';
                     frame.style.width = '100%';
                 } else if (dev === 'tablet') {
                     frame.style.maxWidth = '768px';
@@ -583,16 +883,115 @@ function initDrawerAndRailListeners() {
         });
     });
 
-    // Settings modal toggle
+    // Settings modal & AccountStudio wiring
     const settingsBtn = document.getElementById('kitSettings');
     const accountView = document.getElementById('kit-account');
     if (settingsBtn && accountView) {
-        settingsBtn.addEventListener('click', () => {
-            accountView.hidden = !accountView.hidden;
-        });
-        document.querySelector('.kit-account-back')?.addEventListener('click', () => {
+        // Load initial persisted values
+        try {
+            const rawAcct = localStorage.getItem('pandino_account');
+            if (rawAcct) {
+                const acct = JSON.parse(rawAcct);
+                if (acct.name) state.accountName = acct.name;
+                if (acct.email) state.accountEmail = acct.email;
+            }
+        } catch (e) {}
+
+        const populateAccountFields = () => {
+            const nameInput = document.getElementById('kitAccountName');
+            const emailInput = document.getElementById('kitAccountEmail');
+            const teamName = document.getElementById('kitTeamMemberName');
+            const teamEmail = document.getElementById('kitTeamMemberEmail');
+            if (nameInput) nameInput.value = state.accountName || '';
+            if (emailInput) emailInput.value = state.accountEmail || '';
+            if (teamName) teamName.textContent = state.accountName || 'Workspace Owner';
+            if (teamEmail) teamEmail.textContent = state.accountEmail || 'Owner (Admin)';
+        };
+
+        populateAccountFields();
+
+        const openSettings = () => {
+            accountView.hidden = false;
+            settingsBtn.setAttribute('aria-pressed', 'true');
+            populateAccountFields();
+            const firstInput = document.getElementById('kitAccountName');
+            if (firstInput) setTimeout(() => firstInput.focus(), 100);
+        };
+
+        const closeSettings = () => {
             accountView.hidden = true;
+            settingsBtn.setAttribute('aria-pressed', 'false');
+            settingsBtn.focus();
+        };
+
+        settingsBtn.addEventListener('click', () => {
+            if (accountView.hidden) openSettings();
+            else closeSettings();
         });
+
+        document.querySelector('.kit-account-back')?.addEventListener('click', closeSettings);
+
+        // Escape key to exit settings view
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && !accountView.hidden) {
+                closeSettings();
+            }
+        });
+
+        // Tab Navigation
+        const tabs = accountView.querySelectorAll('#kitAccountNav [data-acct-tab]');
+        const panes = accountView.querySelectorAll('[data-acct-pane]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.acctTab;
+                tabs.forEach(t => {
+                    const on = t === tab;
+                    t.classList.toggle('active', on);
+                    t.setAttribute('aria-selected', String(on));
+                });
+                panes.forEach(pane => {
+                    pane.hidden = pane.dataset.acctPane !== target;
+                });
+            });
+        });
+
+        // Account persistence function
+        const persistAccount = (showToast = true) => {
+            const nameInput = document.getElementById('kitAccountName');
+            const emailInput = document.getElementById('kitAccountEmail');
+            const name = nameInput?.value?.trim() || '';
+            const email = emailInput?.value?.trim() || '';
+            state.accountName = name;
+            state.accountEmail = email;
+
+            const teamName = document.getElementById('kitTeamMemberName');
+            const teamEmail = document.getElementById('kitTeamMemberEmail');
+            if (teamName) teamName.textContent = name || 'Workspace Owner';
+            if (teamEmail) teamEmail.textContent = email || 'Owner (Admin)';
+
+            try {
+                localStorage.setItem('pandino_account', JSON.stringify({ name, email, updatedAt: Date.now() }));
+                writeSiteData(state);
+            } catch (e) {}
+
+            if (showToast) {
+                const toast = document.getElementById('cfgToast');
+                if (toast) {
+                    toast.textContent = 'Account profile updated';
+                    toast.classList.remove('hidden');
+                    setTimeout(() => toast.classList.add('hidden'), 2500);
+                }
+            }
+        };
+
+        // Explicit Save Changes button
+        document.getElementById('kitAccountSave')?.addEventListener('click', () => {
+            persistAccount(true);
+        });
+
+        // Auto-save on input and blur
+        document.getElementById('kitAccountName')?.addEventListener('input', () => persistAccount(false));
+        document.getElementById('kitAccountEmail')?.addEventListener('input', () => persistAccount(false));
     }
 
     // Mobile menu toggle
@@ -663,6 +1062,10 @@ function initColorListeners() {
             if (hex) {
                 applyBrandPalette(hex);
                 state.brandColor = hex;
+                const sumBrand = document.getElementById('sum-brand');
+                if (sumBrand && btn.dataset.color) {
+                    sumBrand.textContent = btn.dataset.color.charAt(0).toUpperCase() + btn.dataset.color.slice(1);
+                }
             }
         });
     });
@@ -670,11 +1073,134 @@ function initColorListeners() {
     // Scheme buttons
     document.querySelectorAll('[data-scheme]').forEach(btn => {
         btn.addEventListener('click', () => {
-            const scheme = btn.dataset.scheme;
-            document.querySelectorAll('[data-scheme]').forEach(b => b.classList.toggle('active', b === btn));
-            const canvasDoc = getCanvasDocument();
-            const root = canvasDoc.documentElement || document.documentElement;
-            root.setAttribute('data-scheme', scheme);
+            applyColorScheme(btn.dataset.scheme);
+        });
+    });
+
+    // Contrast Mode buttons (Adaptive / Monochrome)
+    document.querySelectorAll('[data-contrast-mode]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mode = btn.dataset.contrastMode;
+            document.querySelectorAll('[data-contrast-mode]').forEach(b => b.classList.toggle('active', b === btn));
+            getCanvasBodyTargets().forEach(b => {
+                if (!b) return;
+                b.setAttribute('data-contrast-mode', mode);
+            });
+        });
+    });
+
+    // Button Shade dropdown
+    const btnShade = document.getElementById('btnShade');
+    if (btnShade) {
+        btnShade.addEventListener('change', () => {
+            const val = btnShade.value;
+            const targetColor = val === 'auto' ? 'var(--active-500)' : `var(--active-${val})`;
+            getCanvasTargets().forEach(root => {
+                if (!root) return;
+                root.style.setProperty('--btn-bg', targetColor);
+            });
+        });
+    }
+}
+
+function initServicesListeners() {
+    // Columns dropdown
+    const colsSel = document.getElementById('svcCols');
+    if (colsSel) {
+        colsSel.addEventListener('change', () => {
+            const doc = getCanvasDocument();
+            const grid = doc.querySelector('.svc-grid');
+            if (grid) {
+                grid.style.gridTemplateColumns = `repeat(${colsSel.value}, minmax(0, 1fr))`;
+                syncCanvasHeight();
+            }
+        });
+    }
+
+    // Card style (fill vs outline)
+    document.querySelectorAll('[data-svc="card"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const style = btn.dataset.v;
+            document.querySelectorAll('[data-svc="card"]').forEach(b => b.classList.toggle('active', b === btn));
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.svc-card').forEach(card => {
+                if (style === 'outline') {
+                    card.classList.add('border', 'border-base-300');
+                    card.classList.remove('shadow-sm');
+                } else {
+                    card.classList.remove('border', 'border-base-300');
+                    card.classList.add('shadow-sm');
+                }
+            });
+        });
+    });
+
+    // Toggle icons
+    const toggleIcons = document.getElementById('toggleSvcShowIcon');
+    if (toggleIcons) {
+        toggleIcons.addEventListener('change', () => {
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.svc-ic').forEach(ic => {
+                ic.style.display = toggleIcons.checked ? '' : 'none';
+            });
+        });
+    }
+
+    // Toggle card images
+    const toggleImg = document.getElementById('toggleSvcImg');
+    if (toggleImg) {
+        toggleImg.addEventListener('change', () => {
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.svc').forEach(s => {
+                s.setAttribute('data-img', toggleImg.checked ? 'on' : 'off');
+            });
+        });
+    }
+}
+
+function initHeaderListeners() {
+    // Header Type (classic bar vs floating pill)
+    document.querySelectorAll('[data-opt="type"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setHeaderStyle(btn.dataset.val);
+        });
+    });
+
+    // Bar Surface style
+    document.querySelectorAll('[data-opt="style"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const val = btn.dataset.val;
+            state.headerSurface = val;
+            try { writeSiteData(state); } catch (e) {}
+            document.querySelectorAll('[data-opt="style"]').forEach(b => b.classList.toggle('active', b === btn));
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.site-header').forEach(h => {
+                h.setAttribute('data-style', val);
+            });
+        });
+    });
+
+    // Links count
+    document.querySelectorAll('[data-opt="count"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const count = Number(btn.dataset.val);
+            document.querySelectorAll('[data-opt="count"]').forEach(b => b.classList.toggle('active', b === btn));
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.site-header nav a, .site-header .sh-links a').forEach((a, i) => {
+                a.style.display = i < count ? '' : 'none';
+            });
+        });
+    });
+
+    // Call to Action Buttons
+    document.querySelectorAll('[data-opt="buttons"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const val = btn.dataset.val;
+            document.querySelectorAll('[data-opt="buttons"]').forEach(b => b.classList.toggle('active', b === btn));
+            const doc = getCanvasDocument();
+            doc.querySelectorAll('.site-header .sh-cta, .site-header .sh-actions').forEach(el => {
+                el.style.display = val === 'none' ? 'none' : 'flex';
+            });
         });
     });
 }
@@ -703,6 +1229,76 @@ function initTypographyListeners() {
     }
 }
 
+function initFooterListeners() {
+    const btnSave = document.getElementById('btnSave');
+    const btnReset = document.getElementById('btnReset');
+
+    if (btnSave) {
+        btnSave.addEventListener('click', () => {
+            const typeSel = document.getElementById('typographySelect');
+            if (typeSel) state.typographyTier = typeSel.value;
+
+            const promiseInput = document.getElementById('hero-promise');
+            if (promiseInput && promiseInput.value) {
+                state.heroPromise = promiseInput.value;
+            }
+
+            try {
+                writeSiteData(state);
+            } catch (e) {}
+
+            const btnSaveIcon = document.getElementById('btnSaveIcon');
+            const btnSaveText = document.getElementById('btnSaveText');
+            const toast = document.getElementById('cfgToast');
+
+            if (btnSaveText) btnSaveText.textContent = 'Saved!';
+            if (btnSaveIcon) btnSaveIcon.textContent = 'check';
+            btnSave.classList.add('btn-success');
+
+            if (toast) {
+                toast.textContent = 'Configuration saved';
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 2000);
+            }
+
+            setTimeout(() => {
+                if (btnSaveText) btnSaveText.textContent = 'Save';
+                if (btnSaveIcon) btnSaveIcon.textContent = 'save';
+                btnSave.classList.remove('btn-success');
+            }, 2000);
+        });
+    }
+
+    if (btnReset) {
+        btnReset.addEventListener('click', () => {
+            applyTypographyPreset('tier1');
+            applyBrandPalette('azure');
+            applyColorScheme('brand');
+            setHeroIndex(0);
+            applyPainsLook('a');
+
+            const promiseInput = document.getElementById('hero-promise');
+            if (promiseInput) promiseInput.value = '';
+
+            try {
+                writeSiteData(state);
+            } catch (e) {}
+
+            syncCanvasState();
+
+            const btnResetText = document.getElementById('btnResetText');
+            const btnResetIcon = document.getElementById('btnResetIcon');
+            if (btnResetText) btnResetText.textContent = 'Reset!';
+            if (btnResetIcon) btnResetIcon.textContent = 'check';
+
+            setTimeout(() => {
+                if (btnResetText) btnResetText.textContent = 'Reset';
+                if (btnResetIcon) btnResetIcon.textContent = 'restart_alt';
+            }, 1500);
+        });
+    }
+}
+
 function initToggleListeners() {
     // Header Show Toggle
     const toggleHeaderShow = document.getElementById('toggleHeaderShow');
@@ -724,6 +1320,15 @@ function initToggleListeners() {
         });
     }
 
+    // Go to buttons in #panel-more
+    document.querySelectorAll('.more-row .more-go').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('.more-row');
+            const secId = row?.dataset.sec;
+            if (secId) scrollToCanvasSection(secId);
+        });
+    });
+
     // Section Visibility Toggles in #panel-more
     document.querySelectorAll('.more-row [data-more="show"]').forEach(toggle => {
         toggle.addEventListener('change', () => {
@@ -732,7 +1337,37 @@ function initToggleListeners() {
             const targetSec = byId(secId);
             if (targetSec) {
                 targetSec.hidden = !toggle.checked;
+                // Sync eye in left rail
+                const eye = document.querySelector(`.kit-row[data-sec="${secId}"] .kit-eye input`);
+                if (eye) eye.checked = toggle.checked;
                 syncCanvasHeight();
+            }
+        });
+    });
+
+    // Section scheme selector in #panel-more
+    document.querySelectorAll('.more-row [data-more="scheme"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('.more-row');
+            const scheme = btn.dataset.v;
+            row?.querySelectorAll('[data-more="scheme"]').forEach(b => b.classList.toggle('active', b === btn));
+            const secId = row?.dataset.sec;
+            const targetSec = byId(secId);
+            if (targetSec) {
+                targetSec.setAttribute('data-scheme', scheme);
+                if (scheme === 'brand') {
+                    targetSec.style.backgroundColor = 'var(--active-950, #0f172a)';
+                    targetSec.style.color = '#ffffff';
+                } else if (scheme === 'white') {
+                    targetSec.style.backgroundColor = '#ffffff';
+                    targetSec.style.color = '#17191c';
+                } else if (scheme === 'dark') {
+                    targetSec.style.backgroundColor = '#17191c';
+                    targetSec.style.color = '#ffffff';
+                } else {
+                    targetSec.style.backgroundColor = '';
+                    targetSec.style.color = '';
+                }
             }
         });
     });
@@ -742,77 +1377,532 @@ function initToggleListeners() {
         sel.addEventListener('change', () => {
             const row = sel.closest('.more-row');
             const secId = row?.dataset.sec;
+            if (!state.sectionShades) state.sectionShades = {};
+            if (secId) {
+                state.sectionShades[secId] = sel.value;
+                try { writeSiteData(state); } catch (e) {}
+            }
             const targetSec = byId(secId);
             if (targetSec) {
                 targetSec.style.setProperty('--sec-shade', `var(--active-${sel.value})`);
             }
         });
     });
+
+    // Customer Pains layout selector (3 Cards vs Split Comparison)
+    document.querySelectorAll('#painsLayoutJoin [data-pains-look]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyPainsLook(btn.dataset.painsLook);
+        });
+    });
+
+    // Customer Pains card content alignment selector (Left, Center, Right)
+    document.querySelectorAll('#painsAlignJoin [data-pains-align]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyPainsAlignment(btn.dataset.painsAlign);
+        });
+    });
+}
+
+// --- 8b. Customer Pains Layout Switcher ---
+export function applyPainsLook(look = 'a') {
+    const targetLook = look === 'b' ? 'b' : 'a';
+    state.painsLook = targetLook;
+    
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    const doc = frame?.contentDocument || frame?.contentWindow?.document;
+    const pains = doc?.getElementById('pains') || doc?.querySelector('.ks-pains') || byId('pains');
+    if (pains) {
+        pains.setAttribute('data-look', targetLook);
+    }
+    
+    document.querySelectorAll('#painsLayoutJoin [data-pains-look]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.painsLook === targetLook);
+    });
+    
+    const badge = document.getElementById('painsBadge');
+    if (badge) {
+        badge.textContent = targetLook === 'b' ? 'Split' : '3 Cards';
+    }
+    
+    try {
+        writeSiteData(state);
+    } catch (e) {}
+    syncCanvasHeight();
+}
+
+// --- 8c. Customer Pains Card Content Alignment ---
+export function applyPainsAlignment(align = 'center', persist = true) {
+    const valid = ['left', 'center', 'right'].includes(align) ? align : 'center';
+    state.painsAlign = valid;
+
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    const doc = frame?.contentDocument || frame?.contentWindow?.document;
+    const pains = doc?.getElementById('pains') || doc?.querySelector('.ks-pains') || byId('pains');
+    if (pains) {
+        pains.setAttribute('data-card-align', valid);
+        pains.classList.remove('pains-align-left', 'pains-align-center', 'pains-align-right');
+        pains.classList.add(`pains-align-${valid}`);
+    }
+
+    document.querySelectorAll('#painsAlignJoin [data-pains-align]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.painsAlign === valid);
+    });
+
+    if (persist) {
+        try {
+            writeSiteData(state);
+        } catch (e) {}
+    }
+}
+
+// --- 8c. Synchronize Canvas Layer Labels with Schema/Headings ---
+export function syncCanvasLayerLabels() {
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    const doc = frame?.contentDocument || frame?.contentWindow?.document;
+    if (!doc) return;
+
+    const sectionMap = {
+        'trust-bar': 'trust',
+        'final-cta': 'cta',
+        'cta-final': 'cta',
+        'repairs': 'solutions'
+    };
+
+    doc.querySelectorAll('section[id], header[id], footer[id]').forEach(sec => {
+        let secId = sec.id;
+        if (!secId) return;
+        const cleanId = sectionMap[secId] || secId;
+
+        // Extract editorial title from schema / heading
+        const heading = sec.querySelector('[id$="-title"], h2, h1, h3, .sec-title');
+        const titleText = heading?.textContent?.trim();
+        if (!titleText) return;
+
+        // Update matching sidebar layer node
+        const sidebarNode = document.getElementById('acc-' + cleanId) || 
+                            document.getElementById('acc-' + secId) ||
+                            document.querySelector(`.more-row[data-sec="${cleanId}"]`) ||
+                            document.querySelector(`.more-row[data-sec="${secId}"]`);
+        
+        const label = sidebarNode?.querySelector('.cfg-name, span.font-bold');
+        if (label) {
+            label.textContent = titleText;
+        }
+
+        // Also update any matching row in panel-more
+        document.querySelectorAll(`.more-row[data-sec="${cleanId}"] span.font-bold, .more-row[data-sec="${secId}"] span.font-bold`).forEach(el => {
+            el.textContent = titleText;
+        });
+    });
 }
 
 // --- 9. Synchronize Full Canvas State ---
 export function syncCanvasState() {
-    setHeroIndex(state.heroIndex || 0);
-    applyReviews(state.reviews || 'white');
-    applyHeroPanel(state.panel || 'bottom');
-    applyHeroPanelStyle(state.panelStyle || 'solid');
-    applyCtaCount(state.ctas !== undefined ? state.ctas : 2);
-    if (state.brandColor) applyBrandPalette(state.brandColor);
-    const canvasDoc = getCanvasDocument();
-    if (canvasDoc && canvasDoc.documentElement) {
-        canvasDoc.documentElement.setAttribute('data-theme', state.theme || 'dark');
+    isSyncing = true;
+    try {
+        setHeroIndex(state.heroIndex || 0);
+        applyReviews(state.reviews || 'white');
+        applyHeroPanel(state.panel || 'bottom');
+        applyHeroPanelStyle(state.panelStyle || 'solid');
+        applyCtaCount(state.ctas !== undefined ? state.ctas : 2);
+        applyPainsCtaCount(state.painsCtas !== undefined ? state.painsCtas : (state.ctas !== undefined ? state.ctas : 2), false);
+        if (state.brandColor) applyBrandPalette(state.brandColor);
+        applyColorScheme(state.scheme || 'dark');
+        if (state.theme) {
+            document.documentElement.setAttribute('data-theme', state.theme);
+            const canvasFrame = document.querySelector('.kit-canvas-frame');
+            if (canvasFrame) canvasFrame.setAttribute('data-theme', state.theme);
+            const canvasDoc = getCanvasDocument();
+            if (canvasDoc && canvasDoc.documentElement) {
+                canvasDoc.documentElement.setAttribute('data-theme', state.theme);
+                if (canvasDoc.body) canvasDoc.body.setAttribute('data-theme', state.theme);
+            }
+        }
+        const typePreset = state.typographyTier || document.getElementById('typographySelect')?.value || 'tier1';
+        applyTypographyPreset(typePreset);
+        applyPainsLook(state.painsLook || 'a');
+        applyPainsAlignment(state.painsAlign || 'center', false);
+
+        // Declarative mapping over canvas document
+        const doc = getCanvasDocument();
+        if (doc) {
+            applyStateToDocument(doc, state);
+        }
+
+        if (state.heroPromise) {
+            const promiseInput = document.getElementById('hero-promise');
+            if (promiseInput && document.activeElement !== promiseInput) {
+                promiseInput.value = state.heroPromise;
+            }
+        }
+
+        if (state.halign) {
+            const canvasBodies = getCanvasBodyTargets();
+            ['left', 'center', 'right'].forEach(a => {
+                canvasBodies.forEach(b => b.classList.toggle('hero-halign-' + a, a === state.halign));
+            });
+            document.querySelectorAll('[data-halign]').forEach(btn => btn.classList.toggle('active', btn.dataset.halign === state.halign));
+        }
+
+        if (state.headerSticky !== undefined) {
+            setHeaderSticky(state.headerSticky);
+        }
+        if (state.headerStyle) {
+            setHeaderStyle(state.headerStyle);
+        }
+        if (state.headerSurface) {
+            if (doc) {
+                doc.querySelectorAll('.site-header').forEach(h => {
+                    h.setAttribute('data-style', state.headerSurface);
+                });
+            }
+            document.querySelectorAll('[data-opt="style"]').forEach(b => b.classList.toggle('active', b.dataset.val === state.headerSurface));
+        }
+
+        if (state.heroMarquee !== undefined) {
+            if (doc) {
+                const ls = doc.getElementById('logostrip');
+                if (ls) ls.hidden = !state.heroMarquee;
+            }
+            const toggleHeroMarquee = document.getElementById('toggleHeroMarquee');
+            if (toggleHeroMarquee) toggleHeroMarquee.checked = !!state.heroMarquee;
+            const toggleHeroLogostrip = document.getElementById('toggleHeroLogostrip');
+            if (toggleHeroLogostrip) toggleHeroLogostrip.checked = !!state.heroMarquee;
+        }
+
+        if (state.heroBlur !== undefined) {
+            if (doc) {
+                doc.querySelectorAll('.hero-content').forEach(hc => {
+                    hc.classList.toggle('backdrop-blur-md', !!state.heroBlur);
+                });
+            }
+            const toggleHeroBlur = document.getElementById('toggleHeroBlur');
+            if (toggleHeroBlur) toggleHeroBlur.checked = !!state.heroBlur;
+        }
+
+        if (state.heroReveal !== undefined) {
+            if (doc) {
+                doc.querySelectorAll('.hero').forEach(h => {
+                    h.classList.toggle('hm-reveal', !!state.heroReveal);
+                });
+            }
+            const toggleHeroReveal = document.getElementById('toggleHeroReveal');
+            if (toggleHeroReveal) toggleHeroReveal.checked = !!state.heroReveal;
+        }
+
+        if (state.sectionShades && typeof state.sectionShades === 'object') {
+            Object.entries(state.sectionShades).forEach(([secId, shadeVal]) => {
+                const targetSec = byId(secId);
+                if (targetSec) {
+                    targetSec.style.setProperty('--sec-shade', `var(--active-${shadeVal})`);
+                }
+                const sel = document.querySelector(`.more-row[data-sec="${secId}"] select.more-shade`);
+                if (sel) sel.value = shadeVal;
+            });
+        }
+
+        syncCanvasLayerLabels();
+        syncCanvasHeight();
+    } finally {
+        isSyncing = false;
     }
-    const typePreset = document.getElementById('typographySelect')?.value || 'tier1';
-    applyTypographyPreset(typePreset);
-    syncCanvasHeight();
+}
+
+export function syncBuilderUiControls() {
+    // 1. Typography Controls
+    const tier = state.typographyTier || 'tier1';
+    const sel = document.getElementById('typographySelect');
+    if (sel && sel.value !== tier) sel.value = tier;
+    document.querySelectorAll('[data-tier]').forEach(b => {
+        const active = b.dataset.tier === tier;
+        b.classList.toggle('active', active);
+        b.classList.toggle('btn-primary', active);
+        b.setAttribute('aria-pressed', String(active));
+    });
+
+    // 2. Brand Color Controls
+    if (state.brandColor) {
+        const hex = state.brandColor.toLowerCase();
+        document.querySelectorAll('[data-color].color-btn').forEach(btn => {
+            const style = btn.getAttribute('style') || '';
+            const m = style.match(/#([0-9a-fA-F]{6})/);
+            const isMatch = m ? ('#' + m[1].toLowerCase() === hex) : false;
+            btn.classList.toggle('active', isMatch);
+            btn.classList.toggle('border-2', isMatch);
+            btn.classList.toggle('border-white', isMatch);
+            btn.classList.toggle('ring-2', isMatch);
+            btn.classList.toggle('ring-primary', isMatch);
+            btn.classList.toggle('shadow-xs', isMatch);
+            if (isMatch) btn.classList.remove('border-white/20');
+        });
+        const hexInput = document.getElementById('brandHex');
+        if (hexInput && document.activeElement !== hexInput) hexInput.value = state.brandColor;
+        const hexPick = document.getElementById('brandHexPick');
+        if (hexPick) hexPick.value = state.brandColor;
+        const bshadeSwatch = document.getElementById('bshadeSwatch');
+        if (bshadeSwatch) bshadeSwatch.style.background = state.brandColor;
+        const bshadeHex = document.getElementById('bshadeHex');
+        if (bshadeHex) bshadeHex.textContent = state.brandColor;
+        const sumBrand = document.getElementById('sum-brand');
+        if (sumBrand) {
+            const matchingBtn = document.querySelector(`[data-color].color-btn[style*="${state.brandColor}"]`);
+            if (matchingBtn && matchingBtn.dataset.color) {
+                sumBrand.textContent = matchingBtn.dataset.color.charAt(0).toUpperCase() + matchingBtn.dataset.color.slice(1);
+            } else {
+                sumBrand.textContent = state.brandColor;
+            }
+        }
+    }
+
+    // 3. Scheme Controls
+    if (state.scheme) {
+        document.querySelectorAll('[data-scheme]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.scheme === state.scheme);
+        });
+    }
+
+    // 4. Hero Controls
+    if (state.heroIndex !== undefined) {
+        document.querySelectorAll('[data-hmhero]').forEach(b => {
+            const on = Number(b.dataset.hmhero) === state.heroIndex;
+            b.classList.toggle('active', on);
+            b.classList.toggle('btn-primary', on);
+            b.setAttribute('aria-checked', String(on));
+            b.closest('.pit-look')?.classList.toggle('is-selected', on);
+        });
+        const hint = document.getElementById('hero-layout-hint');
+        if (hint) hint.textContent = LAYOUT_HINTS[state.heroIndex] || '';
+    }
+
+    if (state.heroPromise) {
+        const promiseInput = document.getElementById('hero-promise');
+        if (promiseInput && document.activeElement !== promiseInput) {
+            promiseInput.value = state.heroPromise;
+        }
+    }
+
+    if (state.reviews) {
+        document.querySelectorAll('[data-rev]').forEach(b => {
+            const on = b.dataset.rev === state.reviews;
+            b.classList.toggle('active', on);
+            b.classList.toggle('btn-primary', on);
+        });
+    }
+
+    if (state.halign) {
+        document.querySelectorAll('[data-halign]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.halign === state.halign);
+        });
+    }
+
+    if (state.panel) {
+        document.querySelectorAll('[data-panel]').forEach(b => {
+            const on = b.dataset.panel === state.panel;
+            b.classList.toggle('active', on);
+            b.classList.toggle('btn-primary', on);
+        });
+    }
+
+    if (state.panelStyle) {
+        document.querySelectorAll('[data-pstyle]').forEach(b => {
+            const on = b.dataset.pstyle === state.panelStyle;
+            b.classList.toggle('active', on);
+            b.classList.toggle('btn-primary', on);
+        });
+    }
+
+    if (state.ctas !== undefined) {
+        document.querySelectorAll('[data-ctacount]').forEach(b => {
+            const on = Number(b.dataset.ctacount) === state.ctas;
+            b.classList.toggle('active', on);
+            b.classList.toggle('btn-primary', on);
+        });
+    }
+
+    // 5. Header Controls
+    if (state.headerStyle) {
+        document.querySelectorAll('[data-prop="headerStyle"] button, [data-opt="type"]').forEach(b => {
+            b.classList.toggle('active', (b.dataset.val || b.dataset.opt) === state.headerStyle);
+        });
+    }
+
+    if (state.headerSurface) {
+        document.querySelectorAll('[data-opt="style"]').forEach(b => {
+            b.classList.toggle('active', b.dataset.val === state.headerSurface);
+        });
+    }
+
+    if (state.headerSticky !== undefined) {
+        document.querySelectorAll('[data-prop="headerSticky"] button, [data-opt="sticky"]').forEach(b => {
+            if (b.type === 'checkbox') {
+                b.checked = state.headerSticky;
+            } else {
+                b.classList.toggle('active', (b.dataset.val === 'on') === state.headerSticky);
+            }
+        });
+    }
+
+    // 6. Customer Pains Layout
+    const painsLook = state.painsLook || 'a';
+    document.querySelectorAll('#painsLayoutJoin [data-pains-look]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.painsLook === painsLook);
+    });
+    const badge = document.getElementById('painsBadge');
+    if (badge) {
+        badge.textContent = painsLook === 'b' ? 'Split' : '3 Cards';
+    }
+
+    // 6b. Customer Pains Alignment
+    const painsAlign = state.painsAlign || 'center';
+    document.querySelectorAll('#painsAlignJoin [data-pains-align]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.painsAlign === painsAlign);
+    });
+}
+
+export function initCanvasSectionClicks() {
+    const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
+    if (!frame) return;
+
+    function attachIframeListeners() {
+        try {
+            const doc = frame.contentDocument || frame.contentWindow?.document;
+            if (!doc || !doc.body) return;
+
+            doc.removeEventListener('click', onIframeClick, true);
+            doc.addEventListener('click', onIframeClick, true);
+        } catch (e) {}
+    }
+
+    function onIframeClick(e) {
+        if (e.target.closest('input, textarea, select')) return;
+
+        const sec = e.target.closest('section, header, footer');
+        if (!sec) return;
+
+        let secId = sec.id;
+        if (!secId) {
+            const tag = sec.tagName.toLowerCase();
+            if (tag === 'header') secId = 'header';
+            else if (tag === 'footer') secId = 'footer';
+            else if (sec.classList.contains('hero')) secId = 'hero';
+            else if (sec.classList.contains('svc')) secId = 'services';
+            else if (sec.classList.contains('rc')) secId = 'solutions';
+            else if (sec.classList.contains('ks-about-timeline')) secId = 'about';
+            else if (sec.classList.contains('ks-pains')) secId = 'pains';
+            else if (sec.classList.contains('ks-trust')) secId = 'trust';
+            else if (sec.classList.contains('ks-reviews')) secId = 'reviews';
+            else if (sec.classList.contains('ks-quote')) secId = 'quote';
+            else if (sec.classList.contains('ks-faq')) secId = 'faq';
+            else if (sec.classList.contains('ks-promo')) secId = 'promo';
+            else if (sec.classList.contains('ks-contact')) secId = 'contact';
+            else if (sec.classList.contains('ks-final')) secId = 'cta';
+        }
+
+        if (secId) {
+            const doc = frame.contentDocument || frame.contentWindow?.document;
+            doc?.querySelectorAll('.is-canvas-selected').forEach(el => el.classList.remove('is-canvas-selected'));
+            sec.classList.add('is-canvas-selected');
+
+            activateTab(secId, { fromCanvas: true });
+        }
+    }
+
+    frame.addEventListener('load', attachIframeListeners);
+    if (frame.contentDocument?.readyState === 'complete') {
+        attachIframeListeners();
+    }
 }
 
 // --- 10. Bootstrapping & Storage Sync ---
 export function initRuntime() {
+    // 0. Ensure host document is purged of any leaked template inline styles
+    const hostRoot = document.documentElement;
+    const legacyProps = [
+        '--color-primary', '--primary-color', '--p', '--active-500',
+        '--brand-ink', '--brand-contrast-fg', '--color-primary-content',
+        '--headline-font', '--body-font', '--btn-bg'
+    ];
+    legacyProps.forEach(prop => hostRoot.style.removeProperty(prop));
+    SHADE_STEPS.forEach(step => {
+        hostRoot.style.removeProperty(`--active-${step}`);
+        hostRoot.style.removeProperty(`--primary-${step}`);
+    });
+
     // 1. Read persistent state from storage.js if available
     const saved = readSiteData();
     if (saved) {
         Object.assign(state, saved);
     }
 
+    // Sync palette summary label in sidebar
+    const sumBrand = document.getElementById('sum-brand');
+    if (sumBrand && state.brandColor) {
+        const matchingBtn = document.querySelector(`[data-color].color-btn[style*="${state.brandColor}"]`);
+        if (matchingBtn && matchingBtn.dataset.color) {
+            sumBrand.textContent = matchingBtn.dataset.color.charAt(0).toUpperCase() + matchingBtn.dataset.color.slice(1);
+        }
+    }
+
     // 2. Bind listeners
     initHeroListeners();
     initDrawerAndRailListeners();
     initColorListeners();
+    initServicesListeners();
+    initHeaderListeners();
     initTypographyListeners();
+    initFooterListeners();
     initToggleListeners();
+    initCanvasSectionClicks();
 
     // 3. Connect Canvas Iframe Lifecycle
     const frame = document.getElementById('templateCanvasFrame') || document.querySelector('.kit-canvas-frame iframe');
     if (frame) {
+        let resizeRaf = null;
         frame.addEventListener('load', () => {
             try {
                 const doc = frame.contentDocument || frame.contentWindow?.document;
                 if (doc && doc.body) {
-                    const ro = new ResizeObserver(() => syncCanvasHeight());
+                    const ro = new ResizeObserver(() => {
+                        if (resizeRaf) cancelAnimationFrame(resizeRaf);
+                        resizeRaf = requestAnimationFrame(() => syncCanvasHeight());
+                    });
                     ro.observe(doc.body);
                 }
             } catch (e) {}
             syncCanvasState();
+            syncBuilderUiControls();
         });
 
         // If iframe is already ready
         if (frame.contentDocument?.readyState === 'complete') {
             syncCanvasState();
+            syncBuilderUiControls();
         }
     }
 
-    // Live Preview click listener bound to window execution
-    document.getElementById('kitWin')?.addEventListener('click', () => {
-        const frame = document.getElementById('templateCanvasFrame');
-        if (frame) {
-            // Force target source synchronization
-            frame.src = './template.html?v=' + Date.now();
+    // 3b. Real-Time Pub/Sub Synchronization (BroadcastChannel & storage events)
+    onSiteDataChange((updatedData) => {
+        if (updatedData) {
+            Object.assign(state, updatedData);
+            syncCanvasState();
+            syncBuilderUiControls();
         }
+    });
+
+    // Live Preview click listener bound to window execution
+    document.getElementById('kitWin')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        try {
+            state.typographyTier = document.getElementById('typographySelect')?.value || state.typographyTier || 'tier1';
+            writeSiteData(state);
+        } catch (err) {}
+        window.open('./template.html', '_blank');
     });
 
     // 4. Initial state mappings
     syncCanvasState();
+    syncBuilderUiControls();
 
     // 5. Mount showcase if showcase container is present
     mountShowcase();
@@ -826,6 +1916,9 @@ export function initRuntime() {
     window.__kitPresetRefresh = () => {};
     window.__kitFilterPage = () => {};
     window.activateTab = activateTab;
+    window.syncCanvasLayerLabels = syncCanvasLayerLabels;
+    window.applyPainsLook = applyPainsLook;
+    window.applyPainsAlignment = applyPainsAlignment;
 }
 
 // Auto-run when DOM is ready

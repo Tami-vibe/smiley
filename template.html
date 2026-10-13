@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="kit-standalone-page" data-theme="dark">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -9,6 +9,45 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="./css/tokens-base.css">
+<link rel="stylesheet" href="./css/services-components.css">
+<link rel="stylesheet" href="./css/about-timeline.css">
+<script>
+  (function() {
+    try {
+      const d = JSON.parse(localStorage.getItem('site_data') || 'null');
+      if (!d) return;
+      if (d.scheme) {
+        const theme = d.scheme === 'white' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-scheme', d.scheme);
+      }
+      if (d.brandColor) {
+        document.documentElement.style.setProperty('--color-primary', d.brandColor);
+        document.documentElement.style.setProperty('--primary-color', d.brandColor);
+        document.documentElement.style.setProperty('--p', d.brandColor);
+        document.documentElement.style.setProperty('--active-500', d.brandColor);
+      }
+      if (d.typographyTier) {
+        const fonts = {
+          tier1: { headline: "'Syne', sans-serif", body: "'Manrope', sans-serif" },
+          tier2: { headline: "'DM Serif Display', serif", body: "'Manrope', sans-serif" },
+          tier3: { headline: "'Montserrat', sans-serif", body: "'Inter', sans-serif" },
+          tier4: { headline: "'Playfair Display', serif", body: "'Inter', sans-serif" },
+          tier5: { headline: "'Poppins', sans-serif", body: "'Poppins', sans-serif" }
+        }[d.typographyTier];
+        if (fonts) {
+          document.documentElement.style.setProperty('--headline-font', fonts.headline);
+          document.documentElement.style.setProperty('--body-font', fonts.body);
+          const st = document.createElement('style');
+          st.id = 'pandino-dynamic-typography';
+          st.textContent = 'body { font-family: ' + fonts.body + ' !important; } h1, h2, h3, h4, h5, h6, .hero-content h1, .title-wrap h1, .card-title, .sec-title { font-family: ' + fonts.headline + ' !important; }';
+          document.head.appendChild(st);
+        }
+      }
+    } catch (e) {}
+  })();
+</script>
 <style>
   :root {
     --headline-font: 'Syne', sans-serif;
@@ -16,6 +55,12 @@
     --primary-color: #10b981;
     --color-primary: #10b981;
     --p: #10b981;
+  }
+  html.kit-standalone-page, body.kit-standalone-page {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
   }
   body {
     margin: 0;
@@ -36,15 +81,388 @@
   .rc-ph-ic { width: 2.25rem; height: 2.25rem; }
   .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; list-style: none; padding: 0; margin: 2rem 0; }
   .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
-  .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
   .trust-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; }
   .trust-logos { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; padding: 0; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
   .svc-badge, .rc-badge, .ks-badge { display: none !important; }
+  
+  /* Remove Tailwind overline line across all eyebrow labels */
+  .overline { text-decoration: none !important; }
+
+  /* Solutions tab progress rail and claims cards */
+  .kit-rail-nodes::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    background: color-mix(in srgb, var(--color-base-content, #fff) 15%, transparent);
+    z-index: 0;
+  }
+  .kit-claim-card {
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .kit-claim-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary, #10b981) !important;
+  }
+  /* Canonical DaisyUI Button Component Foundation */
+  .btn,
+  .ks .btn,
+  button.btn,
+  a.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem 1.6rem !important;
+    font-family: var(--body-font, sans-serif) !important;
+    font-size: 0.875rem !important;
+    font-weight: 700 !important;
+    line-height: 1.25rem !important;
+    border-radius: 0.75rem !important;
+    min-height: 2.75rem !important;
+    border-width: 1.5px !important;
+    border-style: solid !important;
+    border-color: transparent !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    user-select: none !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+  }
+  .btn.btn-sm,
+  .ks .btn.btn-sm {
+    padding: 0.45rem 1.1rem !important;
+    font-size: 0.75rem !important;
+    min-height: 2rem !important;
+    border-radius: 0.5rem !important;
+  }
+  .btn.btn-lg,
+  .ks .btn.btn-lg {
+    padding: 0.9rem 2rem !important;
+    font-size: 1rem !important;
+    min-height: 3.25rem !important;
+  }
+  .btn-primary,
+  .btn.btn-primary,
+  .ks .btn-primary,
+  .cta-btn.btn-primary {
+    background-color: var(--color-primary, var(--primary-color, #10b981)) !important;
+    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
+    color: var(--color-primary-content, #ffffff) !important;
+    box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important;
+  }
+  .btn-primary:hover,
+  .btn.btn-primary:hover,
+  .ks .btn-primary:hover,
+  .cta-btn.btn-primary:hover {
+    filter: brightness(1.1) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--color-primary, #10b981) 50%, transparent) !important;
+  }
+  .btn-outline,
+  .btn.btn-outline,
+  .btn-outline.btn-primary,
+  .btn.btn-outline.btn-primary,
+  .ks .btn-outline {
+    background-color: transparent !important;
+    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
+    color: var(--color-primary, var(--primary-color, #10b981)) !important;
+  }
+  .btn-outline:hover,
+  .btn.btn-outline:hover,
+  .btn-outline.btn-primary:hover,
+  .btn.btn-outline.btn-primary:hover,
+  .ks .btn-outline:hover {
+    background-color: var(--color-primary, var(--primary-color, #10b981)) !important;
+    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
+    color: var(--color-primary-content, #ffffff) !important;
+    transform: translateY(-1px) !important;
+  }
+  .btn-ghost,
+  .btn.btn-ghost,
+  .ks .btn-ghost {
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: var(--color-base-content, #ffffff) !important;
+  }
+  .btn-ghost:hover,
+  .btn.btn-ghost:hover,
+  .ks .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--color-base-content, #ffffff) 12%, transparent) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Canonical DaisyUI Card Component Foundation */
+  .card,
+  .ks-pains .card {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-radius: 1.125rem !important;
+    background-color: var(--color-base-200, #17191c) !important;
+    border: 1px solid var(--sch-line, rgba(255, 255, 255, 0.08)) !important;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35) !important;
+    overflow: hidden !important;
+    transition: all 0.25s ease !important;
+    box-sizing: border-box !important;
+  }
+  .card:hover,
+  .ks-pains .card:hover {
+    border-color: color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5) !important;
+  }
+  .card-body,
+  .ks-pains .card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    padding: 1.75rem !important;
+    flex: 1 1 auto !important;
+    box-sizing: border-box !important;
+  }
+  .card-title,
+  .ks-pains .card-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    font-family: var(--headline-font, sans-serif) !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: var(--color-base-content, #ffffff) !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Customer Pains Section Styling */
+  .ks-pains {
+    padding-block: var(--section-pad-y, 4.5rem) !important;
+  }
+  .ks-pains .pains-container,
+  .ks-pains > div {
+    max-width: 1320px !important;
+    margin-inline: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .ks-pains .pains-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
+  @media (min-width: 768px) {
+    .ks-pains .pains-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+  }
+  .ks-pains .pains-grid .card {
+    background: color-mix(in srgb, var(--color-base-200, #17191c) 92%, var(--color-base-100, #191e24)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  /* Customer Pains Card Content Alignment */
+  .ks-pains[data-card-align="center"] .pains-grid .card-body,
+  .ks-pains.pains-align-center .pains-grid .card-body {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .ks-pains[data-card-align="center"] .pains-grid .card-title,
+  .ks-pains.pains-align-center .pains-grid .card-title {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .ks-pains[data-card-align="center"] .pains-grid p,
+  .ks-pains.pains-align-center .pains-grid p {
+    text-align: center !important;
+  }
+  .ks-pains[data-card-align="left"] .pains-grid .card-body,
+  .ks-pains.pains-align-left .pains-grid .card-body {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .ks-pains[data-card-align="left"] .pains-grid .card-title,
+  .ks-pains.pains-align-left .pains-grid .card-title {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .ks-pains[data-card-align="left"] .pains-grid p,
+  .ks-pains.pains-align-left .pains-grid p {
+    text-align: left !important;
+  }
+  .ks-pains[data-card-align="right"] .pains-grid .card-body,
+  .ks-pains.pains-align-right .pains-grid .card-body {
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+  .ks-pains[data-card-align="right"] .pains-grid .card-title,
+  .ks-pains.pains-align-right .pains-grid .card-title {
+    justify-content: flex-end !important;
+    text-align: right !important;
+  }
+  .ks-pains[data-card-align="right"] .pains-grid p,
+  .ks-pains.pains-align-right .pains-grid p {
+    text-align: right !important;
+  }
+  .ks-pains .pains-split {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
+  @media (min-width: 768px) {
+    .ks-pains .pains-split {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+  .ks-pains .pains-split .pains-before {
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    background: color-mix(in srgb, #ef4444 5%, var(--color-base-200, #17191c)) !important;
+  }
+  .ks-pains .pains-split .pains-after {
+    border: 1px solid color-mix(in srgb, var(--color-primary, #10b981) 45%, transparent) !important;
+    background: color-mix(in srgb, var(--color-primary, #10b981) 5%, var(--color-base-200, #17191c)) !important;
+  }
+  .ks-pains[data-look="a"] .pains-split { display: none !important; }
+  .ks-pains[data-look="b"] .pains-grid { display: none !important; }
+  .pains-ctas {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 2rem !important;
+  }
+
+  /* Interactive Section Inspector styling */
+  section, header, footer {
+    cursor: pointer;
+    transition: outline 0.15s ease, box-shadow 0.15s ease;
+  }
+  .is-canvas-selected {
+    outline: 3px solid var(--primary-color, #10b981) !important;
+    outline-offset: -3px !important;
+    position: relative !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important;
+  }
+
+  /* Hero Section Full Fit: media bleeds edge-to-edge without letterboxing margins */
+  .heroes-container .hero {
+    min-height: 580px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .heroes-container .hero > .hm,
+  .heroes-container .hero > .carousel {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0 !important;
+  }
+  .heroes-container .hero > .hero-content {
+    position: relative !important;
+    z-index: 10 !important;
+    padding: 120px 24px 80px !important;
+    width: 100% !important;
+    max-width: 56rem !important;
+  }
+
+  /* Intelligent Contrast System: Headings, Sections, and Cards */
+  .svc-head h2, #svc-title, #rc-title, #pains-title, #rev-title, #faq-title, #contact-title, #final-title, #about-title {
+    color: var(--color-base-content, currentColor) !important;
+  }
+  .svc-head .subtext, .svc-head p {
+    color: color-mix(in srgb, var(--color-base-content, currentColor) 80%, transparent) !important;
+  }
+  .card {
+    background-color: var(--color-base-100) !important;
+    color: var(--color-base-content) !important;
+  }
+  .card-title, .card h3 {
+    color: var(--color-base-content) !important;
+  }
+  .card p {
+    color: color-mix(in srgb, var(--color-base-content) 75%, transparent) !important;
+  }
+
+  /* Scheme surface classes */
+  body.scheme-dark {
+    background-color: #17191c !important;
+    color: #f3f4f6 !important;
+    --color-base-100: #1f2226;
+    --color-base-200: #17191c;
+    --color-base-300: #33373e;
+    --color-base-content: #f9fafb;
+    --svc-bg: #17191c;
+    --svc-fg: #f9fafb;
+    --rc-bg: #17191c;
+    --rc-fg: #f9fafb;
+    --ks-bg: #17191c;
+    --ks-fg: #f9fafb;
+  }
+  body.scheme-white {
+    background-color: #ffffff !important;
+    color: #17191c !important;
+    --color-base-100: #f6f7f9;
+    --color-base-200: #ffffff;
+    --color-base-300: #e5e7eb;
+    --color-base-content: #17191c;
+    --svc-bg: #ffffff;
+    --svc-fg: #17191c;
+    --rc-bg: #ffffff;
+    --rc-fg: #17191c;
+    --ks-bg: #ffffff;
+    --ks-fg: #17191c;
+  }
+  body.scheme-brand {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+    --color-base-100: #1f2937;
+    --color-base-200: #111827;
+    --color-base-300: #374151;
+    --color-base-content: #f9fafb;
+    --svc-bg: #111827;
+    --svc-fg: #f9fafb;
+    --rc-bg: #111827;
+    --rc-fg: #f9fafb;
+    --ks-bg: #111827;
+    --ks-fg: #f9fafb;
+  }
 </style>
 </head>
-<body class="bg-base-100 text-base-content antialiased w-full">
-          <main class="heroes-container w-full bg-base-100 transition-all duration-300">
+<body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page">
+  <header class="site-header sticky top-0 z-30 flex items-center justify-between px-6 py-3.5 w-full backdrop-blur-md bg-base-100/80 border-b border-base-300/60 transition-all duration-200" id="header" data-type="bar" data-style="transparent">
+    <a href="#hero" class="sh-logo flex items-center gap-2.5 text-lg font-bold text-base-content no-underline">
+      <span class="w-8 h-8 rounded-xl bg-primary text-primary-content flex items-center justify-center text-sm font-extrabold shadow-sm">P</span>
+      <span class="sh-brand-name font-bold tracking-tight">Pandino</span>
+    </a>
+    <div class="sh-main hidden md:flex items-center">
+      <nav aria-label="Main Navigation">
+        <ul class="sh-menu flex items-center gap-6 list-none m-0 p-0 text-sm font-medium">
+          <li><a href="#services" class="hover:text-primary transition-colors text-base-content/80">Services</a></li>
+          <li><a href="#about" class="hover:text-primary transition-colors text-base-content/80">About</a></li>
+          <li><a href="#solutions" class="hover:text-primary transition-colors text-base-content/80">Solutions</a></li>
+          <li><a href="#reviews" class="hover:text-primary transition-colors text-base-content/80">Reviews</a></li>
+          <li><a href="#faq" class="hover:text-primary transition-colors text-base-content/80">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sh-actions flex items-center gap-3">
+      <a href="#contact" class="btn btn-sm btn-primary rounded-xl sh-cta text-xs font-semibold px-4 shadow-sm">Contact Us</a>
+    </div>
+  </header>
+  <main class="heroes-container w-full bg-base-100 transition-all duration-300">
 <!-- LAYOUT 1: GRADIENT CENTERED -->
 <section class="hero hero-gradient is-live-hero min-h-[580px] relative overflow-hidden" id="hero" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
 <div class="carousel w-full h-full hm absolute inset-0 z-0" aria-hidden="true">
@@ -70,7 +488,7 @@
     </div>
   </div>
 </div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -104,7 +522,7 @@
 </div>
 </div>
 <div aria-hidden="true" class="accent-bar"></div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -137,7 +555,7 @@
 </div>
 </div>
 </div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -169,7 +587,7 @@
 </div>
 </div>
 </div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -202,7 +620,7 @@
 </div>
 </div>
 </div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -236,7 +654,7 @@
 </a>
 </div>
 <div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 6: Business Info</div>
-<div class="hb-info biz-panel self-end w-full max-w-5xl mx-auto mb-6 z-10 bg-base-100/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-4 text-xs" aria-label="Business information" hidden>
+<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
@@ -455,17 +873,85 @@
 </div>
 </div>
 </section>
-<section id="pains" class="ks ks-pains" data-look="a" aria-labelledby="pains-title">
-<div class="svc-head ks-head header-group"><div class="title-wrap"><h2 id="pains-title">What gets in the way</h2></div></div>
-<div class="pains-grid">
-<article class="card bg-base-100 shadow-sm"><div class="card-body"><h3 class="card-title">Insurance wait</h3><p>The claim sits for weeks while the car stays undrivable.</p></div></article>
-<article class="card bg-base-100 shadow-sm"><div class="card-body"><h3 class="card-title">Surprise bill</h3><p>A supplement shows up after the work has already started.</p></div></article>
-<article class="card bg-base-100 shadow-sm"><div class="card-body"><h3 class="card-title">Car stuck</h3><p>No loaner, no clear date, and no one who will say what happens next.</p></div></article>
-</div>
-<div class="pains-split">
-<div class="pains-before"><h3>The hassle</h3><p>Calls between the insurer and the shop. A rental clock. An estimate that keeps changing.</p></div>
-<div class="pains-after"><h3>The repair</h3><p>One shop writes the estimate, talks to the insurer, and gives a date you can plan around.</p></div>
-</div>
+<section id="pains" class="ks ks-pains" data-look="a" data-card-align="center" aria-labelledby="pains-title">
+  <div class="pains-container max-w-[1320px] mx-auto w-full flex flex-col gap-8">
+    <div class="svc-head ks-head header-group text-center max-w-2xl mx-auto">
+      <div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Driver Pain Points</div>
+      <div class="title-wrap">
+        <h2 id="pains-title" class="text-3xl md:text-5xl font-bold tracking-tight text-base-content">What gets in the way</h2>
+      </div>
+      <p class="subtext text-sm sm:text-base text-base-content/70 mt-2 font-normal">Unexpected delays, hidden fees, and silence from insurance shouldn't be part of the repair process.</p>
+    </div>
+    <div class="pains-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="card bg-base-100 border border-base-300/80 shadow-sm">
+        <div class="card-body p-6 flex flex-col gap-3 items-center text-center">
+          <div class="w-10 h-10 rounded-xl bg-warning/15 flex items-center justify-center text-warning mb-1">
+            <span class="material-symbols-outlined text-2xl">hourglass_empty</span>
+          </div>
+          <h3 class="card-title text-lg font-bold text-base-content justify-center text-center">Insurance wait</h3>
+          <p class="text-sm text-base-content/70 leading-relaxed text-center">The claim sits for weeks while the car stays undrivable.</p>
+        </div>
+      </article>
+      <article class="card bg-base-100 border border-base-300/80 shadow-sm">
+        <div class="card-body p-6 flex flex-col gap-3 items-center text-center">
+          <div class="w-10 h-10 rounded-xl bg-error/15 flex items-center justify-center text-error mb-1">
+            <span class="material-symbols-outlined text-2xl">receipt_long</span>
+          </div>
+          <h3 class="card-title text-lg font-bold text-base-content justify-center text-center">Surprise bill</h3>
+          <p class="text-sm text-base-content/70 leading-relaxed text-center">A supplement shows up after the work has already started.</p>
+        </div>
+      </article>
+      <article class="card bg-base-100 border border-base-300/80 shadow-sm">
+        <div class="card-body p-6 flex flex-col gap-3 items-center text-center">
+          <div class="w-10 h-10 rounded-xl bg-info/15 flex items-center justify-center text-info mb-1">
+            <span class="material-symbols-outlined text-2xl">no_crash</span>
+          </div>
+          <h3 class="card-title text-lg font-bold text-base-content justify-center text-center">Car stuck</h3>
+          <p class="text-sm text-base-content/70 leading-relaxed text-center">No loaner, no clear date, and no one who will say what happens next.</p>
+        </div>
+      </article>
+    </div>
+    <div class="pains-split grid grid-cols-1 md:grid-cols-2 gap-6">
+      <article class="card bg-base-100 border border-base-300/80 shadow-sm pains-before">
+        <div class="card-body p-6 flex flex-col justify-between gap-4">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge badge-error/15 text-error border-error/25 text-xs font-semibold gap-1 py-2 px-2.5">
+                <span class="material-symbols-outlined text-xs">cancel</span> The Hassle
+              </span>
+              <span class="text-xs text-base-content/50 font-mono">Traditional Shop</span>
+            </div>
+            <h3 class="card-title text-lg font-bold text-base-content mb-2">Calls, confusion &amp; moving estimates</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">Calls between the insurer and the shop. A rental clock ticking down. An estimate that keeps changing while your car sits.</p>
+          </div>
+        </div>
+      </article>
+      <article class="card bg-base-100 border border-primary/40 shadow-sm pains-after">
+        <div class="card-body p-6 flex flex-col justify-between gap-4">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="badge badge-success/15 text-success border-success/25 text-xs font-semibold gap-1 py-2 px-2.5">
+                <span class="material-symbols-outlined text-xs">check_circle</span> The Pandino Way
+              </span>
+              <span class="text-xs text-primary font-mono font-semibold">One Point of Contact</span>
+            </div>
+            <h3 class="card-title text-lg font-bold text-base-content mb-2">Clear timelines &amp; direct insurer billing</h3>
+            <p class="text-sm text-base-content/70 leading-relaxed">One shop writes the estimate, handles all communication with the insurer, and gives you a guaranteed date you can plan around.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="pains-ctas cta-row flex flex-wrap gap-4 justify-center items-center mt-6" data-pains-ctas="2">
+      <button class="btn btn-primary rounded-xl cta-btn cta-primary pains-cta-primary">
+        <span class="material-symbols-outlined text-base">support_agent</span>
+        Talk to a Specialist
+      </button>
+      <button class="btn btn-outline btn-primary rounded-xl cta-btn cta-primary cta-second pains-cta-second">
+        <span class="material-symbols-outlined text-base">arrow_forward</span>
+        Learn More
+      </button>
+    </div>
+  </div>
 </section>
 <section aria-labelledby="rc-title" class="rc" data-headgap="tight" data-tabring="1" id="solutions">
 <div class="svc-head rc-head header-group">
@@ -494,11 +980,94 @@
 </div>
 <input aria-label="Insurance claims" class="tab" name="rc_tabs" type="radio"/>
 <div class="tab-content rc-panel">
-<div aria-label="Insurance claim steps" id="lsClaims"></div>
+  <div aria-label="Insurance claim steps" id="lsClaims" class="w-full">
+    <div class="kit-claims-cards-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body p-4 flex flex-col gap-3">
+          <div class="kit-claim-head flex justify-between items-center">
+            <span class="font-extrabold text-sm text-base-content">1. Send photos</span>
+            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">1</span>
+          </div>
+          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+            <span class="material-symbols-outlined text-primary text-3xl">photo_camera</span>
+          </div>
+          <span class="text-xs text-base-content/70">Take photos with your phone. Fast 2 min upload.</span>
+        </div>
+      </div>
+
+      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body p-4 flex flex-col gap-3">
+          <div class="kit-claim-head flex justify-between items-center">
+            <span class="font-extrabold text-sm text-base-content">2. We assess</span>
+            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">2</span>
+          </div>
+          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+            <span class="material-symbols-outlined text-primary text-3xl">receipt_long</span>
+          </div>
+          <span class="text-xs text-base-content/70">We inspect the car and write a clear, binding estimate.</span>
+        </div>
+      </div>
+
+      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body p-4 flex flex-col gap-3">
+          <div class="kit-claim-head flex justify-between items-center">
+            <span class="font-extrabold text-sm text-base-content">3. Insurance handled</span>
+            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">3</span>
+          </div>
+          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+            <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+          </div>
+          <span class="text-xs text-base-content/70">You sign one authorization. We deal with the insurer.</span>
+        </div>
+      </div>
+
+      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body p-4 flex flex-col gap-3">
+          <div class="kit-claim-head flex justify-between items-center">
+            <span class="font-extrabold text-sm text-base-content">4. Repair &amp; keys</span>
+            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">4</span>
+          </div>
+          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+            <span class="material-symbols-outlined text-primary text-3xl">key</span>
+          </div>
+          <span class="text-xs text-base-content/70">Car repaired, cleaned, tested and keys returned.</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <input aria-label="How it works" class="tab" name="rc_tabs" type="radio"/>
 <div class="tab-content rc-panel">
-<div aria-label="How it works steps" id="lsHow"></div>
+  <div aria-label="How it works steps" id="lsHow" class="w-full">
+    <div class="kit-rail-wrap p-6 bg-base-100 rounded-2xl border border-base-300 flex flex-col gap-6">
+      <div class="kit-rail-nodes flex justify-between relative my-4">
+        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
+          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">1</div>
+          <span class="kit-rail-label text-xs font-bold text-base-content">Contact</span>
+        </div>
+        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
+          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">2</div>
+          <span class="kit-rail-label text-xs font-bold text-base-content">Inspection</span>
+        </div>
+        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
+          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">3</div>
+          <span class="kit-rail-label text-xs font-bold text-base-content">Repair</span>
+        </div>
+        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2">
+          <div class="kit-rail-circle w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">4</div>
+          <span class="kit-rail-label text-xs font-bold text-base-content/70">QC Check</span>
+        </div>
+        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2">
+          <div class="kit-rail-circle w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">5</div>
+          <span class="kit-rail-label text-xs font-bold text-base-content/70">Pick-up</span>
+        </div>
+      </div>
+      <div class="p-5 rounded-xl bg-base-200/60 border border-base-300/80 text-sm text-base-content/80">
+        <b class="text-base-content block mb-1">Step 3: Precision Repair &amp; Color Booth Bake</b>
+        Our in-house master panel beaters and painters rebuild body integrity, weld tore seams to factory tolerances, and bake the clearcoat.
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </section>
@@ -520,7 +1089,7 @@
 <div class="rev-score">4.8</div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span>
 <p>Based on <b>212 reviews</b></p>
 <span class="rev-src"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945"></path></svg> Google reviews</span>
-<a class="btn btn-outline btn-primary rounded-xl ks-btn-outline" href="#reviews">Read all reviews</a>
+<a class="btn btn-primary rounded-xl" href="#reviews">Read all reviews</a>
 </div>
 <ul class="rev-list" role="list"><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">M</span><div><b>Marco R.</b><small>2 weeks ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Perfect paint match on my bumper. Friendly team, fair price.</p></li></ul>
 </div>
@@ -538,7 +1107,7 @@
 <label class="qf"><span>Phone or WhatsApp</span><input autocomplete="tel" name="phone" placeholder="+39 …" required="" type="tel"/></label>
 <label class="qf qf-file"><span>Damage photos <em>(optional)</em></span><span class="qf-drop"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg> Add photos<input accept="image/*" multiple="" name="photos" type="file"/></span></label>
 <label class="qf-consent"><input required="" type="checkbox"/> <span>I agree to the <a href="#privacy">privacy policy</a>.</span></label>
-<button class="btn btn-primary rounded-xl ks-btn" type="submit">Get my quote</button>
+<button class="btn btn-primary rounded-xl" type="submit">Get my quote</button>
 <p class="qf-msg" role="status"></p>
 </form>
 </div>
@@ -564,7 +1133,15 @@
 <p>Clear, bright headlights in one hour. Safer driving at night.</p>
 <div class="promo-price"><b>€49</b><s>€79</s></div>
 <p class="promo-legal">Lowest price in the last 30 days: €79. Placeholder — price rules to verify in the research.</p>
-<div class="promo-ctas"><a class="btn btn-primary rounded-xl ks-btn" href="#quote">Book the offer</a><a class="btn btn-ghost rounded-xl ks-btn-link" href="#promo">Offer terms</a></div>
+<div class="promo-ctas flex flex-wrap gap-3 items-center">
+  <a class="btn btn-primary rounded-xl" href="#quote">
+    <span class="material-symbols-outlined text-base">calendar_month</span>
+    Book the offer
+  </a>
+  <a class="btn btn-outline btn-primary rounded-xl" href="#promo">
+    Offer terms
+  </a>
+</div>
 </div>
 <div aria-label="Offer image placeholder" class="promo-media" role="img"><svg aria-hidden="true" class="promo-ph" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M15 8h.01"></path> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"></path> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path></svg><span>Offer image</span></div>
 </div>
@@ -581,7 +1158,7 @@
 </ul>
 </div>
 <div class="contact-map">
-<div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn btn-outline btn-primary rounded-xl ks-btn-outline" type="button">Show map</button></div>
+<div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn btn-primary rounded-xl" type="button"><span class="material-symbols-outlined text-base">map</span> Show map</button></div>
 </div>
 </div>
 </section>
@@ -591,7 +1168,10 @@
 <h2 id="final-title">Had an accident? We’ll take it from here.</h2>
 </div>
 <p class="subtext">Free quote, insurance handled, your car back like new.</p>
-<div class="final-ctas"><a class="btn btn-primary rounded-xl ks-btn" href="#quote">Get a free quote</a><a class="btn btn-outline btn-primary rounded-xl ks-btn-outline" href="tel:+390212345678"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg> Call now</a></div>
+<div class="final-ctas">
+  <a class="btn btn-primary" href="#quote">Get a free quote</a>
+  <a class="btn btn-outline btn-primary" href="tel:+390212345678"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg> Call now</a>
+</div>
 </div>
 </section>
 <section aria-labelledby="repairs-page-title" class="ks page-sheet rep-page" hidden id="page-repairs" data-align="center">
@@ -642,7 +1222,7 @@
 </div>
 <p class="subtext">Send three photos. We reply with a written plan before any panel comes off.</p>
 </header>
-<p class="page-call"><a class="btn btn-primary rounded-xl ks-btn" href="#page-contact">Ask for an estimate</a></p>
+<p class="page-call"><a class="btn btn-primary rounded-xl" href="#page-contact">Ask for an estimate</a></p>
 </div>
 </div>
 </div>
@@ -703,7 +1283,7 @@
 </div>
 <p class="subtext">The photos, the estimate, and any supplement go to the insurer.</p>
 </header>
-<p class="page-call"><a class="btn btn-primary rounded-xl ks-btn" href="tel:+390212345678">Start the claim</a></p>
+<p class="page-call"><a class="btn btn-primary rounded-xl" href="tel:+390212345678">Start the claim</a></p>
 </div>
 </div>
 </div>
@@ -741,7 +1321,7 @@
 </div>
 <p class="subtext">Ask your insurer if roadside is included. If it is not, join our membership. Either way, a person answers.</p>
 </header>
-<p class="page-call"><a class="btn btn-primary rounded-xl ks-btn" href="tel:+390212345678">Call For A Tow</a></p>
+<p class="page-call"><a class="btn btn-primary rounded-xl" href="tel:+390212345678">Call For A Tow</a></p>
 </div>
 </div>
 </div>
@@ -837,7 +1417,7 @@
 </div>
 <p class="subtext">If you need the cash, or you want a fair price, the written authorization and the workmanship guarantee are what a buyer can check. Ask for a valuation before you set the price.</p>
 </header>
-<p class="page-call"><a class="btn btn-primary rounded-xl ks-btn" href="#page-contact">Request A Valuation</a></p>
+<p class="page-call"><a class="btn btn-primary rounded-xl" href="#page-contact">Request A Valuation</a></p>
 </div>
 </div>
 </div>
@@ -889,8 +1469,31 @@
 <div class="foot-legal"><span>© 2026 Business Name Srl · P.IVA IT12345678901</span><nav aria-label="Legal"><a href="#about">About</a><a href="#privacy">Privacy policy</a><a href="#cookies">Cookie policy</a><button class="foot-cookie-btn" type="button">Cookie settings</button></nav></div>
 </footer>
 
-<script>
+<script type="module">
+  import { readSiteData, applyStateToDocument, onSiteDataChange } from './js/storage.js';
+
+  // 1. Initial State Restoration from LocalStorage
+  const initialData = readSiteData();
+  if (initialData) {
+    applyStateToDocument(document, initialData);
+  }
+
+  // 2. Real-Time Pub/Sub Synchronization (BroadcastChannel + storage events)
+  onSiteDataChange((updatedData) => {
+    if (updatedData) {
+      applyStateToDocument(document, updatedData);
+      if (window.parent && window.parent.__syncCanvasHeight) {
+        window.parent.__syncCanvasHeight();
+      }
+    }
+  });
+
+  // 3. Post-load recheck & iframe height reconciliation
   window.addEventListener('load', () => {
+    const data = readSiteData();
+    if (data) {
+      applyStateToDocument(document, data);
+    }
     if (window.parent && window.parent.__syncCanvasHeight) {
       window.parent.__syncCanvasHeight();
     }

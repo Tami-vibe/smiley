@@ -24,79 +24,141 @@
   .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
   .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
   .trust-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; }
-  .trust-logos { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; padding: 0; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
+  .overline { text-decoration: none !important; }
+
+  /* Accordion Tab Open State Visual Contrast & Hierarchy */
+  .cfg-bar details.collapse[open] {
+    background-color: var(--color-base-100, #191e24) !important;
+    border-color: color-mix(in oklab, var(--color-primary, #2563eb) 40%, var(--color-base-300, #2c3345)) !important;
+    box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cfg-bar details.collapse[open] > summary.collapse-title {
+    background-color: color-mix(in oklab, var(--color-primary, #2563eb) 8%, var(--color-base-100, #191e24)) !important;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-base-300, #2c3345) 85%, transparent) !important;
+  }
+  .cfg-bar details.collapse[open] > .collapse-content {
+    background-color: color-mix(in oklab, var(--color-base-100, #191e24) 92%, var(--color-base-200, #15191e) 8%) !important;
+  }
+  .cfg-bar > details.collapse[open] > summary.collapse-title {
+    background-color: color-mix(in oklab, var(--color-primary, #2563eb) 6%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-base-300, #2c3345) 60%, transparent);
+  }
+
+  /* Left Sidebar Overlay & Collapsed State */
+  .kit-account {
+    position: absolute;
+    inset: 0;
+    background: var(--color-base-200, #191e24);
+    z-index: 50;
+    padding: 1.125rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    overflow-y: auto;
+  }
+  .kit-account[hidden] {
+    display: none !important;
+  }
+  .kit-account .menu button.active {
+    background-color: var(--color-primary, #2563eb) !important;
+    color: var(--color-primary-content, #ffffff) !important;
+  }
+  .kit-account .menu button:hover:not(.active) {
+    background-color: color-mix(in oklab, var(--color-base-content, #ffffff) 8%, transparent);
+  }
+  #cfg.is-collapsed {
+    width: 58px !important;
+  }
+  #cfg.is-collapsed .kit-foot {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 0.5rem 0.25rem !important;
+    margin-top: auto !important;
+  }
+  #cfg.is-collapsed #kit-head {
+    justify-content: center !important;
+    padding: 0.5rem 0.25rem !important;
+  }
+  #cfg.is-collapsed #kit-head .kit-brand-name,
+  #cfg.is-collapsed #kit-head .badge,
+  #cfg.is-collapsed #kit-head #kitWin,
+  #cfg.is-collapsed #cfg-scroll,
+  #cfg.is-collapsed .kit-foot #btnSave,
+  #cfg.is-collapsed .kit-foot #btnReset,
+  #cfg.is-collapsed .kit-foot #btn-open-kit,
+  #cfg.is-collapsed .kit-foot #kitSettings {
+    display: none !important;
+  }
 </style>
 </head>
 <body data-mode="builder">
 <div class="drawer lg:drawer-open kit-drawer h-screen max-h-screen overflow-hidden" id="kit-drawer" data-kit-home="open" data-kit-rail="open" data-kit-area="pages">
   <input id="sidebar-toggle" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col h-screen max-h-screen overflow-hidden bg-base-200">
-    <!-- NATIVE DAISYUI HEADER PANEL -->
-    <div class="navbar bg-base-100 border-b border-base-300 px-4 min-h-14">
-      <div class="flex-1 items-center gap-3">
+    <!-- NATIVE DAISYUI HEADER PANEL (SINGLE CONSOLIDATED ROW) -->
+    <header class="navbar bg-base-100 border-b border-base-300 px-4 h-14 min-h-14 flex items-center justify-between z-20 flex-none gap-2">
+      <div class="flex items-center gap-3 min-w-0">
         <label for="sidebar-toggle" class="btn btn-square btn-ghost btn-sm drawer-button lg:hidden kit-open" role="button" tabindex="0" aria-label="open sidebar">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </label>
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-base tracking-tight text-base-content">SaaS Template Tool</span>
-          <span class="badge badge-sm badge-outline opacity-60">Automotive</span>
+        <!-- Tool Branding -->
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="font-bold text-sm sm:text-base tracking-tight text-base-content">SaaS Template Tool</span>
+          <span class="badge badge-sm badge-outline opacity-60 hidden sm:inline-flex">Automotive</span>
         </div>
-      </div>
-      <div class="flex-none flex items-center gap-3">
-        <!-- Responsive Preview Switch Targets in Join Button Cluster -->
-        <div class="kit-devs join border border-base-300 rounded-lg p-0.5 bg-base-200/60" role="group" aria-label="Preview size">
-          <div class="kit-devs-track join">
-            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost active hover:bg-base-100 tooltip tooltip-bottom" data-dev="desktop" aria-pressed="true" data-tip="Desktop" aria-label="Desktop">
-              <span class="material-symbols-outlined text-sm">desktop_windows</span><span class="hidden md:inline font-medium text-xs">Desktop</span>
-            </button>
-            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost hover:bg-base-100 tooltip tooltip-bottom" data-dev="tablet" aria-pressed="false" data-tip="Tablet" aria-label="Tablet">
-              <span class="material-symbols-outlined text-sm">tablet_mac</span><span class="hidden md:inline font-medium text-xs">Tablet</span>
-            </button>
-            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost hover:bg-base-100 tooltip tooltip-bottom" data-dev="phone" aria-pressed="false" data-tip="Phone" aria-label="Phone">
-              <span class="material-symbols-outlined text-sm">smartphone</span><span class="hidden md:inline font-medium text-xs">Phone</span>
-            </button>
-          </div>
-        </div>
-        <!-- Live Preview & Theme Controller -->
-        <div class="kit-canvas-tools flex items-center gap-2">
-          <button type="button" id="kitWin" class="kit-preview btn btn-sm btn-outline btn-primary gap-1.5 text-xs font-semibold" data-tip="Preview your website" aria-label="Live Preview">
-            <span class="material-symbols-outlined text-sm">open_in_new</span><span class="kit-preview-label hidden sm:inline">Live Preview</span>
-          </button>
-          <label class="swap swap-rotate btn btn-sm btn-ghost btn-circle kit-theme" id="kitTheme" title="Toggle dark/light theme">
-            <input type="checkbox" aria-label="Night mode"/>
-            <svg class="swap-on w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.7-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-            <svg class="swap-off w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESPONSIVE FLEX ITEM GRID WRAPPER FOR PREVIEW SCREENS -->
-    <div class="flex-1 flex flex-col min-h-0 overflow-hidden w-full">
-      <!-- CANVAS TOP BAR -->
-      <div class="kit-canvas-bar flex-none bg-base-100 border-b border-base-300 px-4 py-2 flex items-center justify-between">
-        <div class="kit-crumbs flex items-center gap-2">
-          <span class="kit-project flex items-center gap-1">
+        <span class="text-base-content/25 hidden md:inline select-none">/</span>
+        <!-- Inline Project / Page Scope Breadcrumbs -->
+        <div class="kit-crumbs flex items-center gap-1.5 min-w-0">
+          <span class="kit-project flex items-center gap-1 min-w-0">
             <span class="kit-biz flex items-center gap-1 cursor-pointer" id="kitBizOpen">
-              <span class="material-symbols-outlined kit-biz-mark text-primary" aria-hidden="true">storefront</span>
-              <input id="kitProject" readonly aria-label="Website name" value="Business Name" maxlength="48" class="bg-transparent border-none font-semibold text-sm focus:outline-none">
-              <span class="kit-biz-caret" aria-hidden="true">▾</span>
+              <span class="material-symbols-outlined kit-biz-mark text-primary text-base" aria-hidden="true">storefront</span>
+              <input id="kitProject" readonly aria-label="Website name" value="Business Name" maxlength="48" class="bg-transparent border-none font-semibold text-xs sm:text-sm focus:outline-none w-24 sm:w-28 cursor-pointer">
+              <span class="kit-biz-caret text-xs text-base-content/60" aria-hidden="true">▾</span>
             </span>
             <button type="button" class="kit-name-edit btn btn-ghost btn-xs btn-circle" aria-label="Edit website name">
               <span class="material-symbols-outlined text-xs">edit</span>
             </button>
             <span class="kit-niche text-xs text-base-content/60" id="kitNiche"></span>
-            <span class="kit-project-sep text-base-content/40">/</span>
+            <span class="kit-project-sep text-base-content/40 text-xs">/</span>
             <button type="button" class="kit-page btn btn-ghost btn-xs font-semibold" id="kitPage" aria-haspopup="menu" aria-label="Page">Home</button>
           </span>
         </div>
       </div>
 
+      <div class="flex-none flex items-center gap-2 sm:gap-3">
+        <!-- Viewport Controls: Icon-only buttons with accessible aria-labels and daisyUI tooltips -->
+        <div class="kit-devs join border border-base-300 rounded-lg p-0.5 bg-base-200/60" role="group" aria-label="Preview size">
+          <div class="kit-devs-track join">
+            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost active hover:bg-base-100 tooltip tooltip-bottom" data-dev="desktop" aria-pressed="true" data-tip="Desktop" aria-label="Desktop">
+              <span class="material-symbols-outlined text-sm">desktop_windows</span>
+            </button>
+            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost hover:bg-base-100 tooltip tooltip-bottom" data-dev="tablet" aria-pressed="false" data-tip="Tablet" aria-label="Tablet">
+              <span class="material-symbols-outlined text-sm">tablet_mac</span>
+            </button>
+            <button type="button" class="kit-dev join-item btn btn-xs btn-ghost hover:bg-base-100 tooltip tooltip-bottom" data-dev="phone" aria-pressed="false" data-tip="Phone" aria-label="Phone">
+              <span class="material-symbols-outlined text-sm">smartphone</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Controller -->
+        <label class="swap swap-rotate btn btn-sm btn-ghost btn-circle kit-theme" id="kitTheme" title="Toggle dark/light theme" aria-label="Toggle theme">
+          <input type="checkbox" aria-label="Night mode"/>
+          <svg class="swap-on w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.7-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+          <svg class="swap-off w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+        </label>
+      </div>
+    </header>
+
+    <!-- RESPONSIVE FLEX ITEM GRID WRAPPER FOR PREVIEW SCREENS -->
+    <div class="flex-1 flex flex-col min-h-0 overflow-hidden w-full">
+
       <div class="kit-canvas-scroll flex-1 w-full mx-auto bg-base-300 p-4 sm:p-6 lg:p-8 flex flex-col items-center overflow-y-auto">
-        <div class="kit-canvas-frame w-full max-w-5xl bg-base-100 rounded-2xl shadow-2xl border border-base-300/40 overflow-hidden flex flex-col transition-all duration-300 shrink-0">
+        <div class="kit-canvas-frame w-full max-w-7xl 2xl:max-w-[1560px] bg-base-100 rounded-2xl shadow-2xl border border-base-300/80 ring-1 ring-white/10 overflow-hidden flex flex-col transition-all duration-300 shrink-0" data-theme="dark">
           <iframe id="templateCanvasFrame" src="./template.html" class="w-full border-0 transition-all duration-300 min-h-[850px] bg-base-100" title="Template Preview Canvas"></iframe>
-</div><!-- .kit-canvas-frame -->
+        </div><!-- .kit-canvas-frame -->
 <div aria-labelledby="cookie-title" aria-live="polite" class="cookie-banner hidden" hidden="" id="cookieBanner" role="dialog">
 <button aria-label="Close and reject" class="cookie-x" type="button"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M18 6l-12 12"></path> <path d="M6 6l12 12"></path></svg></button>
 <div class="cookie-copy"><b id="cookie-title"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 13v.01"></path> <path d="M12 17v.01"></path> <path d="M12 12v.01"></path> <path d="M16 14v.01"></path> <path d="M11 8v.01"></path> <path d="M13.148 3.476l2.667 1.104a4 4 0 0 0 4.656 6.14l.053 .132a3 3 0 0 1 0 2.296q -.745 1.18 -1.024 1.852q -.283 .684 -.66 2.216a3 3 0 0 1 -1.624 1.623q -1.572 .394 -2.216 .661q -.712 .295 -1.852 1.024a3 3 0 0 1 -2.296 0q -1.203 -.754 -1.852 -1.024q -.707 -.292 -2.216 -.66a3 3 0 0 1 -1.623 -1.624q -.397 -1.577 -.661 -2.216q -.298 -.718 -1.024 -1.852a3 3 0 0 1 0 -2.296q .719 -1.116 1.024 -1.852q .257 -.62 .66 -2.216a3 3 0 0 1 1.624 -1.623q 1.547 -.384 2.216 -.661q .687 -.285 1.852 -1.024a3 3 0 0 1 2.296 0"></path></svg> We use cookies</b><p>Only with your OK, for statistics and maps. Placeholder text — final wording after the privacy research.</p></div>
@@ -129,43 +191,41 @@
   </div><!-- .drawer-content -->
   <div class="drawer-side border-r border-base-300 z-30">
     <label for="sidebar-toggle" aria-label="close sidebar" class="drawer-overlay"></label>
-    <div class="w-80 min-h-screen max-h-screen bg-base-200 border-r border-base-300 p-4 text-base-content flex flex-col gap-3 cfg overflow-y-auto" id="cfg">
-  <!-- 1. Account Header -->
-  <div class="flex items-center justify-between pb-3 border-b border-base-300/80 kit-head" id="kit-head">
-    <div class="flex items-center gap-3">
+    <div class="w-80 h-screen max-h-screen bg-base-200 border-r border-base-300 text-base-content flex flex-col cfg overflow-hidden relative" id="cfg">
+  <!-- 1. Leftside Menu Header (Pinned, Single Compact Row) -->
+  <header class="flex-none px-3.5 h-14 min-h-14 border-b border-base-300/80 bg-base-200 flex items-center justify-between z-10 kit-head" id="kit-head">
+    <div class="flex items-center gap-2.5">
       <div class="avatar placeholder">
-        <div class="bg-primary text-primary-content rounded-xl w-10 h-10 flex items-center justify-center text-xl font-bold shadow-sm">
+        <div class="bg-primary text-primary-content rounded-xl w-9 h-9 flex items-center justify-center text-lg font-bold shadow-xs">
           <button type="button" class="kit-mark focus:outline-none cursor-pointer" id="kitRailToggle" aria-expanded="true" aria-label="Collapse navigation">🐼</button>
         </div>
       </div>
-      <div>
-        <div class="font-bold text-base tracking-tight text-base-content flex items-center gap-1.5">
-          <span class="kit-brand-name">Pandino</span>
-          <span class="badge badge-primary badge-xs font-semibold">v102</span>
-        </div>
-        <p class="text-xs text-base-content/60 font-medium">SaaS Template Tool</p>
+      <div class="font-bold text-sm tracking-tight text-base-content flex items-center gap-1.5">
+        <span class="kit-brand-name">Pandino</span>
+        <span class="badge badge-primary badge-xs font-semibold">v102</span>
       </div>
     </div>
     <div class="flex items-center gap-1">
-      <button type="button" class="btn btn-ghost btn-xs btn-circle tooltip tooltip-left" data-tip="Open UI Kit" onclick="location.href='/kit.html'">
-        <span class="material-symbols-outlined text-sm">open_in_new</span>
+      <button type="button" id="kitWin" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-left text-base-content/70 hover:text-primary" data-tip="Live Preview" aria-label="Live Preview">
+        <span class="material-symbols-outlined text-base">open_in_new</span>
       </button>
     </div>
-  </div>
+  </header>
 
-  <!-- Active Page Breadcrumb -->
-  <div class="flex items-center justify-between px-3 py-2 bg-base-100/60 rounded-lg border border-base-300/60 text-xs">
-    <div class="flex items-center gap-1.5 text-base-content/70">
-      <span class="material-symbols-outlined text-sm text-primary">auto_stories</span>
-      <span class="font-semibold text-base-content">Pages</span>
-      <span>/</span>
-      <span class="badge badge-sm badge-ghost font-medium" id="kitRailPage">Home</span>
+  <!-- 2. Accordion Configuration Matrix (Scrollable Middle) -->
+  <div class="flex-1 min-h-0 overflow-y-auto px-3.5 py-3 flex flex-col gap-3 cfg-scroll-area" id="cfg-scroll">
+    <!-- Active Page Navigation Tree Item -->
+    <div class="flex items-center justify-between px-3 py-1.5 bg-base-100/70 rounded-lg border border-base-300/60 text-xs shadow-2xs shrink-0">
+      <div class="flex items-center gap-1.5 text-base-content/70">
+        <span class="material-symbols-outlined text-sm text-primary">auto_stories</span>
+        <span class="font-semibold text-base-content">Pages</span>
+        <span>/</span>
+        <span class="badge badge-sm badge-ghost font-medium" id="kitRailPage">Home</span>
+      </div>
+      <div id="kit-page-host" data-kit-area="pages"></div>
     </div>
-    <div id="kit-page-host" data-kit-area="pages"></div>
-  </div>
 
-  <!-- 2. Accordion Configuration Matrix -->
-  <div aria-label="Design settings" class="cfg-bar join join-vertical w-full bg-base-100/60 rounded-xl border border-base-300/80 shadow-xs" role="tablist">
+    <div aria-label="Design settings" class="cfg-bar join join-vertical w-full bg-base-100/60 rounded-xl border border-base-300/80 shadow-xs" role="tablist">
     <!-- Brand & Theme Settings Panel -->
     <details class="collapse collapse-arrow join-item border-b border-base-300/60" open>
       <summary class="collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -175,53 +235,212 @@
         </span>
         <span class="badge badge-xs badge-primary">Active</span>
       </summary>
-      <div class="collapse-content px-3 pb-3 flex flex-col gap-2">
-        <ul class="menu menu-sm bg-base-200/50 rounded-lg p-1 w-full gap-0.5">
-          <li>
-            <button type="button" id="rail-type" class="cfg-tab flex items-center justify-between tooltip tooltip-right" data-sec="type" data-tab="brand" data-kit-area="brand" data-brand-face="type" aria-controls="panel-brand" role="tab" aria-selected="false" data-tip="Typography">
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">text_fields</span>
-                <span class="cfg-name">Typography</span>
-              </span>
-              <span class="badge badge-xs badge-ghost">Aa</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" id="tab-brand" class="cfg-tab is-active flex items-center justify-between tooltip tooltip-right" data-tab="brand" data-kit-area="brand" data-brand-face="color" aria-controls="panel-brand" role="tab" aria-selected="true" data-tip="Colors">
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">palette</span>
-                <span class="cfg-name">Colors &amp; Theme</span>
-              </span>
-              <span class="badge badge-xs badge-primary" id="sum-brand">Blue</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" id="tab-header" class="cfg-tab flex items-center justify-between tooltip tooltip-right" data-tab="header" data-kit-area="brand" aria-controls="panel-header" role="tab" aria-selected="false" data-tip="Header">
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">web</span>
-                <span class="cfg-name">Header</span>
-              </span>
-              <span class="cfg-sum" id="sum-header"></span>
-            </button>
-          </li>
-          <li>
-            <button type="button" id="tab-icons" class="cfg-tab flex items-center justify-between tooltip tooltip-right" data-tab="icons" data-kit-area="brand" aria-controls="panel-icons" role="tab" aria-selected="false" data-tip="Icons">
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">category</span>
-                <span class="cfg-name">Icons</span>
-              </span>
-              <span class="cfg-sum" id="sum-icons"></span>
-            </button>
-          </li>
-          <li>
-            <button type="button" id="rail-assets" class="cfg-tab kit-sub flex items-center justify-between tooltip tooltip-right" data-sec="assets" data-kit-area="brand" aria-controls="panel-assets" role="tab" aria-selected="false" data-tip="Assets">
-              <span class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">perm_media</span>
-                <span class="cfg-name">Assets</span>
-              </span>
-            </button>
-          </li>
-        </ul>
+      <div class="collapse-content px-2 pb-2 flex flex-col gap-1.5">
+        <!-- 1. Typography Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-typography" open>
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="rail-type">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">text_fields</span>
+              <span class="cfg-name font-bold">Typography</span>
+            </span>
+            <span class="badge badge-ghost badge-xs font-mono mr-4">5 Presets</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2.5">
+            <div class="form-control w-full">
+              <label class="label py-1" for="typographySelect">
+                <span class="label-text text-xs text-base-content/70">Font Pairing</span>
+              </label>
+              <select id="typographySelect" class="select select-bordered select-xs w-full rounded-lg bg-base-100 font-medium" aria-label="Typography Font Pairing">
+                <option value="tier1" selected>Modern · Syne + Manrope</option>
+                <option value="tier2">Premium · DM Serif + Manrope</option>
+                <option value="tier3">Bold · Montserrat + Inter</option>
+                <option value="tier4">Elegant · Playfair + Inter</option>
+                <option value="tier5">Friendly · Poppins + Poppins</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-1 gap-1.5" id="typePresetList" role="radiogroup" aria-label="Typography Presets">
+              <button type="button" class="btn btn-outline btn-primary btn-xs h-auto py-2 px-2.5 flex items-center justify-between text-left active" data-tier="tier1" aria-pressed="true">
+                <div class="flex flex-col">
+                  <span class="font-bold text-xs" style="font-family:'Syne',sans-serif">Modern</span>
+                  <span class="text-[10px] opacity-70" style="font-family:'Manrope',sans-serif">Syne + Manrope</span>
+                </div>
+                <span class="badge badge-xs badge-neutral" style="font-family:'Syne',sans-serif">Aa</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs h-auto py-2 px-2.5 flex items-center justify-between text-left" data-tier="tier2" aria-pressed="false">
+                <div class="flex flex-col">
+                  <span class="font-bold text-xs" style="font-family:'DM Serif Display',serif">Premium</span>
+                  <span class="text-[10px] opacity-70" style="font-family:'Manrope',sans-serif">DM Serif + Manrope</span>
+                </div>
+                <span class="badge badge-xs badge-neutral" style="font-family:'DM Serif Display',serif">Aa</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs h-auto py-2 px-2.5 flex items-center justify-between text-left" data-tier="tier3" aria-pressed="false">
+                <div class="flex flex-col">
+                  <span class="font-bold text-xs" style="font-family:'Montserrat',sans-serif">Bold</span>
+                  <span class="text-[10px] opacity-70" style="font-family:'Inter',sans-serif">Montserrat + Inter</span>
+                </div>
+                <span class="badge badge-xs badge-neutral" style="font-family:'Montserrat',sans-serif">Aa</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs h-auto py-2 px-2.5 flex items-center justify-between text-left" data-tier="tier4" aria-pressed="false">
+                <div class="flex flex-col">
+                  <span class="font-bold text-xs" style="font-family:'Playfair Display',serif">Elegant</span>
+                  <span class="text-[10px] opacity-70" style="font-family:'Inter',sans-serif">Playfair + Inter</span>
+                </div>
+                <span class="badge badge-xs badge-neutral" style="font-family:'Playfair Display',serif">Aa</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs h-auto py-2 px-2.5 flex items-center justify-between text-left" data-tier="tier5" aria-pressed="false">
+                <div class="flex flex-col">
+                  <span class="font-bold text-xs" style="font-family:'Poppins',sans-serif">Friendly</span>
+                  <span class="text-[10px] opacity-70" style="font-family:'Poppins',sans-serif">Poppins + Poppins</span>
+                </div>
+                <span class="badge badge-xs badge-neutral" style="font-family:'Poppins',sans-serif">Aa</span>
+              </button>
+            </div>
+          </div>
+        </details>
+
+        <!-- 2. Colors & Theme Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-colors">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-brand">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">palette</span>
+              <span class="cfg-name font-bold">Colors &amp; Theme</span>
+            </span>
+            <span class="badge badge-primary badge-xs mr-4" id="sum-brand">Blue</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2.5">
+            <!-- Scheme -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Color Scheme</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-scheme="brand" title="Brand Color">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="white" title="Showroom White">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="dark" title="Carbon Charcoal">Dark</button>
+              </div>
+            </div>
+            <!-- Contrast -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Text Contrast</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-contrast-mode="adaptive">Adaptive</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-contrast-mode="mono">Monochrome</button>
+              </div>
+            </div>
+            <!-- Button Shade -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Button Shade</span></label>
+              <select id="btnShade" class="select select-bordered select-xs w-full rounded-lg bg-base-100">
+                <option value="auto" selected>Auto (Source Step)</option>
+                <option value="50">50 (Whisper)</option>
+                <option value="100">100 (Tint)</option>
+                <option value="300">300 (Soft)</option>
+                <option value="500">500 (Pure)</option>
+                <option value="700">700 (Deep)</option>
+                <option value="950">950 (Night)</option>
+              </select>
+            </div>
+            <!-- Palettes -->
+            <div class="flex items-center justify-between pt-1">
+              <span class="font-semibold text-[11px] text-base-content uppercase tracking-wider">Palettes</span>
+              <span class="badge badge-xs badge-ghost font-mono">9 Palettes</span>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5" role="list">
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1.5 rounded-lg">
+                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Azure</span><span class="badge badge-xs text-white" style="background:#007fff">500</span></div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="azure" style="background:var(--azure-50,#f0f7ff)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="azure" style="background:var(--azure-100,#e0effe)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="azure" style="background:var(--azure-300,#7cc0fd)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="azure" style="background:var(--azure-500,#007fff)"></button>
+                  <button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer" data-color="azure" style="background:var(--azure-700,#0053b8)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="azure" style="background:var(--azure-950,#001a47)"></button>
+                </div>
+              </div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1.5 rounded-lg">
+                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Blue</span><span class="badge badge-xs text-white" style="background:#2563eb">500</span></div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-50,#eff6ff)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-100,#dbeafe)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-300,#93c5fd)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-500,#2563eb)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-700,#1d4ed8)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="blue" style="background:var(--blue-950,#172554)"></button>
+                </div>
+              </div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1.5 rounded-lg">
+                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Rose</span><span class="badge badge-xs text-white" style="background:#f43f5e">500</span></div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-50,#fff1f2)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-100,#ffe4e6)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-300,#fda4af)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-500,#f43f5e)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-700,#be123c)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="rose" style="background:var(--rose-950,#4c0519)"></button>
+                </div>
+              </div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1.5 rounded-lg">
+                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Emerald</span><span class="badge badge-xs text-white" style="background:#10b981">500</span></div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-50,#ecfdf5)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-100,#d1fae5)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-300,#6ee7b7)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-500,#10b981)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-700,#047857)"></button>
+                  <button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer" data-color="emerald" style="background:var(--emerald-950,#022c22)"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- 3. Header Bar Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-header">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-header">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">web</span>
+              <span class="cfg-name font-bold">Header Bar</span>
+            </span>
+            <span class="badge badge-ghost badge-xs mr-4">Navigation</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2.5">
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Header Type</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="type" data-val="bar">Classic</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="type" data-val="pill">Floating Pill</button>
+              </div>
+            </div>
+            <div class="form-control">
+              <label class="label cursor-pointer py-1 flex items-center justify-between">
+                <span class="label-text text-xs font-semibold text-base-content/80">Show Header</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-opt="show" data-val="on" id="toggleHeaderShow" />
+              </label>
+            </div>
+            <div class="form-control">
+              <label class="label cursor-pointer py-1 flex items-center justify-between">
+                <span class="label-text text-xs font-semibold text-base-content/80">Sticky Navigation</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-opt="sticky" data-val="on" id="toggleHeaderSticky" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Bar Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="style" data-val="transparent">Transparent</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="style" data-val="light">Light</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="style" data-val="dark">Dark</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="style" data-val="glass">Glass</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Menu Links</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="3">3</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="4">4</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="count" data-val="5">5</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="6">6</button>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -235,43 +454,214 @@
         <span class="kit-count badge badge-xs badge-neutral">3</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <!-- Hero Row -->
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="hero">
-          <button type="button" aria-controls="panel-hero" aria-selected="false" class="cfg-tab flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-tab="hero" data-kit-area="pages" id="tab-hero" role="tab" data-tip="Hero" aria-label="Hero">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">view_carousel</span>
-            <span class="cfg-name truncate">Hero</span>
-            <span class="kit-preset badge badge-ghost badge-xs text-xs opacity-60">Soft center</span>
-            <span class="cfg-sum" id="sum-hero"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <!-- About Row -->
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="about">
-          <button type="button" aria-controls="panel-about" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="about" data-tab="about" data-kit-area="pages" id="rail-about" role="tab" data-tip="About" aria-label="About">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">info</span>
-            <span class="cfg-name truncate">About</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <!-- FAQ Row -->
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="faq">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="faq" data-tab="more" data-kit-area="pages" id="rail-faq" role="tab" data-tip="FAQ" aria-label="FAQ">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">quiz</span>
-            <span class="cfg-name truncate">FAQ</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Hero Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-hero" open>
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-hero">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">view_carousel</span>
+              <span class="cfg-name font-bold">Hero</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Soft center</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2.5">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-[11px] text-base-content uppercase tracking-wider">Layout Stage</span>
+              <span class="badge badge-xs badge-ghost font-mono">6 Formats</span>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5" role="radiogroup" aria-label="Hero Layout">
+              <button type="button" class="btn btn-outline btn-primary btn-xs flex flex-col h-auto py-1.5 w-full active" data-hmhero="0" title="Soft center">
+                <span class="text-[11px] font-bold">Soft center</span>
+                <span class="text-[9px] opacity-70">Overlay</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs flex flex-col h-auto py-1.5 w-full" data-hmhero="1" title="Full-screen">
+                <span class="text-[11px] font-bold">Full-screen</span>
+                <span class="text-[9px] opacity-70">Bleed</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs flex flex-col h-auto py-1.5 w-full" data-hmhero="2" title="Frame">
+                <span class="text-[11px] font-bold">Frame</span>
+                <span class="text-[9px] opacity-70">Centered</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs flex flex-col h-auto py-1.5 w-full" data-hmhero="3" title="Side menu">
+                <span class="text-[11px] font-bold">Side menu</span>
+                <span class="text-[9px] opacity-70">Navigation</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs flex flex-col h-auto py-1.5 w-full" data-hmhero="4" title="Bold line">
+                <span class="text-[11px] font-bold">Bold line</span>
+                <span class="text-[9px] opacity-70">Minimal</span>
+              </button>
+              <button type="button" class="btn btn-outline btn-xs flex flex-col h-auto py-1.5 w-full" data-hmhero="5" title="Split">
+                <span class="text-[11px] font-bold">Split</span>
+                <span class="text-[9px] opacity-70">Photo+Text</span>
+              </button>
+            </div>
+            <!-- Headline Input -->
+            <div class="form-control w-full">
+              <label class="label py-0.5" for="hero-promise">
+                <span class="label-text text-[11px] font-semibold text-base-content/80">Headline Pitch</span>
+              </label>
+              <input id="hero-promise" class="input input-bordered input-xs w-full font-medium" type="text" maxlength="60" placeholder="e.g., Experience the Future of Mobility" autocomplete="off">
+            </div>
+            <!-- Rating & Trust Badge -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Rating &amp; Trust Badge</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-rev="off">None</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="white">Outlined</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="black">Solid</button>
+              </div>
+            </div>
+            <!-- Text Alignment -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Text Alignment</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="left">Left</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-halign="center">Center</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="right">Right</button>
+              </div>
+            </div>
+            <!-- Buttons Count -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Buttons Count</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="0">None</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="1">1 Button</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-ctacount="2">2 Buttons</button>
+              </div>
+            </div>
+            <!-- Business Panel Position -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Business Panel</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="off">Off</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-panel="bottom">Bottom</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="left">Left</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="right">Right</button>
+              </div>
+            </div>
+            <!-- Business Panel Style -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Panel Style</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pstyle="solid">Solid</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pstyle="outline">Outline</button>
+              </div>
+            </div>
+            <!-- Animation Toggles -->
+            <div class="flex flex-col gap-1 pt-1 border-t border-base-300/60">
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Logo Marquee Slider</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" data-opt="marquee" data-val="on" id="toggleHeroMarquee" />
+                </label>
+              </div>
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Text Reveal Animation</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" data-hmreveal="on" id="toggleHeroReveal" />
+                </label>
+              </div>
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Blur Behind Text</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" data-hmblur="on" id="toggleHeroBlur" />
+                </label>
+              </div>
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Logos Below Hero</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" data-logostrip="on" id="toggleHeroLogostrip" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </details>
+        <!-- About Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-about" data-sec="about">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-about">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">info</span>
+              <span class="cfg-name font-bold">About</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Timeline</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- FAQ Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-faq" data-sec="faq">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-faq">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">quiz</span>
+              <span class="cfg-name font-bold">FAQ</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Accordion</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -285,17 +675,73 @@
         <span class="kit-count badge badge-xs badge-neutral">1</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="pains">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="pains" data-tab="more" data-kit-area="pages" id="rail-pains" role="tab" data-tip="Customer Pains" aria-label="Customer Pains">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">mood_bad</span>
-            <span class="cfg-name truncate">Customer Pains</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Customer Pains Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-pains" data-sec="pains">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-pains">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">mood_bad</span>
+              <span class="cfg-name font-bold">Customer Pains</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4" id="painsBadge">3 Cards</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Layout Style</span></label>
+              <div class="join w-full" id="painsLayoutJoin">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-look="a">3 Cards</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-look="b">Split Comparison</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Buttons Count</span></label>
+              <div class="join w-full" id="painsCtaJoin">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-ctacount="0">None</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-ctacount="1">1 Button</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-ctacount="2">2 Buttons</button>
+              </div>
+            </div>
+            <!-- Card Content Alignment -->
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Card Alignment</span></label>
+              <div class="join w-full" id="painsAlignJoin">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-align="left">Left</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-align="center">Center</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-align="right">Right</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -309,30 +755,91 @@
         <span class="kit-count badge badge-xs badge-neutral">2</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="services">
-          <button type="button" aria-controls="panel-services" aria-selected="false" class="cfg-tab flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-tab="services" data-kit-area="pages" id="tab-services" role="tab" data-tip="Services" aria-label="Services">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">handyman</span>
-            <span class="cfg-name truncate">Services</span>
-            <span class="kit-preset badge badge-ghost badge-xs text-xs opacity-60">Icon Grid</span>
-            <span class="cfg-sum" id="sum-services"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="repairs">
-          <button type="button" aria-controls="panel-repairs" aria-selected="false" class="cfg-tab flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-tab="repairs" data-kit-area="pages" id="tab-repairs" role="tab" data-tip="Solutions" aria-label="Solutions">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">car_repair</span>
-            <span class="cfg-name truncate">Solutions</span>
-            <span class="kit-preset badge badge-ghost badge-xs text-xs opacity-60">Tabs</span>
-            <span class="cfg-sum" id="sum-repairs"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Services Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-services" data-sec="services">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-services">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">handyman</span>
+              <span class="cfg-name font-bold">Services</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Icon Grid</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2.5">
+            <div class="form-control w-full">
+              <label class="label py-0.5" for="svcCols"><span class="label-text text-[11px] text-base-content/70">Columns</span></label>
+              <select id="svcCols" class="select select-bordered select-xs w-full rounded-xl bg-base-100 font-medium" data-svc="cols">
+                <option value="2">2 Columns</option>
+                <option value="3">3 Columns</option>
+                <option value="4" selected>4 Columns</option>
+              </select>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Card Style</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-svc="card" data-v="fill">Fill</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-svc="card" data-v="outline">Outline</button>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1 pt-1 border-t border-base-300/60">
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Show Service Icons</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-svc="showicon" data-v="on" id="toggleSvcShowIcon" />
+                </label>
+              </div>
+              <div class="form-control">
+                <label class="label cursor-pointer py-1 flex items-center justify-between">
+                  <span class="label-text text-xs font-semibold text-base-content/80">Card Images</span>
+                  <input type="checkbox" class="toggle toggle-primary toggle-xs" data-svc="img" data-v="on" id="toggleSvcImg" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Solutions Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-solutions" data-sec="solutions">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-repairs">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">car_repair</span>
+              <span class="cfg-name font-bold">Solutions</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Tabs</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -346,28 +853,93 @@
         <span class="kit-count badge badge-xs badge-neutral">2</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="trust">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="trust" data-tab="more" data-kit-area="pages" id="rail-trust" role="tab" data-tip="Trust Bar" aria-label="Trust Bar">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">verified</span>
-            <span class="cfg-name truncate">Trust Bar</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="reviews">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="reviews" data-tab="more" data-kit-area="pages" id="rail-reviews" role="tab" data-tip="Reviews" aria-label="Reviews">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">reviews</span>
-            <span class="cfg-name truncate">Reviews</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Trust Bar Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-trust" data-sec="trust">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-trust">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">verified</span>
+              <span class="cfg-name font-bold">Trust Bar</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Logos</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- Reviews Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-reviews" data-sec="reviews">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-reviews">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">reviews</span>
+              <span class="cfg-name font-bold">Reviews</span>
+            </span>
+            <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Testimonials</span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -381,50 +953,177 @@
         <span class="kit-count badge badge-xs badge-neutral">4</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="quote">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="quote" data-tab="more" data-kit-area="pages" id="rail-quote" role="tab" data-tip="Quote Banner" aria-label="Quote Banner">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">request_quote</span>
-            <span class="cfg-name truncate">Quote Banner</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="promo">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="promo" data-tab="more" data-kit-area="pages" id="rail-promo" role="tab" data-tip="Promo" aria-label="Promo">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">sell</span>
-            <span class="cfg-name truncate">Promo</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="final-cta">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="final-cta" data-tab="more" data-kit-area="pages" id="rail-final-cta" role="tab" data-tip="Call to Action" aria-label="Call to Action">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">call_to_action</span>
-            <span class="cfg-name truncate">Call to Action</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="contact">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="contact" data-tab="more" data-kit-area="pages" id="rail-contact" role="tab" data-tip="Contact + Map" aria-label="Contact + Map">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">pin_drop</span>
-            <span class="cfg-name truncate">Contact + Map</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Quote Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-quote" data-sec="quote">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-quote">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">request_quote</span>
+              <span class="cfg-name font-bold">Quote Banner</span>
+            </span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- Promo Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-promo" data-sec="promo">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-promo">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">sell</span>
+              <span class="cfg-name font-bold">Promo</span>
+            </span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- CTA Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-cta" data-sec="cta">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-cta">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">call_to_action</span>
+              <span class="cfg-name font-bold">Call to Action</span>
+            </span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- Contact Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-contact" data-sec="contact">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-contact">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">pin_drop</span>
+              <span class="cfg-name font-bold">Contact + Map</span>
+            </span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -438,17 +1137,48 @@
         <span class="kit-count badge badge-xs badge-neutral">1</span>
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="footer">
-          <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="footer" data-tab="more" data-kit-area="pages" id="rail-footer" role="tab" data-tip="Footer" aria-label="Footer">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">dock</span>
-            <span class="cfg-name truncate">Footer</span>
-            <span class="kit-preset"></span>
-          </button>
-          <label class="kit-eye cursor-pointer flex items-center pl-2" role="button" aria-pressed="true" aria-label="Shown on page">
-            <input type="checkbox" checked class="toggle toggle-primary toggle-sm pointer-events-none" />
-            <span class="ms sr-only" aria-hidden="true">visibility</span>
-          </label>
-        </div>
+        <!-- Footer Accordion -->
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-footer" data-sec="footer">
+          <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-footer">
+            <span class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-base text-primary">dock</span>
+              <span class="cfg-name font-bold">Footer</span>
+            </span>
+          </summary>
+          <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
+            <div class="form-control">
+              <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+                <span class="label-text text-xs text-base-content/70">Visible on Page</span>
+                <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+              </label>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Section Surface</span></label>
+              <div class="join w-full">
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button>
+                <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button>
+              </div>
+            </div>
+            <div class="form-control w-full">
+              <label class="label py-0.5"><span class="label-text text-[11px] text-base-content/70">Brand Shade</span></label>
+              <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700" selected>700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+                <option value="950">950</option>
+              </select>
+            </div>
+          </div>
+        </details>
         <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="all">
           <button type="button" aria-controls="panel-more" aria-selected="false" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="all" data-tab="more" data-kit-area="library" id="rail-all" role="tab" data-tip="Homepage" aria-label="Homepage">
             <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">home</span>
@@ -469,7 +1199,7 @@
     </button>
   </div>
   <div class="border-b border-base-300/60 my-1"></div>
-  <div class="cfg-panels">
+  <div class="cfg-panels hidden" style="display:none !important;" hidden>
 <!-- PANEL: BRAND (TYPOGRAPHY & COLOR) -->
 <div aria-labelledby="tab-brand" class="cfg-panel card bg-base-100 border border-base-300/80 p-4 flex flex-col gap-4 shadow-sm hidden" id="panel-brand" role="tabpanel" hidden="">
   <!-- Panel Header -->
@@ -985,6 +1715,26 @@
       </div>
     </div>
 
+    <!-- Business Panel Position -->
+    <div class="form-control w-full">
+      <label class="label py-1"><span class="label-text text-xs text-base-content/70">Business Panel</span></label>
+      <div class="join w-full">
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="off" title="Off">Off</button>
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-panel="bottom" title="Bottom">Bottom</button>
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="left" title="Left">Left</button>
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="right" title="Right">Right</button>
+      </div>
+    </div>
+
+    <!-- Business Panel Style -->
+    <div class="form-control w-full">
+      <label class="label py-1"><span class="label-text text-xs text-base-content/70">Panel Style</span></label>
+      <div class="join w-full">
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pstyle="solid" title="Solid">Solid</button>
+        <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pstyle="outline" title="Outline">Outline</button>
+      </div>
+    </div>
+
     <!-- Secondary Parameter Native Toggles -->
     <div class="flex flex-col gap-1 pt-1 border-t border-base-300/60">
       <div class="form-control">
@@ -1094,6 +1844,41 @@
   </div>
 
   <div class="flex flex-col gap-2.5" id="moreSectionsList">
+    <!-- About Story -->
+    <div class="card bg-base-200/50 border border-base-300 p-2.5 flex flex-col gap-2 rounded-lg more-row" data-sec="about">
+      <div class="flex items-center justify-between">
+        <span class="font-bold text-xs text-base-content">About Story</span>
+        <button class="btn btn-ghost btn-xs more-go" type="button">Go to</button>
+      </div>
+      <div class="form-control">
+        <label class="label cursor-pointer py-0.5 flex items-center justify-between">
+          <span class="label-text text-xs text-base-content/70">Visible</span>
+          <input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" />
+        </label>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <div class="join flex-1">
+          <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page" title="Page">Page</button>
+          <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand" title="Brand">Brand</button>
+          <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white" title="White">White</button>
+          <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark" title="Dark">Dark</button>
+        </div>
+        <select aria-label="Brand shade" class="select select-bordered select-xs w-20 more-shade font-mono">
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="300">300</option>
+          <option value="400">400</option>
+          <option value="500">500</option>
+          <option value="600">600</option>
+          <option value="700" selected>700</option>
+          <option value="800">800</option>
+          <option value="900">900</option>
+          <option value="950">950</option>
+        </select>
+      </div>
+    </div>
+
     <!-- Customer Pains -->
     <div class="card bg-base-200/50 border border-base-300 p-2.5 flex flex-col gap-2 rounded-lg more-row" data-sec="pains">
       <div class="flex items-center justify-between">
@@ -1422,49 +2207,189 @@
   </div>
   <p class="text-xs text-base-content/70">Icons: Tabler (MIT) as primary set with Material Symbols (Apache 2.0) integrated.</p>
 </div>
-</div>
-  <!-- 3. Pinned Base Actions -->
-  <div class="mt-auto pt-3 border-t border-base-300 flex items-center justify-between kit-foot" id="kit-foot" aria-label="Settings, save, reset, and undo">
-    <div class="flex items-center gap-2">
-      <button type="button" id="kitSettings" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top" data-tip="Settings" data-action="settings" aria-label="Settings" aria-pressed="false">
+  </div><!-- #cfg-scroll -->
+
+  <!-- 3. Leftside Menu Footer (Pinned Single Utility Dock) -->
+  <footer class="flex-none px-3 h-14 min-h-14 border-t border-base-300 bg-base-200 z-10 flex items-center justify-between gap-1.5 kit-foot" id="kit-foot" aria-label="Settings, save, reset, and utilities">
+    <!-- Primary Action: Compact Save -->
+    <button class="btn btn-sm btn-primary gap-1.5 font-semibold text-xs shadow-xs shrink-0" id="btnSave" type="button" title="Save changes">
+      <span class="material-symbols-outlined text-sm" id="btnSaveIcon">save</span>
+      <span id="btnSaveText">Save</span>
+    </button>
+
+    <!-- Utility Icons Dock Group -->
+    <div class="flex items-center gap-0.5">
+      <!-- Reset Action -->
+      <button class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top text-base-content/70 hover:text-error" id="btnReset" type="button" data-tip="Reset changes" aria-label="Reset changes">
+        <span class="material-symbols-outlined text-base" id="btnResetIcon">restart_alt</span>
+        <span id="btnResetText" class="sr-only">Reset</span>
+      </button>
+
+      <!-- Hide Controls Toggle -->
+      <button type="button" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top text-base-content/70 hover:text-base-content" id="cfgCollapse" data-tip="Hide controls" aria-expanded="true" aria-label="Hide controls">
+        <span class="material-symbols-outlined text-base">visibility_off</span>
+        <span id="cfgCollapseLabel" class="sr-only">Hide controls</span>
+      </button>
+
+      <!-- UI Kit / Components Showcase -->
+      <a href="/kit.html" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top text-base-content/70 hover:text-primary" id="btn-open-kit" data-tip="UI Kit" aria-label="Component Kit Showcase">
+        <span class="material-symbols-outlined text-base">style</span>
+      </a>
+
+      <!-- Settings / Account -->
+      <button type="button" id="kitSettings" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top text-base-content/70 hover:text-base-content" data-tip="Settings" data-action="settings" aria-label="Settings" aria-pressed="false">
         <span class="material-symbols-outlined text-base">settings</span>
       </button>
-      <button type="button" class="btn btn-ghost btn-sm text-xs font-semibold gap-1" id="cfgCollapse" aria-expanded="true">
-        <span class="material-symbols-outlined text-sm">visibility_off</span>
-        <span>Hide controls</span>
-      </button>
     </div>
-    <a href="/kit.html" class="btn btn-primary btn-sm gap-1.5 font-semibold text-xs shadow-xs" id="btn-open-kit" title="Component Kit Showcase">
-      <span class="material-symbols-outlined text-sm">style</span>
-      <span>UI Kit</span>
-    </a>
     <span class="cfg-toast hidden" id="cfgToast" role="status"></span>
-  </div>
-  <div id="kit-account" class="kit-account" hidden role="region" aria-label="Account">
-    <div class="kit-account-head">
-      <button type="button" class="kit-account-back" aria-label="Back to builder"><span class="material-symbols-outlined">arrow_back</span></button>
-      <div class="kit-account-id">
-        <div><strong id="kitAccountTitle">Account</strong><span id="kitAccountPlan">Studio</span></div>
+  </footer>
+  <div id="kit-account" class="kit-account" hidden role="region" aria-label="Account Studio">
+    <!-- Header with clear back button -->
+    <div class="flex items-center justify-between pb-3 border-b border-base-300/60 flex-none">
+      <button type="button" class="kit-account-back btn btn-ghost btn-sm gap-1.5 -ml-1 text-base-content/80 hover:text-base-content rounded-lg" aria-label="Back to Editor">
+        <span class="material-symbols-outlined text-lg">arrow_back</span>
+        <span class="text-xs font-semibold">Back to Editor</span>
+      </button>
+      <div class="flex items-center gap-1.5">
+        <span class="text-xs font-bold text-base-content" id="kitAccountTitle">Account</span>
+        <span class="badge badge-primary badge-outline text-[10px] font-mono font-semibold py-0.5 px-1.5" id="kitAccountPlan">Studio</span>
       </div>
     </div>
-    <nav class="kit-account-nav" role="tablist" aria-label="Account">
-      <button type="button" data-acct="profile" aria-pressed="true"><span class="material-symbols-outlined">person</span><span>Profile</span></button>
-      <button type="button" data-acct="projects"><span class="material-symbols-outlined">folder_open</span><span>Projects</span></button>
-      <button type="button" data-acct="plan"><span class="material-symbols-outlined">toll</span><span>Subscription</span></button>
-      <button type="button" data-acct="billing"><span class="material-symbols-outlined">receipt_long</span><span>Billing</span></button>
-      <button type="button" data-acct="team"><span class="material-symbols-outlined">group</span><span>Team</span></button>
-      <button type="button" data-acct="help"><span class="material-symbols-outlined">help</span><span>Help</span></button>
-    </nav>
-    <div class="kit-account-body">
-      <div class="kit-account-pane" data-acct-pane="profile">
-        <label>Your name<input id="kitAccountName" maxlength="48" placeholder="Your name" autocomplete="name" class="input input-bordered w-full"></label>
-        <label>Email<input id="kitAccountEmail" maxlength="80" placeholder="you@studio.com" autocomplete="email" class="input input-bordered w-full"></label>
-        <p>Saved on this device. This is the person who owns the Pandino workspace.</p>
+
+    <!-- Structured vertical navigation menu -->
+    <ul class="menu menu-sm bg-base-200/50 rounded-xl p-1 border border-base-300/40 w-full gap-0.5 flex-none" id="kitAccountNav" role="tablist" aria-label="Account Sections">
+      <li>
+        <button type="button" class="active flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="profile" role="tab" aria-selected="true">
+          <span class="material-symbols-outlined text-base">person</span>
+          <span>Profile</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="projects" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined text-base">folder_open</span>
+          <span>Projects</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="plan" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined text-base">toll</span>
+          <span>Subscription</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="billing" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined text-base">receipt_long</span>
+          <span>Billing</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="team" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined text-base">group</span>
+          <span>Team</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="help" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined text-base">help</span>
+          <span>Help</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Panels Container -->
+    <div class="kit-account-body flex-1 overflow-y-auto flex flex-col gap-3">
+      <!-- Profile Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="profile">
+        <div class="form-control w-full">
+          <label class="label py-1" for="kitAccountName">
+            <span class="label-text text-xs font-semibold text-base-content/80">Your Name</span>
+          </label>
+          <input id="kitAccountName" maxlength="48" placeholder="e.g. Alex Morgan" autocomplete="name" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" />
+        </div>
+        <div class="form-control w-full">
+          <label class="label py-1" for="kitAccountEmail">
+            <span class="label-text text-xs font-semibold text-base-content/80">Email Address</span>
+          </label>
+          <input id="kitAccountEmail" type="email" maxlength="80" placeholder="you@studio.com" autocomplete="email" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" />
+        </div>
+        <div class="flex items-start gap-2 p-2.5 rounded-lg bg-base-300/30 border border-base-300/40">
+          <span class="material-symbols-outlined text-sm text-primary mt-0.5 shrink-0">verified_user</span>
+          <p class="text-[11px] text-base-content/60 leading-relaxed m-0">Saved on this device. This profile owns the local Pandino workspace records.</p>
+        </div>
+        <button type="button" id="kitAccountSave" class="btn btn-sm btn-primary w-full mt-1 gap-1.5 rounded-lg">
+          <span class="material-symbols-outlined text-base">save</span>
+          <span>Save Changes</span>
+        </button>
       </div>
-      <div class="kit-account-pane" data-acct-pane="projects" hidden>
-        <div id="kitVault" class="kit-vault"></div>
-        <button type="button" class="kit-account-add btn btn-sm btn-primary" id="kitVaultAdd">New project</button>
-        <p>Up to 5 projects live in this vault. Opening one loads it on the canvas.</p>
+
+      <!-- Projects Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="projects" hidden>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-base-content">Workspace Projects</span>
+          <span class="badge badge-neutral badge-xs text-[10px]">1 / 5</span>
+        </div>
+        <div id="kitVault" class="kit-vault flex flex-col gap-2">
+          <div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-row items-center justify-between shadow-xs">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="material-symbols-outlined text-primary text-base">directions_car</span>
+              <div class="truncate">
+                <div class="text-xs font-semibold text-base-content truncate">Automotive Repair Pro</div>
+                <div class="text-[10px] text-base-content/50">Current Active Project</div>
+              </div>
+            </div>
+            <span class="badge badge-success badge-xs text-[10px]">Active</span>
+          </div>
+        </div>
+        <button type="button" class="kit-account-add btn btn-sm btn-outline btn-primary w-full gap-1.5 rounded-lg" id="kitVaultAdd">
+          <span class="material-symbols-outlined text-base">add</span>
+          <span>New Project</span>
+        </button>
+        <p class="text-[11px] text-base-content/50 m-0">Up to 5 projects live in this local vault. Switching loads it on canvas.</p>
+      </div>
+
+      <!-- Subscription Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="plan" hidden>
+        <div class="card bg-base-100 border border-primary/30 p-3.5 rounded-xl shadow-xs">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-base-content">Studio Tier</span>
+            <span class="badge badge-primary badge-sm text-[10px]">Unlimited</span>
+          </div>
+          <p class="text-xs text-base-content/70 m-0 leading-relaxed">Full access to automotive sections, custom tokens, duo pairings, and static live preview exports.</p>
+        </div>
+        <div class="text-[11px] text-base-content/50">Renews annually. Managed via workspace administrator.</div>
+      </div>
+
+      <!-- Billing Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="billing" hidden>
+        <div class="card bg-base-100 border border-base-300/60 p-3.5 rounded-xl text-center">
+          <span class="material-symbols-outlined text-2xl text-base-content/40 mx-auto mb-1">credit_card</span>
+          <span class="text-xs font-semibold text-base-content">Payment Method Active</span>
+          <span class="text-[11px] text-base-content/50 mt-1">Direct invoice via company procurement.</span>
+        </div>
+      </div>
+
+      <!-- Team Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="team" hidden>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-base-content">Seats</span>
+          <span class="badge badge-ghost badge-xs">1 Active</span>
+        </div>
+        <div class="card bg-base-100 border border-base-300/60 p-2.5 rounded-xl flex flex-row items-center gap-2.5">
+          <div class="w-7 h-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">P</div>
+          <div class="min-w-0 flex-1">
+            <div class="text-xs font-semibold text-base-content truncate" id="kitTeamMemberName">Workspace Owner</div>
+            <div class="text-[10px] text-base-content/50 truncate" id="kitTeamMemberEmail">Owner (Admin)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help Pane -->
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="help" hidden>
+        <div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-col gap-2">
+          <div class="text-xs font-bold text-base-content">Pandino Documentation</div>
+          <p class="text-[11px] text-base-content/70 m-0 leading-relaxed">Built with Vanilla DaisyUI 5 and Tailwind CSS 4. Keyboard shortcuts, section anchors, and design token guides available.</p>
+          <div class="text-[10px] text-base-content/40 font-mono mt-1">Version: Pandino v102 (Release Build)</div>
+        </div>
       </div>
     </div>
   </div>
