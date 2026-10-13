@@ -367,21 +367,44 @@ export function applyRecipe(canvasDoc, recipeKey = "full-landing") {
     el.hidden = !activeSet.has(el.id);
   });
 }
-const SUB_RECIPE = ["header", "hero", "quote", "contact", "footer"];
+const SUB_RECIPE = ["header", "hero", "service-detail", "solutions", "trust", "quote", "contact", "footer"];
 const MIN_RECIPE = ["header", "hero", "footer"];
 export const ROUTES = {
   home: { tier: "full", kicker: "Step Into The Green", title: "Experience the Future of Mobility", desc: "Advanced technology meets stunning design. Premium automotive experience awaits you.", recipe: RECIPES["full-landing"], crumbs: ["Home"] },
-  "collision-repair": { tier: "sub", kicker: "OEM Certified Repair", title: "Collision Repair", desc: "Frame and body restored to factory specs after any accident.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Collision Repair"] },
-  "paint-refinishing": { tier: "sub", kicker: "Precision Color Match", title: "Paint & Refinishing", desc: "Computer colour matching and a showroom finish.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Paint & Refinishing"] },
-  "dent-removal": { tier: "sub", kicker: "PDR Specialists", title: "Dent Removal", desc: "Paintless repair for hail damage and parking dents.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Dent Removal"] },
-  "insurance-claims": { tier: "sub", kicker: "Direct Billing", title: "Insurance Claims", desc: "We handle the paperwork directly with your insurer.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Insurance Claims"] },
-  "towing": { tier: "sub", kicker: "24/7 Roadside Assistance", title: "24/7 Towing", desc: "Roadside pickup and transport to our workshop.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "24/7 Towing"] },
-  "windshield-glass": { tier: "sub", kicker: "ADAS Calibration", title: "Windshield & Glass", desc: "Chip repair and full windshield replacement.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Windshield & Glass"] },
-  "frame-suspension": { tier: "sub", kicker: "Laser Realignment", title: "Frame & Suspension", desc: "Alignment checks after impacts and potholes.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Frame & Suspension"] },
-  "courtesy-car": { tier: "sub", kicker: "Zero Downtime", title: "Courtesy Car", desc: "Keep moving while we repair your vehicle.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Courtesy Car"] },
-  "battery-electrics": { tier: "sub", kicker: "High-Voltage Diagnostics", title: "Battery & Electrics", desc: "Testing, replacement and electrical repairs.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Battery & Electrics"] },
-  "wheels-tyres": { tier: "sub", kicker: "Wheel Precision", title: "Wheels & Tyres", desc: "Rim repair, tyre fitting and balancing.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Wheels & Tyres"] },
+  "collision-repair": { tier: "sub", kicker: "OEM Certified Repair", title: "Collision Repair", desc: "Frame and body restored to factory specs after any accident.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Collision Repair"], badge: "OEM CERTIFIED", copy: "Complete structural repair using factory-certified alignment jigs, OEM panel replacements, and precision tolerance measurement.", points: ["Computerized laser chassis realignment", "Original OEM structural replacement panels", "Lifetime factory collision warranty certificate"], img: "./media/showcase/bodywork-door-repair.jpg" },
+  "paint-refinishing": { tier: "sub", kicker: "Precision Color Match", title: "Paint & Refinishing", desc: "Computer colour matching and a showroom finish.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Paint & Refinishing"], badge: "GLASURIT 100 LINE", copy: "Spectrophotometer computer color matching with downdraft climate-controlled spray booths ensuring factory sheen, depth, and UV durability.", points: ["Digital spectrophotometer color calibration", "Heated downdraft spray & baking booth", "Multi-stage clearcoat with lifetime gloss guarantee"], img: "./media/hero/hero-beast-mode-01.jpg" },
+  "dent-removal": { tier: "sub", kicker: "PDR Specialists", title: "Dent Removal", desc: "Paintless repair for hail damage and parking dents.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Dent Removal"], badge: "PDR MASTER CERTIFIED", copy: "Non-invasive paintless dent repair (PDR) gently massaging metal back into shape without compromising original factory clearcoat or paint layers.", points: ["Zero filler or repainting required", "Preserves factory warranty and vehicle resale value", "Same-day turnaround for hail and door dings"], img: "./media/showcase/workshop-bay.jpg" },
+  "insurance-claims": { tier: "sub", kicker: "Direct Billing", title: "Insurance Claims", desc: "We handle the paperwork directly with your insurer.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Insurance Claims"], badge: "DIRECT BILLING PARTNER", copy: "Comprehensive claim management directly with all major insurance providers. We handle damage appraisal, adjuster negotiations, and direct billing.", points: ["Direct billing with zero upfront cost on covered claims", "Official computerized damage appraisal report", "Dedicated claims manager from filing to car pickup"], img: "./media/showcase/service-authorization.jpg" },
+  "towing": { tier: "sub", kicker: "24/7 Roadside Assistance", title: "24/7 Towing", desc: "Roadside pickup and transport to our workshop.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "24/7 Towing"], badge: "24/7 RAPID DISPATCH", copy: "Immediate emergency recovery and flatbed transport throughout Milan and surrounding provinces directly into our secure facility.", points: ["Flatbed transport preventing AWD & EV drivetrain wear", "Under 35-minute average urban arrival window", "Immediate courtesy vehicle dispatch on scene"], img: "./media/hero/highway-suv.jpg" },
+  "windshield-glass": { tier: "sub", kicker: "ADAS Calibration", title: "Windshield & Glass", desc: "Chip repair and full windshield replacement.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Windshield & Glass"], badge: "ADAS CERTIFIED", copy: "Stone chip resin repairs and OEM windshield replacements coupled with optical recalibration for lane departure and emergency braking cameras.", points: ["OEM acoustic and solar reflective glass replacement", "Digital ADAS camera & radar sensor recalibration", "Direct insurance glass coverage with no deductible"], img: "./media/hero/driver-cockpit.jpg" },
+  "frame-suspension": { tier: "sub", kicker: "Laser Realignment", title: "Frame & Suspension", desc: "Alignment checks after impacts and potholes.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Frame & Suspension"], badge: "LASER GEOMETRY", copy: "Millimeter-accurate 3D laser chassis alignment and suspension diagnostic load testing to ensure precise steering response and high-speed stability.", points: ["3D laser chassis bench measurement", "Subframe, control arm & strut replacement", "4-wheel laser alignment printout report"], img: "./media/hero/ev-lift-diagnostic.jpg" },
+  "courtesy-car": { tier: "sub", kicker: "Zero Downtime", title: "Courtesy Car", desc: "Keep moving while we repair your vehicle.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Courtesy Car"], badge: "FREE LOANER FLEET", copy: "Modern, fully insured replacement cars provided free of charge during the repair window so your daily routine remains completely uninterrupted.", points: ["Modern automatic, hybrid, and electric vehicle options", "Comprehensive insurance coverage with zero deductible", "Immediate vehicle handoff upon shop drop-off"], img: "./media/hero/hero-1.jpg" },
+  "battery-electrics": { tier: "sub", kicker: "High-Voltage Diagnostics", title: "Battery & Electrics", desc: "Testing, replacement and electrical repairs.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Battery & Electrics"], badge: "HIGH-VOLTAGE CERTIFIED", copy: "Certified technicians trained in high-voltage EV and hybrid battery safety protocols, wiring repairs, inverter testing, and computer diagnostics.", points: ["High-voltage battery isolation and module diagnosis", "OEM computer system scanning and clearing", "Charging port, BMS and wiring harness repair"], img: "./media/hero/diagnostic-scanner.jpg" },
+  "wheels-tyres": { tier: "sub", kicker: "Wheel Precision", title: "Wheels & Tyres", desc: "Rim repair, tyre fitting and balancing.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Wheels & Tyres"], badge: "HUNTER ROAD FORCE", copy: "Alloy rim diamond cutting, kerb rash restoration, CNC rim straightening, and dynamic road-force laser balancing for vibration-free driving.", points: ["CNC diamond-cut alloy rim cosmetic refurbishment", "Hydraulic rim straightening for pothole bends", "Premium tyre replacement and dynamic road-force balancing"], img: "./media/ai-images/tyres.jpg" },
   privacy: { tier: "minimal", kicker: "Compliance & GDPR", title: "Privacy Policy", desc: "Transparent terms regarding customer data processing and rights.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Privacy"] },
   warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
   cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] }
 };
+export function populateServiceDetail(doc, route) {
+  const svc = doc?.getElementById("service-detail");
+  if (!svc) return;
+  if (route.tier === "sub" && route.copy) {
+    svc.hidden = false;
+    const img = doc.getElementById("svc-detail-img");
+    if (img && route.img) { img.src = route.img; img.alt = route.title || "Service Detail"; }
+    const badge = doc.getElementById("svc-detail-badge");
+    if (badge) badge.textContent = route.badge || "OEM CERTIFIED";
+    const kicker = doc.getElementById("svc-detail-kicker");
+    if (kicker) kicker.textContent = route.kicker || "SERVICE SPEC";
+    const title = doc.getElementById("svc-detail-title");
+    if (title) title.textContent = route.title || "";
+    const copy = doc.getElementById("svc-detail-copy");
+    if (copy) copy.textContent = route.copy || "";
+    const points = doc.getElementById("svc-detail-points");
+    if (points && route.points) {
+      points.innerHTML = route.points.map(p => `<li class="flex items-center gap-2"><svg class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg><span>${p}</span></li>`).join("");
+    }
+  } else {
+    svc.hidden = true;
+  }
+}

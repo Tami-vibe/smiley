@@ -1,5 +1,5 @@
 import { MS, sectorIcon, railIcons, setAutoBodyIcons } from "./sector-icons.js";
-import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite, FONT_TIERS, hexToRgb, SHADE_STEPS, rampFromHex, ROUTES, applyRecipe } from "./storage.js";
+import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite, FONT_TIERS, hexToRgb, SHADE_STEPS, rampFromHex, ROUTES, applyRecipe, populateServiceDetail } from "./storage.js";
 /* =========================================================
    PANDINO RUNTIME: DECLARATIVE DATA-MAPPER ENGINE (DAISYUI 5)
    ========================================================= */
@@ -21,12 +21,10 @@ export function syncCanvasHeight() {
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
     if (!frame) return;
     try {
-        const doc = getCanvasDocument();
-        const h = Math.max(doc?.body?.scrollHeight || 0, doc?.documentElement?.scrollHeight || 0, 700);
-        if (Math.abs(h - lastCanvasHeight) > 15 && h < 25000) {
-            lastCanvasHeight = h;
-            frame.style.height = `${h}px`;
-        }
+        const scroller = document.querySelector(".kit-canvas-scroll");
+        const dev = document.querySelector("[data-dev].active")?.dataset?.dev || "desktop";
+        const h = dev === "desktop" ? Math.max((scroller?.clientHeight || 850) - 48, 750) : (dev === "tablet" ? 1024 : 844);
+        frame.style.height = `${h}px`;
     } catch (e) {}
 }
 window.__syncCanvasHeight = syncCanvasHeight;
@@ -582,6 +580,7 @@ export function navigateRoute(routeKey) {
         const desc = doc.getElementById("hero-desc");
         if (desc && route.desc) desc.textContent = route.desc;
     }
+    if (doc) populateServiceDetail(doc, route);
     if (route.recipe && doc) applyRecipe(doc, route.recipe);
     syncCanvasHeight();
 }

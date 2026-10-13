@@ -171,14 +171,14 @@
   </header>
   <main class="heroes-container w-full bg-base-100 transition-all duration-300">
 <!-- UNIFIED HERO SECTION (data-layout="1..6") -->
-<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:min-h-[100dvh] data-[hero-tier=sub]:min-h-[50dvh] data-[hero-tier=minimal]:min-h-[20dvh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
-<div class="carousel w-full h-full absolute inset-0 z-0" aria-hidden="true">
-  <div class="carousel-item w-full h-full is-active" data-slide="1"><div class="w-full h-full"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
-  <div class="carousel-item w-full h-full" data-slide="2"><div class="w-full h-full"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full" data-slide="3"><div class="w-full h-full"><video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
-  <div class="carousel-item w-full h-full" data-slide="4"><div class="w-full h-full"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full" data-slide="5"><div class="w-full h-full"><img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full" data-slide="6"><div class="w-full h-full"><img src="./media/hero/hero-1.jpg" alt="" class="w-full h-full object-cover"></div></div>
+<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:h-screen data-[hero-tier=full]:max-h-screen data-[hero-tier=sub]:h-[50vh] data-[hero-tier=sub]:max-h-[50vh] data-[hero-tier=minimal]:h-[25vh] data-[hero-tier=minimal]:max-h-[25vh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
+<div class="carousel w-full h-full absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+  <div class="carousel-item absolute inset-0 w-full h-full is-active" data-slide="1"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div>
+  <div class="carousel-item absolute inset-0 w-full h-full" data-slide="2"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div>
+  <div class="carousel-item absolute inset-0 w-full h-full" data-slide="3"><video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div>
+  <div class="carousel-item absolute inset-0 w-full h-full" data-slide="4"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div>
+  <div class="carousel-item absolute inset-0 w-full h-full" data-slide="5"><img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover"></div>
+  <div class="carousel-item absolute inset-0 w-full h-full" data-slide="6"><img src="./media/hero/hero-1.jpg" alt="" class="w-full h-full object-cover"></div>
   <span class="absolute inset-0 bg-black/40"></span>
 </div>
 <div class="absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
@@ -396,6 +396,30 @@
         <span class="material-symbols-outlined text-base">arrow_forward</span>
         Learn More
       </button>
+    </div>
+  </div>
+</section>
+<!-- SERVICE DETAIL (2-COLUMN DYNAMIC LANDMARK) -->
+<section id="service-detail" class="w-full py-12 md:py-20 bg-base-100" hidden>
+  <div class="max-w-6xl mx-auto w-full px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-base-content/10 aspect-[4/3] bg-base-200">
+        <img id="svc-detail-img" src="" alt="Service Detail" class="w-full h-full object-cover" />
+        <div class="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-base-100/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+          <span class="text-xs font-bold text-white uppercase tracking-wider" id="svc-detail-badge">OEM CERTIFIED</span>
+          <span class="badge badge-primary badge-sm font-mono font-bold">LIFETIME WARRANTY</span>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <span id="svc-detail-kicker" class="text-xs font-mono font-bold text-primary tracking-widest uppercase block">SERVICE SPEC</span>
+        <h2 id="svc-detail-title" class="text-3xl md:text-4xl font-extrabold text-base-content tracking-tight"></h2>
+        <p id="svc-detail-copy" class="text-base text-base-content/80 leading-relaxed"></p>
+        <ul id="svc-detail-points" class="space-y-2 pt-1 text-sm font-medium text-base-content/90"></ul>
+        <div class="pt-2 flex flex-wrap gap-3">
+          <a href="#quote" class="btn btn-primary rounded-xl px-6">Get Direct Estimate</a>
+          <a href="tel:+390212345678" class="btn btn-outline rounded-xl">24/7 Towing Dispatch</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -826,7 +850,7 @@
 </footer>
 </main>
 <script type="module">
-  import { readSiteData, applyStateToDocument, onSiteDataChange, ROUTES, applyRecipe } from './js/storage.js';
+  import { readSiteData, applyStateToDocument, onSiteDataChange, ROUTES, applyRecipe, populateServiceDetail } from './js/storage.js';
   function navRoute(raw) {
     const key = (raw || location.hash).replace(/^#?\/?(services\/|legal\/)?/, '') || 'home';
     const r = ROUTES[key] || ROUTES.home;
@@ -843,6 +867,7 @@
       if (t && r.title) t.textContent = r.title;
       if (d && r.desc) d.textContent = r.desc;
     }
+    populateServiceDetail(document, r);
     if (r.recipe) applyRecipe(document, r.recipe);
     if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
   }
