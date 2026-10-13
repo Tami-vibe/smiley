@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>@layer reset, theme, base, components, utilities;</style>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="./css/tokens-base.css">
@@ -53,14 +54,6 @@
   body { margin: 0; padding: 0; font-family: var(--body-font); overflow-x: hidden; }
   h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
   .heroes-container svg:not([class*="w-"]):not([width]) { max-width: 100%; height: auto; }
-  .svc-ic, .ks-ic { width: 2rem; height: 2rem; flex-shrink: 0; }
-  .svc-ic-sm, .ks-ic-sm, .faq-chev, .svc-arrow, .rc-arr { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
-  .ks-star { width: 1.25rem; height: 1.25rem; }
-  .rc-ph-ic { width: 2.25rem; height: 2.25rem; }
-  .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; list-style: none; padding: 0; margin: 2rem 0; }
-  .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
-  .trust-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; }
-  .trust-logos { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; padding: 0; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
   .svc-badge, .rc-badge, .ks-badge { display: none !important; }
   /* Remove Tailwind overline line across all eyebrow labels */
@@ -70,85 +63,58 @@
   .kit-claim-card { transition: transform 0.2s ease, border-color 0.2s ease; }
   .kit-claim-card:hover { transform: translateY(-2px); border-color: var(--color-primary, #10b981) !important; }
   /* Canonical DaisyUI Button Component Foundation */
-  .btn,
-  .ks .btn,
-  button.btn,
-  a.btn { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important; padding: 0.75rem 1.6rem !important; font-family: var(--body-font, sans-serif) !important; font-size: 0.875rem !important; font-weight: 700 !important; line-height: 1.25rem !important; border-radius: 0.75rem !important; min-height: 2.75rem !important; border-width: 1.5px !important; border-style: solid !important; border-color: transparent !important; cursor: pointer !important; text-decoration: none !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; user-select: none !important; box-sizing: border-box !important; white-space: nowrap !important; }
-  .btn.btn-sm,
-  .ks .btn.btn-sm { padding: 0.45rem 1.1rem !important; font-size: 0.75rem !important; min-height: 2rem !important; border-radius: 0.5rem !important; }
-  .btn.btn-lg,
-  .ks .btn.btn-lg { padding: 0.9rem 2rem !important; font-size: 1rem !important; min-height: 3.25rem !important; }
-  .btn-primary,
-  .btn.btn-primary,
-  .ks .btn-primary,
-  .cta-btn.btn-primary { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; }
-  .btn-primary:hover,
-  .btn.btn-primary:hover,
-  .ks .btn-primary:hover,
-  .cta-btn.btn-primary:hover { filter: brightness(1.1) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--color-primary, #10b981) 50%, transparent) !important; }
-  .btn-outline,
-  .btn.btn-outline,
-  .btn-outline.btn-primary,
-  .btn.btn-outline.btn-primary,
-  .ks .btn-outline { background-color: transparent !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary, var(--primary-color, #10b981)) !important; }
-  .btn-outline:hover,
-  .btn.btn-outline:hover,
-  .btn-outline.btn-primary:hover,
-  .btn.btn-outline.btn-primary:hover,
-  .ks .btn-outline:hover { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; transform: translateY(-1px) !important; }
-  .btn-ghost,
-  .btn.btn-ghost,
-  .ks .btn-ghost { background-color: transparent !important; border-color: rgba(255, 255, 255, 0.15) !important; color: var(--color-base-content, #ffffff) !important; }
-  .btn-ghost:hover,
-  .btn.btn-ghost:hover,
-  .ks .btn-ghost:hover { background-color: color-mix(in srgb, var(--color-base-content, #ffffff) 12%, transparent) !important; border-color: rgba(255, 255, 255, 0.3) !important; }
+  .btn, button.btn, a.btn { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important; padding: 0.75rem 1.6rem !important; font-family: var(--body-font, sans-serif) !important; font-size: 0.875rem !important; font-weight: 700 !important; line-height: 1.25rem !important; border-radius: 0.75rem !important; min-height: 2.75rem !important; border-width: 1.5px !important; border-style: solid !important; border-color: transparent !important; cursor: pointer !important; text-decoration: none !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; user-select: none !important; box-sizing: border-box !important; white-space: nowrap !important; }
+  .btn.btn-sm { padding: 0.45rem 1.1rem !important; font-size: 0.75rem !important; min-height: 2rem !important; border-radius: 0.5rem !important; }
+  .btn.btn-lg { padding: 0.9rem 2rem !important; font-size: 1rem !important; min-height: 3.25rem !important; }
+  .btn-primary, .btn.btn-primary { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; }
+  .btn-primary:hover, .btn.btn-primary:hover { filter: brightness(1.1) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--color-primary, #10b981) 50%, transparent) !important; }
+  .btn-outline, .btn.btn-outline { background-color: transparent !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary, var(--primary-color, #10b981)) !important; }
+  .btn-outline:hover, .btn.btn-outline:hover { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; transform: translateY(-1px) !important; }
+  .btn-ghost, .btn.btn-ghost { background-color: transparent !important; border-color: rgba(255, 255, 255, 0.15) !important; color: var(--color-base-content, #ffffff) !important; }
+  .btn-ghost:hover, .btn.btn-ghost:hover { background-color: color-mix(in srgb, var(--color-base-content, #ffffff) 12%, transparent) !important; border-color: rgba(255, 255, 255, 0.3) !important; }
   /* Canonical DaisyUI Card Component Foundation */
-  .card,
-  .ks-pains .card { position: relative !important; display: flex !important; flex-direction: column !important; border-radius: 1.125rem !important; background-color: var(--color-base-200, #17191c) !important; border: 1px solid var(--sch-line, rgba(255, 255, 255, 0.08)) !important; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35) !important; overflow: hidden !important; transition: all 0.25s ease !important; box-sizing: border-box !important; }
-  .card:hover,
-  .ks-pains .card:hover { border-color: color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; transform: translateY(-2px) !important; box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5) !important; }
-  .card-body,
-  .ks-pains .card-body { display: flex !important; flex-direction: column !important; gap: 0.75rem !important; padding: 1.75rem !important; flex: 1 1 auto !important; box-sizing: border-box !important; }
-  .card-title,
-  .ks-pains .card-title { display: flex !important; align-items: center !important; gap: 0.5rem !important; font-family: var(--headline-font, sans-serif) !important; font-size: 1.15rem !important; font-weight: 700 !important; color: var(--color-base-content, #ffffff) !important; margin: 0 !important; line-height: 1.3 !important; }
+  .card { position: relative !important; display: flex !important; flex-direction: column !important; border-radius: 1.125rem !important; background-color: var(--color-base-200, #17191c) !important; border: 1px solid var(--sch-line, rgba(255, 255, 255, 0.08)) !important; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35) !important; overflow: hidden !important; transition: all 0.25s ease !important; box-sizing: border-box !important; }
+  .card:hover { border-color: color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; transform: translateY(-2px) !important; box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5) !important; }
+  .card-body { display: flex !important; flex-direction: column !important; gap: 0.75rem !important; padding: 1.75rem !important; flex: 1 1 auto !important; box-sizing: border-box !important; }
+  .card-title { display: flex !important; align-items: center !important; gap: 0.5rem !important; font-family: var(--headline-font, sans-serif) !important; font-size: 1.15rem !important; font-weight: 700 !important; color: var(--color-base-content, #ffffff) !important; margin: 0 !important; line-height: 1.3 !important; }
   /* Customer Pains Section Styling */
-  .ks-pains { padding-block: var(--section-pad-y, 4.5rem) !important; }
-  .ks-pains .pains-container,
-  .ks-pains > div { max-width: 72rem; margin-inline: auto; width: 100%; padding-inline: 1rem; box-sizing: border-box; }
-  .ks-pains .pains-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
-  @media (min-width: 768px) { .ks-pains .pains-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
-  .ks-pains .pains-grid .card { background: color-mix(in srgb, var(--color-base-200, #17191c) 92%, var(--color-base-100, #191e24)) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
+  #pains { padding-block: var(--section-pad-y, 4.5rem) !important; }
+  #pains .pains-container,
+  #pains > div { max-width: 72rem; margin-inline: auto; width: 100%; padding-inline: 1rem; box-sizing: border-box; }
+  #pains .pains-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
+  @media (min-width: 768px) { #pains .pains-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+  #pains .pains-grid .card { background: color-mix(in srgb, var(--color-base-200, #17191c) 92%, var(--color-base-100, #191e24)) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
   /* Customer Pains Card Content Alignment */
-  .ks-pains[data-card-align="center"] .pains-grid .card-body,
-  .ks-pains.pains-align-center .pains-grid .card-body { align-items: center !important; text-align: center !important; }
-  .ks-pains[data-card-align="center"] .pains-grid .card-title,
-  .ks-pains.pains-align-center .pains-grid .card-title { justify-content: center !important; text-align: center !important; }
-  .ks-pains[data-card-align="center"] .pains-grid p,
-  .ks-pains.pains-align-center .pains-grid p { text-align: center !important; }
-  .ks-pains[data-card-align="left"] .pains-grid .card-body,
-  .ks-pains.pains-align-left .pains-grid .card-body { align-items: flex-start !important; text-align: left !important; }
-  .ks-pains[data-card-align="left"] .pains-grid .card-title,
-  .ks-pains.pains-align-left .pains-grid .card-title { justify-content: flex-start !important; text-align: left !important; }
-  .ks-pains[data-card-align="left"] .pains-grid p,
-  .ks-pains.pains-align-left .pains-grid p { text-align: left !important; }
-  .ks-pains[data-card-align="right"] .pains-grid .card-body,
-  .ks-pains.pains-align-right .pains-grid .card-body { align-items: flex-end !important; text-align: right !important; }
-  .ks-pains[data-card-align="right"] .pains-grid .card-title,
-  .ks-pains.pains-align-right .pains-grid .card-title { justify-content: flex-end !important; text-align: right !important; }
-  .ks-pains[data-card-align="right"] .pains-grid p,
-  .ks-pains.pains-align-right .pains-grid p { text-align: right !important; }
-  .ks-pains .pains-split { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
-  @media (min-width: 768px) { .ks-pains .pains-split { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-  .ks-pains .pains-split .pains-before { border: 1px solid rgba(239, 68, 68, 0.3) !important; background: color-mix(in srgb, #ef4444 5%, var(--color-base-200, #17191c)) !important; }
-  .ks-pains .pains-split .pains-after { border: 1px solid color-mix(in srgb, var(--color-primary, #10b981) 45%, transparent) !important; background: color-mix(in srgb, var(--color-primary, #10b981) 5%, var(--color-base-200, #17191c)) !important; }
-  .ks-pains[data-look="a"] .pains-split { display: none !important; }
-  .ks-pains[data-look="b"] .pains-grid { display: none !important; }
+  #pains[data-card-align="center"] .pains-grid .card-body,
+  #pains.pains-align-center .pains-grid .card-body { align-items: center !important; text-align: center !important; }
+  #pains[data-card-align="center"] .pains-grid .card-title,
+  #pains.pains-align-center .pains-grid .card-title { justify-content: center !important; text-align: center !important; }
+  #pains[data-card-align="center"] .pains-grid p,
+  #pains.pains-align-center .pains-grid p { text-align: center !important; }
+  #pains[data-card-align="left"] .pains-grid .card-body,
+  #pains.pains-align-left .pains-grid .card-body { align-items: flex-start !important; text-align: left !important; }
+  #pains[data-card-align="left"] .pains-grid .card-title,
+  #pains.pains-align-left .pains-grid .card-title { justify-content: flex-start !important; text-align: left !important; }
+  #pains[data-card-align="left"] .pains-grid p,
+  #pains.pains-align-left .pains-grid p { text-align: left !important; }
+  #pains[data-card-align="right"] .pains-grid .card-body,
+  #pains.pains-align-right .pains-grid .card-body { align-items: flex-end !important; text-align: right !important; }
+  #pains[data-card-align="right"] .pains-grid .card-title,
+  #pains.pains-align-right .pains-grid .card-title { justify-content: flex-end !important; text-align: right !important; }
+  #pains[data-card-align="right"] .pains-grid p,
+  #pains.pains-align-right .pains-grid p { text-align: right !important; }
+  #pains .pains-split { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
+  @media (min-width: 768px) { #pains .pains-split { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+  #pains .pains-split .pains-before { border: 1px solid rgba(239, 68, 68, 0.3) !important; background: color-mix(in srgb, #ef4444 5%, var(--color-base-200, #17191c)) !important; }
+  #pains .pains-split .pains-after { border: 1px solid color-mix(in srgb, var(--color-primary, #10b981) 45%, transparent) !important; background: color-mix(in srgb, var(--color-primary, #10b981) 5%, var(--color-base-200, #17191c)) !important; }
+  #pains[data-look="a"] .pains-split { display: none !important; }
+  #pains[data-look="b"] .pains-grid { display: none !important; }
   .pains-ctas { display: flex !important; flex-wrap: wrap !important; gap: 1rem !important; justify-content: center !important; align-items: center !important; margin-top: 2rem !important; }
   /* Interactive Section Inspector styling */
   section, header, footer { cursor: pointer; transition: outline 0.15s ease, box-shadow 0.15s ease; }
   .is-canvas-selected { outline: 3px solid var(--primary-color, #10b981) !important; outline-offset: -3px !important; position: relative !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important; }
   /* Hero Section Component & Unified Layout Engine (data-layout="1..6") */
-  .heroes-container .hero { min-height: 580px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; position: relative; overflow: hidden; }
+  .heroes-container .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
   .heroes-container .hero > .hm,
   .heroes-container .hero > .carousel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
   .heroes-container .hero > .hero-content { position: relative; z-index: 10; padding: 120px 24px 80px; width: 100%; max-width: 56rem; }
@@ -181,179 +147,186 @@
 </style>
 </head>
 <body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page">
-  <header class="site-header sticky top-0 z-30 flex items-center justify-between px-6 py-3.5 w-full backdrop-blur-md bg-base-100/80 border-b border-base-300/60 transition-all duration-200" id="header" data-type="bar" data-style="transparent">
-    <a href="#hero" class="sh-logo flex items-center gap-2.5 text-lg font-bold text-base-content no-underline">
-      <span class="w-8 h-8 rounded-xl bg-primary text-primary-content flex items-center justify-center text-sm font-extrabold shadow-sm">P</span>
-      <span class="sh-brand-name font-bold tracking-tight">Pandino</span>
-    </a>
-    <div class="sh-main hidden md:flex items-center">
-      <nav aria-label="Main Navigation">
-        <ul class="sh-menu flex items-center gap-6 list-none m-0 p-0 text-sm font-medium">
-          <li><a href="#services" class="hover:text-primary transition-colors text-base-content/80">Services</a></li>
-          <li><a href="#about" class="hover:text-primary transition-colors text-base-content/80">About</a></li>
-          <li><a href="#solutions" class="hover:text-primary transition-colors text-base-content/80">Solutions</a></li>
-          <li><a href="#reviews" class="hover:text-primary transition-colors text-base-content/80">Reviews</a></li>
-          <li><a href="#faq" class="hover:text-primary transition-colors text-base-content/80">FAQ</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="sh-actions flex items-center gap-3">
-      <a href="#contact" class="btn btn-sm btn-primary rounded-xl sh-cta text-xs font-semibold px-4 shadow-sm">Contact Us</a>
+  <header class="sticky top-0 z-30 w-full backdrop-blur-md bg-base-100/80 border-b border-base-300/60 transition-all duration-200" id="header" data-type="bar" data-style="transparent">
+    <div class="max-w-6xl mx-auto w-full px-4 py-3.5 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2.5 text-lg font-bold text-base-content no-underline">
+        <span class="w-8 h-8 rounded-xl bg-primary text-primary-content flex items-center justify-center text-sm font-extrabold shadow-sm">P</span>
+        <span class="font-bold tracking-tight">Pandino</span>
+      </a>
+      <div class="hidden md:flex items-center">
+        <nav aria-label="Main Navigation">
+          <ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium">
+            <li><a href="#services" class="hover:text-primary transition-colors text-base-content/80">Services</a></li>
+            <li><a href="#about" class="hover:text-primary transition-colors text-base-content/80">About</a></li>
+            <li><a href="#solutions" class="hover:text-primary transition-colors text-base-content/80">Solutions</a></li>
+            <li><a href="#reviews" class="hover:text-primary transition-colors text-base-content/80">Reviews</a></li>
+            <li><a href="#faq" class="hover:text-primary transition-colors text-base-content/80">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn btn-sm btn-primary rounded-xl text-xs font-semibold px-4 shadow-sm">Contact Us</a>
+      </div>
     </div>
   </header>
   <main class="heroes-container w-full bg-base-100 transition-all duration-300">
 <!-- UNIFIED HERO SECTION (data-layout="1..6") -->
-<section class="hero is-live-hero min-h-[580px] relative overflow-hidden" id="hero" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
-<div class="carousel w-full h-full hm absolute inset-0 z-0" aria-hidden="true">
-  <div class="carousel-item w-full h-full hm-slide is-active" data-slide="1"><div class="hm-move w-full h-full"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
-  <div class="carousel-item w-full h-full hm-slide" data-slide="2"><div class="hm-move w-full h-full"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide" data-slide="3"><div class="hm-move w-full h-full"><video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
-  <div class="carousel-item w-full h-full hm-slide" data-slide="4"><div class="hm-move w-full h-full"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide" data-slide="5"><div class="hm-move w-full h-full"><img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide" data-slide="6"><div class="hm-move w-full h-full"><img src="./media/hero/hero-1.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <span class="hm-veil absolute inset-0 bg-black/40"></span><span class="hm-split"></span><span class="hm-tex"></span>
+<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:min-h-[100dvh] data-[hero-tier=sub]:min-h-[50dvh] data-[hero-tier=minimal]:min-h-[20dvh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
+<div class="carousel w-full h-full absolute inset-0 z-0" aria-hidden="true">
+  <div class="carousel-item w-full h-full is-active" data-slide="1"><div class="w-full h-full"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
+  <div class="carousel-item w-full h-full" data-slide="2"><div class="w-full h-full"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full" data-slide="3"><div class="w-full h-full"><video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
+  <div class="carousel-item w-full h-full" data-slide="4"><div class="w-full h-full"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full" data-slide="5"><div class="w-full h-full"><img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full" data-slide="6"><div class="w-full h-full"><img src="./media/hero/hero-1.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <span class="absolute inset-0 bg-black/40"></span>
 </div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
-<div class="hero-content header-group flex-col text-center max-w-3xl z-10 py-12">
-  <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="stars text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-  <div class="title-wrap">
-    <div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Step Into The Green</div>
-    <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Experience the Future of Mobility</h1>
-  </div>
-  <p class="subtext text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
-  <div class="cta-group mt-6">
-    <div class="cta-row flex flex-wrap gap-3 justify-center">
-      <button class="btn btn-primary rounded-xl cta-btn cta-primary">Book a Test Drive</button>
-      <button class="btn btn-accent rounded-xl cta-btn cta-primary cta-second">Learn More</button>
+<div class="absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
+<div class="max-w-6xl mx-auto w-full px-4 flex flex-col items-center justify-center z-10">
+  <div class="hero-content flex-col text-center max-w-3xl z-10 py-6">
+    <div id="hero-breadcrumbs" class="breadcrumbs text-xs opacity-60 mb-2 hidden"></div>
+    <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
+    <div>
+      <span id="hero-kicker" class="label text-primary font-bold tracking-widest text-xs uppercase mb-2 justify-center">Step Into The Green</span>
+      <h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Experience the Future of Mobility</h1>
+    </div>
+    <p id="hero-desc" class="text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
+    <div id="hero-ctas" class="mt-6 flex flex-wrap gap-3 justify-center">
+      <button class="btn btn-primary rounded-xl cta-primary">Book a Test Drive</button>
+      <button class="btn btn-accent rounded-xl cta-primary cta-second">Learn More</button>
     </div>
   </div>
 </div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
+<div class="w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
+  <div class="p-4 border-b md:border-b-0 md:border-r border-base-300/60"><span class="font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="font-semibold block text-base-content mt-1">Via Nazionale, 42</span><span class="opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
+  <div class="p-4 border-b md:border-b-0 md:border-r border-base-300/60"><span class="font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="font-semibold block text-base-content mt-1">Business Name Srl</span><span class="opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
+  <div class="p-4 border-b md:border-b-0 md:border-r border-base-300/60"><span class="font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="font-semibold block text-base-content mt-1"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="opacity-70 block text-[11px]">Call or WhatsApp</span></div>
+  <div class="p-4"><span class="font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="opacity-80 mt-1 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
 </div>
 </section>
-<section aria-label="Partner logos" class="ks ks-logostrip" hidden="" id="logostrip">
-<div class="logostrip-inner" aria-hidden="true">
-<div class="hm-track"><div class="hm-group"><span>Logo1</span><span>Logo2</span><span>Logo3</span><span>Logo4</span><span>Logo5</span><span>Logo6</span><span>Logo7</span><span>Logo8</span></div><div class="hm-group"><span>Logo1</span><span>Logo2</span><span>Logo3</span><span>Logo4</span><span>Logo5</span><span>Logo6</span><span>Logo7</span><span>Logo8</span></div></div>
-</div>
+<!-- LOGOSTRIP -->
+<section id="logostrip" class="w-full py-8 md:py-12" data-theme="dark" aria-label="Partner logos" hidden="">
+  <div class="max-w-6xl mx-auto w-full px-4">
+    <div class="flex items-center justify-between gap-6 overflow-x-auto text-sm font-semibold opacity-60 py-2">
+      <span>Audi</span><span>BMW</span><span>Mercedes</span><span>Porsche</span><span>Tesla</span><span>Volvo</span><span>Volkswagen</span><span>Alfa Romeo</span>
+    </div>
+  </div>
 </section>
-<section aria-labelledby="svc-title" class="svc py-16" id="services" data-align="center">
-<div class="svc-head header-group text-center mb-10 max-w-2xl mx-auto px-4">
-<div class="title-wrap">
-<div class="svc-label label overline uppercase tracking-wider text-xs font-bold text-primary justify-center">Our services</div>
-<h2 id="svc-title" class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1">Everything your car needs after an accident.</h2>
-</div>
-<p class="subtext opacity-70 mt-3 text-base">From the first call to the final polish, one workshop takes care of it all.</p>
-</div>
-<ul class="svc-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto w-full px-4" role="list">
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path> <path d="M14 8v-2"></path> <path d="M19 12h2"></path> <path d="M17.5 15.5l1.5 1.5"></path> <path d="M17.5 8.5l1.5 -1.5"></path></svg><h3 class="card-title text-lg font-bold">Collision repair</h3><p class="text-sm opacity-80">Frame and body restored to factory specs after any accident.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 12a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2l0 -7"></path> <path d="M6 10v-4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4"></path> <path d="M15 7h.01"></path> <path d="M18 9h.01"></path> <path d="M18 5h.01"></path> <path d="M21 3h.01"></path> <path d="M21 7h.01"></path> <path d="M21 11h.01"></path> <path d="M10 7h1"></path></svg><h3 class="card-title text-lg font-bold">Paint &amp; refinishing</h3><p class="text-sm opacity-80">Computer colour matching and a showroom finish.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.414 10l-7.383 7.418a2.091 2.091 0 0 0 0 2.967a2.11 2.11 0 0 0 2.976 0l7.407 -7.385"></path> <path d="M18.121 15.293l2.586 -2.586a1 1 0 0 0 0 -1.414l-7.586 -7.586a1 1 0 0 0 -1.414 0l-2.586 2.586a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0"></path></svg><h3 class="card-title text-lg font-bold">Dent removal</h3><p class="text-sm opacity-80">Paintless repair for hail damage and parking dents.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path> <path d="M15 19l2 2l4 -4"></path></svg><h3 class="card-title text-lg font-bold">Insurance claims</h3><p class="text-sm opacity-80">We handle the paperwork directly with your insurer.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M7 18h8m4 0h2v-6a5 5 0 0 0 -5 -5h-1l1.5 5h4.5"></path> <path d="M12 18v-11h3"></path> <path d="M3 17v-5h9"></path> <path d="M4 12v-6l18 -3v2"></path> <path d="M8 12v-4l-4 -2"></path></svg><h3 class="card-title text-lg font-bold">24/7 towing</h3><p class="text-sm opacity-80">Roadside pickup and transport to our workshop.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11 18a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path> <path d="M3 9l5.5 5.5a5 5 0 0 1 7 0l5.5 -5.5a12 12 0 0 0 -18 0"></path> <path d="M12 18l-2.2 -12.8"></path></svg><h3 class="card-title text-lg font-bold">Windshield &amp; glass</h3><p class="text-sm opacity-80">Chip repair and full windshield replacement.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22a3 3 0 1 1 0 -6a3 3 0 0 1 0 6"></path> <path d="M12 16v-12"></path> <path d="M13 2h-2v2h2v-2"></path> <path d="M9 11l6 -1"></path> <path d="M9 14l6 -1"></path> <path d="M9 8l6 -1"></path></svg><h3 class="card-title text-lg font-bold">Frame &amp; suspension</h3><p class="text-sm opacity-80">Alignment checks after impacts and potholes.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M15 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> <path d="M5 20h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path> <path d="M3 6l9 -4l9 4"></path></svg><h3 class="card-title text-lg font-bold">Courtesy car</h3><p class="text-sm opacity-80">Keep moving while we repair your vehicle.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -10"></path> <path d="M6 5v-2"></path> <path d="M18 3v2"></path> <path d="M6.5 12h3"></path> <path d="M14.5 12h3"></path> <path d="M16 10.5v3"></path></svg><h3 class="card-title text-lg font-bold">Battery &amp; electrics</h3><p class="text-sm opacity-80">Testing, replacement and electrical repairs.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-<li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path> <path d="M3 12h6"></path> <path d="M15 12h6"></path> <path d="M13.6 9.4l3.4 -4.8"></path> <path d="M10.4 14.6l-3.4 4.8"></path> <path d="M7 4.6l3.4 4.8"></path> <path d="M13.6 14.6l3.4 4.8"></path></svg><h3 class="card-title text-lg font-bold">Wheels &amp; tyres</h3><p class="text-sm opacity-80">Rim repair, tyre fitting and balancing.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
-</ul>
-<div class="svc-all text-center mt-10"><a class="btn btn-primary rounded-xl svc-all-btn" href="#services">See all services</a></div>
+<!-- SERVICES -->
+<section id="services" class="w-full py-12 md:py-20" data-theme="dark" aria-labelledby="svc-title" data-align="center">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">Our services</div>
+      <h2 id="svc-title" class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1">Everything your car needs after an accident.</h2>
+      <p class="opacity-70 mt-3 text-base">From the first call to the final polish, one workshop takes care of it all.</p>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full p-0 m-0 list-none" role="list">
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/collision-repair" data-route="collision-repair"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path><path d="M14 8v-2"></path><path d="M19 12h2"></path><path d="M17.5 15.5l1.5 1.5"></path><path d="M17.5 8.5l1.5 -1.5"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Collision repair</h3><p class="text-sm opacity-80 text-base-content">Frame and body restored to factory specs after any accident.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/paint-refinishing" data-route="paint-refinishing"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2l0 -7"></path><path d="M6 10v-4a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4"></path><path d="M15 7h.01"></path><path d="M18 9h.01"></path><path d="M18 5h.01"></path><path d="M21 3h.01"></path><path d="M21 7h.01"></path><path d="M21 11h.01"></path><path d="M10 7h1"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Paint &amp; refinishing</h3><p class="text-sm opacity-80 text-base-content">Computer colour matching and a showroom finish.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/dent-removal" data-route="dent-removal"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.414 10l-7.383 7.418a2.091 2.091 0 0 0 0 2.967a2.11 2.11 0 0 0 2.976 0l7.407 -7.385"></path><path d="M18.121 15.293l2.586 -2.586a1 1 0 0 0 0 -1.414l-7.586 -7.586a1 1 0 0 0 -1.414 0l-2.586 2.586a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Dent removal</h3><p class="text-sm opacity-80 text-base-content">Paintless repair for hail damage and parking dents.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/insurance-claims" data-route="insurance-claims"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path><path d="M15 19l2 2l4 -4"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Insurance claims</h3><p class="text-sm opacity-80 text-base-content">We handle the paperwork directly with your insurer.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/towing" data-route="towing"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M7 18h8m4 0h2v-6a5 5 0 0 0 -5 -5h-1l1.5 5h4.5"></path><path d="M12 18v-11h3"></path><path d="M3 17v-5h9"></path><path d="M4 12v-6l18 -3v2"></path><path d="M8 12v-4l-4 -2"></path></svg><h3 class="card-title text-lg font-bold text-base-content">24/7 towing</h3><p class="text-sm opacity-80 text-base-content">Roadside pickup and transport to our workshop.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/windshield-glass" data-route="windshield-glass"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11 18a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path><path d="M3 9l5.5 5.5a5 5 0 0 1 7 0l5.5 -5.5a12 12 0 0 0 -18 0"></path><path d="M12 18l-2.2 -12.8"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Windshield &amp; glass</h3><p class="text-sm opacity-80 text-base-content">Chip repair and full windshield replacement.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/frame-suspension" data-route="frame-suspension"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22a3 3 0 1 1 0 -6a3 3 0 0 1 0 6"></path><path d="M12 16v-12"></path><path d="M13 2h-2v2h2v-2"></path><path d="M9 11l6 -1"></path><path d="M9 14l6 -1"></path><path d="M9 8l6 -1"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Frame &amp; suspension</h3><p class="text-sm opacity-80 text-base-content">Alignment checks after impacts and potholes.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/courtesy-car" data-route="courtesy-car"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path><path d="M15 20a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path><path d="M5 20h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path><path d="M3 6l9 -4l9 4"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Courtesy car</h3><p class="text-sm opacity-80 text-base-content">Keep moving while we repair your vehicle.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/battery-electrics" data-route="battery-electrics"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -10"></path><path d="M6 5v-2"></path><path d="M18 3v2"></path><path d="M6.5 12h3"></path><path d="M14.5 12h3"></path><path d="M16 10.5v3"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Battery &amp; electrics</h3><p class="text-sm opacity-80 text-base-content">Testing, replacement and electrical repairs.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+      <li class="card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="card-body p-6 flex flex-col justify-between no-underline" href="#services/wheels-tyres" data-route="wheels-tyres"><svg aria-hidden="true" class="w-8 h-8 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M3 12h6"></path><path d="M15 12h6"></path><path d="M13.6 9.4l3.4 -4.8"></path><path d="M10.4 14.6l-3.4 4.8"></path><path d="M7 4.6l3.4 4.8"></path><path d="M13.6 14.6l3.4 4.8"></path></svg><h3 class="card-title text-lg font-bold text-base-content">Wheels &amp; tyres</h3><p class="text-sm opacity-80 text-base-content">Rim repair, tyre fitting and balancing.</p><span class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></span></a></li>
+    </ul>
+    <div class="text-center mt-2"><a class="btn btn-primary rounded-xl" href="#services">See all services</a></div>
+  </div>
 </section>
-<section id="about" class="py-16 bg-base-200/40" data-layout="timeline" aria-labelledby="about-title">
-<div class="max-w-4xl mx-auto px-4">
-<div class="text-center mb-12">
-<div class="label overline uppercase tracking-wider text-xs font-bold text-primary justify-center">About us</div>
-<h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1" id="about-title">Our story</h2>
-<p class="opacity-70 mt-2 text-base">Key milestones that shaped our engineering craft and customer trust.</p>
-</div>
-<ul class="timeline timeline-vertical timeline-snap-icon max-md:timeline-compact max-w-4xl mx-auto px-4">
-<li>
-<div class="timeline-start md:text-end mb-10">
-<time class="font-mono text-sm font-bold text-primary block">2021</time>
-<h3 class="text-lg font-bold text-base-content mt-1">Foundational Standards</h3>
-<p class="text-sm opacity-80 mt-1">First prototype launched. Focused on solving core workflow bottlenecks for early adopters and establishing foundational standards.</p>
-</div>
-<div class="timeline-middle text-primary">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-</div>
-<div class="timeline-end mb-10">
-<div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2318181b%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%233f3f46%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%233f3f46%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 1" class="w-full h-auto block" /></div>
-</div>
-<hr class="bg-primary/40"/>
-</li>
-<li>
-<hr class="bg-primary/40"/>
-<div class="timeline-start md:text-end mb-10">
-<div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px] md:ms-auto"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2327272a%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%2352525b%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%2352525b%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 2" class="w-full h-auto block" /></div>
-</div>
-<div class="timeline-middle text-primary">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-</div>
-<div class="timeline-end mb-10">
-<time class="font-mono text-sm font-bold text-primary block">2022</time>
-<h3 class="text-lg font-bold text-base-content mt-1">Team Expansion & v2.0</h3>
-<p class="text-sm opacity-80 mt-1">Expanded core engineering team, deployed version 2.0 with improved responsiveness, and reached critical adoption across initial sectors.</p>
-</div>
-<hr class="bg-primary/40"/>
-</li>
-<li>
-<hr class="bg-primary/40"/>
-<div class="timeline-start md:text-end mb-10">
-<time class="font-mono text-sm font-bold text-primary block">2023</time>
-<h3 class="text-lg font-bold text-base-content mt-1">Modular Integrations</h3>
-<p class="text-sm opacity-80 mt-1">Rolled out advanced customization capabilities, modular integrations, and expanded client support for enterprise operations.</p>
-</div>
-<div class="timeline-middle text-primary">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-</div>
-<div class="timeline-end mb-10">
-<div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%231c1c1f%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%233f3f46%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%233f3f46%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 3" class="w-full h-auto block" /></div>
-</div>
-<hr class="bg-primary/40"/>
-</li>
-<li>
-<hr class="bg-primary/40"/>
-<div class="timeline-start md:text-end mb-10">
-<div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px] md:ms-auto"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2309090b%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%2327272a%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%2327272a%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 4" class="w-full h-auto block" /></div>
-</div>
-<div class="timeline-middle text-primary">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-</div>
-<div class="timeline-end mb-10">
-<time class="font-mono text-sm font-bold text-primary block">2024</time>
-<h3 class="text-lg font-bold text-base-content mt-1">Architectural Redesign</h3>
-<p class="text-sm opacity-80 mt-1">Key milestone year: complete architectural redesign, sub-second rendering pipelines, and rapid expansion into global multi-sector markets.</p>
-</div>
-<hr class="bg-primary/40"/>
-</li>
-<li>
-<hr class="bg-primary/40"/>
-<div class="timeline-start md:text-end mb-10">
-<time class="font-mono text-sm font-bold text-primary block">2025</time>
-<h3 class="text-lg font-bold text-base-content mt-1">Automated Infrastructure</h3>
-<p class="text-sm opacity-80 mt-1">Scaled automated delivery pipeline and real-time infrastructure, setting the benchmark for intuitive visual site generation.</p>
-</div>
-<div class="timeline-middle text-primary">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-</div>
-<div class="timeline-end mb-10">
-<div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%233f3f46%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%23a1a1aa%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%23a1a1aa%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 5" class="w-full h-auto block" /></div>
-</div>
-</li>
-</ul>
-</div>
+<!-- ABOUT -->
+<section id="about" class="w-full py-12 md:py-20 bg-base-200/40" data-theme="dark" data-layout="timeline" aria-labelledby="about-title">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">About us</div>
+      <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1" id="about-title">Our story</h2>
+      <p class="opacity-70 mt-2 text-base">Key milestones that shaped our engineering craft and customer trust.</p>
+    </div>
+    <ul class="timeline timeline-vertical timeline-snap-icon max-md:timeline-compact max-w-4xl mx-auto px-4">
+      <li>
+        <div class="timeline-start md:text-end mb-10">
+          <time class="font-mono text-sm font-bold text-primary block">2021</time>
+          <h3 class="text-lg font-bold text-base-content mt-1">Foundational Standards</h3>
+          <p class="text-sm opacity-80 mt-1">First prototype launched. Focused on solving core workflow bottlenecks for early adopters and establishing foundational standards.</p>
+        </div>
+        <div class="timeline-middle text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="timeline-end mb-10">
+          <div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2318181b%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%233f3f46%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%233f3f46%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 1" class="w-full h-auto block" /></div>
+        </div>
+        <hr class="bg-primary/40"/>
+      </li>
+      <li>
+        <hr class="bg-primary/40"/>
+        <div class="timeline-start md:text-end mb-10">
+          <div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px] md:ms-auto"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2327272a%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%2352525b%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%2352525b%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 2" class="w-full h-auto block" /></div>
+        </div>
+        <div class="timeline-middle text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="timeline-end mb-10">
+          <time class="font-mono text-sm font-bold text-primary block">2022</time>
+          <h3 class="text-lg font-bold text-base-content mt-1">Team Expansion &amp; v2.0</h3>
+          <p class="text-sm opacity-80 mt-1">Expanded core engineering team, deployed version 2.0 with improved responsiveness, and reached critical adoption across initial sectors.</p>
+        </div>
+        <hr class="bg-primary/40"/>
+      </li>
+      <li>
+        <hr class="bg-primary/40"/>
+        <div class="timeline-start md:text-end mb-10">
+          <time class="font-mono text-sm font-bold text-primary block">2023</time>
+          <h3 class="text-lg font-bold text-base-content mt-1">Modular Integrations</h3>
+          <p class="text-sm opacity-80 mt-1">Rolled out advanced customization capabilities, modular integrations, and expanded client support for enterprise operations.</p>
+        </div>
+        <div class="timeline-middle text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="timeline-end mb-10">
+          <div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%231c1c1f%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%233f3f46%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%233f3f46%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 3" class="w-full h-auto block" /></div>
+        </div>
+        <hr class="bg-primary/40"/>
+      </li>
+      <li>
+        <hr class="bg-primary/40"/>
+        <div class="timeline-start md:text-end mb-10">
+          <div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px] md:ms-auto"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%2309090b%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%2327272a%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%2327272a%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 4" class="w-full h-auto block" /></div>
+        </div>
+        <div class="timeline-middle text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="timeline-end mb-10">
+          <time class="font-mono text-sm font-bold text-primary block">2024</time>
+          <h3 class="text-lg font-bold text-base-content mt-1">Architectural Redesign</h3>
+          <p class="text-sm opacity-80 mt-1">Key milestone year: complete architectural redesign, sub-second rendering pipelines, and rapid expansion into global multi-sector markets.</p>
+        </div>
+        <hr class="bg-primary/40"/>
+      </li>
+      <li>
+        <hr class="bg-primary/40"/>
+        <div class="timeline-start md:text-end mb-10">
+          <time class="font-mono text-sm font-bold text-primary block">2025</time>
+          <h3 class="text-lg font-bold text-base-content mt-1">Automated Infrastructure</h3>
+          <p class="text-sm opacity-80 mt-1">Scaled automated delivery pipeline and real-time infrastructure, setting the benchmark for intuitive visual site generation.</p>
+        </div>
+        <div class="timeline-middle text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+        </div>
+        <div class="timeline-end mb-10">
+          <div class="rounded-xl overflow-hidden border border-base-300 shadow-sm max-w-[200px]"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%208%206%22%3E%3Crect%20width%3D%228%22%20height%3D%226%22%20fill%3D%22%233f3f46%22%2F%3E%3Ccircle%20cx%3D%222.8%22%20cy%3D%222.2%22%20r%3D%22.7%22%20fill%3D%22%23a1a1aa%22%2F%3E%3Cpath%20d%3D%22M0%206%202.4%203.5%203.7%204.4%205.1%202.9%208%206Z%22%20fill%3D%22%23a1a1aa%22%2F%3E%3C%2Fsvg%3E" alt="Milestone 5" class="w-full h-auto block" /></div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </section>
-<section id="pains" class="ks ks-pains" data-look="a" data-card-align="center" aria-labelledby="pains-title">
+<!-- CUSTOMER PAINS -->
+<section id="pains" class="w-full py-12 md:py-20" data-theme="dark" data-look="a" data-card-align="center" aria-labelledby="pains-title">
   <div class="pains-container max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
-    <div class="svc-head ks-head header-group text-center max-w-2xl mx-auto">
-      <div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Driver Pain Points</div>
-      <div class="title-wrap">
-        <h2 id="pains-title" class="text-3xl md:text-5xl font-bold tracking-tight text-base-content">What gets in the way</h2>
-      </div>
-      <p class="subtext text-sm sm:text-base text-base-content/70 mt-2 font-normal">Unexpected delays, hidden fees, and silence from insurance shouldn't be part of the repair process.</p>
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-widest text-xs font-bold text-primary justify-center mb-1">Driver Pain Points</div>
+      <h2 id="pains-title" class="text-3xl md:text-5xl font-bold tracking-tight text-base-content">What gets in the way</h2>
+      <p class="text-sm sm:text-base text-base-content/70 mt-2 font-normal">Unexpected delays, hidden fees, and silence from insurance shouldn't be part of the repair process.</p>
     </div>
     <div class="pains-grid grid grid-cols-1 md:grid-cols-3 gap-6">
       <article class="card bg-base-100 border border-base-300/80 shadow-sm">
@@ -389,7 +362,7 @@
         <div class="card-body p-6 flex flex-col justify-between gap-4">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="badge badge-error/15 text-error border-error/25 text-xs font-semibold gap-1 py-2 px-2.5">
+              <span class="badge badge-error text-error bg-error/10 border-error/20 text-xs font-semibold gap-1 py-2 px-2.5">
                 <span class="material-symbols-outlined text-xs">cancel</span> The Hassle
               </span>
               <span class="text-xs text-base-content/50 font-mono">Traditional Shop</span>
@@ -403,7 +376,7 @@
         <div class="card-body p-6 flex flex-col justify-between gap-4">
           <div>
             <div class="flex items-center justify-between mb-3">
-              <span class="badge badge-success/15 text-success border-success/25 text-xs font-semibold gap-1 py-2 px-2.5">
+              <span class="badge badge-success text-success bg-success/10 border-success/20 text-xs font-semibold gap-1 py-2 px-2.5">
                 <span class="material-symbols-outlined text-xs">check_circle</span> The Pandino Way
               </span>
               <span class="text-xs text-primary font-mono font-semibold">One Point of Contact</span>
@@ -414,281 +387,489 @@
         </div>
       </article>
     </div>
-    <div class="pains-ctas cta-row flex flex-wrap gap-4 justify-center items-center mt-6" data-pains-ctas="2">
-      <button class="btn btn-primary rounded-xl cta-btn cta-primary pains-cta-primary">
+    <div class="pains-ctas flex flex-wrap gap-4 justify-center items-center mt-6" data-pains-ctas="2">
+      <button class="btn btn-primary rounded-xl pains-cta-primary">
         <span class="material-symbols-outlined text-base">support_agent</span>
         Talk to a Specialist
       </button>
-      <button class="btn btn-outline btn-primary rounded-xl cta-btn cta-primary cta-second pains-cta-second">
+      <button class="btn btn-outline btn-primary rounded-xl cta-second pains-cta-second">
         <span class="material-symbols-outlined text-base">arrow_forward</span>
         Learn More
       </button>
     </div>
   </div>
 </section>
-<section aria-labelledby="rc-title" class="rc" data-headgap="tight" data-tabring="1" id="solutions">
-<div class="svc-head rc-head header-group">
-<div class="title-wrap">
-<div class="svc-label label overline">How we work</div>
-<h2 id="rc-title">From damage to done, without the stress.</h2>
-</div>
-<p class="subtext">Real repairs, simple insurance claims and a clear process.</p>
-</div>
-<div aria-label="Repairs and claims" class="tabs tabs-box rc-tabs" role="tablist">
-<input aria-label="Before &amp; After" checked="" class="tab" name="rc_tabs" type="radio"/>
-<div class="tab-content rc-panel">
-<div class="rc-ba">
-<figure aria-label="Drag to compare before and after" class="diff rc-diff" tabindex="0">
-<div aria-label="Before the repair" class="diff-item-1" role="img" tabindex="0"><div class="rc-ph rc-before"><svg aria-hidden="true" class="rc-ph-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path> <path d="M14 8v-2"></path> <path d="M19 12h2"></path> <path d="M17.5 15.5l1.5 1.5"></path> <path d="M17.5 8.5l1.5 -1.5"></path></svg><span>Before</span></div></div>
-<div aria-label="After the repair" class="diff-item-2" role="img"><div class="rc-ph rc-after"><svg aria-hidden="true" class="rc-ph-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg><span>After</span></div></div>
-<div class="diff-resizer"></div>
-</figure>
-<div class="rc-case">
-<h3>Rear bumper &amp; tailgate</h3>
-<p>Drag the handle to compare the car before and after the repair.</p>
-<ul class="rc-facts" role="list"><li><span>Repair time</span><b>3 days</b></li><li><span>Paid by</span><b>Insurance</b></li><li><span>Paint</span><b>Factory color match</b></li></ul>
-<a class="rc-link" href="#solutions">See all repairs <svg aria-hidden="true" class="rc-arr" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></a>
-</div>
-</div>
-</div>
-<input aria-label="Insurance claims" class="tab" name="rc_tabs" type="radio"/>
-<div class="tab-content rc-panel">
-  <div aria-label="Insurance claim steps" id="lsClaims" class="w-full">
-    <div class="kit-claims-cards-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
-        <div class="card-body p-4 flex flex-col gap-3">
-          <div class="kit-claim-head flex justify-between items-center">
-            <span class="font-extrabold text-sm text-base-content">1. Send photos</span>
-            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">1</span>
+<!-- SOLUTIONS (REPAIRS & CLAIMS) -->
+<section id="solutions" class="w-full py-12 md:py-20" data-theme="dark" aria-labelledby="rc-title">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-8">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">How we work</div>
+      <h2 id="rc-title" class="text-3xl md:text-4xl font-extrabold tracking-tight">From damage to done, without the stress.</h2>
+      <p class="opacity-70 mt-2 text-base">Real repairs, simple insurance claims and a clear process.</p>
+    </div>
+    <div aria-label="Repairs and claims" class="tabs tabs-box w-full" role="tablist">
+      <input aria-label="Before &amp; After" checked="" class="tab" name="rc_tabs" type="radio"/>
+      <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <figure aria-label="Drag to compare before and after" class="diff aspect-video rounded-xl overflow-hidden border border-base-300 shadow-sm" tabindex="0">
+            <div aria-label="Before the repair" class="diff-item-1" role="img" tabindex="0">
+              <div class="bg-base-200 flex flex-col items-center justify-center h-full p-4 text-center">
+                <svg aria-hidden="true" class="w-10 h-10 text-base-content/40 mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path><path d="M14 8v-2"></path><path d="M19 12h2"></path><path d="M17.5 15.5l1.5 1.5"></path><path d="M17.5 8.5l1.5 -1.5"></path></svg>
+                <span class="text-xs font-bold uppercase tracking-wider opacity-70">Before</span>
+              </div>
+            </div>
+            <div aria-label="After the repair" class="diff-item-2" role="img">
+              <div class="bg-base-300 flex flex-col items-center justify-center h-full p-4 text-center">
+                <svg aria-hidden="true" class="w-10 h-10 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg>
+                <span class="text-xs font-bold uppercase tracking-wider text-primary">After</span>
+              </div>
+            </div>
+            <div class="diff-resizer"></div>
+          </figure>
+          <div class="flex flex-col gap-4">
+            <h3 class="text-2xl font-bold">Rear bumper &amp; tailgate</h3>
+            <p class="text-sm opacity-80 leading-relaxed">Drag the handle to compare the car before and after the repair.</p>
+            <ul class="flex flex-col gap-2 p-0 m-0 list-none text-sm" role="list">
+              <li class="flex justify-between border-b border-base-300/60 pb-1.5"><span class="opacity-70">Repair time</span><b>3 days</b></li>
+              <li class="flex justify-between border-b border-base-300/60 pb-1.5"><span class="opacity-70">Paid by</span><b>Insurance</b></li>
+              <li class="flex justify-between border-b border-base-300/60 pb-1.5"><span class="opacity-70">Paint</span><b>Factory color match</b></li>
+            </ul>
+            <a class="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2" href="#solutions">See all repairs <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12l14 0"></path><path d="M13 18l6 -6"></path><path d="M13 6l6 6"></path></svg></a>
           </div>
-          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
-            <span class="material-symbols-outlined text-primary text-3xl">photo_camera</span>
-          </div>
-          <span class="text-xs text-base-content/70">Take photos with your phone. Fast 2 min upload.</span>
         </div>
       </div>
-
-      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
-        <div class="card-body p-4 flex flex-col gap-3">
-          <div class="kit-claim-head flex justify-between items-center">
-            <span class="font-extrabold text-sm text-base-content">2. We assess</span>
-            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">2</span>
+      <input aria-label="Insurance claims" class="tab" name="rc_tabs" type="radio"/>
+      <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
+        <div aria-label="Insurance claim steps" id="lsClaims" class="w-full">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card bg-base-100 shadow-sm border border-base-200">
+              <div class="card-body p-4 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-sm text-base-content">1. Send photos</span>
+                  <span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">1</span>
+                </div>
+                <div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+                  <span class="material-symbols-outlined text-primary text-3xl">photo_camera</span>
+                </div>
+                <span class="text-xs text-base-content/70">Take photos with your phone. Fast 2 min upload.</span>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-sm border border-base-200">
+              <div class="card-body p-4 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-sm text-base-content">2. We assess</span>
+                  <span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">2</span>
+                </div>
+                <div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+                  <span class="material-symbols-outlined text-primary text-3xl">receipt_long</span>
+                </div>
+                <span class="text-xs text-base-content/70">We inspect the car and write a clear, binding estimate.</span>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-sm border border-base-200">
+              <div class="card-body p-4 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-sm text-base-content">3. Insurance handled</span>
+                  <span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">3</span>
+                </div>
+                <div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+                  <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+                </div>
+                <span class="text-xs text-base-content/70">You sign one authorization. We deal with the insurer.</span>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-sm border border-base-200">
+              <div class="card-body p-4 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                  <span class="font-extrabold text-sm text-base-content">4. Repair &amp; keys</span>
+                  <span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">4</span>
+                </div>
+                <div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
+                  <span class="material-symbols-outlined text-primary text-3xl">key</span>
+                </div>
+                <span class="text-xs text-base-content/70">Car repaired, cleaned, tested and keys returned.</span>
+              </div>
+            </div>
           </div>
-          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
-            <span class="material-symbols-outlined text-primary text-3xl">receipt_long</span>
-          </div>
-          <span class="text-xs text-base-content/70">We inspect the car and write a clear, binding estimate.</span>
         </div>
       </div>
-
-      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
-        <div class="card-body p-4 flex flex-col gap-3">
-          <div class="kit-claim-head flex justify-between items-center">
-            <span class="font-extrabold text-sm text-base-content">3. Insurance handled</span>
-            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">3</span>
+      <input aria-label="How it works" class="tab" name="rc_tabs" type="radio"/>
+      <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
+        <div aria-label="How it works steps" id="lsHow" class="w-full">
+          <div class="p-6 bg-base-100 rounded-2xl border border-base-300 flex flex-col gap-6">
+            <div class="flex justify-between relative my-4">
+              <div class="relative z-10 flex flex-col items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">1</div>
+                <span class="text-xs font-bold text-base-content">Contact</span>
+              </div>
+              <div class="relative z-10 flex flex-col items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">2</div>
+                <span class="text-xs font-bold text-base-content">Inspection</span>
+              </div>
+              <div class="relative z-10 flex flex-col items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">3</div>
+                <span class="text-xs font-bold text-base-content">Repair</span>
+              </div>
+              <div class="relative z-10 flex flex-col items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">4</div>
+                <span class="text-xs font-bold text-base-content/70">QC Check</span>
+              </div>
+              <div class="relative z-10 flex flex-col items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">5</div>
+                <span class="text-xs font-bold text-base-content/70">Pick-up</span>
+              </div>
+            </div>
+            <div class="p-5 rounded-xl bg-base-200/60 border border-base-300/80 text-sm text-base-content/80">
+              <b class="text-base-content block mb-1">Step 3: Precision Repair &amp; Color Booth Bake</b>
+              Our in-house master panel beaters and painters rebuild body integrity, weld tore seams to factory tolerances, and bake the clearcoat.
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- TRUST -->
+<section id="trust" class="w-full py-12 md:py-20 bg-base-200/40" data-theme="dark" aria-label="Why drivers trust us">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="stats stats-vertical lg:stats-horizontal shadow bg-base-200 w-full">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg aria-hidden="true" class="w-8 h-8 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+        </div>
+        <div class="stat-title uppercase text-xs tracking-wider">Experience</div>
+        <div class="stat-value text-primary">25</div>
+        <div class="stat-desc">Years in business</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure text-warning">
+          <svg aria-hidden="true" class="w-8 h-8 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"></path></svg>
+        </div>
+        <div class="stat-title uppercase text-xs tracking-wider">Google rating</div>
+        <div class="stat-value text-warning">4.8</div>
+        <div class="stat-desc">Based on 212 reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg aria-hidden="true" class="w-8 h-8 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg>
+        </div>
+        <div class="stat-title uppercase text-xs tracking-wider">Repairs Completed</div>
+        <div class="stat-value text-base-content">12,000+</div>
+        <div class="stat-desc">Cars repaired</div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <svg aria-hidden="true" class="w-8 h-8 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path><path d="M15 19l2 2l4 -4"></path></svg>
+        </div>
+        <div class="stat-title uppercase text-xs tracking-wider">Insurance Network</div>
+        <div class="stat-value text-base-content">15</div>
+        <div class="stat-desc">Insurance partners</div>
+      </div>
+    </div>
+    <ul aria-label="Certifications and partners" class="flex flex-wrap items-center justify-center gap-6 p-0 m-0 list-none text-xs opacity-75 font-medium" role="list">
+      <li class="flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M13 17.5v4.5l2 -1.5l2 1.5v-4.5"></path><path d="M10 19h-5a2 2 0 0 1 -2 -2v-10c0 -1.1 .9 -2 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -1 1.73"></path><path d="M6 9l12 0"></path><path d="M6 12l3 0"></path><path d="M6 15l2 0"></path></svg><span>Certified body shop</span></li>
+      <li class="flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 0 12 0a6 6 0 1 0 -12 0"></path><path d="M12 15l3.4 5.89l1.598 -3.233l3.598 .232l-3.4 -5.889"></path><path d="M6.802 12l-3.4 5.89l3.598 -.233l1.598 3.232l3.4 -5.889"></path></svg><span>Manufacturer approved</span></li>
+      <li class="flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path><path d="M15 19l2 2l4 -4"></path></svg><span>Insurer partner</span></li>
+      <li class="flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7c.412 .41 .97 .64 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1c0 .58 .23 1.138 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55v-1"></path><path d="M9 12l2 2l4 -4"></path></svg><span>Warranty on repairs</span></li>
+      <li class="flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path></svg><span>Family owned</span></li>
+    </ul>
+  </div>
+</section>
+<!-- REVIEWS -->
+<section id="reviews" class="w-full py-12 md:py-20" data-theme="dark" aria-labelledby="rev-title">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">Reviews</div>
+      <h2 id="rev-title" class="text-3xl md:text-4xl font-extrabold tracking-tight">What our customers say.</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 flex flex-col justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-sm">M</span>
+            <div><b class="text-sm block">Marco R.</b><small class="text-xs opacity-60">2 weeks ago · Google</small></div>
           </div>
-          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
-            <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
-          </div>
-          <span class="text-xs text-base-content/70">You sign one authorization. We deal with the insurer.</span>
+          <div class="text-warning text-sm">★★★★★</div>
+          <p class="text-sm opacity-80 leading-relaxed">Fast, honest and my car looks new. They handled the insurance for me.</p>
         </div>
       </div>
-
-      <div class="kit-claim-card card bg-base-100 shadow-sm border border-base-200">
-        <div class="card-body p-4 flex flex-col gap-3">
-          <div class="kit-claim-head flex justify-between items-center">
-            <span class="font-extrabold text-sm text-base-content">4. Repair &amp; keys</span>
-            <span class="kit-claim-num w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">4</span>
+      <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 flex flex-col justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-sm">G</span>
+            <div><b class="text-sm block">Giulia B.</b><small class="text-xs opacity-60">1 month ago · Google</small></div>
           </div>
-          <div class="kit-claim-stage h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden">
-            <span class="material-symbols-outlined text-primary text-3xl">key</span>
+          <div class="text-warning text-sm">★★★★★</div>
+          <p class="text-sm opacity-80 leading-relaxed">Clear quote, repair done in 3 days. Courtesy car was a big help.</p>
+        </div>
+      </div>
+      <div class="card bg-base-200 border border-base-300">
+        <div class="card-body p-6 flex flex-col justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-sm">L</span>
+            <div><b class="text-sm block">Luca P.</b><small class="text-xs opacity-60">2 months ago · Google</small></div>
           </div>
-          <span class="text-xs text-base-content/70">Car repaired, cleaned, tested and keys returned.</span>
+          <div class="text-warning text-sm">★★★★★</div>
+          <p class="text-sm opacity-80 leading-relaxed">Perfect paint match on my bumper. Friendly team, fair price.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-2">
+      <a class="btn btn-primary rounded-xl" href="#reviews">Read all 212 reviews</a>
+    </div>
+  </div>
+</section>
+<!-- QUOTE -->
+<section id="quote" class="w-full py-12 md:py-20 bg-base-200/40" data-theme="dark" aria-labelledby="quote-title">
+  <div class="max-w-6xl mx-auto w-full px-4">
+    <div class="card bg-base-100 border border-base-300 shadow-md p-6 md:p-10 max-w-2xl mx-auto">
+      <div class="text-center mb-8">
+        <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">Free quote</div>
+        <h2 id="quote-title" class="text-2xl md:text-3xl font-extrabold tracking-tight">Get your repair quote in 24 hours.</h2>
+        <p class="text-sm opacity-70 mt-2">Send a few photos of the damage. We reply with a clear price.</p>
+      </div>
+      <form class="flex flex-col gap-4" novalidate="">
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Name</span></label>
+          <input autocomplete="name" name="name" placeholder="Your name" required="" type="text" class="input input-bordered w-full rounded-xl"/>
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Phone or WhatsApp</span></label>
+          <input autocomplete="tel" name="phone" placeholder="+39 …" required="" type="tel" class="input input-bordered w-full rounded-xl"/>
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Damage photos <em class="opacity-60 text-xs font-normal">(optional)</em></span></label>
+          <input accept="image/*" multiple="" name="photos" type="file" class="file-input file-input-bordered w-full rounded-xl"/>
+        </div>
+        <div class="form-control">
+          <label class="label cursor-pointer justify-start gap-3">
+            <input required="" type="checkbox" class="checkbox checkbox-primary checkbox-sm rounded-md"/>
+            <span class="label-text text-xs">I agree to the <a href="#privacy" class="link link-hover text-primary">privacy policy</a>.</span>
+          </label>
+        </div>
+        <button class="btn btn-primary rounded-xl w-full mt-2" type="submit">Get my quote</button>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- FAQ -->
+<section id="faq" class="w-full py-12 md:py-20" data-theme="dark" aria-labelledby="faq-title">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="text-center max-w-2xl mx-auto">
+      <div class="label uppercase tracking-wider text-xs font-bold text-primary justify-center mb-1">FAQ</div>
+      <h2 id="faq-title" class="text-3xl md:text-4xl font-extrabold tracking-tight">Quick answers.</h2>
+      <p class="opacity-70 mt-2 text-base">Still unsure? Call or WhatsApp us.</p>
+    </div>
+    <div class="max-w-3xl mx-auto w-full">
+      <div class="join join-vertical w-full">
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="faq-accordion" checked="checked"/>
+          <div class="collapse-title text-base font-bold">Do I have to use the body shop my insurer suggests?</div>
+          <div class="collapse-content text-sm opacity-80"><p>No. By Italian law, you have the right to choose your preferred certified body shop. We manage the claim directly with your insurer.</p></div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="faq-accordion"/>
+          <div class="collapse-title text-base font-bold">How long does a repair take?</div>
+          <div class="collapse-content text-sm opacity-80"><p>Most repairs take a few working days. We confirm the exact timeline with your initial quote.</p></div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="faq-accordion"/>
+          <div class="collapse-title text-base font-bold">Do you offer a courtesy car?</div>
+          <div class="collapse-content text-sm opacity-80"><p>Yes, ask us when you book. Courtesy vehicles are available for the entire duration of your repair.</p></div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="faq-accordion"/>
+          <div class="collapse-title text-base font-bold">Can you match my car’s original paint?</div>
+          <div class="collapse-content text-sm opacity-80"><p>Yes. We use spectrophotometer computer colour matching and factory clearcoats.</p></div>
+        </div>
+        <div class="collapse collapse-arrow join-item border border-base-300">
+          <input type="radio" name="faq-accordion"/>
+          <div class="collapse-title text-base font-bold">How do I get a quote?</div>
+          <div class="collapse-content text-sm opacity-80"><p>Send photos with the form above or by WhatsApp. We reply within 24 hours.</p></div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<input aria-label="How it works" class="tab" name="rc_tabs" type="radio"/>
-<div class="tab-content rc-panel">
-  <div aria-label="How it works steps" id="lsHow" class="w-full">
-    <div class="kit-rail-wrap p-6 bg-base-100 rounded-2xl border border-base-300 flex flex-col gap-6">
-      <div class="kit-rail-nodes flex justify-between relative my-4">
-        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
-          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">1</div>
-          <span class="kit-rail-label text-xs font-bold text-base-content">Contact</span>
+</section>
+<!-- PROMO -->
+<section id="promo" class="w-full py-12 md:py-20" data-theme="dark" aria-labelledby="promo-title">
+  <div class="max-w-6xl mx-auto w-full px-4">
+    <div class="card bg-base-100 border border-base-300 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10 items-center">
+      <div class="flex flex-col gap-4">
+        <div class="badge badge-primary badge-outline gap-1 font-semibold text-xs py-2 px-3">
+          <span class="material-symbols-outlined text-xs">local_offer</span> Spring offer · until 31 May
         </div>
-        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
-          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">2</div>
-          <span class="kit-rail-label text-xs font-bold text-base-content">Inspection</span>
+        <h2 id="promo-title" class="text-3xl font-extrabold tracking-tight">Headlight restoration</h2>
+        <p class="text-base opacity-80 leading-relaxed">Clear, bright headlights in one hour. Safer driving at night.</p>
+        <div class="flex items-baseline gap-3 my-1">
+          <span class="text-4xl font-extrabold text-primary">€49</span>
+          <s class="text-base opacity-50">€79</s>
         </div>
-        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2 is-active">
-          <div class="kit-rail-circle w-9 h-9 rounded-full bg-primary text-primary-content border-2 border-primary grid place-items-center font-extrabold text-sm shadow-md">3</div>
-          <span class="kit-rail-label text-xs font-bold text-base-content">Repair</span>
-        </div>
-        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2">
-          <div class="kit-rail-circle w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">4</div>
-          <span class="kit-rail-label text-xs font-bold text-base-content/70">QC Check</span>
-        </div>
-        <div class="kit-rail-node relative z-10 flex flex-col items-center gap-2">
-          <div class="kit-rail-circle w-9 h-9 rounded-full bg-base-200 text-base-content/70 border-2 border-base-300 grid place-items-center font-extrabold text-sm">5</div>
-          <span class="kit-rail-label text-xs font-bold text-base-content/70">Pick-up</span>
+        <p class="text-xs opacity-50">Lowest price in the last 30 days: €79. Placeholder — price rules to verify in the research.</p>
+        <div class="flex flex-wrap gap-3 items-center mt-2">
+          <a class="btn btn-primary rounded-xl" href="#quote">
+            <span class="material-symbols-outlined text-base">calendar_month</span>
+            Book the offer
+          </a>
+          <a class="btn btn-outline btn-primary rounded-xl" href="#promo">
+            Offer terms
+          </a>
         </div>
       </div>
-      <div class="p-5 rounded-xl bg-base-200/60 border border-base-300/80 text-sm text-base-content/80">
-        <b class="text-base-content block mb-1">Step 3: Precision Repair &amp; Color Booth Bake</b>
-        Our in-house master panel beaters and painters rebuild body integrity, weld tore seams to factory tolerances, and bake the clearcoat.
+      <div aria-label="Offer image placeholder" role="img" class="bg-base-200/80 rounded-2xl border border-base-300 flex flex-col items-center justify-center p-12 text-center aspect-video md:aspect-auto md:h-full">
+        <svg aria-hidden="true" class="w-12 h-12 text-base-content/40 shrink-0 mb-3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M15 8h.01"></path>
+          <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"></path>
+          <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+          <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path>
+        </svg>
+        <span class="text-xs font-semibold uppercase tracking-wider opacity-60">Offer image</span>
       </div>
     </div>
   </div>
-</div>
-</div>
 </section>
-<section aria-label="Why drivers trust us" class="ks ks-trust" id="trust-bar">
-<ul class="trust-stats" role="list">
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12"></path> <path d="M16 3v4"></path> <path d="M8 3v4"></path> <path d="M4 11h16"></path> <path d="M11 15h1"></path> <path d="M12 15v3"></path></svg><b>25</b><span>years in business</span></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245"></path></svg><b>4.8</b><span>Google rating</span></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg><b>12,000+</b><span>cars repaired</span></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path> <path d="M15 19l2 2l4 -4"></path></svg><b>15</b><span>insurance partners</span></li>
-</ul>
-<ul aria-label="Certifications and partners" class="trust-logos" role="list">
-<li><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 15a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path> <path d="M13 17.5v4.5l2 -1.5l2 1.5v-4.5"></path> <path d="M10 19h-5a2 2 0 0 1 -2 -2v-10c0 -1.1 .9 -2 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -1 1.73"></path> <path d="M6 9l12 0"></path> <path d="M6 12l3 0"></path> <path d="M6 15l2 0"></path></svg><span>Certified body shop</span></li><li><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9a6 6 0 1 0 12 0a6 6 0 1 0 -12 0"></path> <path d="M12 15l3.4 5.89l1.598 -3.233l3.598 .232l-3.4 -5.889"></path> <path d="M6.802 12l-3.4 5.89l3.598 -.233l1.598 3.232l3.4 -5.889"></path></svg><span>Manufacturer approved</span></li><li><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"></path> <path d="M15 19l2 2l4 -4"></path></svg><span>Insurer partner</span></li><li><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7c.412 .41 .97 .64 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1c0 .58 .23 1.138 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55v-1"></path> <path d="M9 12l2 2l4 -4"></path></svg><span>Warranty on repairs</span></li><li><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path></svg><span>Family owned</span></li>
-</ul>
+<!-- CONTACT -->
+<section id="contact" class="w-full py-12 md:py-20 bg-base-200/30" data-theme="dark" aria-labelledby="contact-title">
+  <div class="max-w-6xl mx-auto w-full px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+      <div class="card bg-base-100 border border-base-300 p-6 md:p-8 flex flex-col justify-between gap-6 shadow-sm">
+        <div>
+          <div class="label uppercase tracking-wider text-xs font-bold text-primary mb-1">Contact</div>
+          <h2 id="contact-title" class="text-3xl font-extrabold tracking-tight">Visit or call us.</h2>
+        </div>
+        <ul class="flex flex-col gap-4 p-0 m-0 list-none" role="list">
+          <li class="flex items-start gap-4">
+            <svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg>
+            <div><b class="text-sm block">Via Nazionale, 42</b><span class="text-xs opacity-70">20123 Milan (MI)</span></div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg>
+            <div><b class="text-sm block"><a href="tel:+390212345678" class="link link-hover text-base-content">+39 02 1234 5678</a></b><span class="text-xs opacity-70">Mon–Fri 08:00–18:30 · Sat 08:00–12:30</span></div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg>
+            <div><b class="text-sm block"><a href="#contact" class="link link-hover text-primary">WhatsApp us</a></b><span class="text-xs opacity-70">Send photos, get a quick reply</span></div>
+          </li>
+          <li class="flex items-start gap-4">
+            <svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path><path d="M3 7l9 6l9 -6"></path></svg>
+            <div><b class="text-sm block"><a href="mailto:info@example.com" class="link link-hover text-base-content">info@example.com</a></b><span class="text-xs opacity-70">We answer within one working day</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="card bg-base-100 border border-base-300 p-8 flex flex-col items-center justify-center text-center gap-4 shadow-sm min-h-[300px]">
+        <svg aria-hidden="true" class="w-11 h-11 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+          <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path>
+        </svg>
+        <p class="text-sm opacity-70 max-w-xs">The map loads only when you ask, so no Google cookies before consent.</p>
+        <button class="btn btn-primary rounded-xl" type="button"><span class="material-symbols-outlined text-base">map</span> Show map</button>
+      </div>
+    </div>
+  </div>
 </section>
-<section aria-labelledby="rev-title" class="ks ks-reviews" id="reviews">
-<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">Reviews</div><h2 id="rev-title">What our customers say.</h2></div></div>
-<div class="rev-wrap">
-<div class="rev-summary">
-<div class="rev-score">4.8</div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span>
-<p>Based on <b>212 reviews</b></p>
-<span class="rev-src"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M20.945 11a9 9 0 1 1 -3.284 -5.997l-2.655 2.392a5.5 5.5 0 1 0 2.119 6.605h-4.125v-3h7.945"></path></svg> Google reviews</span>
-<a class="btn btn-primary rounded-xl" href="#reviews">Read all reviews</a>
-</div>
-<ul class="rev-list" role="list"><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">M</span><div><b>Marco R.</b><small>2 weeks ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Fast, honest and my car looks new. They handled the insurance for me.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">G</span><div><b>Giulia B.</b><small>1 month ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Clear quote, repair done in 3 days. Courtesy car was a big help.</p></li><li class="rev-card"><div class="rev-top"><span aria-hidden="true" class="rev-avatar">L</span><div><b>Luca P.</b><small>2 months ago · Google</small></div></div><span aria-hidden="true" class="ks-stars"><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg><svg aria-hidden="true" class="ks-star" fill="currentColor" viewbox="0 0 24 24"><path d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"></path></svg></span><p>Perfect paint match on my bumper. Friendly team, fair price.</p></li></ul>
-</div>
-<p class="ks-note">Sample reviews for the demo. Real sites show only real, verifiable reviews.</p>
+<!-- CALL TO ACTION (CTA) -->
+<section id="cta" class="w-full py-16 md:py-24 bg-primary text-primary-content" data-theme="dark" aria-labelledby="final-title" data-height="default" data-align="center">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col items-center justify-center text-center gap-6">
+    <h2 id="final-title" class="text-3xl md:text-5xl font-extrabold tracking-tight">Had an accident? We'll take it from here.</h2>
+    <p class="text-base sm:text-lg opacity-90 max-w-xl">Free quote, insurance handled, your car back like new.</p>
+    <div class="flex flex-wrap gap-4 justify-center items-center mt-2">
+      <a class="btn bg-white text-primary hover:bg-white/90 border-none rounded-xl font-bold px-6 shadow-md" href="#quote">Get a free quote</a>
+      <a class="btn btn-outline border-white text-white hover:bg-white hover:text-primary rounded-xl font-bold px-6" href="tel:+390212345678">
+        <svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg> Call now
+      </a>
+    </div>
+  </div>
 </section>
-<section aria-labelledby="quote-title" class="ks ks-quote" id="quote">
-<div class="quote-card">
-<div class="quote-copy">
-<div class="svc-label">Free quote</div>
-<h2 id="quote-title">Get your repair quote in 24 hours.</h2>
-<p>Send a few photos of the damage. We reply with a clear price.</p>
-</div>
-<form class="quote-form" novalidate="">
-<label class="qf"><span>Name</span><input autocomplete="name" name="name" placeholder="Your name" required="" type="text"/></label>
-<label class="qf"><span>Phone or WhatsApp</span><input autocomplete="tel" name="phone" placeholder="+39 …" required="" type="tel"/></label>
-<label class="qf qf-file"><span>Damage photos <em>(optional)</em></span><span class="qf-drop"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg> Add photos<input accept="image/*" multiple="" name="photos" type="file"/></span></label>
-<label class="qf-consent"><input required="" type="checkbox"/> <span>I agree to the <a href="#privacy">privacy policy</a>.</span></label>
-<button class="btn btn-primary rounded-xl" type="submit">Get my quote</button>
-<p class="qf-msg" role="status"></p>
-</form>
-</div>
-</section>
-<section aria-labelledby="faq-title" class="ks ks-faq" id="faq">
-<div class="faq-grid">
-<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">FAQ</div><h2 id="faq-title">Quick answers.</h2></div><p class="subtext">Still unsure? Call or WhatsApp us.</p></div>
-<div class="faq-list"><details class="faq-item" open=""><summary>Do I have to use the body shop my insurer suggests?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Placeholder answer — the final text comes from the Italy insurance research.</p></details><details class="faq-item"><summary>How long does a repair take?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Most repairs take a few working days. We confirm the time with your quote.</p></details><details class="faq-item"><summary>Do you offer a courtesy car?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Yes, ask us when you book. Availability depends on the day.</p></details><details class="faq-item"><summary>Can you match my car’s original paint?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Yes. We use computer colour matching for factory colours.</p></details><details class="faq-item"><summary>How do I get a quote?<svg aria-hidden="true" class="faq-chev" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6l6 -6"></path></svg></summary><p>Send photos with the form above or by WhatsApp. We reply within 24 hours.</p></details></div>
-<div class="faq-collapse">
-<div class="collapse faq-cl"><input type="checkbox" aria-label="Do I have to use the body shop my insurer suggests?" checked/><div class="collapse-title">Do I have to use the body shop my insurer suggests?</div><div class="collapse-content"><p>Placeholder answer — the final text comes from the Italy insurance research.</p></div></div>
-<div class="collapse faq-cl"><input type="checkbox" aria-label="How long does a repair take?"/><div class="collapse-title">How long does a repair take?</div><div class="collapse-content"><p>Most repairs take a few working days. We confirm the time with your quote.</p></div></div>
-<div class="collapse faq-cl"><input type="checkbox" aria-label="Do you offer a courtesy car?"/><div class="collapse-title">Do you offer a courtesy car?</div><div class="collapse-content"><p>Yes, ask us when you book. Availability depends on the day.</p></div></div>
-<div class="collapse faq-cl"><input type="checkbox" aria-label="Can you match my car’s original paint?"/><div class="collapse-title">Can you match my car’s original paint?</div><div class="collapse-content"><p>Yes. We use computer colour matching for factory colours.</p></div></div>
-<div class="collapse faq-cl"><input type="checkbox" aria-label="How do I get a quote?"/><div class="collapse-title">How do I get a quote?</div><div class="collapse-content"><p>Send photos with the form above or by WhatsApp. We reply within 24 hours.</p></div></div>
-</div>
-</div>
-</section>
-<section aria-labelledby="promo-title" class="ks ks-promo" id="promo">
-<div class="promo-card">
-<div class="promo-copy">
-<span class="promo-tag"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 15l6 -6"></path> <path d="M9 9.5a.5 .5 0 1 0 1 0a.5 .5 0 1 0 -1 0" fill="currentColor"></path> <path d="M14 14.5a.5 .5 0 1 0 1 0a.5 .5 0 1 0 -1 0" fill="currentColor"></path> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path></svg> Spring offer · until 31 May</span>
-<h2 id="promo-title">Headlight restoration</h2>
-<p>Clear, bright headlights in one hour. Safer driving at night.</p>
-<div class="promo-price"><b>€49</b><s>€79</s></div>
-<p class="promo-legal">Lowest price in the last 30 days: €79. Placeholder — price rules to verify in the research.</p>
-<div class="promo-ctas flex flex-wrap gap-3 items-center">
-  <a class="btn btn-primary rounded-xl" href="#quote">
-    <span class="material-symbols-outlined text-base">calendar_month</span>
-    Book the offer
-  </a>
-  <a class="btn btn-outline btn-primary rounded-xl" href="#promo">
-    Offer terms
-  </a>
-</div>
-</div>
-<div aria-label="Offer image placeholder" class="promo-media" role="img"><svg aria-hidden="true" class="promo-ph" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M15 8h.01"></path> <path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"></path> <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path> <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path></svg><span>Offer image</span></div>
-</div>
-</section>
-<section aria-labelledby="contact-title" class="ks ks-contact" id="contact">
-<div class="contact-grid">
-<div class="contact-info">
-<div class="svc-head ks-head header-group"><div class="title-wrap"><div class="svc-label label overline">Contact</div><h2 id="contact-title">Visit or call us.</h2></div></div>
-<ul class="contact-list" role="list">
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><div><b>Via Nazionale, 42</b><span>20123 Milan (MI)</span></div></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg><div><b><a href="tel:+390212345678">+39 02 1234 5678</a></b><span>Mon–Fri 08:00–18:30 · Sat 08:00–12:30</span></div></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path> <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg><div><b><a href="#contact">WhatsApp us</a></b><span>Send photos, get a quick reply</span></div></li>
-<li><svg aria-hidden="true" class="ks-ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path> <path d="M3 7l9 6l9 -6"></path></svg><div><b><a href="mailto:info@example.com">info@example.com</a></b><span>We answer within one working day</span></div></li>
-</ul>
-</div>
-<div class="contact-map">
-<div class="map-ph"><svg aria-hidden="true" class="map-pin-big" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p>The map loads only when you ask, so no Google cookies before consent.</p><button class="btn btn-primary rounded-xl" type="button"><span class="material-symbols-outlined text-base">map</span> Show map</button></div>
-</div>
-</div>
-</section>
-<section aria-labelledby="final-title" class="ks ks-final" id="cta" data-height="default" data-align="center">
-<div class="final-inner header-group">
-<div class="title-wrap">
-<h2 id="final-title">Had an accident? We’ll take it from here.</h2>
-</div>
-<p class="subtext">Free quote, insurance handled, your car back like new.</p>
-<div class="final-ctas">
-  <a class="btn btn-primary" href="#quote">Get a free quote</a>
-  <a class="btn btn-outline btn-primary" href="tel:+390212345678"><svg aria-hidden="true" class="ks-ic-sm" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg> Call now</a>
-</div>
-</div>
-</section>
-<footer class="ks ks-footer w-full bg-base-100 border-t border-base-300/60 p-6 md:p-10" id="footer" data-foot-links="plain" data-look="a">
-<div class="foot-grid">
-<div class="foot-brand"><div class="foot-logo"><span class="foot-mark"></span>Logo</div><p>Body shop in Milan since 2001. Collision repair, paint and insurance claims.</p></div>
-<nav aria-label="Services" class="foot-col"><b>Services</b><a href="#services">Collision repair</a><a href="#services">Paint &amp; refinishing</a><a href="#services">Dent removal</a><a href="#solutions">Insurance claims</a></nav>
-<div class="foot-col"><b>Contact</b><span>Via Nazionale, 42<br/>20123 Milan (MI)</span><a href="tel:+390212345678">+39 02 1234 5678</a><a href="mailto:info@example.com">info@example.com</a></div>
-<div class="foot-col"><b>Hours</b><span class="foot-open" data-open="false">Closed</span><span>Mon–Fri 08:00–18:30</span><span>Sat 08:00–12:30</span><span>Sun closed</span></div>
-</div>
-<div class="fd fd-links footer sm:footer-horizontal"><nav class="fd-services" aria-label="Services"><h6 class="footer-title">Services</h6><a class="link link-hover" href="#services">Collision repair</a><a class="link link-hover" href="#services">Paint &amp; refinishing</a><a class="link link-hover" href="#services">Dent removal</a><a class="link link-hover" href="#solutions">Insurance claims</a></nav><nav aria-label="Contact"><h6 class="footer-title">Contact</h6><span>Via Nazionale, 42<br/>20123 Milan (MI)</span><a class="link link-hover" href="tel:+390212345678">+39 02 1234 5678</a><a class="link link-hover" href="mailto:info@example.com">info@example.com</a></nav><nav aria-label="Legal"><h6 class="footer-title">Legal</h6><a class="link link-hover" href="#about">About</a><a class="link link-hover" href="#privacy">Privacy policy</a><a class="link link-hover" href="#cookies">Cookie policy</a><button type="button" class="link link-hover foot-cookie-btn" data-cookie-open="">Cookie settings</button></nav></div>
-<div class="fd fd-logo footer sm:footer-horizontal"><aside><span class="foot-mark fd-mark"></span><p><b>Business Name Srl</b><br/>Body shop in Milan since 2001</p></aside><nav class="fd-services" aria-label="Services"><h6 class="footer-title">Services</h6><a class="link link-hover" href="#services">Collision repair</a><a class="link link-hover" href="#services">Paint &amp; refinishing</a><a class="link link-hover" href="#services">Dent removal</a><a class="link link-hover" href="#solutions">Insurance claims</a></nav><nav aria-label="Contact"><h6 class="footer-title">Contact</h6><span>Via Nazionale, 42<br/>20123 Milan (MI)</span><a class="link link-hover" href="tel:+390212345678">+39 02 1234 5678</a><a class="link link-hover" href="mailto:info@example.com">info@example.com</a></nav><nav aria-label="Legal"><h6 class="footer-title">Legal</h6><a class="link link-hover" href="#about">About</a><a class="link link-hover" href="#privacy">Privacy policy</a><a class="link link-hover" href="#cookies">Cookie policy</a><button type="button" class="link link-hover foot-cookie-btn" data-cookie-open="">Cookie settings</button></nav></div>
-<div class="fd fd-social footer sm:footer-horizontal"><aside><span class="foot-mark"></span><p>© 2026 Business Name Srl · P.IVA IT12345678901</p><nav class="fd-legal" aria-label="Legal"><a class="link link-hover" href="#about">About</a><a class="link link-hover" href="#privacy">Privacy policy</a><a class="link link-hover" href="#cookies">Cookie policy</a><button type="button" class="link link-hover foot-cookie-btn" data-cookie-open="">Cookie settings</button></nav></aside><nav class="fd-soc" aria-label="Social media"><a href="#footer" aria-label="Twitter"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg></a><a href="#footer" aria-label="YouTube"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a><a href="#footer" aria-label="Facebook"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a></nav></div>
-<div class="foot-legal"><span>© 2026 Business Name Srl · P.IVA IT12345678901</span><nav aria-label="Legal"><a href="#about">About</a><a href="#privacy">Privacy policy</a><a href="#cookies">Cookie policy</a><button class="foot-cookie-btn" type="button">Cookie settings</button></nav></div>
+<!-- FOOTER -->
+<footer id="footer" class="w-full bg-base-200 text-base-content border-t border-base-300 py-12" data-theme="dark">
+  <div class="max-w-6xl mx-auto w-full px-4 flex flex-col gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+      <div class="md:col-span-2 flex flex-col gap-3">
+        <div class="flex items-center gap-2 text-xl font-bold">
+          <span class="w-8 h-8 rounded-lg bg-primary text-primary-content flex items-center justify-center font-black shadow-sm">P</span>
+          <span>Pandino Autobody</span>
+        </div>
+        <p class="text-xs opacity-70 leading-relaxed max-w-sm">Milan's premier certified collision repair and refinishing workshop since 2001. Direct insurance settlement and factory precision.</p>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">I-CAR GOLD CLASS</span>
+          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">ASE CERTIFIED</span>
+          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">OEM CERTIFIED</span>
+        </div>
+      </div>
+      <nav class="flex flex-col gap-2 text-xs">
+        <h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Services</h6>
+        <a href="#services/collision-repair" data-route="collision-repair" class="link link-hover">Collision Repair</a>
+        <a href="#services/paint-refinishing" data-route="paint-refinishing" class="link link-hover">Paint &amp; Refinishing</a>
+        <a href="#services/dent-removal" data-route="dent-removal" class="link link-hover">Dent Removal</a>
+        <a href="#services/frame-suspension" data-route="frame-suspension" class="link link-hover">Frame &amp; Suspension</a>
+        <a href="#services/windshield-glass" data-route="windshield-glass" class="link link-hover">Windshield &amp; Glass</a>
+      </nav>
+      <div class="flex flex-col gap-2 text-xs">
+        <h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Shop Dispatch</h6>
+        <span class="opacity-80">Via Nazionale, 42, 20123 Milan (MI)</span>
+        <a href="tel:+390212345678" class="link link-hover text-primary font-bold">+39 02 1234 5678</a>
+        <span class="badge badge-warning badge-xs font-semibold mt-1">24/7 Emergency Towing</span>
+      </div>
+      <div class="flex flex-col gap-3 text-xs">
+        <h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Claims Direct</h6>
+        <p class="opacity-70 leading-relaxed">Direct billing with all major European insurers. Zero upfront out-of-pocket on approved claims.</p>
+        <a href="#quote" class="btn btn-sm btn-primary rounded-xl font-bold w-fit">Request Estimate</a>
+      </div>
+    </div>
+    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70">
+      <p>© 2026 Business Name Srl · VAT IT12345678901</p>
+      <div class="flex items-center gap-6">
+        <a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a>
+        <a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a>
+        <a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
 </footer>
-
+</main>
 <script type="module">
-  import { readSiteData, applyStateToDocument, onSiteDataChange } from './js/storage.js';
-
-  // 1. Initial State Restoration from LocalStorage
-  const initialData = readSiteData();
-  if (initialData) {
-    applyStateToDocument(document, initialData);
+  import { readSiteData, applyStateToDocument, onSiteDataChange, ROUTES, applyRecipe } from './js/storage.js';
+  function navRoute(raw) {
+    const key = (raw || location.hash).replace(/^#?\/?(services\/|legal\/)?/, '') || 'home';
+    const r = ROUTES[key] || ROUTES.home;
+    const hero = document.getElementById('hero');
+    if (hero) {
+      hero.dataset.heroTier = r.tier;
+      const b = document.getElementById('hero-breadcrumbs');
+      if (b) {
+        b.classList.toggle('hidden', r.tier === 'full' || !r.crumbs || r.crumbs.length <= 1);
+        b.innerHTML = r.crumbs?.length > 1 ? `<ul>${r.crumbs.map((c, i) => i === r.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join('')}</ul>` : '';
+      }
+      const k = document.getElementById('hero-kicker'), t = document.getElementById('hero-title'), d = document.getElementById('hero-desc');
+      if (k && r.kicker) k.textContent = r.kicker;
+      if (t && r.title) t.textContent = r.title;
+      if (d && r.desc) d.textContent = r.desc;
+    }
+    if (r.recipe) applyRecipe(document, r.recipe);
+    if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
   }
-
-  // 2. Real-Time Pub/Sub Synchronization (BroadcastChannel + storage events)
+  const initialData = readSiteData();
+  if (initialData) applyStateToDocument(document, initialData);
   onSiteDataChange((updatedData) => {
     if (updatedData) {
       applyStateToDocument(document, updatedData);
-      if (window.parent && window.parent.__syncCanvasHeight) {
-        window.parent.__syncCanvasHeight();
-      }
+      if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
     }
   });
-
-  // 3. Post-load recheck & iframe height reconciliation
   window.addEventListener('load', () => {
     const data = readSiteData();
-    if (data) {
-      applyStateToDocument(document, data);
-    }
-    if (window.parent && window.parent.__syncCanvasHeight) {
-      window.parent.__syncCanvasHeight();
+    if (data) applyStateToDocument(document, data);
+    if (location.hash) navRoute(location.hash);
+    if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
+  });
+  window.addEventListener('hashchange', () => navRoute(location.hash));
+  document.addEventListener('click', e => {
+    const l = e.target.closest?.('[data-route]');
+    if (l) {
+      const h = l.getAttribute('href');
+      if (h?.startsWith('#')) location.hash = h;
+      navRoute(l.dataset.route);
     }
   });
+  if (location.hash) navRoute(location.hash);
 </script>
 </body>
 </html>

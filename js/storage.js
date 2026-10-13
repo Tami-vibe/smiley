@@ -3,17 +3,14 @@
    Real-time BroadcastChannel & LocalStorage persistence.
    Declarative style token & layout variant synchronization.
    ========================================================= */
-
 const KEY = 'site_data';
 const CHANNEL_NAME = 'pandino_site_sync';
-
 let syncChannel = null;
 try {
     if (typeof BroadcastChannel !== 'undefined') {
         syncChannel = new BroadcastChannel(CHANNEL_NAME);
     }
 } catch (e) {}
-
 export function readSiteData() {
     try {
         return JSON.parse(localStorage.getItem(KEY) || 'null');
@@ -21,7 +18,6 @@ export function readSiteData() {
         return null;
     }
 }
-
 export function writeSiteData(data) {
     if (!data) return;
     try {
@@ -32,10 +28,8 @@ export function writeSiteData(data) {
         }
     } catch (e) { /* private browsing quota guard */ }
 }
-
 export function onSiteDataChange(callback) {
     if (typeof callback !== 'function') return () => {};
-
     const onBroadcast = (e) => {
         if (e.data && e.data.type === 'SITE_DATA_SYNC' && e.data.data) {
             callback(e.data.data);
@@ -48,18 +42,15 @@ export function onSiteDataChange(callback) {
             } catch (err) {}
         }
     };
-
     if (syncChannel) {
         syncChannel.addEventListener('message', onBroadcast);
     }
     window.addEventListener('storage', onStorage);
-
     return () => {
         if (syncChannel) syncChannel.removeEventListener('message', onBroadcast);
         window.removeEventListener('storage', onStorage);
     };
 }
-
 /* Trailing debounce for high-frequency input (e.g., headline text input) */
 export function createDeferredWrite(run, wait = 250) {
     let timer = 0;
@@ -76,11 +67,9 @@ export function createDeferredWrite(run, wait = 250) {
     schedule.pending = () => timer !== 0;
     return schedule;
 }
-
 /* =========================================================
    DESIGN TOKENS: TYPOGRAPHY TIERS & OKLCH PALETTE GENERATOR
    ========================================================= */
-
 export const FONT_TIERS = {
     tier1: { headline: "'Syne', sans-serif", body: "'Manrope', sans-serif" },
     tier2: { headline: "'DM Serif Display', serif", body: "'Manrope', sans-serif" },
@@ -88,14 +77,12 @@ export const FONT_TIERS = {
     tier4: { headline: "'Playfair Display', serif", body: "'Inter', sans-serif" },
     tier5: { headline: "'Poppins', sans-serif", body: "'Poppins', sans-serif" }
 };
-
 export function hexToRgb(hex) {
     const m = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
     if (!m) return null;
     const n = parseInt(m[1], 16);
     return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
-
 export function rgbToOklch(r, g, b) {
     let R = r / 255, G = g / 255, B = b / 255;
     R = R <= .04045 ? R / 12.92 : ((R + .055) / 1.055) ** 2.4;
@@ -113,7 +100,6 @@ export function rgbToOklch(r, g, b) {
     if (H < 0) H += 360;
     return { L, C, H };
 }
-
 export function oklchToHex(L, C, H) {
     const h = H * Math.PI / 180;
     const a = C * Math.cos(h), b = C * Math.sin(h);
@@ -131,11 +117,9 @@ export function oklchToHex(L, C, H) {
     const hex = n => Math.round(toS(n) * 255).toString(16).padStart(2, '0');
     return '#' + hex(R) + hex(G) + hex(B);
 }
-
 export const SHADE_STEPS = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
 export const L_T = { 50: 0.976, 100: 0.947, 200: 0.899, 300: 0.832, 400: 0.742, 500: 0.670, 600: 0.587, 700: 0.511, 800: 0.433, 900: 0.377, 950: 0.257 };
 export const C_T = { 50: 0.015, 100: 0.036, 200: 0.069, 300: 0.110, 400: 0.151, 500: 0.175, 600: 0.177, 700: 0.163, 800: 0.136, 900: 0.112, 950: 0.077 };
-
 export function rampFromHex(hex) {
     const rgb = hexToRgb(hex);
     if (!rgb) return null;
@@ -158,19 +142,15 @@ export function rampFromHex(hex) {
     });
     return out;
 }
-
 /* =========================================================
    DECLARATIVE DOCUMENT STATE MAPPER
    Applies full custom state model to target document.
    ========================================================= */
-
 export function applyStateToDocument(doc, data) {
     if (!doc || !data) return;
-
     const root = doc.documentElement;
     const body = doc.body;
     if (!root || !body) return;
-
     // 1. Brand Palette & OKLCH Color Ramp
     if (data.brandColor) {
         const hex = data.brandColor;
@@ -181,7 +161,6 @@ export function applyStateToDocument(doc, data) {
             const lum = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
             contrastFg = lum > 0.62 ? '#17191c' : '#ffffff';
         }
-
         const p500 = (ramp && ramp['500']) || hex;
         [root, body].forEach(target => {
             if (ramp) {
@@ -203,7 +182,6 @@ export function applyStateToDocument(doc, data) {
             target.style.setProperty('--color-primary-content', contrastFg);
         });
     }
-
     // 2. Color Scheme & Theme Mode
     if (data.scheme) {
         const isLight = (data.scheme === 'white');
@@ -221,7 +199,6 @@ export function applyStateToDocument(doc, data) {
         const frameContainer = document.querySelector('.kit-canvas-frame');
         if (frameContainer) frameContainer.setAttribute('data-theme', data.theme);
     }
-
     // 3. Typography Preset Model
     if (data.typographyTier) {
         const fonts = FONT_TIERS[data.typographyTier] || FONT_TIERS.tier1;
@@ -229,7 +206,6 @@ export function applyStateToDocument(doc, data) {
             target.style.setProperty('--headline-font', fonts.headline);
             target.style.setProperty('--body-font', fonts.body);
         });
-
         let dynStyle = doc.getElementById('pandino-dynamic-typography');
         if (!dynStyle) {
             dynStyle = doc.createElement('style');
@@ -243,7 +219,6 @@ export function applyStateToDocument(doc, data) {
             }
         `;
     }
-
     // 4. Hero Layout Formats (0: Soft center, 1: Full-screen, 2: Frame, 3: Side menu, 4: Bold line, 5: Split)
     if (data.heroIndex !== undefined) {
         const hero = doc.getElementById('hero') || doc.querySelector('main.heroes-container > .hero, .heroes-container > .hero, .hero');
@@ -263,7 +238,6 @@ export function applyStateToDocument(doc, data) {
             if (label && HERO_LABELS[data.heroIndex]) label.textContent = HERO_LABELS[data.heroIndex];
         }
     }
-
     // 5. Hero Panel Position (off, bottom, left, right) - Enforces Split hero variant
     if (data.panel) {
         const pos = data.panel;
@@ -284,13 +258,11 @@ export function applyStateToDocument(doc, data) {
             hero.setAttribute('data-panel', pos);
         });
     }
-
     // 6. Hero Panel Style (solid vs outline)
     if (data.panelStyle) {
         body.classList.toggle('panel-solid', data.panelStyle === 'solid');
         body.classList.toggle('panel-outline', data.panelStyle === 'outline');
     }
-
     // 7. Customer Pains Layout Variant (a: 3 Cards vs b: Split Comparison)
     if (data.painsLook) {
         const pains = doc.getElementById('pains') || doc.querySelector('.ks-pains');
@@ -298,7 +270,6 @@ export function applyStateToDocument(doc, data) {
             pains.setAttribute('data-look', data.painsLook);
         }
     }
-
     // 7b. Customer Pains Card Alignment (left | center | right)
     if (data.painsAlign) {
         const pains = doc.getElementById('pains') || doc.querySelector('.ks-pains');
@@ -308,13 +279,11 @@ export function applyStateToDocument(doc, data) {
             pains.classList.add(`pains-align-${data.painsAlign}`);
         }
     }
-
     // 8. Hero Headline Pitch Text
     if (data.heroPromise) {
         const h1 = doc.querySelector('.hero.is-live-hero .hero-content h1, .hero#hero .hero-content h1') || doc.querySelector('.hero-content h1');
         if (h1) h1.textContent = data.heroPromise;
     }
-
     // 9. CTA Buttons Count (Hero & Sections)
     if (data.ctas !== undefined) {
         const heroes = doc.querySelectorAll('main.heroes-container > .hero, .heroes-container > .hero');
@@ -325,7 +294,6 @@ export function applyStateToDocument(doc, data) {
             if (second) second.style.display = data.ctas >= 2 ? '' : 'none';
         });
     }
-
     // 9b. Customer Pains Buttons Count
     const painsCtaCount = (data.painsCtas !== undefined) ? data.painsCtas : (data.ctas !== undefined ? data.ctas : 2);
     const painsSection = doc.getElementById('pains') || doc.querySelector('.ks-pains');
@@ -337,21 +305,18 @@ export function applyStateToDocument(doc, data) {
         if (primary) primary.style.display = painsCtaCount >= 1 ? '' : 'none';
         if (second) second.style.display = painsCtaCount >= 2 ? '' : 'none';
     }
-
     // 10. Reviews Trust Badge Style (off, white, black)
     if (data.reviews) {
         body.classList.toggle('reviews-on', data.reviews !== 'off');
         body.classList.toggle('reviews-white', data.reviews === 'white');
         body.classList.toggle('reviews-black', data.reviews === 'black');
     }
-
     // 11. Hero Text Alignment
     if (data.halign) {
         ['left', 'center', 'right'].forEach(a => {
             body.classList.toggle('hero-halign-' + a, a === data.halign);
         });
     }
-
     // 12. Header Sticky & Surface Style
     if (data.headerSticky !== undefined) {
         body.classList.toggle('is-sticky-header', !!data.headerSticky);
@@ -367,7 +332,6 @@ export function applyStateToDocument(doc, data) {
             h.setAttribute('data-style', data.headerSurface);
         });
     }
-
     // 13. Secondary Hero Toggles
     if (data.heroMarquee !== undefined) {
         const ls = doc.getElementById('logostrip');
@@ -378,7 +342,6 @@ export function applyStateToDocument(doc, data) {
             hc.classList.toggle('backdrop-blur-md', !!data.heroBlur);
         });
     }
-
     // 14. Section Custom Shades
     if (data.sectionShades && typeof data.sectionShades === 'object') {
         Object.entries(data.sectionShades).forEach(([secId, shadeVal]) => {
@@ -388,4 +351,37 @@ export function applyStateToDocument(doc, data) {
             }
         });
     }
+    // 15. Declarative Recipe System
+    if (data.recipe) {
+        applyRecipe(doc, data.recipe);
+    }
 }
+export const RECIPES = {
+  "one-page-lead": ["header", "hero", "pains", "services", "reviews", "quote", "footer"],
+  "full-landing": ["header", "hero", "logostrip", "pains", "services", "about", "solutions", "trust", "reviews", "quote", "faq", "promo", "contact", "cta", "footer"],
+  "claims-subpage": ["header", "solutions", "quote", "contact", "footer"]
+};
+export function applyRecipe(canvasDoc, recipeKey = "full-landing") {
+  const activeSet = new Set(Array.isArray(recipeKey) ? recipeKey : (RECIPES[recipeKey] || RECIPES["full-landing"]));
+  canvasDoc.querySelectorAll("header[id], section[id], footer[id]").forEach(el => {
+    el.hidden = !activeSet.has(el.id);
+  });
+}
+const SUB_RECIPE = ["header", "hero", "quote", "contact", "footer"];
+const MIN_RECIPE = ["header", "hero", "footer"];
+export const ROUTES = {
+  home: { tier: "full", kicker: "Step Into The Green", title: "Experience the Future of Mobility", desc: "Advanced technology meets stunning design. Premium automotive experience awaits you.", recipe: RECIPES["full-landing"], crumbs: ["Home"] },
+  "collision-repair": { tier: "sub", kicker: "OEM Certified Repair", title: "Collision Repair", desc: "Frame and body restored to factory specs after any accident.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Collision Repair"] },
+  "paint-refinishing": { tier: "sub", kicker: "Precision Color Match", title: "Paint & Refinishing", desc: "Computer colour matching and a showroom finish.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Paint & Refinishing"] },
+  "dent-removal": { tier: "sub", kicker: "PDR Specialists", title: "Dent Removal", desc: "Paintless repair for hail damage and parking dents.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Dent Removal"] },
+  "insurance-claims": { tier: "sub", kicker: "Direct Billing", title: "Insurance Claims", desc: "We handle the paperwork directly with your insurer.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Insurance Claims"] },
+  "towing": { tier: "sub", kicker: "24/7 Roadside Assistance", title: "24/7 Towing", desc: "Roadside pickup and transport to our workshop.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "24/7 Towing"] },
+  "windshield-glass": { tier: "sub", kicker: "ADAS Calibration", title: "Windshield & Glass", desc: "Chip repair and full windshield replacement.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Windshield & Glass"] },
+  "frame-suspension": { tier: "sub", kicker: "Laser Realignment", title: "Frame & Suspension", desc: "Alignment checks after impacts and potholes.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Frame & Suspension"] },
+  "courtesy-car": { tier: "sub", kicker: "Zero Downtime", title: "Courtesy Car", desc: "Keep moving while we repair your vehicle.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Courtesy Car"] },
+  "battery-electrics": { tier: "sub", kicker: "High-Voltage Diagnostics", title: "Battery & Electrics", desc: "Testing, replacement and electrical repairs.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Battery & Electrics"] },
+  "wheels-tyres": { tier: "sub", kicker: "Wheel Precision", title: "Wheels & Tyres", desc: "Rim repair, tyre fitting and balancing.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Wheels & Tyres"] },
+  privacy: { tier: "minimal", kicker: "Compliance & GDPR", title: "Privacy Policy", desc: "Transparent terms regarding customer data processing and rights.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Privacy"] },
+  warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
+  cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] }
+};

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8"/>
@@ -27,7 +26,6 @@
   .trust-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; list-style: none; padding: 0; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
   .overline { text-decoration: none !important; }
-
   /* Accordion Tab Open State Visual Contrast & Hierarchy */
   .cfg-bar details.collapse[open] {
     background-color: var(--color-base-100, #191e24) !important;
@@ -46,7 +44,6 @@
     background-color: color-mix(in oklab, var(--color-primary, #2563eb) 6%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--color-base-300, #2c3345) 60%, transparent);
   }
-
   /* Left Sidebar Overlay & Collapsed State */
   .kit-account {
     position: absolute;
@@ -126,7 +123,6 @@
           </span>
         </div>
       </div>
-
       <div class="flex-none flex items-center gap-2 sm:gap-3">
         <!-- Viewport Controls: Icon-only buttons with accessible aria-labels and daisyUI tooltips -->
         <div class="kit-devs join border border-base-300 rounded-lg p-0.5 bg-base-200/60" role="group" aria-label="Preview size">
@@ -136,7 +132,6 @@
             <button type="button" class="kit-dev join-item btn btn-xs btn-ghost hover:bg-base-100 tooltip tooltip-bottom" data-dev="phone" aria-pressed="false" data-tip="Phone" aria-label="Phone"><span class="material-symbols-outlined text-sm">smartphone</span></button>
           </div>
         </div>
-
         <!-- Theme Controller -->
         <label class="swap swap-rotate btn btn-sm btn-ghost btn-circle kit-theme" id="kitTheme" title="Toggle dark/light theme" aria-label="Toggle theme">
           <input type="checkbox" aria-label="Night mode"/>
@@ -145,10 +140,8 @@
         </label>
       </div>
     </header>
-
     <!-- RESPONSIVE FLEX ITEM GRID WRAPPER FOR PREVIEW SCREENS -->
     <div class="flex-1 flex flex-col min-h-0 overflow-hidden w-full">
-
       <div class="kit-canvas-scroll flex-1 w-full mx-auto bg-base-300 p-4 sm:p-6 lg:p-8 flex flex-col items-center overflow-y-auto">
         <div class="kit-canvas-frame w-full max-w-7xl 2xl:max-w-[1560px] bg-base-100 rounded-2xl shadow-2xl border border-base-300/80 ring-1 ring-white/10 overflow-hidden flex flex-col transition-all duration-300 shrink-0" data-theme="dark">
           <iframe id="templateCanvasFrame" src="./template.html" class="w-full border-0 transition-all duration-300 min-h-[850px] bg-base-100" title="Template Preview Canvas"></iframe>
@@ -205,7 +198,6 @@
       </button>
     </div>
   </header>
-
   <!-- 2. Accordion Configuration Matrix (Scrollable Middle) -->
   <div class="flex-1 min-h-0 overflow-y-auto px-3.5 py-3 flex flex-col gap-3 cfg-scroll-area" id="cfg-scroll">
     <!-- Active Page Navigation Tree Item -->
@@ -218,7 +210,6 @@
       </div>
       <div id="kit-page-host" data-kit-area="pages"></div>
     </div>
-
     <div aria-label="Design settings" class="cfg-bar join join-vertical w-full bg-base-100/60 rounded-xl border border-base-300/80 shadow-xs" role="tablist">
     <!-- Brand & Theme Settings Panel -->
     <details class="collapse collapse-arrow join-item border-b border-base-300/60" open>
@@ -231,7 +222,7 @@
       </summary>
       <div class="collapse-content px-2 pb-2 flex flex-col gap-1.5">
         <!-- 1. Typography Accordion -->
-        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-typography" open>
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-typography" data-sec="typography" open>
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="rail-type">
             <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary">text_fields</span><span class="cfg-name font-bold">Typography</span></span>
             <span class="badge badge-ghost badge-xs font-mono mr-4">5 Presets</span>
@@ -250,9 +241,8 @@
             </div>
           </div>
         </details>
-
         <!-- 2. Colors & Theme Accordion -->
-        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-colors">
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-colors" data-sec="colors">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-brand">
             <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary">palette</span><span class="cfg-name font-bold">Colors &amp; Theme</span></span>
             <span class="badge badge-primary badge-xs mr-4" id="sum-brand">Blue</span>
@@ -294,9 +284,8 @@
             </div>
           </div>
         </details>
-
         <!-- 3. Header Bar Accordion -->
-        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-header">
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-header" data-sec="header">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-header">
             <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary">web</span><span class="cfg-name font-bold">Header Bar</span></span>
             <span class="badge badge-ghost badge-xs mr-4">Navigation</span>
@@ -320,7 +309,6 @@
         </details>
       </div>
     </details>
-
     <!-- Hook & Story Accordion Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item border-b border-base-300/60" open>
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -329,7 +317,7 @@
       </summary>
       <div class="kit-sections-grid collapse-content px-2 pb-2 flex flex-col gap-1">
         <!-- Hero Accordion -->
-        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-hero" open>
+        <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60" id="acc-hero" data-sec="hero" open>
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-hero">
             <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base text-primary">view_carousel</span><span class="cfg-name font-bold">Hero</span></span>
             <span class="badge badge-ghost badge-xs text-xs opacity-70 mr-4">Soft center</span>
@@ -386,7 +374,6 @@
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
           </div>
         </details>
-
         <!-- FAQ Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-faq" data-sec="faq">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-faq">
@@ -401,7 +388,6 @@
         </details>
       </div>
     </details>
-
     <!-- Pains & Problems Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item border-b border-base-300/60">
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -435,7 +421,6 @@
         </details>
       </div>
     </details>
-
     <!-- Solutions & Services Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item border-b border-base-300/60">
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -464,7 +449,6 @@
             </div>
           </div>
         </details>
-
         <!-- Solutions Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-solutions" data-sec="solutions">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-repairs">
@@ -479,7 +463,6 @@
         </details>
       </div>
     </details>
-
     <!-- Trust & Proof Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item border-b border-base-300/60">
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -499,7 +482,6 @@
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
           </div>
         </details>
-
         <!-- Reviews Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-reviews" data-sec="reviews">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-reviews">
@@ -514,7 +496,6 @@
         </details>
       </div>
     </details>
-
     <!-- Conversion Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item border-b border-base-300/60">
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -533,7 +514,6 @@
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
           </div>
         </details>
-
         <!-- Promo Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-promo" data-sec="promo">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-promo">
@@ -545,7 +525,6 @@
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
           </div>
         </details>
-
         <!-- CTA Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-cta" data-sec="cta">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-cta">
@@ -557,7 +536,6 @@
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
           </div>
         </details>
-
         <!-- Contact Accordion -->
         <details class="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300/60 more-row" id="acc-contact" data-sec="contact">
           <summary class="collapse-title text-xs font-semibold py-2 px-3 flex items-center justify-between cursor-pointer min-h-0" id="tab-contact">
@@ -571,7 +549,6 @@
         </details>
       </div>
     </details>
-
     <!-- Footer & Site Map Panel -->
     <details class="kit-bucket collapse collapse-arrow join-item">
       <summary class="kit-group collapse-title text-sm font-semibold flex items-center justify-between pr-8">
@@ -604,7 +581,6 @@
         </div>
       </div>
     </details>
-
     <button aria-controls="panel-more" aria-selected="false" class="cfg-tab tooltip tooltip-right hidden" data-tab="more" data-kit-area="pages" id="tab-more" role="tab" data-tip="More sections" aria-label="More sections" hidden>
       <span class="cfg-num">7</span><span class="cfg-name">More sections</span>
     </button>
@@ -615,7 +591,6 @@
   <div id="bshadeSwatch" class="hidden"><span id="bshadeHex"></span><span id="bshadeContrast"></span></div>
   <input type="color" id="brandHexPick" class="hidden" /><input type="text" id="brandHex" class="hidden" /><button type="button" id="brandHexApply" class="hidden"></button>
   </div><!-- #cfg-scroll -->
-
   <!-- 3. Leftside Menu Footer (Pinned Single Utility Dock) -->
   <footer class="flex-none px-3 h-14 min-h-14 border-t border-base-300 bg-base-200 z-10 flex items-center justify-between gap-1.5 kit-foot" id="kit-foot" aria-label="Settings, save, reset, and utilities">
     <!-- Primary Action: Compact Save -->
@@ -623,7 +598,6 @@
       <span class="material-symbols-outlined text-sm" id="btnSaveIcon">save</span>
       <span id="btnSaveText">Save</span>
     </button>
-
     <!-- Utility Icons Dock Group -->
     <div class="flex items-center gap-0.5">
       <button class="btn btn-ghost btn-sm btn-circle tooltip tooltip-top text-base-content/70 hover:text-error" id="btnReset" type="button" data-tip="Reset changes" aria-label="Reset changes"><span class="material-symbols-outlined text-base" id="btnResetIcon">restart_alt</span><span id="btnResetText" class="sr-only">Reset</span></button>
@@ -644,7 +618,6 @@
         <span class="badge badge-primary badge-outline text-[10px] font-mono font-semibold py-0.5 px-1.5" id="kitAccountPlan">Studio</span>
       </div>
     </div>
-
     <!-- Structured vertical navigation menu -->
     <ul class="menu menu-sm bg-base-200/50 rounded-xl p-1 border border-base-300/40 w-full gap-0.5 flex-none" id="kitAccountNav" role="tablist" aria-label="Account Sections">
       <li><button type="button" class="active flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="profile" role="tab" aria-selected="true"><span class="material-symbols-outlined text-base">person</span><span>Profile</span></button></li>
@@ -654,7 +627,6 @@
       <li><button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="team" role="tab" aria-selected="false"><span class="material-symbols-outlined text-base">group</span><span>Team</span></button></li>
       <li><button type="button" class="flex items-center gap-2.5 py-1.5 px-2.5 rounded-lg text-xs font-medium" data-acct-tab="help" role="tab" aria-selected="false"><span class="material-symbols-outlined text-base">help</span><span>Help</span></button></li>
     </ul>
-
     <!-- Tab Panels Container -->
     <div class="kit-account-body flex-1 overflow-y-auto flex flex-col gap-3">
       <!-- Profile Pane -->
@@ -680,7 +652,6 @@
           <span>Save Changes</span>
         </button>
       </div>
-
       <!-- Projects Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="projects" hidden>
         <div class="flex items-center justify-between">
@@ -705,7 +676,6 @@
         </button>
         <p class="text-[11px] text-base-content/50 m-0">Up to 5 projects live in this local vault. Switching loads it on canvas.</p>
       </div>
-
       <!-- Subscription Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="plan" hidden>
         <div class="card bg-base-100 border border-primary/30 p-3.5 rounded-xl shadow-xs">
@@ -717,7 +687,6 @@
         </div>
         <div class="text-[11px] text-base-content/50">Renews annually. Managed via workspace administrator.</div>
       </div>
-
       <!-- Billing Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="billing" hidden>
         <div class="card bg-base-100 border border-base-300/60 p-3.5 rounded-xl text-center">
@@ -726,7 +695,6 @@
           <span class="text-[11px] text-base-content/50 mt-1">Direct invoice via company procurement.</span>
         </div>
       </div>
-
       <!-- Team Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="team" hidden>
         <div class="flex items-center justify-between">
@@ -741,7 +709,6 @@
           </div>
         </div>
       </div>
-
       <!-- Help Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="help" hidden>
         <div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-col gap-2">

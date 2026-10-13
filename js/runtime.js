@@ -1,28 +1,21 @@
 import { MS, sectorIcon, railIcons, setAutoBodyIcons } from "./sector-icons.js";
-import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite, FONT_TIERS, hexToRgb, SHADE_STEPS, rampFromHex } from "./storage.js";
-
+import { readSiteData, writeSiteData, onSiteDataChange, applyStateToDocument, createDeferredWrite, FONT_TIERS, hexToRgb, SHADE_STEPS, rampFromHex, ROUTES, applyRecipe } from "./storage.js";
 /* =========================================================
    PANDINO RUNTIME: DECLARATIVE DATA-MAPPER ENGINE (DAISYUI 5)
    ========================================================= */
-
-// --- 1. Canvas Target Resolution & Aliases ---
-export const ID_ALIASES = { repairs: "solutions", trust: "trust-bar", "final-cta": "cta", cookie: "cookieBanner" };
-
+// --- 1. Canvas Target Resolution & 1:1 Bindings ---
 export function getCanvasDocument() {
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
     return frame?.contentDocument || frame?.contentWindow?.document || document;
 }
-
 export function getCanvasTargets() {
     const doc = getCanvasDocument();
     return doc?.documentElement ? [doc.documentElement] : [document.documentElement];
 }
-
 export function getCanvasBodyTargets() {
     const doc = getCanvasDocument();
     return doc?.body ? [doc.body] : [document.body];
 }
-
 let lastCanvasHeight = 0;
 export function syncCanvasHeight() {
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
@@ -37,30 +30,18 @@ export function syncCanvasHeight() {
     } catch (e) {}
 }
 window.__syncCanvasHeight = syncCanvasHeight;
-
 export function byId(id) {
     if (!id) return null;
     const doc = getCanvasDocument();
-    const alias = ID_ALIASES[id];
-    return doc.getElementById(id) || (alias ? doc.getElementById(alias) : null) || document.getElementById(id) || (alias ? document.getElementById(alias) : null);
+    return doc?.getElementById(id) || document.getElementById(id);
 }
-
 export function normalizeSecId(id) {
-    return { solutions: "repairs", "trust-bar": "trust", cta: "final-cta", cookieBanner: "cookie" }[id] || id || "";
+    return id || "";
 }
-
-export const SEC_NAMES = {
-    header: "Header", hero: "Hero", services: "Services", repairs: "Solutions", about: "About",
-    trust: "Trust", reviews: "Reviews", quote: "Quote", faq: "FAQ", promo: "Promo",
-    contact: "Contact", "final-cta": "Call to Action", footer: "Footer", cookie: "Cookie Banner"
-};
-
 export function heroSections() {
     return [...getCanvasDocument().querySelectorAll("main.heroes-container > .hero")];
 }
-
 // --- 2. Color System & OKLCH Ramp Generator ---
-
 export function applyBrandPalette(hex) {
     if (!hex) return;
     const ramp = rampFromHex(hex);
@@ -85,7 +66,6 @@ export function applyBrandPalette(hex) {
         btn.classList.toggle("border-white/20", !on);
     });
 }
-
 export function applyColorScheme(scheme) {
     if (!scheme) return;
     state.scheme = scheme; safeWriteSiteData();
@@ -94,7 +74,6 @@ export function applyColorScheme(scheme) {
     getCanvasBodyTargets().forEach(b => { b.classList.remove("scheme-white", "scheme-dark", "scheme-brand"); b.classList.add(`scheme-${scheme}`); });
     syncActiveGroup("[data-scheme]", "data-scheme", scheme);
 }
-
 // --- 3. Typography Preset System ---
 export { FONT_TIERS };
 export function applyTypographyPreset(tier) {
@@ -104,7 +83,6 @@ export function applyTypographyPreset(tier) {
     syncActiveGroup("[data-tier]", "data-tier", tier);
     state.typographyTier = tier; safeWriteSiteData();
 }
-
 // --- 4. Reactive State & Dispatch Helper ---
 const state = {
     heroIndex: 0, headerStyle: "standard", headerAlign: "left", headerSticky: false,
@@ -112,10 +90,8 @@ const state = {
     brandColor: "#16a34a", theme: "dark", painsLook: "a", painsAlign: "center",
     accountName: "", accountEmail: ""
 };
-
 let isSyncing = false;
 export function safeWriteSiteData() { if (!isSyncing) try { writeSiteData(state); } catch (e) {} }
-
 function syncActiveGroup(selector, attr, activeVal) {
     document.querySelectorAll(selector).forEach(btn => {
         const on = btn.getAttribute(attr) === String(activeVal);
@@ -124,11 +100,9 @@ function syncActiveGroup(selector, attr, activeVal) {
         btn.setAttribute("aria-pressed", String(on));
     });
 }
-
 // --- 5. Hero Data-Mapper ---
 const LAYOUT_HINTS = { 0: "Best for a short, direct offer.", 1: "Best for a strong photo or video.", 2: "Best for a short, direct offer.", 3: "Best when the work itself sells.", 4: "Best for a short, direct offer.", 5: "Best when the work itself sells." };
 const HERO_LABELS = ["Layout 1: Gradient Centered", "Layout 2: Full Bleed", "Layout 3: Centered Full", "Layout 4: Bottom sidebar menu", "Layout 5: Bold Minimal", "Layout 6: Business Info"];
-
 export function setHeroIndex(idx) {
     idx = Math.max(0, Math.min(Number(idx) || 0, 5));
     state.heroIndex = idx; safeWriteSiteData();
@@ -143,13 +117,11 @@ export function setHeroIndex(idx) {
     const hint = document.getElementById("hero-layout-hint"); if (hint) hint.textContent = LAYOUT_HINTS[idx] || "";
     syncCanvasHeight();
 }
-
 export function applyReviews(style) {
     state.reviews = style; safeWriteSiteData();
     getCanvasBodyTargets().forEach(b => ["on", "white", "black"].forEach(k => b.classList.toggle("reviews-" + k, k === "on" ? style !== "off" : style === k)));
     syncActiveGroup("[data-rev]", "data-rev", style);
 }
-
 export function applyHeroPanel(pos) {
     state.panel = pos; safeWriteSiteData();
     getCanvasBodyTargets().forEach(b => ["off", "bottom", "left", "right"].forEach(v => b.classList.toggle("panel-" + v, pos === v)));
@@ -158,13 +130,11 @@ export function applyHeroPanel(pos) {
     getCanvasDocument().querySelectorAll(".hero").forEach(hero => hero.setAttribute("data-panel", pos));
     syncCanvasHeight();
 }
-
 export function applyHeroPanelStyle(style) {
     state.panelStyle = style; safeWriteSiteData();
     getCanvasBodyTargets().forEach(b => ["solid", "outline"].forEach(k => b.classList.toggle("panel-" + k, style === k)));
     syncActiveGroup("[data-pstyle]", "data-pstyle", style);
 }
-
 export function applyCtaCount(count) {
     state.ctas = count; safeWriteSiteData();
     heroSections().forEach(hero => {
@@ -176,7 +146,6 @@ export function applyCtaCount(count) {
     if (state.painsCtas === undefined) applyPainsCtaCount(count, false);
     syncCanvasHeight();
 }
-
 export function applyPainsCtaCount(count, persist = true) {
     state.painsCtas = count; if (persist) safeWriteSiteData();
     const pains = byId("pains");
@@ -189,23 +158,20 @@ export function applyPainsCtaCount(count, persist = true) {
     syncActiveGroup("[data-pains-ctacount]", "data-pains-ctacount", count);
     syncCanvasHeight();
 }
-
 // --- 6. Navigation & Header ---
 export function setHeaderSticky(sticky) {
     state.headerSticky = !!sticky; safeWriteSiteData();
     getCanvasBodyTargets().forEach(b => { b.classList.toggle("is-sticky-header", state.headerSticky); b.dataset.stickyHeader = String(state.headerSticky); });
     const chk = document.getElementById("toggleHeaderSticky"); if (chk) chk.checked = state.headerSticky;
 }
-
 export function setHeaderStyle(style) {
     state.headerStyle = style; safeWriteSiteData();
     getCanvasDocument().querySelectorAll(".site-header").forEach(h => h.setAttribute("data-type", style));
     syncActiveGroup('[data-opt="type"]', "data-val", style);
 }
-
 export function scrollToCanvasSection(secId) {
     if (!secId) return;
-    const doc = getCanvasDocument(), alias = ID_ALIASES[secId], target = doc.getElementById(secId) || (alias ? doc.getElementById(alias) : null);
+    const doc = getCanvasDocument(), target = doc?.getElementById(secId);
     if (!target) return;
     if (target.hidden) { target.hidden = false; syncCanvasHeight(); }
     doc.querySelectorAll(".is-canvas-selected").forEach(el => el.classList.remove("is-canvas-selected"));
@@ -219,14 +185,11 @@ export function scrollToCanvasSection(secId) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 }
-
 // --- 7. In-Place Accordion & Tabs ---
-export function activateTab(tabId, opts = {}) {
-    if (!tabId) return;
-    let cleanId = String(tabId).replace(/^(tab-|rail-|acc-)/, "").toLowerCase();
-    const map = { type: "typography", font: "typography", color: "colors", brand: "colors", repairs: "solutions", "trust-bar": "trust", "final-cta": "cta" };
-    if (map[cleanId]) cleanId = map[cleanId];
-    const targetAcc = document.getElementById("acc-" + cleanId) || document.querySelector(`.more-row[data-sec="${cleanId}"]`) || document.getElementById(tabId);
+export function activateTab(secKey, opts = {}) {
+    if (!secKey) return;
+    const cleanId = String(secKey).replace(/^(tab-|rail-|acc-)/, "").toLowerCase();
+    const targetAcc = document.querySelector(`[data-sec="${cleanId}"]`) || document.getElementById(`acc-${cleanId}`);
     if (targetAcc) {
         const bucket = targetAcc.closest(".kit-bucket"); if (bucket) bucket.open = true;
         if (targetAcc.tagName.toLowerCase() === "details") targetAcc.open = true;
@@ -236,12 +199,11 @@ export function activateTab(tabId, opts = {}) {
     }
     document.querySelectorAll(".cfg-tab").forEach(t => {
         const tid = t.id.replace(/^(tab-|rail-)/, "");
-        const on = (t.id === tabId || tid === cleanId || t.dataset.sec === cleanId);
+        const on = (t.id === secKey || tid === cleanId || t.dataset.sec === cleanId);
         t.classList.toggle("is-active", on); t.setAttribute("aria-selected", String(on));
     });
-    if (!opts.fromCanvas) scrollToCanvasSection(["header", "colors", "typography"].includes(cleanId) ? (cleanId === "header" ? "header" : "hero") : cleanId);
+    if (!opts.fromCanvas) scrollToCanvasSection(["colors", "typography"].includes(cleanId) ? "hero" : cleanId);
 }
-
 // --- 8. Customer Pains Layout & Alignment ---
 export function applyPainsLook(look = "a") {
     state.painsLook = look === "b" ? "b" : "a";
@@ -250,7 +212,6 @@ export function applyPainsLook(look = "a") {
     const badge = document.getElementById("painsBadge"); if (badge) badge.textContent = state.painsLook === "b" ? "Split" : "3 Cards";
     safeWriteSiteData(); syncCanvasHeight();
 }
-
 export function applyPainsAlignment(align = "center", persist = true) {
     state.painsAlign = ["left", "center", "right"].includes(align) ? align : "center";
     const pains = byId("pains");
@@ -262,7 +223,6 @@ export function applyPainsAlignment(align = "center", persist = true) {
     syncActiveGroup("#painsAlignJoin [data-pains-align]", "data-pains-align", state.painsAlign);
     if (persist) safeWriteSiteData();
 }
-
 export function syncCanvasLayerLabels() {
     const doc = getCanvasDocument(); if (!doc) return;
     const map = { "trust-bar": "trust", "final-cta": "cta", repairs: "solutions" };
@@ -275,7 +235,6 @@ export function syncCanvasLayerLabels() {
         }
     });
 }
-
 // --- 9. Unified Data-Dispatch Pattern & Sync ---
 export function syncCanvasState() {
     isSyncing = true;
@@ -294,25 +253,20 @@ export function syncCanvasState() {
         applyTypographyPreset(state.typographyTier || document.getElementById("typographySelect")?.value || "tier1");
         applyPainsLook(state.painsLook || "a");
         applyPainsAlignment(state.painsAlign || "center", false);
-
         const doc = getCanvasDocument();
         if (doc) applyStateToDocument(doc, state);
-
         const promiseInput = document.getElementById("hero-promise");
         if (promiseInput && state.heroPromise && document.activeElement !== promiseInput) promiseInput.value = state.heroPromise;
-
         if (state.halign) {
             getCanvasBodyTargets().forEach(cb => ["left", "center", "right"].forEach(a => cb.classList.toggle("hero-halign-" + a, a === state.halign)));
             syncActiveGroup("[data-halign]", "data-halign", state.halign);
         }
-
         if (state.headerSticky !== undefined) setHeaderSticky(state.headerSticky);
         if (state.headerStyle) setHeaderStyle(state.headerStyle);
         if (state.headerSurface) {
             if (doc) doc.querySelectorAll(".site-header").forEach(h => h.setAttribute("data-style", state.headerSurface));
             syncActiveGroup('[data-opt="style"]', "data-val", state.headerSurface);
         }
-
         if (state.heroMarquee !== undefined) {
             const ls = doc?.getElementById("logostrip"); if (ls) ls.hidden = !state.heroMarquee;
             ["toggleHeroMarquee", "toggleHeroLogostrip"].forEach(id => { const t = document.getElementById(id); if (t) t.checked = !!state.heroMarquee; });
@@ -325,7 +279,6 @@ export function syncCanvasState() {
             doc?.querySelectorAll(".hero").forEach(h => h.classList.toggle("hm-reveal", !!state.heroReveal));
             const tr = document.getElementById("toggleHeroReveal"); if (tr) tr.checked = !!state.heroReveal;
         }
-
         if (state.sectionShades && typeof state.sectionShades === "object") {
             Object.entries(state.sectionShades).forEach(([secId, shadeVal]) => {
                 byId(secId)?.style.setProperty("--sec-shade", `var(--active-${shadeVal})`);
@@ -339,7 +292,6 @@ export function syncCanvasState() {
         isSyncing = false;
     }
 }
-
 function setDevicePreview(dev) {
     syncActiveGroup("[data-dev]", "data-dev", dev);
     const scroller = document.querySelector(".kit-canvas-scroll"), frame = document.querySelector(".kit-canvas-frame");
@@ -351,7 +303,6 @@ function setDevicePreview(dev) {
     }
     setTimeout(syncCanvasHeight, 150);
 }
-
 // --- 10. Unified Global Event Dispatcher ---
 const DISPATCH_MAP = {
     hmhero: v => setHeroIndex(Number(v)),
@@ -393,7 +344,6 @@ const DISPATCH_MAP = {
         }
     }
 };
-
 function initAccountSettings() {
     const settingsBtn = document.getElementById("kitSettings"), accountView = document.getElementById("kit-account");
     if (!settingsBtn || !accountView) return;
@@ -422,7 +372,6 @@ function initAccountSettings() {
     document.getElementById("kitAccountSave")?.addEventListener("click", () => persistAcct(true));
     ["kitAccountName", "kitAccountEmail"].forEach(id => document.getElementById(id)?.addEventListener("input", () => persistAcct(false)));
 }
-
 function initGlobalDispatchListeners() {
     document.addEventListener("click", e => {
         const btn = e.target.closest("button, [data-opt], .cfg-tab, .color-btn, .kit-row");
@@ -446,7 +395,6 @@ function initGlobalDispatchListeners() {
         if (btn.classList.contains("kit-row")) return activateTab(btn.querySelector(".cfg-tab")?.id || btn.dataset.sec);
         if (btn.id === "shClose") document.getElementById("shMobile")?.setAttribute("aria-hidden", "true");
     });
-
     const promise = document.getElementById("hero-promise");
     if (promise) {
         const deferred = createDeferredWrite(() => { state.heroPromise = promise.value; safeWriteSiteData(); }, 150);
@@ -455,7 +403,6 @@ function initGlobalDispatchListeners() {
             if (h1) h1.textContent = e.target.value; state.heroPromise = e.target.value; deferred();
         });
     }
-
     const CHANGE_MAP = {
         typographySelect: el => applyTypographyPreset(el.value),
         btnShade: el => getCanvasTargets().forEach(r => r?.style.setProperty("--btn-bg", el.value === "auto" ? "var(--active-500)" : `var(--active-${el.value})`)),
@@ -468,7 +415,6 @@ function initGlobalDispatchListeners() {
         toggleHeroBlur: el => { state.heroBlur = el.checked; safeWriteSiteData(); getCanvasDocument().querySelectorAll(".hero-content").forEach(hc => hc.classList.toggle("backdrop-blur-md", el.checked)); }
     };
     for (const [id, fn] of Object.entries(CHANGE_MAP)) document.getElementById(id)?.addEventListener("change", e => fn(e.target));
-
     document.querySelectorAll('.more-row [data-more="show"]').forEach(t => t.addEventListener("change", () => {
         const sec = byId(t.closest(".more-row")?.dataset.sec); if (sec) { sec.hidden = !t.checked; syncCanvasHeight(); }
     }));
@@ -476,13 +422,11 @@ function initGlobalDispatchListeners() {
         const sec = s.closest(".more-row")?.dataset.sec;
         if (sec) { (state.sectionShades ??= {})[sec] = s.value; safeWriteSiteData(); byId(sec)?.style.setProperty("--sec-shade", `var(--active-${s.value})`); }
     }));
-
     const hexInput = document.getElementById("brandHex"), hexPick = document.getElementById("brandHexPick");
     const updHex = v => { if (v) { applyBrandPalette(v); state.brandColor = v; } };
     hexPick?.addEventListener("input", () => { if (hexInput) hexInput.value = hexPick.value; updHex(hexPick.value); });
     document.getElementById("brandHexApply")?.addEventListener("click", () => updHex(hexInput?.value));
     hexInput?.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); updHex(hexInput.value); } });
-
     ["toggleHeroMarquee", "toggleHeroLogostrip"].forEach(id => {
         document.getElementById(id)?.addEventListener("change", e => {
             state.heroMarquee = e.target.checked; safeWriteSiteData();
@@ -490,18 +434,15 @@ function initGlobalDispatchListeners() {
             syncCanvasHeight();
         });
     });
-
     const themeInput = document.querySelector("#kitTheme input");
     if (themeInput) themeInput.addEventListener("change", () => {
         const theme = themeInput.checked ? "light" : "dark";
         [document.documentElement, document.getElementById("kit-drawer"), getCanvasDocument()?.documentElement, getCanvasDocument()?.body, document.querySelector(".kit-canvas-frame")].forEach(el => el?.setAttribute("data-theme", theme));
         state.theme = theme; safeWriteSiteData();
     });
-
     initActionButtons();
     initAccountSettings();
 }
-
 function initActionButtons() {
     document.getElementById("cfgCollapse")?.addEventListener("click", e => {
         const btn = e.target.closest("button"), isCol = document.getElementById("cfg")?.classList.toggle("is-collapsed");
@@ -528,12 +469,10 @@ function initActionButtons() {
         if (txt) txt.textContent = "Reset!"; if (ic) ic.textContent = "check"; setTimeout(() => { if (txt) txt.textContent = "Reset"; if (ic) ic.textContent = "restart_alt"; }, 1500);
     });
 }
-
 // --- 11. Iframe Click-to-Inspect ---
 export function initCanvasSectionClicks() {
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
     if (!frame) return;
-
     function attach() {
         try {
             const doc = frame.contentDocument || frame.contentWindow?.document;
@@ -542,20 +481,11 @@ export function initCanvasSectionClicks() {
             doc.addEventListener("click", onClick, true);
         } catch (e) {}
     }
-
     function onClick(e) {
         if (e.target.closest("input, textarea, select")) return;
         const sec = e.target.closest("section, header, footer");
         if (!sec) return;
-        let secId = sec.id;
-        if (!secId) {
-            const tag = sec.tagName.toLowerCase();
-            if (tag === "header" || tag === "footer") secId = tag;
-            else {
-                const clsMap = { hero: "hero", svc: "services", rc: "solutions", "ks-about-timeline": "about", "ks-pains": "pains", "ks-trust": "trust", "ks-reviews": "reviews", "ks-quote": "quote", "ks-faq": "faq", "ks-promo": "promo", "ks-contact": "contact", "ks-final": "cta" };
-                for (const [cls, id] of Object.entries(clsMap)) { if (sec.classList.contains(cls)) { secId = id; break; } }
-            }
-        }
+        const secId = sec.id || (["header", "footer"].includes(sec.tagName.toLowerCase()) ? sec.tagName.toLowerCase() : null);
         if (secId) {
             const doc = frame.contentDocument || frame.contentWindow?.document;
             doc?.querySelectorAll(".is-canvas-selected").forEach(el => el.classList.remove("is-canvas-selected"));
@@ -563,29 +493,23 @@ export function initCanvasSectionClicks() {
             activateTab(secId, { fromCanvas: true });
         }
     }
-
     frame.addEventListener("load", attach);
     if (frame.contentDocument?.readyState === "complete") attach();
 }
-
 // --- 12. Bootstrapping & Storage Sync ---
 export function initRuntime() {
     const hostRoot = document.documentElement;
     ["--color-primary", "--primary-color", "--p", "--active-500", "--brand-ink", "--brand-contrast-fg", "--color-primary-content", "--headline-font", "--body-font", "--btn-bg"].forEach(p => hostRoot.style.removeProperty(p));
     SHADE_STEPS.forEach(step => { hostRoot.style.removeProperty(`--active-${step}`); hostRoot.style.removeProperty(`--primary-${step}`); });
-
     const saved = readSiteData();
     if (saved) Object.assign(state, saved);
-
     const sumBrand = document.getElementById("sum-brand");
     if (sumBrand && state.brandColor) {
         const matchingBtn = document.querySelector(`[data-color].color-btn[style*="${state.brandColor}"]`);
         if (matchingBtn?.dataset.color) sumBrand.textContent = matchingBtn.dataset.color.charAt(0).toUpperCase() + matchingBtn.dataset.color.slice(1);
     }
-
     initGlobalDispatchListeners();
     initCanvasSectionClicks();
-
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
     if (frame) {
         let resizeRaf = null;
@@ -599,19 +523,22 @@ export function initRuntime() {
                     });
                     ro.observe(doc.body);
                 }
+                bindRouteDelegation(doc, frame.contentWindow);
             } catch (e) {}
             syncCanvasState();
+            if (window.location.hash) navigateRoute(window.location.hash);
         });
-        if (frame.contentDocument?.readyState === "complete") syncCanvasState();
+        if (frame.contentDocument?.readyState === "complete") {
+            bindRouteDelegation(frame.contentDocument, frame.contentWindow);
+            syncCanvasState();
+        }
     }
-
     onSiteDataChange(updatedData => {
         if (updatedData) {
             Object.assign(state, updatedData);
             syncCanvasState();
         }
     });
-
     document.getElementById("kitWin")?.addEventListener("click", e => {
         e.preventDefault();
         try {
@@ -620,9 +547,9 @@ export function initRuntime() {
         } catch (err) {}
         window.open("./template.html", "_blank");
     });
-
+    bindRouteDelegation(document, window);
     syncCanvasState();
-
+    if (window.location.hash) navigateRoute(window.location.hash);
     Object.assign(window, {
         __heroMedia: { get cur() { return state.heroIndex; }, setHeroIndex },
         __applyHeroPanel: applyHeroPanel,
@@ -631,10 +558,47 @@ export function initRuntime() {
         activateTab,
         syncCanvasLayerLabels,
         applyPainsLook,
-        applyPainsAlignment
+        applyPainsAlignment,
+        navigateRoute
     });
 }
-
+export function navigateRoute(routeKey) {
+    const raw = routeKey || window.location.hash || "home";
+    const key = raw.replace(/^#?\/?(services\/|legal\/)?/, "") || "home";
+    const route = ROUTES[key] || ROUTES.home;
+    const doc = getCanvasDocument();
+    const hero = doc?.getElementById("hero");
+    if (hero) {
+        hero.dataset.heroTier = route.tier;
+        const crumbs = doc.getElementById("hero-breadcrumbs");
+        if (crumbs) {
+            crumbs.classList.toggle("hidden", route.tier === "full" || !route.crumbs || route.crumbs.length <= 1);
+            crumbs.innerHTML = route.crumbs?.length > 1 ? `<ul>${route.crumbs.map((c, i) => i === route.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join("")}</ul>` : "";
+        }
+        const kicker = doc.getElementById("hero-kicker");
+        if (kicker && route.kicker) kicker.textContent = route.kicker;
+        const title = doc.getElementById("hero-title");
+        if (title && route.title) title.textContent = route.title;
+        const desc = doc.getElementById("hero-desc");
+        if (desc && route.desc) desc.textContent = route.desc;
+    }
+    if (route.recipe && doc) applyRecipe(doc, route.recipe);
+    syncCanvasHeight();
+}
+function bindRouteDelegation(targetDoc, targetWin) {
+    targetDoc?.addEventListener("click", e => {
+        const link = e.target.closest?.("[data-route]");
+        if (!link) return;
+        const route = link.dataset.route;
+        const href = link.getAttribute("href");
+        if (href && href.startsWith("#")) {
+            window.location.hash = href;
+            if (targetWin && targetWin !== window) targetWin.location.hash = href;
+        }
+        navigateRoute(route);
+    });
+    targetWin?.addEventListener("hashchange", () => navigateRoute(targetWin.location.hash));
+}
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initRuntime);
 } else {
