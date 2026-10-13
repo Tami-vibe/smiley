@@ -147,11 +147,27 @@
   /* Interactive Section Inspector styling */
   section, header, footer { cursor: pointer; transition: outline 0.15s ease, box-shadow 0.15s ease; }
   .is-canvas-selected { outline: 3px solid var(--primary-color, #10b981) !important; outline-offset: -3px !important; position: relative !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important; }
-  /* Hero Section Full Fit: media bleeds edge-to-edge without letterboxing margins */
-  .heroes-container .hero { min-height: 580px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 0 !important; position: relative !important; overflow: hidden !important; }
+  /* Hero Section Component & Unified Layout Engine (data-layout="1..6") */
+  .heroes-container .hero { min-height: 580px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; position: relative; overflow: hidden; }
   .heroes-container .hero > .hm,
-  .heroes-container .hero > .carousel { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; z-index: 0 !important; }
-  .heroes-container .hero > .hero-content { position: relative !important; z-index: 10 !important; padding: 120px 24px 80px !important; width: 100% !important; max-width: 56rem !important; }
+  .heroes-container .hero > .carousel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .heroes-container .hero > .hero-content { position: relative; z-index: 10; padding: 120px 24px 80px; width: 100%; max-width: 56rem; }
+  .heroes-container .hero .hm-slide { display: none; }
+  .heroes-container .hero:not([data-layout]) .hm-slide[data-slide="1"],
+  .heroes-container .hero[data-layout="1"] .hm-slide[data-slide="1"],
+  .heroes-container .hero[data-layout="2"] .hm-slide[data-slide="2"],
+  .heroes-container .hero[data-layout="3"] .hm-slide[data-slide="3"],
+  .heroes-container .hero[data-layout="4"] .hm-slide[data-slide="4"],
+  .heroes-container .hero[data-layout="5"] .hm-slide[data-slide="5"],
+  .heroes-container .hero[data-layout="6"] .hm-slide[data-slide="6"] { display: block; }
+  .heroes-container .hero[data-layout="2"] .hm-veil { background-color: rgba(0, 0, 0, 0.6); }
+  .heroes-container .hero[data-layout="3"] { padding: clamp(1rem, 2.5vw, 2rem); }
+  .heroes-container .hero[data-layout="3"] > .carousel { inset: clamp(1rem, 2.5vw, 2rem); border-radius: 1.5rem; }
+  .heroes-container .hero[data-layout="4"] > .hero-content { align-items: flex-start; text-align: left; margin-inline: clamp(1.5rem, 6vw, 6rem) auto; max-width: 44rem; }
+  .heroes-container .hero[data-layout="4"] .cta-row { justify-content: flex-start; }
+  .heroes-container .hero[data-layout="5"] h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -0.03em; text-transform: uppercase; }
+  .heroes-container .hero[data-layout="6"] { justify-content: space-between; }
+  .heroes-container .hero[data-layout="6"] .hb-info { display: grid; }
   /* Intelligent Contrast System: Headings, Sections, and Cards */
   .svc-head h2, #svc-title, #rc-title, #pains-title, #rev-title, #faq-title, #contact-title, #final-title, #about-title { color: var(--color-base-content, currentColor) !important; }
   .svc-head .subtext, .svc-head p { color: color-mix(in srgb, var(--color-base-content, currentColor) 80%, transparent) !important; }
@@ -186,14 +202,15 @@
     </div>
   </header>
   <main class="heroes-container w-full bg-base-100 transition-all duration-300">
-<!-- LAYOUT 1: GRADIENT CENTERED -->
-<section class="hero hero-gradient is-live-hero min-h-[580px] relative overflow-hidden" id="hero" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
+<!-- UNIFIED HERO SECTION (data-layout="1..6") -->
+<section class="hero is-live-hero min-h-[580px] relative overflow-hidden" id="hero" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-style="fill">
 <div class="carousel w-full h-full hm absolute inset-0 z-0" aria-hidden="true">
-  <div class="carousel-item w-full h-full hm-slide is-active">
-    <div class="hm-move w-full h-full">
-      <video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video>
-    </div>
-  </div>
+  <div class="carousel-item w-full h-full hm-slide is-active" data-slide="1"><div class="hm-move w-full h-full"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
+  <div class="carousel-item w-full h-full hm-slide" data-slide="2"><div class="hm-move w-full h-full"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full hm-slide" data-slide="3"><div class="hm-move w-full h-full"><video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div></div>
+  <div class="carousel-item w-full h-full hm-slide" data-slide="4"><div class="hm-move w-full h-full"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full hm-slide" data-slide="5"><div class="hm-move w-full h-full"><img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover"></div></div>
+  <div class="carousel-item w-full h-full hm-slide" data-slide="6"><div class="hm-move w-full h-full"><img src="./media/hero/hero-1.jpg" alt="" class="w-full h-full object-cover"></div></div>
   <span class="hm-veil absolute inset-0 bg-black/40"></span><span class="hm-split"></span><span class="hm-tex"></span>
 </div>
 <div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
@@ -211,172 +228,6 @@
     </div>
   </div>
 </div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
-</div>
-</section>
-
-<!-- Layout 2: Full Bleed -->
-<section class="hero hero-fullbleed" hidden data-panel="right" data-reviews="black" data-ctas="2" data-cta-style="fill">
-<div class="carousel w-full h-full hm" aria-hidden="true">
-  <div class="carousel-item w-full h-full hm-slide is-active">
-    <div class="hm-move">
-      <img src="./media/hero/highway-suv.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-  </div>
-  <span class="hm-veil"></span><span class="hm-split"></span><span class="hm-tex"></span>
-</div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 2: Full Bleed</div>
-<div class="hero-content header-group flex-col text-center max-w-3xl z-10 py-12">
-<a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="stars text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-<div class="title-wrap">
-<div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Unlock Performance</div>
-<h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Unlock Next Level Performance</h1>
-</div>
-<p class="subtext text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="medium">Experience the power of cutting-edge technology and engineering excellence.</p>
-<div class="cta-group mt-6">
-<div class="cta-row flex flex-wrap gap-3 justify-center">
-<button class="btn btn-primary rounded-xl cta-btn cta-primary">Explore Now →</button>
-<button class="btn btn-accent rounded-xl cta-btn cta-primary cta-second">Learn More</button>
-</div>
-</div>
-</div>
-<div aria-hidden="true" class="accent-bar"></div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
-</div>
-</section>
-
-<!-- Layout 3: Centered Full -->
-<section class="hero hero-centered min-h-[580px] relative overflow-hidden" hidden data-panel="left" data-reviews="off" data-ctas="2" data-cta-style="fill">
-<div class="hero-media carousel w-full h-full hm absolute inset-0 z-0">
-  <div class="carousel-item w-full h-full hm-slide is-active">
-    <div class="hm-move w-full h-full">
-      <video src="./media/hero/mountain-sports-car.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video>
-    </div>
-  </div>
-  <span class="hm-veil absolute inset-0 bg-black/40"></span><span class="hm-split"></span><span class="hm-tex"></span>
-</div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 3: Centered Full</div>
-<div class="hero-content header-group flex-col text-center max-w-3xl z-10 py-12">
-<a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="stars text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-<div class="title-wrap">
-<div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Next-Gen Automotive</div>
-<h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Build a Life in Performance</h1>
-</div>
-<p class="subtext text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="long">Streamline your experience and boost confidence with intuitive solutions. Speed, safety, and simplicity—all in one vehicle.</p>
-<div class="cta-group mt-6">
-<div class="cta-row flex flex-wrap gap-3 justify-center">
-<button class="btn btn-primary rounded-xl cta-btn cta-primary">Get Started</button>
-<button class="btn btn-accent rounded-xl cta-btn cta-primary cta-second">Learn More</button>
-</div>
-</div>
-</div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
-</div>
-</section>
-
-<!-- Layout 4: Framed Sidebar -->
-<section class="hero hero-framed min-h-[580px] relative overflow-hidden" hidden data-panel="bottom" data-reviews="off" data-ctas="2" data-cta-style="fill">
-<div class="carousel w-full h-full hm absolute inset-0 z-0" aria-hidden="true">
-  <div class="carousel-item w-full h-full hm-slide is-active"><div class="hm-move w-full h-full"><img src="./media/hero/ev-lift-diagnostic.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide"><div class="hm-move w-full h-full"><img src="./media/hero/diagnostic-scanner.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide"><div class="hm-move w-full h-full"><img src="./media/hero/driver-cockpit.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <div class="carousel-item w-full h-full hm-slide"><div class="hm-move w-full h-full"><img src="./media/hero/mountain-road.jpg" alt="" class="w-full h-full object-cover"></div></div>
-  <span class="hm-veil absolute inset-0 bg-black/40"></span><span class="hm-split"></span><span class="hm-tex"></span>
-</div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 4: Bottom sidebar menu</div>
-<div class="hero-content header-group flex-col text-center max-w-3xl z-10 py-12">
-<a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="stars text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-<div class="title-wrap">
-<div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Right Column</div>
-<h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Build a Life in Performance</h1>
-</div>
-<p class="subtext text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="long">Supporting content for the right side column.</p>
-<div class="cta-group mt-6">
-<div class="cta-row flex flex-wrap gap-3 justify-center">
-<button class="btn btn-primary rounded-xl cta-btn cta-primary">Action Button</button>
-<button class="btn btn-accent rounded-xl cta-btn cta-primary cta-second">Learn More</button>
-</div>
-</div>
-</div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
-</div>
-</section>
-
-<!-- Layout 5: Bold Minimal -->
-<section class="hero hero-aerial min-h-[580px] relative overflow-hidden" hidden data-panel="off" data-reviews="black" data-ctas="2" data-cta-style="outline">
-<div class="carousel w-full h-full hm absolute inset-0 z-0" aria-hidden="true">
-  <div class="carousel-item w-full h-full hm-slide is-active">
-    <div class="hm-move w-full h-full">
-      <img src="./media/hero/hero-beast-mode-01.jpg" alt="" class="w-full h-full object-cover">
-    </div>
-  </div>
-  <span class="hm-veil absolute inset-0 bg-black/40"></span><span class="hm-split"></span><span class="hm-tex"></span>
-</div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 5: Bold Minimal</div>
-<div class="hero-content header-group flex-col text-center max-w-3xl z-10 py-12">
-<a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="stars text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-<div class="title-wrap">
-<div class="label overline text-primary font-bold tracking-widest text-xs uppercase mb-2">Innovation</div>
-<h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Beast Mode</h1>
-</div>
-<p class="subtext text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="medium">Self-driving freight is here. The future of logistics starts now.</p>
-<div class="cta-group mt-6">
-<div class="cta-row flex flex-wrap gap-3 justify-center">
-<button class="btn btn-primary rounded-xl cta-btn cta-primary">Enter Now</button>
-<button class="btn btn-accent rounded-xl cta-btn cta-primary cta-second">Learn More</button>
-</div>
-</div>
-</div>
-<div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
-  <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Phone</span><span class="hb-value font-semibold block text-base-content"><a href="tel:+390212345678" class="link link-hover text-primary">+39 02 1234 5678</a></span><span class="hb-sub opacity-70 block text-[11px]">Call or WhatsApp</span></div>
-  <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Opening hours</span><div class="hb-hours opacity-80 mt-0.5 space-y-0.5"><div><span>Mon–Fri:</span> <span>08:00–18:30</span></div><div><span>Sat:</span> <span>08:00–12:30</span></div><div><span>Sun:</span> <span class="badge badge-error badge-xs">Closed</span></div></div></div>
-</div>
-</section>
-
-<!-- Layout 6: Business Info -->
-<section class="hero hero-business" hidden data-panel="bottom" data-reviews="corner" data-ctas="0" data-cta-style="fill">
-<div class="hb-stage">
-<div class="hb-media">
-  <div class="carousel w-full h-full hm" aria-hidden="true">
-    <div class="carousel-item w-full h-full hm-slide is-active"><div class="hm-move"><img src="./media/hero/hero-1.jpg" alt=""></div></div>
-    <div class="carousel-item w-full h-full hm-slide"><div class="hm-move"><img src="./media/hero/hero-2.jpg" alt=""></div></div>
-    <div class="carousel-item w-full h-full hm-slide"><div class="hm-move"><img src="./media/hero/hero-3.jpg" alt=""></div></div>
-    <div class="carousel-item w-full h-full hm-slide"><div class="hm-move"><img src="./media/hero/hero-4.jpg" alt=""></div></div>
-    <span class="hm-veil"></span><span class="hm-split"></span><span class="hm-tex"></span>
-  </div>
-</div>
-<div class="hero-label">Layout 6: Business Info</div>
-<div class="hero-content header-group">
-<div class="title-wrap">
-<div class="label overline">Body Shop in Milan</div>
-<h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight drop-shadow-md">Your car in safe hands.</h1>
-</div>
-<p class="subtext" data-tagline-size="short">Repairs, paint and insurance claims.</p>
-<div aria-label="Slides" class="hb-dots" role="group"></div>
-</div>
-<a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hb-reviews" href="#reviews">
-<span aria-hidden="true" class="star">★</span> 4.8 <small>· 12 reviews</small>
-</a>
-</div>
-<div class="hero-label absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 6: Business Info</div>
 <div class="hb-info biz-panel w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
   <div class="hb-cell hb-photo"><div class="hb-photo-media"></div><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Address</span><span class="hb-value font-semibold block text-base-content">Via Nazionale, 42</span><span class="hb-sub opacity-70 block text-[11px]">20123 Milan (MI)</span></div>
   <div class="hb-cell"><span class="hb-kicker font-bold opacity-60 uppercase text-[10px] block">Business name</span><span class="hb-value font-semibold block text-base-content">Business Name Srl</span><span class="hb-sub opacity-70 block text-[11px]">VAT No. IT12345678901</span></div>

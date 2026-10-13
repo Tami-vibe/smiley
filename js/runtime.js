@@ -209,26 +209,30 @@ const LAYOUT_HINTS = {
     4: "Best for a short, direct offer.", 5: "Best when the work itself sells."
 };
 
+const HERO_LABELS = [
+    "Layout 1: Gradient Centered",
+    "Layout 2: Full Bleed",
+    "Layout 3: Centered Full",
+    "Layout 4: Bottom sidebar menu",
+    "Layout 5: Bold Minimal",
+    "Layout 6: Business Info"
+];
+
 export function setHeroIndex(idx) {
-    const heroes = heroSections();
-    if (!heroes.length) return;
-    idx = Math.max(0, Math.min(idx, heroes.length - 1));
+    idx = Math.max(0, Math.min(Number(idx) || 0, 5));
     state.heroIndex = idx;
     safeWriteSiteData();
 
-    heroes.forEach((hero, i) => {
-        const on = i === idx;
-        hero.classList.toggle("is-live-hero", on);
-        hero.hidden = !on;
-        if (on) {
-            hero.id = "hero";
-            const input = document.getElementById("hero-promise");
-            const h1 = hero.querySelector(".hero-content h1");
-            if (input && h1 && !input.value) input.value = h1.textContent.trim();
-        } else if (hero.id === "hero") {
-            hero.removeAttribute("id");
-        }
-    });
+    const canvasDoc = getCanvasDocument();
+    const heroSection = canvasDoc?.getElementById("hero") || canvasDoc?.querySelector(".hero");
+    if (heroSection) {
+        heroSection.dataset.layout = String(idx + 1);
+        const label = heroSection.querySelector(".hero-label");
+        if (label && HERO_LABELS[idx]) label.textContent = HERO_LABELS[idx];
+        const input = document.getElementById("hero-promise");
+        const h1 = heroSection.querySelector(".hero-content h1");
+        if (input && h1 && !input.value) input.value = h1.textContent.trim();
+    }
 
     syncActiveGroup("[data-hmhero]", "data-hmhero", idx);
     const hint = document.getElementById("hero-layout-hint");
@@ -477,9 +481,6 @@ export function syncCanvasState() {
     }
 }
 
-export function syncBuilderUiControls() {
-    syncCanvasState();
-}
 
 function setDevicePreview(dev) {
     syncActiveGroup("[data-dev]", "data-dev", dev);

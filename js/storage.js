@@ -246,17 +246,22 @@ export function applyStateToDocument(doc, data) {
 
     // 4. Hero Layout Formats (0: Soft center, 1: Full-screen, 2: Frame, 3: Side menu, 4: Bold line, 5: Split)
     if (data.heroIndex !== undefined) {
-        const heroes = doc.querySelectorAll('main.heroes-container > .hero, .heroes-container > .hero');
-        heroes.forEach((hero, i) => {
-            const on = (i === data.heroIndex);
-            hero.classList.toggle('is-live-hero', on);
-            hero.hidden = !on;
-            if (on) {
-                hero.id = 'hero';
-            } else if (hero.id === 'hero') {
-                hero.removeAttribute('id');
-            }
-        });
+        const hero = doc.getElementById('hero') || doc.querySelector('main.heroes-container > .hero, .heroes-container > .hero, .hero');
+        if (hero) {
+            hero.dataset.layout = String(Number(data.heroIndex) + 1);
+            hero.hidden = false;
+            hero.classList.add('is-live-hero');
+            const HERO_LABELS = [
+                'Layout 1: Gradient Centered',
+                'Layout 2: Full Bleed',
+                'Layout 3: Centered Full',
+                'Layout 4: Bottom sidebar menu',
+                'Layout 5: Bold Minimal',
+                'Layout 6: Business Info'
+            ];
+            const label = hero.querySelector('.hero-label');
+            if (label && HERO_LABELS[data.heroIndex]) label.textContent = HERO_LABELS[data.heroIndex];
+        }
     }
 
     // 5. Hero Panel Position (off, bottom, left, right) - Enforces Split hero variant
