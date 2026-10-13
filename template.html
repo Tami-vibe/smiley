@@ -48,32 +48,11 @@
   })();
 </script>
 <style>
-  :root {
-    --headline-font: 'Syne', sans-serif;
-    --body-font: 'Manrope', sans-serif;
-    --primary-color: #10b981;
-    --color-primary: #10b981;
-    --p: #10b981;
-  }
-  html.kit-standalone-page, body.kit-standalone-page {
-    height: auto !important;
-    min-height: 100% !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--body-font);
-    overflow-x: hidden;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--headline-font);
-  }
-  .heroes-container svg:not([class*="w-"]):not([width]) {
-    max-width: 100%;
-    height: auto;
-  }
+  :root { --headline-font: 'Syne', sans-serif; --body-font: 'Manrope', sans-serif; --primary-color: #10b981; --color-primary: #10b981; --p: #10b981; }
+  html.kit-standalone-page, body.kit-standalone-page { height: auto !important; min-height: 100% !important; overflow-x: hidden !important; overflow-y: auto !important; }
+  body { margin: 0; padding: 0; font-family: var(--body-font); overflow-x: hidden; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
+  .heroes-container svg:not([class*="w-"]):not([width]) { max-width: 100%; height: auto; }
   .svc-ic, .ks-ic { width: 2rem; height: 2rem; flex-shrink: 0; }
   .svc-ic-sm, .ks-ic-sm, .faq-chev, .svc-arrow, .rc-arr { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
   .ks-star { width: 1.25rem; height: 1.25rem; }
@@ -84,359 +63,105 @@
   .trust-logos { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; padding: 0; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
   .svc-badge, .rc-badge, .ks-badge { display: none !important; }
-  
   /* Remove Tailwind overline line across all eyebrow labels */
   .overline { text-decoration: none !important; }
-
   /* Solutions tab progress rail and claims cards */
-  .kit-rail-nodes::before {
-    content: '';
-    position: absolute;
-    top: 18px;
-    left: 24px;
-    right: 24px;
-    height: 3px;
-    background: color-mix(in srgb, var(--color-base-content, #fff) 15%, transparent);
-    z-index: 0;
-  }
-  .kit-claim-card {
-    transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-  .kit-claim-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-primary, #10b981) !important;
-  }
+  .kit-rail-nodes::before { content: ''; position: absolute; top: 18px; left: 24px; right: 24px; height: 3px; background: color-mix(in srgb, var(--color-base-content, #fff) 15%, transparent); z-index: 0; }
+  .kit-claim-card { transition: transform 0.2s ease, border-color 0.2s ease; }
+  .kit-claim-card:hover { transform: translateY(-2px); border-color: var(--color-primary, #10b981) !important; }
   /* Canonical DaisyUI Button Component Foundation */
   .btn,
   .ks .btn,
   button.btn,
-  a.btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.5rem !important;
-    padding: 0.75rem 1.6rem !important;
-    font-family: var(--body-font, sans-serif) !important;
-    font-size: 0.875rem !important;
-    font-weight: 700 !important;
-    line-height: 1.25rem !important;
-    border-radius: 0.75rem !important;
-    min-height: 2.75rem !important;
-    border-width: 1.5px !important;
-    border-style: solid !important;
-    border-color: transparent !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    user-select: none !important;
-    box-sizing: border-box !important;
-    white-space: nowrap !important;
-  }
+  a.btn { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important; padding: 0.75rem 1.6rem !important; font-family: var(--body-font, sans-serif) !important; font-size: 0.875rem !important; font-weight: 700 !important; line-height: 1.25rem !important; border-radius: 0.75rem !important; min-height: 2.75rem !important; border-width: 1.5px !important; border-style: solid !important; border-color: transparent !important; cursor: pointer !important; text-decoration: none !important; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; user-select: none !important; box-sizing: border-box !important; white-space: nowrap !important; }
   .btn.btn-sm,
-  .ks .btn.btn-sm {
-    padding: 0.45rem 1.1rem !important;
-    font-size: 0.75rem !important;
-    min-height: 2rem !important;
-    border-radius: 0.5rem !important;
-  }
+  .ks .btn.btn-sm { padding: 0.45rem 1.1rem !important; font-size: 0.75rem !important; min-height: 2rem !important; border-radius: 0.5rem !important; }
   .btn.btn-lg,
-  .ks .btn.btn-lg {
-    padding: 0.9rem 2rem !important;
-    font-size: 1rem !important;
-    min-height: 3.25rem !important;
-  }
+  .ks .btn.btn-lg { padding: 0.9rem 2rem !important; font-size: 1rem !important; min-height: 3.25rem !important; }
   .btn-primary,
   .btn.btn-primary,
   .ks .btn-primary,
-  .cta-btn.btn-primary {
-    background-color: var(--color-primary, var(--primary-color, #10b981)) !important;
-    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
-    color: var(--color-primary-content, #ffffff) !important;
-    box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important;
-  }
+  .cta-btn.btn-primary { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; box-shadow: 0 2px 10px -2px color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; }
   .btn-primary:hover,
   .btn.btn-primary:hover,
   .ks .btn-primary:hover,
-  .cta-btn.btn-primary:hover {
-    filter: brightness(1.1) !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--color-primary, #10b981) 50%, transparent) !important;
-  }
+  .cta-btn.btn-primary:hover { filter: brightness(1.1) !important; transform: translateY(-1px) !important; box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--color-primary, #10b981) 50%, transparent) !important; }
   .btn-outline,
   .btn.btn-outline,
   .btn-outline.btn-primary,
   .btn.btn-outline.btn-primary,
-  .ks .btn-outline {
-    background-color: transparent !important;
-    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
-    color: var(--color-primary, var(--primary-color, #10b981)) !important;
-  }
+  .ks .btn-outline { background-color: transparent !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary, var(--primary-color, #10b981)) !important; }
   .btn-outline:hover,
   .btn.btn-outline:hover,
   .btn-outline.btn-primary:hover,
   .btn.btn-outline.btn-primary:hover,
-  .ks .btn-outline:hover {
-    background-color: var(--color-primary, var(--primary-color, #10b981)) !important;
-    border-color: var(--color-primary, var(--primary-color, #10b981)) !important;
-    color: var(--color-primary-content, #ffffff) !important;
-    transform: translateY(-1px) !important;
-  }
+  .ks .btn-outline:hover { background-color: var(--color-primary, var(--primary-color, #10b981)) !important; border-color: var(--color-primary, var(--primary-color, #10b981)) !important; color: var(--color-primary-content, #ffffff) !important; transform: translateY(-1px) !important; }
   .btn-ghost,
   .btn.btn-ghost,
-  .ks .btn-ghost {
-    background-color: transparent !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    color: var(--color-base-content, #ffffff) !important;
-  }
+  .ks .btn-ghost { background-color: transparent !important; border-color: rgba(255, 255, 255, 0.15) !important; color: var(--color-base-content, #ffffff) !important; }
   .btn-ghost:hover,
   .btn.btn-ghost:hover,
-  .ks .btn-ghost:hover {
-    background-color: color-mix(in srgb, var(--color-base-content, #ffffff) 12%, transparent) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-  }
-
+  .ks .btn-ghost:hover { background-color: color-mix(in srgb, var(--color-base-content, #ffffff) 12%, transparent) !important; border-color: rgba(255, 255, 255, 0.3) !important; }
   /* Canonical DaisyUI Card Component Foundation */
   .card,
-  .ks-pains .card {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    border-radius: 1.125rem !important;
-    background-color: var(--color-base-200, #17191c) !important;
-    border: 1px solid var(--sch-line, rgba(255, 255, 255, 0.08)) !important;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35) !important;
-    overflow: hidden !important;
-    transition: all 0.25s ease !important;
-    box-sizing: border-box !important;
-  }
+  .ks-pains .card { position: relative !important; display: flex !important; flex-direction: column !important; border-radius: 1.125rem !important; background-color: var(--color-base-200, #17191c) !important; border: 1px solid var(--sch-line, rgba(255, 255, 255, 0.08)) !important; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35) !important; overflow: hidden !important; transition: all 0.25s ease !important; box-sizing: border-box !important; }
   .card:hover,
-  .ks-pains .card:hover {
-    border-color: color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5) !important;
-  }
+  .ks-pains .card:hover { border-color: color-mix(in srgb, var(--color-primary, #10b981) 40%, transparent) !important; transform: translateY(-2px) !important; box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.5) !important; }
   .card-body,
-  .ks-pains .card-body {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-    padding: 1.75rem !important;
-    flex: 1 1 auto !important;
-    box-sizing: border-box !important;
-  }
+  .ks-pains .card-body { display: flex !important; flex-direction: column !important; gap: 0.75rem !important; padding: 1.75rem !important; flex: 1 1 auto !important; box-sizing: border-box !important; }
   .card-title,
-  .ks-pains .card-title {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-    font-family: var(--headline-font, sans-serif) !important;
-    font-size: 1.15rem !important;
-    font-weight: 700 !important;
-    color: var(--color-base-content, #ffffff) !important;
-    margin: 0 !important;
-    line-height: 1.3 !important;
-  }
-
+  .ks-pains .card-title { display: flex !important; align-items: center !important; gap: 0.5rem !important; font-family: var(--headline-font, sans-serif) !important; font-size: 1.15rem !important; font-weight: 700 !important; color: var(--color-base-content, #ffffff) !important; margin: 0 !important; line-height: 1.3 !important; }
   /* Customer Pains Section Styling */
-  .ks-pains {
-    padding-block: var(--section-pad-y, 4.5rem) !important;
-  }
+  .ks-pains { padding-block: var(--section-pad-y, 4.5rem) !important; }
   .ks-pains .pains-container,
-  .ks-pains > div {
-    max-width: 72rem;
-    margin-inline: auto;
-    width: 100%;
-    padding-inline: 1rem;
-    box-sizing: border-box;
-  }
-  .ks-pains .pains-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-    width: 100% !important;
-  }
-  @media (min-width: 768px) {
-    .ks-pains .pains-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-  }
-  .ks-pains .pains-grid .card {
-    background: color-mix(in srgb, var(--color-base-200, #17191c) 92%, var(--color-base-100, #191e24)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  }
+  .ks-pains > div { max-width: 72rem; margin-inline: auto; width: 100%; padding-inline: 1rem; box-sizing: border-box; }
+  .ks-pains .pains-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
+  @media (min-width: 768px) { .ks-pains .pains-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+  .ks-pains .pains-grid .card { background: color-mix(in srgb, var(--color-base-200, #17191c) 92%, var(--color-base-100, #191e24)) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; }
   /* Customer Pains Card Content Alignment */
   .ks-pains[data-card-align="center"] .pains-grid .card-body,
-  .ks-pains.pains-align-center .pains-grid .card-body {
-    align-items: center !important;
-    text-align: center !important;
-  }
+  .ks-pains.pains-align-center .pains-grid .card-body { align-items: center !important; text-align: center !important; }
   .ks-pains[data-card-align="center"] .pains-grid .card-title,
-  .ks-pains.pains-align-center .pains-grid .card-title {
-    justify-content: center !important;
-    text-align: center !important;
-  }
+  .ks-pains.pains-align-center .pains-grid .card-title { justify-content: center !important; text-align: center !important; }
   .ks-pains[data-card-align="center"] .pains-grid p,
-  .ks-pains.pains-align-center .pains-grid p {
-    text-align: center !important;
-  }
+  .ks-pains.pains-align-center .pains-grid p { text-align: center !important; }
   .ks-pains[data-card-align="left"] .pains-grid .card-body,
-  .ks-pains.pains-align-left .pains-grid .card-body {
-    align-items: flex-start !important;
-    text-align: left !important;
-  }
+  .ks-pains.pains-align-left .pains-grid .card-body { align-items: flex-start !important; text-align: left !important; }
   .ks-pains[data-card-align="left"] .pains-grid .card-title,
-  .ks-pains.pains-align-left .pains-grid .card-title {
-    justify-content: flex-start !important;
-    text-align: left !important;
-  }
+  .ks-pains.pains-align-left .pains-grid .card-title { justify-content: flex-start !important; text-align: left !important; }
   .ks-pains[data-card-align="left"] .pains-grid p,
-  .ks-pains.pains-align-left .pains-grid p {
-    text-align: left !important;
-  }
+  .ks-pains.pains-align-left .pains-grid p { text-align: left !important; }
   .ks-pains[data-card-align="right"] .pains-grid .card-body,
-  .ks-pains.pains-align-right .pains-grid .card-body {
-    align-items: flex-end !important;
-    text-align: right !important;
-  }
+  .ks-pains.pains-align-right .pains-grid .card-body { align-items: flex-end !important; text-align: right !important; }
   .ks-pains[data-card-align="right"] .pains-grid .card-title,
-  .ks-pains.pains-align-right .pains-grid .card-title {
-    justify-content: flex-end !important;
-    text-align: right !important;
-  }
+  .ks-pains.pains-align-right .pains-grid .card-title { justify-content: flex-end !important; text-align: right !important; }
   .ks-pains[data-card-align="right"] .pains-grid p,
-  .ks-pains.pains-align-right .pains-grid p {
-    text-align: right !important;
-  }
-  .ks-pains .pains-split {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-    width: 100% !important;
-  }
-  @media (min-width: 768px) {
-    .ks-pains .pains-split {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-  }
-  .ks-pains .pains-split .pains-before {
-    border: 1px solid rgba(239, 68, 68, 0.3) !important;
-    background: color-mix(in srgb, #ef4444 5%, var(--color-base-200, #17191c)) !important;
-  }
-  .ks-pains .pains-split .pains-after {
-    border: 1px solid color-mix(in srgb, var(--color-primary, #10b981) 45%, transparent) !important;
-    background: color-mix(in srgb, var(--color-primary, #10b981) 5%, var(--color-base-200, #17191c)) !important;
-  }
+  .ks-pains.pains-align-right .pains-grid p { text-align: right !important; }
+  .ks-pains .pains-split { display: grid !important; grid-template-columns: 1fr !important; gap: 1.5rem !important; width: 100% !important; }
+  @media (min-width: 768px) { .ks-pains .pains-split { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+  .ks-pains .pains-split .pains-before { border: 1px solid rgba(239, 68, 68, 0.3) !important; background: color-mix(in srgb, #ef4444 5%, var(--color-base-200, #17191c)) !important; }
+  .ks-pains .pains-split .pains-after { border: 1px solid color-mix(in srgb, var(--color-primary, #10b981) 45%, transparent) !important; background: color-mix(in srgb, var(--color-primary, #10b981) 5%, var(--color-base-200, #17191c)) !important; }
   .ks-pains[data-look="a"] .pains-split { display: none !important; }
   .ks-pains[data-look="b"] .pains-grid { display: none !important; }
-  .pains-ctas {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 1rem !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin-top: 2rem !important;
-  }
-
+  .pains-ctas { display: flex !important; flex-wrap: wrap !important; gap: 1rem !important; justify-content: center !important; align-items: center !important; margin-top: 2rem !important; }
   /* Interactive Section Inspector styling */
-  section, header, footer {
-    cursor: pointer;
-    transition: outline 0.15s ease, box-shadow 0.15s ease;
-  }
-  .is-canvas-selected {
-    outline: 3px solid var(--primary-color, #10b981) !important;
-    outline-offset: -3px !important;
-    position: relative !important;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important;
-  }
-
+  section, header, footer { cursor: pointer; transition: outline 0.15s ease, box-shadow 0.15s ease; }
+  .is-canvas-selected { outline: 3px solid var(--primary-color, #10b981) !important; outline-offset: -3px !important; position: relative !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important; }
   /* Hero Section Full Fit: media bleeds edge-to-edge without letterboxing margins */
-  .heroes-container .hero {
-    min-height: 580px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    position: relative !important;
-    overflow: hidden !important;
-  }
+  .heroes-container .hero { min-height: 580px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 0 !important; position: relative !important; overflow: hidden !important; }
   .heroes-container .hero > .hm,
-  .heroes-container .hero > .carousel {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 0 !important;
-  }
-  .heroes-container .hero > .hero-content {
-    position: relative !important;
-    z-index: 10 !important;
-    padding: 120px 24px 80px !important;
-    width: 100% !important;
-    max-width: 56rem !important;
-  }
-
+  .heroes-container .hero > .carousel { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; z-index: 0 !important; }
+  .heroes-container .hero > .hero-content { position: relative !important; z-index: 10 !important; padding: 120px 24px 80px !important; width: 100% !important; max-width: 56rem !important; }
   /* Intelligent Contrast System: Headings, Sections, and Cards */
-  .svc-head h2, #svc-title, #rc-title, #pains-title, #rev-title, #faq-title, #contact-title, #final-title, #about-title {
-    color: var(--color-base-content, currentColor) !important;
-  }
-  .svc-head .subtext, .svc-head p {
-    color: color-mix(in srgb, var(--color-base-content, currentColor) 80%, transparent) !important;
-  }
-  .card {
-    background-color: var(--color-base-100) !important;
-    color: var(--color-base-content) !important;
-  }
-  .card-title, .card h3 {
-    color: var(--color-base-content) !important;
-  }
-  .card p {
-    color: color-mix(in srgb, var(--color-base-content) 75%, transparent) !important;
-  }
-
+  .svc-head h2, #svc-title, #rc-title, #pains-title, #rev-title, #faq-title, #contact-title, #final-title, #about-title { color: var(--color-base-content, currentColor) !important; }
+  .svc-head .subtext, .svc-head p { color: color-mix(in srgb, var(--color-base-content, currentColor) 80%, transparent) !important; }
+  .card { background-color: var(--color-base-100) !important; color: var(--color-base-content) !important; }
+  .card-title, .card h3 { color: var(--color-base-content) !important; }
+  .card p { color: color-mix(in srgb, var(--color-base-content) 75%, transparent) !important; }
   /* Scheme surface classes */
-  body.scheme-dark {
-    background-color: #17191c !important;
-    color: #f3f4f6 !important;
-    --color-base-100: #1f2226;
-    --color-base-200: #17191c;
-    --color-base-300: #33373e;
-    --color-base-content: #f9fafb;
-    --svc-bg: #17191c;
-    --svc-fg: #f9fafb;
-    --rc-bg: #17191c;
-    --rc-fg: #f9fafb;
-    --ks-bg: #17191c;
-    --ks-fg: #f9fafb;
-  }
-  body.scheme-white {
-    background-color: #ffffff !important;
-    color: #17191c !important;
-    --color-base-100: #f6f7f9;
-    --color-base-200: #ffffff;
-    --color-base-300: #e5e7eb;
-    --color-base-content: #17191c;
-    --svc-bg: #ffffff;
-    --svc-fg: #17191c;
-    --rc-bg: #ffffff;
-    --rc-fg: #17191c;
-    --ks-bg: #ffffff;
-    --ks-fg: #17191c;
-  }
-  body.scheme-brand {
-    background-color: #111827 !important;
-    color: #f9fafb !important;
-    --color-base-100: #1f2937;
-    --color-base-200: #111827;
-    --color-base-300: #374151;
-    --color-base-content: #f9fafb;
-    --svc-bg: #111827;
-    --svc-fg: #f9fafb;
-    --rc-bg: #111827;
-    --rc-fg: #f9fafb;
-    --ks-bg: #111827;
-    --ks-fg: #f9fafb;
-  }
+  body.scheme-dark { background-color: #17191c !important; color: #f3f4f6 !important; --color-base-100: #1f2226; --color-base-200: #17191c; --color-base-300: #33373e; --color-base-content: #f9fafb; --svc-bg: #17191c; --svc-fg: #f9fafb; --rc-bg: #17191c; --rc-fg: #f9fafb; --ks-bg: #17191c; --ks-fg: #f9fafb; }
+  body.scheme-white { background-color: #ffffff !important; color: #17191c !important; --color-base-100: #f6f7f9; --color-base-200: #ffffff; --color-base-300: #e5e7eb; --color-base-content: #17191c; --svc-bg: #ffffff; --svc-fg: #17191c; --rc-bg: #ffffff; --rc-fg: #17191c; --ks-bg: #ffffff; --ks-fg: #17191c; }
+  body.scheme-brand { background-color: #111827 !important; color: #f9fafb !important; --color-base-100: #1f2937; --color-base-200: #111827; --color-base-300: #374151; --color-base-content: #f9fafb; --svc-bg: #111827; --svc-fg: #f9fafb; --rc-bg: #111827; --rc-fg: #f9fafb; --ks-bg: #111827; --ks-fg: #f9fafb; }
 </style>
 </head>
 <body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page">
@@ -685,108 +410,6 @@
 <li class="svc-card card bg-base-100 border border-base-300 shadow-sm transition-all hover:border-primary/50 hover:shadow-md"><a class="svc-link card-body p-6 flex flex-col justify-between" href="#services"><svg aria-hidden="true" class="svc-ic w-8 h-8 text-primary mb-2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path> <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path> <path d="M3 12h6"></path> <path d="M15 12h6"></path> <path d="M13.6 9.4l3.4 -4.8"></path> <path d="M10.4 14.6l-3.4 4.8"></path> <path d="M7 4.6l3.4 4.8"></path> <path d="M13.6 14.6l3.4 4.8"></path></svg><h3 class="card-title text-lg font-bold">Wheels &amp; tyres</h3><p class="text-sm opacity-80">Rim repair, tyre fitting and balancing.</p><span class="svc-more inline-flex items-center gap-1 text-sm font-semibold text-primary mt-2">Learn more <svg aria-hidden="true" class="svc-arrow w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12l14 0"></path> <path d="M13 18l6 -6"></path> <path d="M13 6l6 6"></path></svg></span></a></li>
 </ul>
 <div class="svc-all text-center mt-10"><a class="btn btn-primary rounded-xl svc-all-btn" href="#services">See all services</a></div>
-<div class="svc-tabbed-showcase" id="svcShowcase" data-container="boxed" hidden></div>
-<div class="svc-feature-stack" id="svcFeatureStack" data-container="boxed" hidden>
-<div class="feature-head">
-<span class="feature-tag">Common Traits</span>
-<h2 class="feature-heading" id="features-title">Where Humble Fits Best</h2>
-</div>
-<div class="feature-rows">
-<div class="feature-row">
-<div class="feature-media"><img alt="Hand gripping a tool on a factory line" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&amp;fit=crop&amp;w=1200&amp;q=70" style="width: 100%; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover;"/></div>
-<div class="feature-copy">
-<h3 class="feature-title">Physical &amp; Repeatable Work</h3>
-<span class="material-symbols-outlined feature-icon">sync_alt</span>
-<p class="feature-desc">Many human, repeatable steps that need to be guided and captured, with physical operations requiring handoffs across cells, lines, or teams.</p>
-</div>
-</div>
-<div class="feature-row">
-<div class="feature-media"><img alt="Two workers in hard hats inside a warehouse" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&amp;fit=crop&amp;w=1200&amp;q=70" style="width: 100%; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover;"/></div>
-<div class="feature-copy">
-<h3 class="feature-title">Scheduling-Heavy &amp; High-Mix</h3>
-<span class="material-symbols-outlined feature-icon">assignment</span>
-<p class="feature-desc">Tight scheduling constraints (tools, crews, materials, changeovers, compliance) with highly custom/high-mix workflows requiring lot/serial traceability.</p>
-</div>
-</div>
-<div class="feature-row">
-<div class="feature-media"><img alt="Motion-blurred spinning industrial drum" src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&amp;fit=crop&amp;w=1200&amp;q=70" style="width: 100%; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover;"/></div>
-<div class="feature-copy">
-<h3 class="feature-title">Disconnected Systems &amp; Tribal Knowledge</h3>
-<span class="material-symbols-outlined feature-icon">link_off</span>
-<p class="feature-desc">Multiple systems that don't talk to each other, where tribal knowledge fills the operational gaps between platforms.</p>
-</div>
-</div>
-<div class="feature-row">
-<div class="feature-media"><img alt="Two workers in hard hats facing equipment racks" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=1200&amp;q=70" style="width: 100%; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover;"/></div>
-<div class="feature-copy">
-<h3 class="feature-title">Cloud-Friendly Environment</h3>
-<span class="material-symbols-outlined feature-icon">cloud</span>
-<p class="feature-desc">Modern IT policies that embrace cloud solutions and digital transformation initiatives.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="svc-ecosystem" id="svcEcosystem" data-container="boxed" data-visual="canvas" hidden>
-<div class="svc-eco-header">
-<h2 class="svc-eco-title" id="svc-eco-title">Network &amp; Operations</h2>
-<p class="svc-eco-desc">Unified real-time infrastructure engineered for performance and precision.</p>
-</div>
-<div class="svc-eco-visual">
-<div class="svc-eco-canvas-wrap">
-<canvas class="svc-eco-canvas" width="1000" height="500" aria-hidden="true"></canvas>
-<svg class="svc-eco-graphic" viewBox="0 0 1000 500" aria-hidden="true">
-<g fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.45">
-<ellipse cx="500" cy="250" rx="280" ry="110"/>
-<ellipse cx="500" cy="250" rx="210" ry="82" transform="rotate(-18 500 250)"/>
-<ellipse cx="500" cy="250" rx="140" ry="54" transform="rotate(24 500 250)"/>
-</g>
-<circle cx="500" cy="250" r="16" fill="currentColor"/>
-<circle cx="230" cy="210" r="5" fill="currentColor" opacity="0.7"/>
-<circle cx="690" cy="180" r="5" fill="currentColor" opacity="0.7"/>
-<circle cx="760" cy="300" r="4" fill="currentColor" opacity="0.55"/>
-<circle cx="340" cy="320" r="4" fill="currentColor" opacity="0.55"/>
-</svg>
-<div class="svc-hotspot" style="top: 25%; left: 32%;">
-<div class="svc-hotspot-pin"><span class="material-symbols-outlined">hub</span></div>
-</div>
-<div class="svc-hotspot" style="top: 20%; left: 52%;">
-<div class="svc-hotspot-pin active"><span class="material-symbols-outlined">database</span></div>
-</div>
-<div class="svc-hotspot" style="top: 40%; left: 70%;">
-<div class="svc-hotspot-pin"><span class="material-symbols-outlined">shield</span></div>
-</div>
-<div class="svc-telemetry-card" style="top: 38%; left: 16%;">
-<span class="telemetry-stat">4.5x faster</span>
-<p class="telemetry-copy">Optimized direct routing reduces round-trip overhead.</p>
-<span class="corner tl"></span><span class="corner tr"></span>
-<span class="corner bl"></span><span class="corner br"></span>
-</div>
-</div>
-</div>
-<div class="svc-eco-matrix-wrap">
-<span class="matrix-bracket tl"></span>
-<span class="matrix-bracket tr"></span>
-<span class="matrix-bracket bl"></span>
-<span class="matrix-bracket br"></span>
-<div class="svc-eco-matrix">
-<div class="svc-matrix-cell">
-<span class="material-symbols-outlined matrix-icon">language</span>
-<h3 class="matrix-title" id="svc-split-title">Deploy Everywhere</h3>
-<p class="matrix-copy">Full operational capability provisioned locally with high reliability.</p>
-</div>
-<div class="svc-matrix-cell">
-<span class="material-symbols-outlined matrix-icon">near_me</span>
-<h3 class="matrix-title">Zero Proximity Gap</h3>
-<p class="matrix-copy">Connected directly where your users and assets live without transit friction.</p>
-</div>
-<div class="svc-matrix-cell">
-<span class="material-symbols-outlined matrix-icon">tune</span>
-<h3 class="matrix-title">Engineered Scale</h3>
-<p class="matrix-copy">Automated headroom management eliminating resource bottlenecks.</p>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="about" class="py-16 bg-base-200/40" data-layout="timeline" aria-labelledby="about-title">
 <div class="max-w-4xl mx-auto px-4">
@@ -870,66 +493,6 @@
 </div>
 </li>
 </ul>
-</div>
-</section>
-<div class="about-mission-media" data-container="boxed" hidden>
-<div class="about-mission-header">
-<h2 class="about-mission-title" id="about-mission-title">Our mission is to make operations <span class="about-gradient-word">meaningful</span></h2>
-<p class="about-mission-desc">The intelligent workflow engine that turns complexity into clarity, empowering teams to operate at their absolute best.</p>
-</div>
-<div class="about-media-frame">
-<div class="about-media-poster">
-<img alt="Company story" data-fallback="1" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%209%22%3E%3Crect%20width%3D%2216%22%20height%3D%229%22%20fill%3D%22%2318181b%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%224.5%22%20r%3D%221.15%22%20fill%3D%22%233f3f46%22%2F%3E%3C%2Fsvg%3E">
-<button type="button" class="about-glass-play-pill" aria-label="Discover Our Journey">
-<span class="play-icon-wrap"><span class="material-symbols-outlined">play_arrow</span></span>
-<div class="play-copy">
-<span class="play-title">Discover Our Journey</span>
-<span class="play-meta">1 MIN</span>
-</div>
-</button>
-</div>
-</div>
-</div>
-<div class="about-proof about-pillars" data-layout-block="pillars" hidden>
-<h2 class="about-proof-title" id="about-pillars-title">The standard we hold <span class="about-gradient-word">ourselves</span> to.</h2>
-<div class="about-pillar-grid">
-<article class="about-pillar card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">verified</span><h3 class="card-title about-node-title">A clear promise</h3><p class="about-node-body">Every job is scoped before it starts, so the price you hear is the price you pay.</p></div></article>
-<article class="about-pillar card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">shield</span><h3 class="card-title about-node-title">Work you can check</h3><p class="about-node-body">You see the estimate, the parts, and the date. Nothing moves without you.</p></div></article>
-<article class="about-pillar card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">support_agent</span><h3 class="card-title about-node-title">A person on the line</h3><p class="about-node-body">One contact stays with the job from the first call to the handoff.</p></div></article>
-</div>
-</div>
-<div class="about-proof about-numbers" data-layout-block="numbers" hidden>
-<p class="about-kicker">Proof</p>
-<h2 class="about-proof-title" id="about-numbers-title">We measure the work <span class="about-gradient-word">by the outcome</span>.</h2>
-<div class="about-stat-row">
-<div class="about-stat"><strong class="about-metric">2,400+</strong><span class="about-stat-label">Customers</span></div>
-<div class="about-stat"><strong class="about-metric">70+</strong><span class="about-stat-label">Cities</span></div>
-<div class="about-stat"><strong class="about-metric">98%</strong><span class="about-stat-label">On-time handoffs</span></div>
-</div>
-</div>
-<div class="about-proof about-principles" data-layout-block="principles" hidden>
-<h2 class="about-proof-title" id="about-principles-title">How the work <span class="about-gradient-word">gets done</span></h2>
-<p class="about-lead">Three habits we keep on every job.</p>
-<div class="about-principle-row">
-<article class="about-principle card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">hub</span><h3 class="card-title about-node-title">In one place</h3><p class="about-node-body">The estimate, the photos, and the date live together, so nobody is chasing a thread.</p></div></article>
-<article class="about-principle card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">diversity_3</span><h3 class="card-title about-node-title">Open to everyone</h3><p class="about-node-body">Clear language, readable type, and a path that does not assume you already know the trade.</p></div></article>
-<article class="about-principle card bg-base-100 shadow-sm"><div class="card-body"><span class="material-symbols-outlined about-node-icon">schedule</span><h3 class="card-title about-node-title">On your clock</h3><p class="about-node-body">We fit the work around the day you already have, not the other way around.</p></div></article>
-</div>
-</div>
-<div class="about-proof about-showcase" data-layout-block="showcase" data-cta="1" hidden>
-<div class="about-show-head">
-<p class="about-kicker">Our team</p>
-<h2 class="about-proof-title" id="about-showcase-title">People that make the work</h2>
-<p class="about-lead">The people on the floor, and the places the work gets done.</p>
-<div class="about-show-actions">
-<a class="btn btn-primary rounded-xl about-show-btn" href="#contact">We are hiring</a>
-<a class="btn btn-outline btn-primary rounded-xl about-show-btn is-outline" href="#contact">Meet the team</a>
-</div>
-</div>
-<div class="about-show-rows">
-<div class="about-show-row" data-dir="rtl"><div class="about-show-sources"><img class="about-show-img" alt="" src="./media/showcase/bodywork-door-repair.jpg"><img class="about-show-img" alt="" src="./media/showcase/diagnostic-scanner.jpg"><img class="about-show-img" alt="" src="./media/showcase/workshop-bay.jpg"><img class="about-show-img" alt="" src="./media/showcase/ac-service.jpg"><video class="about-show-media" src="./media/showcase/night-city-sedan.mp4" muted loop autoplay playsinline></video></div><div class="about-show-track"></div></div>
-<div class="about-show-row" data-dir="ltr"><div class="about-show-sources"><img class="about-show-img" alt="" src="./media/showcase/service-authorization.jpg"><img class="about-show-img" alt="" src="./media/showcase/mountain-road.jpg"><img class="about-show-img" alt="" src="./media/showcase/highway-suv.jpg"><img class="about-show-img" alt="" src="./media/showcase/driver-cockpit.jpg"><video class="about-show-media" src="./media/showcase/mountain-sports-car.mp4" muted loop autoplay playsinline></video></div><div class="about-show-track"></div></div>
-</div>
 </div>
 </section>
 <section id="pains" class="ks ks-pains" data-look="a" data-card-align="center" aria-labelledby="pains-title">
@@ -1233,288 +796,6 @@
 </div>
 </div>
 </section>
-<section aria-labelledby="repairs-page-title" class="ks page-sheet rep-page" hidden id="page-repairs" data-align="center">
-<div class="tow-hero rep-hero">
-<video autoplay muted loop playsinline src="./media/showcase/mountain-sports-car.mp4" poster="./media/showcase/workshop-bay.jpg"></video>
-<div class="tow-hero-copy header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Repairs</span>
-<h2 id="repairs-page-title">From the first photo to the day you drive away.</h2>
-</div>
-<p class="subtext">Collision work is done in our own booth, on your car, by the same crew that quoted it. You get a written plan before any panel comes off, and you walk the car with us before you drive away.</p>
-</div>
-</div>
-<div class="rep-band">
-<div class="rep-inner">
-<header class="rep-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">The steps</span>
-<h2>Four steps. Then you drive away.</h2>
-</div>
-<p class="subtext">You get a written plan before any panel comes off.</p>
-</header>
-<ul class="rep-cards">
-<li><b>Look and measure</b><span>We photograph the damage, measure the frame, and tell you what can be saved.</span></li>
-<li><b>Structural repair</b><span>Bent rails and pillars are pulled back to factory points, then welded where the metal tore.</span></li>
-<li><b>Paint in our booth</b><span>Colour is matched to the car’s code and baked, not blended in the parking lot.</span></li>
-<li><b>Detail and handoff</b><span>Panels are fitted, lights aimed, and you walk the car with us before you leave.</span></li>
-</ul>
-</div>
-</div>
-<div class="rep-film">
-<video autoplay muted loop playsinline src="./media/showcase/mountain-sports-car.mp4"></video>
-<div class="rep-film-copy header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Before you leave</span>
-<h2>The car is checked before you drive it.</h2>
-</div>
-<p class="subtext">We aim the lights and walk the car with you. A repair that is not safe does not leave.</p>
-</div>
-</div>
-<div class="rep-band rep-cta">
-<div class="rep-inner">
-<div class="rep-split">
-<header class="rep-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Estimate</span>
-<h2>Ask for a repair plan.</h2>
-</div>
-<p class="subtext">Send three photos. We reply with a written plan before any panel comes off.</p>
-</header>
-<p class="page-call"><a class="btn btn-primary rounded-xl" href="#page-contact">Ask for an estimate</a></p>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="insurance-page-title" class="ks page-sheet ins-page" hidden id="page-insurance" data-align="center">
-<div class="tow-hero ins-hero">
-<video autoplay muted loop playsinline src="./media/ai-images/car-driving.mp4" poster="./media/showcase/service-authorization.jpg"></video>
-<div class="tow-hero-copy header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Insurance</span>
-<h2 id="insurance-page-title">You choose the shop. We deal with the claim.</h2>
-</div>
-<p class="subtext">Your insurer can suggest a shop. You do not have to use it. We deal directly with the insurer, handle photographic damage documentation, and manage all supplemental claims so you stay on the road.</p>
-</div>
-</div>
-<div class="ins-band">
-<div class="ins-inner">
-<div class="ins-split">
-<header class="ins-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Your right</span>
-<h2>You can pick this shop.</h2>
-</div>
-<p class="subtext">A suggestion from the insurer is not an order. We say only what a shop is allowed to say where you live.</p>
-</header>
-<ul class="ins-points">
-<li><b>You choose</b> You do not have to use the shop they name.</li>
-<li><b>In writing</b> You can ask for the estimate before the work starts.</li>
-<li><b>The supplement</b> Extra damage is sent to the insurer before we repair it.</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="ins-band ins-bring">
-<div class="ins-inner">
-<header class="ins-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">What to bring</span>
-<h2>Four things. Then we file the claim.</h2>
-</div>
-<p class="subtext">The claim number, your policy, and photos from the scene if you have them.</p>
-</header>
-<ul class="ins-cards">
-<li><b>Claim number</b><span>The number your insurer gave you.</span></li>
-<li><b>Your policy</b><span>The page that names the cover.</span></li>
-<li><b>Photos</b><span>Shots from the scene, if you have them.</span></li>
-<li><b>The report</b><span>The police report, if there is one.</span></li>
-</ul>
-</div>
-</div>
-<div class="ins-band ins-close">
-<div class="ins-inner">
-<div class="ins-split">
-<header class="ins-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Start the claim</span>
-<h2>We file it from this shop.</h2>
-</div>
-<p class="subtext">The photos, the estimate, and any supplement go to the insurer.</p>
-</header>
-<p class="page-call"><a class="btn btn-primary rounded-xl" href="tel:+390212345678">Start the claim</a></p>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="emergency-page-title" class="ks page-sheet tow-page" hidden id="page-emergency" data-align="center">
-<div class="tow-hero">
-<video autoplay muted loop playsinline src="./media/ai-images/car-towed.mp4"></video>
-<div class="tow-hero-copy header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Emergency</span>
-<h2 id="emergency-page-title">Night, weekend, or a junction. We roll.</h2>
-</div>
-<p class="subtext">A flatbed leaves from the shop. Tell us the road, a landmark, and whether the car still rolls. Stay in the car if it is safe, with the hazards on.</p>
-</div>
-</div>
-<div class="tow-band">
-<div class="tow-inner">
-<header class="tow-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">The tow</span>
-<h2>Call. We track it. We pick it up.</h2>
-</div>
-<p class="subtext">A person answers, including after the shop floor has closed.</p>
-</header>
-<div aria-label="How it works steps" id="towHow"></div>
-</div>
-</div>
-<div class="war-band war-close">
-<div class="war-inner">
-<div class="war-split">
-<header class="war-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Cover</span>
-<h2>A membership from us, or a policy that pays the tow.</h2>
-</div>
-<p class="subtext">Ask your insurer if roadside is included. If it is not, join our membership. Either way, a person answers.</p>
-</header>
-<p class="page-call"><a class="btn btn-primary rounded-xl" href="tel:+390212345678">Call For A Tow</a></p>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="warranty-page-title" class="ks page-sheet war-page" hidden id="page-warranty" data-align="center">
-<div class="war-hero" aria-label="What a modern warranty has to cover">
-<figure tabindex="0" style="--war-still:url(./media/showcase/driver-cockpit.jpg)"><video autoplay muted playsinline poster="./media/showcase/driver-cockpit.jpg" aria-label="Camera aimed after the glass is replaced"><source src="./media/ai-images/mirror-camera.mp4" type="video/mp4"/></video><figcaption><b>Sensors and hardware</b><span>Radar, cameras, ultrasonic sensors, and the parts behind automatic braking stay covered.</span></figcaption></figure>
-<figure tabindex="0" style="--war-still:url(./media/showcase/highway-suv.jpg)"><video autoplay muted playsinline poster="./media/showcase/highway-suv.jpg" aria-label="Paint over a radar stays inside the maker thickness limit"><source src="./media/ai-images/alfa-romeo-bumper.mp4" type="video/mp4"/></video><figcaption><b>Calibration and labor</b><span>Static and dynamic calibration is included. That work often costs more than the part.</span></figcaption></figure>
-<figure tabindex="0" style="--war-still:url(./media/showcase/workshop-bay.jpg)"><video autoplay muted playsinline poster="./media/showcase/workshop-bay.jpg" aria-label="A light inspected on the car"><source src="./media/ai-images/car-light.mp4" type="video/mp4"/></video><figcaption><b>Factory-spec parts</b><span>Factory parts keep the safety systems aligned the way the maker set them.</span></figcaption></figure>
-<figure tabindex="0"><img alt="A diagnostic scanner" src="./media/showcase/diagnostic-scanner.jpg"/><figcaption><b>Software and scans</b><span>Diagnostic scans, control-unit programming, and firmware updates are part of the cover.</span></figcaption></figure>
-</div>
-<div class="war-band">
-<div class="war-inner">
-<div class="war-split">
-<div class="war-slider">
-<input checked id="war-s1" name="war-slide" type="radio"/>
-<input id="war-s2" name="war-slide" type="radio"/>
-<input id="war-s3" name="war-slide" type="radio"/>
-<input id="war-s4" name="war-slide" type="radio"/>
-<div class="war-photo">
-<img alt="The written authorization on the job" class="for-s1" src="./media/showcase/service-authorization.jpg"/>
-<img alt="The driver cockpit after an independent repair" class="for-s2" src="./media/ai-images/driver-cockpit.jpeg"/>
-<img alt="The measuring lift and scan equipment" class="for-s3" src="./media/hero/ev-lift-diagnostic.jpg"/>
-<img alt="A panel we repaired, the work the written guarantee covers" class="for-s4" src="./media/showcase/bodywork-door-repair.jpg"/>
-</div>
-</div>
-<div class="war-copy">
-<div class="war-pills kw-pills" role="tablist" aria-label="Owner protections">
-<label for="war-s1">Authorization</label>
-<label for="war-s2">Warranty rights</label>
-<label for="war-s3">Credentials</label>
-<label for="war-s4">Workmanship</label>
-</div>
-<div class="war-header header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Before you leave the car</span>
-<h2 id="warranty-page-title">Ask for the record, then the proof.</h2>
-</div>
-<p class="subtext">No single US law covers every body repair. These four checks do. Ask to see each one before the keys change hands.</p>
-</div>
-<ul class="war-points">
-<li class="for-s1"><b>Written authorization.</b> California Business and Professions Code 9884.9, current in 2025, says no work starts and no charge accrues until you authorize it. A collision estimate must list parts and labor, and say if a part is new, used, rebuilt, or reconditioned. Nothing above that estimate is charged without a new written authorization.</li>
-<li class="for-s2"><b>Warranty rights.</b> The Magnuson-Moss Warranty Act, 15 U.S.C. 2302(c), bars a maker from tying coverage to its dealer or its parts unless that part or service is free. The FTC says a claim can be refused only if the maker proves the independent repair, or the other part, caused that failure.</li>
-<li class="for-s3"><b>Credentials you can verify.</b> I-CAR Gold Class is earned, not bought. The estimator, refinish, structural, and non-structural roles must be at ProLevel 2 or higher, with annual training. For 2026 renewals, a shop that calibrates driver-assist systems in house must list an ADAS technician. ASE is the technician's test. An automaker certification means that brand approved the procedures and the equipment.</li>
-<li class="for-s4"><b>Workmanship, in writing.</b> Peeling or cracking on panels we sprayed is covered. So is a weld or frame pull we did, if that repair fails. A new impact, rust already in the car, and a part you told us not to replace are not. Call with the invoice number. No new estimate for our own work.</li>
-</ul>
-</div></div>
-</div>
-</div>
-<div class="war-film">
-<video autoplay muted loop playsinline poster="./media/showcase/mountain-road.jpg" src="./media/showcase/night-city-sedan.mp4"></video>
-<div class="war-film-grid">
-<div class="war-film-copy">
-<div class="war-film-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">On the road</span>
-<h2>The record travels with the car.</h2>
-</div>
-<p class="subtext">A repair that followed the maker's procedure is a document a later buyer can read. The market around that car is measured once a year, not live.</p>
-</div>
-<ul>
-<li><b>PROCEDURE</b> Scan, repair, and calibrate to the procedure for that vehicle.</li>
-<li><b>RECORD</b> The authorization and the calibration certificate stay with the car.</li>
-<li><b>RESALE</b> A documented repair is not priced like one without the paperwork.</li>
-</ul>
-</div>
-<aside class="stats stats-vertical war-stats" aria-label="US vehicle market">
-<div class="stat">
-<div class="stat-title">Registered vehicles</div>
-<div class="stat-value">297.5M</div>
-<div class="stat-desc">FHWA Highway Statistics 2024, published 2026</div>
-</div>
-<div class="stat">
-<div class="stat-title">New vehicles</div>
-<div class="stat-value">16.1M</div>
-<div class="stat-desc">2026 sales forecast, Cox Automotive</div>
-</div>
-<div class="stat">
-<div class="stat-title">Used vehicles</div>
-<div class="stat-value">38.5M</div>
-<div class="stat-desc">2026 sales forecast, Cox Automotive</div>
-</div>
-</aside>
-</div>
-</div>
-<div class="war-band war-close">
-<div class="war-inner">
-<div class="war-split">
-<header class="war-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Selling</span>
-<h2>Selling the car? Start with a real number.</h2>
-</div>
-<p class="subtext">If you need the cash, or you want a fair price, the written authorization and the workmanship guarantee are what a buyer can check. Ask for a valuation before you set the price.</p>
-</header>
-<p class="page-call"><a class="btn btn-primary rounded-xl" href="#page-contact">Request A Valuation</a></p>
-</div>
-</div>
-</div>
-</section>
-<section aria-labelledby="contact-page-title" class="ks page-sheet" hidden id="page-contact" data-align="center">
-<div class="page-wrap">
-<div class="contact-sheet-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">Estimate</span>
-<h1 id="contact-page-title">Send three photos. We reply the same day.</h1>
-</div>
-<p class="subtext">A useful estimate needs the claim or a short note of what hit the car, plus a phone number we can reach. We answer on working days before the shop closes.</p>
-</div>
-<ul class="page-list">
-<li><b>Photos</b> One of each damaged side, and one of the licence plate.</li>
-<li><b>Phone</b> <a href="tel:+390212345678">+39 02 1234 5678</a></li>
-<li><b>Email</b> <a href="mailto:info@example.com">info@example.com</a></li>
-<li><b>Shop</b> Via Nazionale 42, Milan. The gate is open Monday to Friday, 8:00 to 18:30.</li>
-</ul>
-</div>
-</section>
-<section aria-labelledby="about-page-title" class="ks page-sheet" hidden id="page-about" data-align="center">
-<div class="page-wrap">
-<div class="about-sheet-head header-group">
-<div class="title-wrap">
-<span class="svc-label label overline">About</span>
-<h1 id="about-page-title">A family booth in Milan, open since 2001.</h1>
-</div>
-<p class="subtext">The shop is still on Via Nazionale. The people who write the estimate are the people who paint the car. Most of our work is neighbours coming back with the next dent, and parents sending their children.</p>
-</div>
-<ul class="page-list">
-<li><b>The booth</b> One downdraft booth, mixed in-house, so the colour is mixed for your car and not a stock tin.</li>
-<li><b>The crew</b> Panel beaters and painters on the same floor. No car is shipped out for the paint.</li>
-<li><b>Who comes</b> Families after a car-park bump, and drivers whose insurer told them to pick a shop.</li>
-</ul>
-</div>
-</section>
-</main>
 <footer class="ks ks-footer w-full bg-base-100 border-t border-base-300/60 p-6 md:p-10" id="footer" data-foot-links="plain" data-look="a">
 <div class="foot-grid">
 <div class="foot-brand"><div class="foot-logo"><span class="foot-mark"></span>Logo</div><p>Body shop in Milan since 2001. Collision repair, paint and insurance claims.</p></div>
