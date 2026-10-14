@@ -383,7 +383,8 @@ export const ROUTES = {
   "wheels-tyres": { tier: "sub", kicker: "Wheel Precision", title: "Wheels & Tyres", desc: "Rim repair, tyre fitting and balancing.", recipe: SUB_RECIPE, crumbs: ["Home", "Services", "Wheels & Tyres"], badge: "HUNTER ROAD FORCE", copy: "Alloy rim diamond cutting, kerb rash restoration, CNC rim straightening, and dynamic road-force laser balancing for vibration-free driving.", points: ["CNC diamond-cut alloy rim cosmetic refurbishment", "Hydraulic rim straightening for pothole bends", "Premium tyre replacement and dynamic road-force balancing"], img: "./media/ai-images/tyres.jpg" },
   privacy: { tier: "minimal", kicker: "Compliance & GDPR", title: "Privacy Policy", desc: "Transparent terms regarding customer data processing and rights.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Privacy"] },
   warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
-  cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] }
+  cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] },
+  "design-system": { tier: "minimal", kicker: "LIVING SYSTEM SPEC", title: "Pandino Design Tokens & Component Guide", desc: "Fluid typography scale, OKLCH surface palette, and standardized DaisyUI components.", recipe: ["header", "hero", "design-system", "footer"], crumbs: ["Home", "Design System"] }
 };
 export function populateServiceDetail(doc, route) {
   const svc = doc?.getElementById("service-detail");

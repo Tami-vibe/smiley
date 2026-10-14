@@ -107,15 +107,15 @@
   <span class="absolute inset-0 bg-black/40"></span>
 </div>
 <div class="absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
-<div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center justify-center z-10">
-  <div class="hero-content flex-col text-center max-w-3xl z-10 py-6">
-    <div id="hero-breadcrumbs" class="breadcrumbs text-xs opacity-60 mb-2 hidden"></div>
+<div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 z-10 flex flex-col items-center text-center justify-center">
+  <div class="hero-content flex-col text-center max-w-3xl w-full mx-auto z-10 py-6">
+    <div id="hero-breadcrumbs" class="breadcrumbs text-xs opacity-60 mb-2 hidden justify-center [&>ul]:justify-center"></div>
     <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
     <div>
       <span id="hero-kicker" class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 mb-2 justify-center block">Step Into The Green</span>
       <h1 id="hero-title" class="tracking-tight font-extrabold text-base-content drop-shadow-md">Experience the Future of Mobility</h1>
     </div>
-    <p id="hero-desc" class="text-base sm:text-lg text-white/80 max-w-2xl mt-3 font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
+    <p id="hero-desc" class="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mt-3 font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
     <div id="hero-ctas" class="mt-6 flex flex-wrap gap-3 justify-center">
       <button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none cta-primary">Book a Test Drive</button>
       <button class="btn h-12 px-7 rounded-full bg-base-content/10 hover:bg-base-content/15 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md transition-all cta-second">Learn More</button>
@@ -187,8 +187,8 @@
       <article class="card bg-base-200/50 backdrop-blur-sm border border-base-content/5 rounded-2xl transition-all duration-200 hover:border-base-content/15 shadow-sm"><div class="card-body p-6 flex flex-col gap-3 items-center text-center"><div class="w-10 h-10 rounded-xl bg-info/15 flex items-center justify-center text-info mb-1"><span class="material-symbols-outlined text-2xl">no_crash</span></div><h3 class="card-title font-bold text-base-content justify-center text-center">Car stuck</h3><p class="text-sm text-base-content/70 leading-relaxed text-center">No loaner, no clear date, and no one who will say what happens next.</p></div></article>
     </div>
     <div class="pains-split grid grid-cols-1 md:grid-cols-2 gap-6">
-      <article class="card bg-base-200/50 backdrop-blur-sm border border-base-content/5 rounded-2xl transition-all duration-200 hover:border-base-content/15 shadow-sm pains-before"><div class="card-body p-6 flex flex-col justify-between gap-4"><div><div class="flex items-center justify-between mb-3"><span class="badge badge-error text-error bg-error/10 border-error/20 text-xs font-semibold gap-1 py-2 px-2.5"><span class="material-symbols-outlined text-xs">cancel</span> The Hassle</span><span class="text-xs text-base-content/50 font-mono">Traditional Shop</span></div><h3 class="card-title font-bold text-base-content mb-2">Calls, confusion &amp; moving estimates</h3><p class="text-sm text-base-content/70 leading-relaxed">Calls between the insurer and the shop. A rental clock ticking down. An estimate that keeps changing while your car sits.</p></div></div></article>
-      <article class="card bg-base-200/50 backdrop-blur-sm border border-base-content/5 rounded-2xl transition-all duration-200 hover:border-base-content/15 shadow-sm pains-after"><div class="card-body p-6 flex flex-col justify-between gap-4"><div><div class="flex items-center justify-between mb-3"><span class="badge badge-success text-success bg-success/10 border-success/20 text-xs font-semibold gap-1 py-2 px-2.5"><span class="material-symbols-outlined text-xs">check_circle</span> The Pandino Way</span><span class="text-xs text-primary font-mono font-semibold">One Point of Contact</span></div><h3 class="card-title font-bold text-base-content mb-2">Clear timelines &amp; direct insurer billing</h3><p class="text-sm text-base-content/70 leading-relaxed">One shop writes the estimate, handles all communication with the insurer, and gives you a guaranteed date you can plan around.</p></div></div></article>
+      <article class="card bg-base-200/50 backdrop-blur-sm border border-base-content/5 rounded-2xl transition-all duration-200 hover:border-base-content/15 shadow-sm pains-before"><div class="card-body p-6 flex flex-col justify-between gap-4"><div><div class="flex items-center justify-between mb-3"><span class="badge badge-error badge-outline gap-1.5 py-3 px-3 text-xs font-semibold"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>The Hassle</span><span class="text-xs text-base-content/50 font-mono">Traditional Shop</span></div><h3 class="card-title font-bold text-base-content mb-2">Calls, confusion &amp; moving estimates</h3><p class="text-sm text-base-content/70 leading-relaxed">Calls between the insurer and the shop. A rental clock ticking down. An estimate that keeps changing while your car sits.</p></div></div></article>
+      <article class="card bg-base-200/50 backdrop-blur-sm border border-base-content/5 rounded-2xl transition-all duration-200 hover:border-base-content/15 shadow-sm pains-after"><div class="card-body p-6 flex flex-col justify-between gap-4"><div><div class="flex items-center justify-between mb-3"><span class="badge badge-success badge-outline gap-1.5 py-3 px-3 text-xs font-semibold"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>The Pandino Way</span><span class="text-xs text-primary font-mono font-semibold">One Point of Contact</span></div><h3 class="card-title font-bold text-base-content mb-2">Clear timelines &amp; direct insurer billing</h3><p class="text-sm text-base-content/70 leading-relaxed">One shop writes the estimate, handles all communication with the insurer, and gives you a guaranteed date you can plan around.</p></div></div></article>
     </div>
     <div class="pains-ctas flex flex-wrap gap-4 justify-center items-center mt-6" data-pains-ctas="2">
       <button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none pains-cta-primary"><span class="material-symbols-outlined text-base">support_agent</span> Talk to a Specialist</button>
@@ -390,6 +390,50 @@
     </div>
   </div>
 </section>
+<!-- DESIGN SYSTEM SHOWCASE -->
+<section id="design-system" class="w-full py-16 bg-base-100" hidden>
+  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-16">
+    <!-- 1. Typography Hierarchy -->
+    <div>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / TYPOGRAPHY HIERARCHY</span>
+      <div class="divider my-2"></div>
+      <div class="space-y-6 pt-4">
+        <div><h1>Title H1: Precision Collision (Fluid 40px → 72px)</h1></div>
+        <div><h2>Headline H2: Certified Realignment (Fluid 32px → 64px)</h2></div>
+        <div><h3>Headline H3: Computerized Paint Matching (Fluid 24px → 48px)</h3></div>
+        <div><h4>Headline H4: Direct Insurer Concierge (Fluid 20px → 28px)</h4></div>
+        <div><p class="subtitle">Subtitle: Restoring chassis integrity and factory metallurgy standards.</p></div>
+        <div><p>Body text: Standard descriptive copy rendered at 16px with 150% line height for optimal legibility.</p></div>
+        <div><small>Small text: Statutory disclosures, legal terms, and warranty disclaimers at 14px.</small></div>
+      </div>
+    </div>
+    <!-- 2. Color Palette & OKLCH Ramps -->
+    <div>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">02 / COLOR TOKENS & SURFACES</span>
+      <div class="divider my-2"></div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-primary text-primary-content text-xs font-bold shadow">Primary Brand</div>
+        <div class="p-4 rounded-2xl bg-primary/20 text-primary text-xs font-bold border border-primary/30">Primary Tint</div>
+        <div class="p-4 rounded-2xl bg-base-100 text-base-content text-xs font-bold border border-base-300">Base 100 (Canvas)</div>
+        <div class="p-4 rounded-2xl bg-base-200 text-base-content text-xs font-bold border border-base-300">Base 200 (Cards)</div>
+        <div class="p-4 rounded-2xl bg-base-300 text-base-content text-xs font-bold border border-base-300">Base 300 (Recessed)</div>
+        <div class="p-4 rounded-2xl bg-base-content/10 text-base-content text-xs font-bold border border-base-content/10">Frosted Glass</div>
+      </div>
+    </div>
+    <!-- 3. Interactive Components -->
+    <div>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">03 / UI COMPONENT KIT</span>
+      <div class="divider my-2"></div>
+      <div class="flex flex-wrap items-center gap-4 pt-4">
+        <button class="btn btn-primary h-12 px-7 rounded-full text-sm font-semibold">Primary Action</button>
+        <button class="btn h-12 px-7 rounded-full bg-base-content/10 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md">Secondary Action</button>
+        <span class="badge badge-primary">Primary Badge</span>
+        <span class="badge badge-success badge-outline">Success Outline</span>
+        <span class="badge badge-error badge-outline">Error Outline</span>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- FOOTER -->
 <footer id="footer" class="w-full bg-base-200 text-base-content border-t border-base-300 py-12" data-theme="dark">
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col gap-10">
@@ -410,7 +454,7 @@
       <div class="flex flex-col gap-2 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Shop Dispatch</h6><span class="opacity-80">Via Nazionale, 42, 20123 Milan (MI)</span><a href="tel:+390212345678" class="link link-hover text-primary font-bold">+39 02 1234 5678</a><span class="badge badge-warning badge-xs font-semibold mt-1">24/7 Emergency Towing</span></div>
       <div class="flex flex-col gap-3 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Claims Direct</h6><p class="opacity-70 leading-relaxed">Direct billing with all major European insurers. Zero upfront out-of-pocket on approved claims.</p><a href="#quote" class="btn btn-sm btn-primary rounded-xl font-bold w-fit">Request Estimate</a></div>
     </div>
-    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a></div></div>
+    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a><a href="#design-system" data-route="design-system" class="link link-hover">Design System</a></div></div>
   </div>
 </footer>
 </main>
