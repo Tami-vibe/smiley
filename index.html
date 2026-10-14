@@ -194,6 +194,10 @@
       </div>
       <div id="kit-page-host" data-kit-area="pages"></div>
     </div>
+    <div class="px-3 pt-2 pb-1 flex gap-2">
+      <a href="#typography-ui" target="_blank" data-route="typography-ui" class="btn btn-xs btn-outline rounded-lg flex-1 font-mono text-[11px]">Type Spec</a>
+      <a href="#color-ui" target="_blank" data-route="color-ui" class="btn btn-xs btn-outline rounded-lg flex-1 font-mono text-[11px]">Color Kit</a>
+    </div>
     <div aria-label="Design settings" class="cfg-bar join join-vertical w-full bg-base-100/60 rounded-xl border border-base-300/80 shadow-xs" role="tablist">
     <!-- Brand & Theme Settings Panel -->
     <details class="collapse collapse-arrow join-item border-b border-base-300/60" open>
@@ -563,12 +567,6 @@
             <span class="cfg-name truncate">Templates</span>
           </button>
         </div>
-        <div class="kit-row flex items-center justify-between py-1 px-2 hover:bg-base-200/60 rounded-lg transition-colors group" data-sec="design-system">
-          <a href="#design-system" data-route="design-system" class="cfg-tab kit-sub flex-1 flex items-center gap-2 text-left text-sm py-1 font-medium text-base-content/80 group-hover:text-base-content tooltip tooltip-right" data-sec="design-system" data-tab="more" data-kit-area="library" id="rail-design-system" role="tab" data-tip="Design System" aria-label="Design System">
-            <span class="material-symbols-outlined text-base text-base-content/60 group-hover:text-primary">token</span>
-            <span class="cfg-name truncate">Design System</span>
-          </a>
-        </div>
       </div>
     </details>
     <button aria-controls="panel-more" aria-selected="false" class="cfg-tab tooltip tooltip-right hidden" data-tab="more" data-kit-area="pages" id="tab-more" role="tab" data-tip="More sections" aria-label="More sections" hidden>
@@ -666,47 +664,10 @@
         </button>
         <p class="text-[11px] text-base-content/50 m-0">Up to 5 projects live in this local vault. Switching loads it on canvas.</p>
       </div>
-      <!-- Subscription Pane -->
-      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="plan" hidden>
-        <div class="card bg-base-100 border border-primary/30 p-3.5 rounded-xl shadow-xs">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-base-content">Studio Tier</span>
-            <span class="badge badge-primary badge-sm text-[10px]">Unlimited</span>
-          </div>
-          <p class="text-xs text-base-content/70 m-0 leading-relaxed">Full access to automotive sections, custom tokens, duo pairings, and static live preview exports.</p>
-        </div>
-        <div class="text-[11px] text-base-content/50">Renews annually. Managed via workspace administrator.</div>
-      </div>
-      <!-- Billing Pane -->
-      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="billing" hidden>
-        <div class="card bg-base-100 border border-base-300/60 p-3.5 rounded-xl text-center">
-          <span class="material-symbols-outlined text-2xl text-base-content/40 mx-auto mb-1">credit_card</span>
-          <span class="text-xs font-semibold text-base-content">Payment Method Active</span>
-          <span class="text-[11px] text-base-content/50 mt-1">Direct invoice via company procurement.</span>
-        </div>
-      </div>
-      <!-- Team Pane -->
-      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="team" hidden>
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-base-content">Seats</span>
-          <span class="badge badge-ghost badge-xs">1 Active</span>
-        </div>
-        <div class="card bg-base-100 border border-base-300/60 p-2.5 rounded-xl flex flex-row items-center gap-2.5">
-          <div class="w-7 h-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">P</div>
-          <div class="min-w-0 flex-1">
-            <div class="text-xs font-semibold text-base-content truncate" id="kitTeamMemberName">Workspace Owner</div>
-            <div class="text-[10px] text-base-content/50 truncate" id="kitTeamMemberEmail">Owner (Admin)</div>
-          </div>
-        </div>
-      </div>
-      <!-- Help Pane -->
-      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="help" hidden>
-        <div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-col gap-2">
-          <div class="text-xs font-bold text-base-content">Pandino Documentation</div>
-          <p class="text-[11px] text-base-content/70 m-0 leading-relaxed">Built with Vanilla DaisyUI 5 and Tailwind CSS 4. Keyboard shortcuts, section anchors, and design token guides available.</p>
-          <div class="text-[10px] text-base-content/40 font-mono mt-1">Version: Pandino v102 (Release Build)</div>
-        </div>
-      </div>
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="plan" hidden><div class="card bg-base-100 border border-primary/30 p-3.5 rounded-xl shadow-xs"><div class="flex items-center justify-between mb-2"><span class="text-xs font-bold text-base-content">Studio Tier</span><span class="badge badge-primary badge-sm text-[10px]">Unlimited</span></div><p class="text-xs text-base-content/70 m-0 leading-relaxed">Full access to automotive sections, custom tokens, and live preview exports.</p></div><div class="text-[11px] text-base-content/50">Renews annually. Managed via workspace administrator.</div></div>
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="billing" hidden><div class="card bg-base-100 border border-base-300/60 p-3.5 rounded-xl text-center"><span class="material-symbols-outlined text-2xl text-base-content/40 mx-auto mb-1">credit_card</span><span class="text-xs font-semibold text-base-content">Payment Method Active</span><span class="text-[11px] text-base-content/50 mt-1">Direct invoice via company procurement.</span></div></div>
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="team" hidden><div class="flex items-center justify-between"><span class="text-xs font-bold text-base-content">Seats</span><span class="badge badge-ghost badge-xs">1 Active</span></div><div class="card bg-base-100 border border-base-300/60 p-2.5 rounded-xl flex flex-row items-center gap-2.5"><div class="w-7 h-7 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-xs">P</div><div class="min-w-0 flex-1"><div class="text-xs font-semibold text-base-content truncate" id="kitTeamMemberName">Workspace Owner</div><div class="text-[10px] text-base-content/50 truncate" id="kitTeamMemberEmail">Owner (Admin)</div></div></div></div>
+      <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="help" hidden><div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-col gap-2"><div class="text-xs font-bold text-base-content">Pandino Documentation</div><p class="text-[11px] text-base-content/70 m-0 leading-relaxed">Built with Vanilla DaisyUI 5 and Tailwind CSS 4. Keyboard shortcuts, section anchors, and design token guides available.</p><div class="text-[10px] text-base-content/40 font-mono mt-1">Version: Pandino v102 (Release Build)</div></div></div>
     </div>
   </div>
 </div><!-- #cfg -->

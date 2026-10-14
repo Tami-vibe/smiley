@@ -596,6 +596,7 @@ export function navigateRoute(routeKey) {
     }
     if (doc) populateServiceDetail(doc, route);
     if (route.recipe && doc) applyRecipe(doc, route.recipe);
+    [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = doc?.getElementById("chip-" + s); if (c) c.style.backgroundColor = "var(--active-" + s + ")"; });
     syncCanvasHeight();
 }
 function bindRouteDelegation(targetDoc, targetWin) {

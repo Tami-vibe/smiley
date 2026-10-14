@@ -87,7 +87,7 @@
         <span class="font-bold tracking-tight">Pandino</span>
       </a>
       <div class="hidden md:flex items-center">
-        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li></ul></nav>
+        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li><li><a href="#typography-ui" data-route="typography-ui" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Typography UI</a></li><li><a href="#color-ui" data-route="color-ui" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Color UI</a></li></ul></nav>
       </div>
       <div class="flex items-center gap-3">
         <a href="#contact" class="btn btn-sm h-9 px-4 rounded-full btn-primary text-xs font-semibold shadow-none border-none">Contact Us</a>
@@ -342,7 +342,7 @@
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
     <div class="card bg-base-100 border border-base-300 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10 items-center">
       <div class="flex flex-col gap-4">
-        <div class="badge badge-primary badge-outline gap-1 font-semibold text-xs py-2 px-3"><span class="material-symbols-outlined text-xs">local_offer</span> Spring offer · until 31 May</div>
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide"><svg class="w-3.5 h-3.5 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg><span>Spring offer · until 31 May</span></span>
         <h2 id="promo-title" class="tracking-tight font-extrabold text-base-content">Headlight restoration</h2>
         <p class="text-base opacity-80 leading-relaxed">Clear, bright headlights in one hour. Safer driving at night.</p>
         <div class="flex items-baseline gap-3 my-1"><span class="text-4xl font-extrabold text-primary">€49</span><s class="text-base opacity-50">€79</s></div>
@@ -390,46 +390,81 @@
     </div>
   </div>
 </section>
-<!-- DESIGN SYSTEM SHOWCASE -->
-<section id="design-system" class="w-full py-16 bg-base-100" hidden>
-  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-16">
-    <!-- 1. Typography Hierarchy -->
+<!-- TYPOGRAPHY UI SPECIMEN -->
+<section id="typography-ui" class="w-full py-16 bg-base-100" hidden>
+  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-12">
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / TYPOGRAPHY HIERARCHY</span>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / TYPOGRAPHIC SPECIMEN &amp; SCALE</span>
       <div class="divider my-2"></div>
-      <div class="space-y-6 pt-4">
+      <div class="space-y-4 pt-2">
         <div><h1>Title H1: Precision Collision (Fluid 40px → 72px)</h1></div>
         <div><h2>Headline H2: Certified Realignment (Fluid 32px → 64px)</h2></div>
         <div><h3>Headline H3: Computerized Paint Matching (Fluid 24px → 48px)</h3></div>
         <div><h4>Headline H4: Direct Insurer Concierge (Fluid 20px → 28px)</h4></div>
-        <div><p class="subtitle">Subtitle: Restoring chassis integrity and factory metallurgy standards.</p></div>
-        <div><p>Body text: Standard descriptive copy rendered at 16px with 150% line height for optimal legibility.</p></div>
-        <div><small>Small text: Statutory disclosures, legal terms, and warranty disclaimers at 14px.</small></div>
+        <div><p class="subtitle text-base sm:text-lg opacity-85">Subtitle: Restoring chassis integrity and factory metallurgy standards.</p></div>
+        <div><p class="leading-relaxed opacity-75">Body text: Standard descriptive copy rendered at 16px with 150% line height for optimal legibility.</p></div>
+        <div><small class="text-xs opacity-60">Small text: Statutory disclosures, legal terms, and warranty disclaimers at 14px.</small></div>
       </div>
     </div>
-    <!-- 2. Color Palette & OKLCH Ramps -->
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">02 / COLOR TOKENS & SURFACES</span>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">LIVE COMPONENT TYPOGRAPHY PREVIEWS</span>
       <div class="divider my-2"></div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 pt-4">
-        <div class="p-4 rounded-2xl bg-primary text-primary-content text-xs font-bold shadow">Primary Brand</div>
-        <div class="p-4 rounded-2xl bg-primary/20 text-primary text-xs font-bold border border-primary/30">Primary Tint</div>
-        <div class="p-4 rounded-2xl bg-base-100 text-base-content text-xs font-bold border border-base-300">Base 100 (Canvas)</div>
-        <div class="p-4 rounded-2xl bg-base-200 text-base-content text-xs font-bold border border-base-300">Base 200 (Cards)</div>
-        <div class="p-4 rounded-2xl bg-base-300 text-base-content text-xs font-bold border border-base-300">Base 300 (Recessed)</div>
-        <div class="p-4 rounded-2xl bg-base-content/10 text-base-content text-xs font-bold border border-base-content/10">Frosted Glass</div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 items-stretch">
+        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between">
+          <div><span class="text-xs font-mono font-bold uppercase tracking-wider text-primary">Service Spec</span><h3 class="font-bold text-base-content mt-1">Laser Chassis Bench</h3><p class="text-sm opacity-80 mt-2">Millimeter-accurate 3D laser chassis alignment restoring factory crash structures.</p></div>
+          <div class="badge badge-primary badge-outline text-xs mt-4">OEM Verified</div>
+        </div>
+        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between">
+          <div class="flex items-center gap-3 mb-2"><span class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs">M</span><div><b class="text-xs block">Marco R.</b><small class="text-[11px] opacity-60">Verified Customer</small></div></div>
+          <p class="text-sm opacity-80 italic">"The typography and layout remained crystal clear on my phone."</p>
+          <div class="text-warning text-xs mt-3">★★★★★</div>
+        </div>
+        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between items-center text-center">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider opacity-60">Fleet Volume</span>
+          <div class="text-4xl font-extrabold text-primary my-2">2,400+</div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-base-100 border border-base-content/10 text-xs font-semibold"><span class="w-2 h-2 rounded-full bg-success"></span><span>Repairs Completed</span></div>
+        </div>
       </div>
     </div>
-    <!-- 3. Interactive Components -->
+  </div>
+</section>
+<!-- COLOR UI SPECIMEN & OKLCH PALETTE -->
+<section id="color-ui" class="w-full py-16 bg-base-100" hidden>
+  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-12">
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">03 / UI COMPONENT KIT</span>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">02 / OKLCH BRAND RAMP (900 DOWN TO 200)</span>
       <div class="divider my-2"></div>
-      <div class="flex flex-wrap items-center gap-4 pt-4">
-        <button class="btn btn-primary h-12 px-7 rounded-full text-sm font-semibold">Primary Action</button>
-        <button class="btn h-12 px-7 rounded-full bg-base-content/10 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md">Secondary Action</button>
-        <span class="badge badge-primary">Primary Badge</span>
-        <span class="badge badge-success badge-outline">Success Outline</span>
-        <span class="badge badge-error badge-outline">Error Outline</span>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 pt-2" id="colorRampGrid">
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-900"><span class="text-[10px] font-mono font-bold opacity-75">900</span><b class="text-xs font-mono">Darkest</b><span class="text-[10px] opacity-75 font-mono">L: 0.20</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-800"><span class="text-[10px] font-mono font-bold opacity-75">800</span><b class="text-xs font-mono">Deep</b><span class="text-[10px] opacity-75 font-mono">L: 0.28</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-700"><span class="text-[10px] font-mono font-bold opacity-75">700</span><b class="text-xs font-mono">Mid-Dark</b><span class="text-[10px] opacity-75 font-mono">L: 0.36</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-600"><span class="text-[10px] font-mono font-bold opacity-75">600</span><b class="text-xs font-mono">Base-Dark</b><span class="text-[10px] opacity-75 font-mono">L: 0.46</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-500"><span class="text-[10px] font-mono font-bold opacity-75">500</span><b class="text-xs font-mono">Primary</b><span class="text-[10px] opacity-75 font-mono">L: 0.58</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-400"><span class="text-[10px] font-mono font-bold opacity-75">400</span><b class="text-xs font-mono">Bright</b><span class="text-[10px] opacity-75 font-mono">L: 0.70</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-300"><span class="text-[10px] font-mono font-bold opacity-75">300</span><b class="text-xs font-mono">Tint</b><span class="text-[10px] opacity-75 font-mono">L: 0.80</span></div>
+        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-200"><span class="text-[10px] font-mono font-bold opacity-75">200</span><b class="text-xs font-mono">Light</b><span class="text-[10px] opacity-75 font-mono">L: 0.90</span></div>
+      </div>
+    </div>
+    <div>
+      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">SURFACE CONTRAST TILES &amp; COMPLIANCE MINI-CARD</span>
+      <div class="divider my-2"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <div class="p-5 rounded-2xl bg-base-100 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 1</span><b class="block text-sm mt-1">Base 100 (Canvas)</b><p class="text-xs opacity-70 mt-1">Background canvas surface level.</p></div>
+        <div class="p-5 rounded-2xl bg-base-200 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 2</span><b class="block text-sm mt-1">Base 200 (Cards)</b><p class="text-xs opacity-70 mt-1">Elevated card &amp; container level.</p></div>
+        <div class="p-5 rounded-2xl bg-base-300 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 3</span><b class="block text-sm mt-1">Base 300 (Recessed)</b><p class="text-xs opacity-70 mt-1">Recessed inputs &amp; dividers.</p></div>
+        <div class="p-5 rounded-2xl bg-base-content/10 text-base-content border border-base-content/10 backdrop-blur-md shadow-sm"><span class="text-xs font-mono opacity-60">Surface 4</span><b class="block text-sm mt-1">Frosted Glass</b><p class="text-xs opacity-70 mt-1">Backdrop-filtered surface.</p></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 items-center">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="badge badge-primary">Primary Badge</span>
+          <span class="badge badge-success badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Success Outline</span>
+          <span class="badge badge-warning badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Warning Outline</span>
+          <span class="badge badge-error badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>Error Outline</span>
+        </div>
+        <div class="card bg-base-200 border border-base-content/10 shadow-xl p-5 rounded-2xl flex flex-row items-center justify-between gap-4">
+          <div><span class="text-[11px] font-mono uppercase tracking-wider text-primary font-bold">Contrast Compliance</span><b class="block text-sm text-base-content mt-0.5">WCAG AAA Verified</b><p class="text-xs opacity-70 mt-0.5">Tested across dark, brand, and white schemes.</p></div>
+          <button class="btn btn-primary btn-sm rounded-full px-4">Test Action</button>
+        </div>
       </div>
     </div>
   </div>
@@ -454,7 +489,7 @@
       <div class="flex flex-col gap-2 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Shop Dispatch</h6><span class="opacity-80">Via Nazionale, 42, 20123 Milan (MI)</span><a href="tel:+390212345678" class="link link-hover text-primary font-bold">+39 02 1234 5678</a><span class="badge badge-warning badge-xs font-semibold mt-1">24/7 Emergency Towing</span></div>
       <div class="flex flex-col gap-3 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Claims Direct</h6><p class="opacity-70 leading-relaxed">Direct billing with all major European insurers. Zero upfront out-of-pocket on approved claims.</p><a href="#quote" class="btn btn-sm btn-primary rounded-xl font-bold w-fit">Request Estimate</a></div>
     </div>
-    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a><a href="#design-system" data-route="design-system" class="link link-hover">Design System</a></div></div>
+    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a><a href="#typography-ui" data-route="typography-ui" class="link link-hover">Type Spec</a><a href="#color-ui" data-route="color-ui" class="link link-hover">Color Kit</a></div></div>
   </div>
 </footer>
 </main>
@@ -470,11 +505,12 @@
       if (k && r.kicker) k.textContent = r.kicker; if (t && r.title) t.textContent = r.title; if (d && r.desc) d.textContent = r.desc;
     }
     populateServiceDetail(document, r); if (r.recipe) applyRecipe(document, r.recipe);
+    [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; });
     if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
   }
   const initialData = readSiteData(); if (initialData) applyStateToDocument(document, initialData);
-  onSiteDataChange((updatedData) => { if (updatedData) { applyStateToDocument(document, updatedData); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); } });
-  window.addEventListener('load', () => { const data = readSiteData(); if (data) applyStateToDocument(document, data); if (location.hash) navRoute(location.hash); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); });
+  onSiteDataChange((updatedData) => { if (updatedData) { applyStateToDocument(document, updatedData); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); } });
+  window.addEventListener('load', () => { const data = readSiteData(); if (data) applyStateToDocument(document, data); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (location.hash) navRoute(location.hash); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); });
   window.addEventListener('hashchange', () => navRoute(location.hash));
   document.addEventListener('click', e => { const l = e.target.closest?.('[data-route]'); if (l) { const h = l.getAttribute('href'); if (h?.startsWith('#')) location.hash = h; navRoute(l.dataset.route); } });
   if (location.hash) navRoute(location.hash);
