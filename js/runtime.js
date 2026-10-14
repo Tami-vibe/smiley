@@ -226,11 +226,7 @@ export function applyPainsLook(look = "a") {
 export function applyPainsAlignment(align = "center", persist = true) {
     state.painsAlign = ["left", "center", "right"].includes(align) ? align : "center";
     const pains = byId("pains");
-    if (pains) {
-        pains.setAttribute("data-card-align", state.painsAlign);
-        pains.classList.remove("pains-align-left", "pains-align-center", "pains-align-right");
-        pains.classList.add(`pains-align-${state.painsAlign}`);
-    }
+    if (pains) { pains.setAttribute("data-card-align", state.painsAlign); pains.classList.remove("pains-align-left", "pains-align-center", "pains-align-right"); pains.classList.add(`pains-align-${state.painsAlign}`); }
     syncActiveGroup("#painsAlignJoin [data-pains-align]", "data-pains-align", state.painsAlign);
     if (persist) safeWriteSiteData();
 }
@@ -238,12 +234,20 @@ export function applyGalleryWidth(val = "boxed") {
     state.galleryWidth = val;
     const c = getCanvasDocument()?.getElementById("about-gallery-container");
     if (c) {
-        c.dataset.galleryWidth = val;
-        const b = val === "boxed";
+        c.dataset.galleryWidth = val; const b = val === "boxed";
         c.classList.toggle("max-w-7xl", b); c.classList.toggle("mx-auto", b); c.classList.toggle("px-4", b); c.classList.toggle("px-0", !b); c.classList.toggle("w-full", true);
     }
     document.querySelectorAll("[data-gallery-width]").forEach(btn => btn.classList.toggle("btn-active", btn.dataset.galleryWidth === val));
     safeWriteSiteData(); syncCanvasHeight();
+}
+export function applyGalleryScale(val = "1", persist = true) {
+    state.galleryScale = val;
+    const lbl = byId("gallery-scale-val"), sld = byId("gallery-scale-slider");
+    if (lbl) lbl.textContent = `${val}x`;
+    if (sld && sld.value !== String(val)) sld.value = val;
+    getCanvasDocument()?.getElementById("about-gallery-container")?.style.setProperty("--gal-scale", val);
+    if (persist) safeWriteSiteData();
+    syncCanvasHeight();
 }
 export function syncCanvasLayerLabels() {
     const doc = getCanvasDocument(); if (!doc) return;
@@ -276,6 +280,7 @@ export function syncCanvasState() {
         applyPainsLook(state.painsLook || "a");
         applyPainsAlignment(state.painsAlign || "center", false);
         applyGalleryWidth(state.galleryWidth || "boxed");
+        applyGalleryScale(state.galleryScale || "1", false);
         const doc = getCanvasDocument();
         if (doc) {
             applyStateToDocument(doc, state);
@@ -347,6 +352,7 @@ const DISPATCH_MAP = {
     actionAlign: v => { state.svcActionAlign = v; safeWriteSiteData(); syncActiveGroup("[data-action-align]", "data-action-align", v); const s = byId("services"); if (s) s.dataset.actionAlign = v; },
     galleryFilter: v => { syncActiveGroup("[data-gallery-filter]", "data-gallery-filter", v); getCanvasDocument().querySelectorAll("#gallery-row-1 [data-tag], #gallery-row-2 [data-tag]").forEach(el => { const m = v === "all" || el.dataset.tag === v; el.style.opacity = m ? "1" : "0.2"; el.style.filter = m ? "none" : "grayscale(100%)"; }); },
     galleryWidth: v => applyGalleryWidth(v),
+    galleryScale: v => applyGalleryScale(v),
     dev: v => setDevicePreview(v),
     halign: v => {
         state.halign = v; safeWriteSiteData();
@@ -459,23 +465,18 @@ function initGlobalDispatchListeners() {
     hexPick?.addEventListener("input", () => { if (hexInput) hexInput.value = hexPick.value; updHex(hexPick.value); });
     document.getElementById("brandHexApply")?.addEventListener("click", () => updHex(hexInput?.value));
     hexInput?.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); updHex(hexInput.value); } });
-    ["toggleHeroMarquee", "toggleHeroLogostrip"].forEach(id => {
-        document.getElementById(id)?.addEventListener("change", e => {
-            state.heroMarquee = e.target.checked; safeWriteSiteData();
-            const ls = getCanvasDocument().getElementById("logostrip"); if (ls) ls.hidden = !e.target.checked;
-            syncCanvasHeight();
-        });
-    });
-    const themeInput = document.querySelector("#kitTheme input");
-    if (themeInput) themeInput.addEventListener("change", () => {
-        const theme = themeInput.checked ? "light" : "dark";
+    ["toggleHeroMarquee", "toggleHeroLogostrip"].forEach(id => document.getElementById(id)?.addEventListener("change", e => {
+        state.heroMarquee = e.target.checked; safeWriteSiteData();
+        const ls = getCanvasDocument().getElementById("logostrip"); if (ls) ls.hidden = !e.target.checked;
+        syncCanvasHeight();
+    }));
+    document.querySelector("#kitTheme input")?.addEventListener("change", e => {
+        const theme = e.target.checked ? "light" : "dark";
         [document.documentElement, document.getElementById("kit-drawer"), getCanvasDocument()?.documentElement, getCanvasDocument()?.body, document.querySelector(".kit-canvas-frame")].forEach(el => el?.setAttribute("data-theme", theme));
         state.theme = theme; safeWriteSiteData();
     });
-    byId("toggle-animations")?.addEventListener("change", (e) => {
-        const doc = getCanvasDocument();
-        if (doc) doc.documentElement.dataset.animations = e.target.checked ? "true" : "false";
-    });
+    byId("toggle-animations")?.addEventListener("change", e => { const doc = getCanvasDocument(); if (doc) doc.documentElement.dataset.animations = e.target.checked ? "true" : "false"; });
+    byId("gallery-scale-slider")?.addEventListener("input", e => applyGalleryScale(e.target.value));
     initActionButtons();
     initAccountSettings();
 }

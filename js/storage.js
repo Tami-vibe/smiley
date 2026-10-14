@@ -279,9 +279,10 @@ export function applyStateToDocument(doc, data) {
             pains.classList.add(`pains-align-${data.painsAlign}`);
         }
     }
-    if (data.svcCardAlign) { const s = doc.getElementById('services'); if (s) s.dataset.cardAlign = data.svcCardAlign; }
-    if (data.svcActionAlign) { const s = doc.getElementById('services'); if (s) s.dataset.actionAlign = data.svcActionAlign; }
+    if (data.svcCardAlign) doc.getElementById('services')?.setAttribute('data-card-align', data.svcCardAlign);
+    if (data.svcActionAlign) doc.getElementById('services')?.setAttribute('data-action-align', data.svcActionAlign);
     if (data.galleryWidth) { const c = doc.getElementById('about-gallery-container'); if (c) { c.dataset.galleryWidth = data.galleryWidth; const b = data.galleryWidth === 'boxed'; c.classList.toggle('max-w-7xl', b); c.classList.toggle('mx-auto', b); c.classList.toggle('px-4', b); c.classList.toggle('px-0', !b); } }
+    if (data.galleryScale) doc.getElementById('about-gallery-container')?.style.setProperty('--gal-scale', data.galleryScale);
     // 8. Hero Headline Pitch Text
     if (data.heroPromise) {
         const h1 = doc.querySelector('.hero.is-live-hero .hero-content h1, .hero#hero .hero-content h1') || doc.querySelector('.hero-content h1');
