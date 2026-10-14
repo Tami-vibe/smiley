@@ -254,6 +254,7 @@ body:not(.kit-standalone-page) {
 }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 25s linear infinite; }
+.\[animation-direction\:reverse\] { animation-direction: reverse; }
 #services[data-card-align="center"] .card-body { align-items: center; text-align: center; }
 #services[data-card-align="left"] .card-body { align-items: flex-start; text-align: left; }
 #services[data-card-align="right"] .card-body { align-items: flex-end; text-align: right; }

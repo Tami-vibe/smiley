@@ -234,6 +234,17 @@ export function applyPainsAlignment(align = "center", persist = true) {
     syncActiveGroup("#painsAlignJoin [data-pains-align]", "data-pains-align", state.painsAlign);
     if (persist) safeWriteSiteData();
 }
+export function applyGalleryWidth(val = "boxed") {
+    state.galleryWidth = val;
+    const c = getCanvasDocument()?.getElementById("about-gallery-container");
+    if (c) {
+        c.dataset.galleryWidth = val;
+        const b = val === "boxed";
+        c.classList.toggle("max-w-7xl", b); c.classList.toggle("mx-auto", b); c.classList.toggle("px-4", b); c.classList.toggle("px-0", !b); c.classList.toggle("w-full", true);
+    }
+    document.querySelectorAll("[data-gallery-width]").forEach(btn => btn.classList.toggle("btn-active", btn.dataset.galleryWidth === val));
+    safeWriteSiteData(); syncCanvasHeight();
+}
 export function syncCanvasLayerLabels() {
     const doc = getCanvasDocument(); if (!doc) return;
     const map = { "trust-bar": "trust", "final-cta": "cta", repairs: "solutions" };
@@ -264,6 +275,7 @@ export function syncCanvasState() {
         applyTypographyPreset(state.typographyTier || document.getElementById("typographySelect")?.value || "tier1");
         applyPainsLook(state.painsLook || "a");
         applyPainsAlignment(state.painsAlign || "center", false);
+        applyGalleryWidth(state.galleryWidth || "boxed");
         const doc = getCanvasDocument();
         if (doc) {
             applyStateToDocument(doc, state);
@@ -334,6 +346,7 @@ const DISPATCH_MAP = {
     cardAlign: v => { state.svcCardAlign = v; safeWriteSiteData(); syncActiveGroup("[data-card-align]", "data-card-align", v); const s = byId("services"); if (s) s.dataset.cardAlign = v; },
     actionAlign: v => { state.svcActionAlign = v; safeWriteSiteData(); syncActiveGroup("[data-action-align]", "data-action-align", v); const s = byId("services"); if (s) s.dataset.actionAlign = v; },
     galleryFilter: v => { syncActiveGroup("[data-gallery-filter]", "data-gallery-filter", v); getCanvasDocument().querySelectorAll("#gallery-row-1 [data-tag], #gallery-row-2 [data-tag]").forEach(el => { const m = v === "all" || el.dataset.tag === v; el.style.opacity = m ? "1" : "0.2"; el.style.filter = m ? "none" : "grayscale(100%)"; }); },
+    galleryWidth: v => applyGalleryWidth(v),
     dev: v => setDevicePreview(v),
     halign: v => {
         state.halign = v; safeWriteSiteData();
@@ -575,7 +588,7 @@ export function initRuntime() {
     if (window.location.hash) navigateRoute(window.location.hash);
     Object.assign(window, {
         __heroMedia: { get cur() { return state.heroIndex; }, setHeroIndex }, __applyHeroPanel: applyHeroPanel, __applyBrandPalette: applyBrandPalette,
-        __kitPresetRefresh: () => {}, __kitFilterPage: () => {}, activateTab, syncCanvasLayerLabels, applyPainsLook, applyPainsAlignment, navigateRoute
+        __kitPresetRefresh: () => {}, __kitFilterPage: () => {}, activateTab, syncCanvasLayerLabels, applyPainsLook, applyPainsAlignment, applyGalleryWidth, navigateRoute
     });
 }
 export function bindBlueprintColorInteractions(doc) {
