@@ -571,16 +571,8 @@ export function initRuntime() {
     syncCanvasState();
     if (window.location.hash) navigateRoute(window.location.hash);
     Object.assign(window, {
-        __heroMedia: { get cur() { return state.heroIndex; }, setHeroIndex },
-        __applyHeroPanel: applyHeroPanel,
-        __applyBrandPalette: applyBrandPalette,
-        __kitPresetRefresh: () => {},
-        __kitFilterPage: () => {},
-        activateTab,
-        syncCanvasLayerLabels,
-        applyPainsLook,
-        applyPainsAlignment,
-        navigateRoute
+        __heroMedia: { get cur() { return state.heroIndex; }, setHeroIndex }, __applyHeroPanel: applyHeroPanel, __applyBrandPalette: applyBrandPalette,
+        __kitPresetRefresh: () => {}, __kitFilterPage: () => {}, activateTab, syncCanvasLayerLabels, applyPainsLook, applyPainsAlignment, navigateRoute
     });
 }
 export function bindBlueprintColorInteractions(doc) {
@@ -604,17 +596,17 @@ export function navigateRoute(routeKey) {
         }
         const kicker = doc.getElementById("hero-kicker"), title = doc.getElementById("hero-title"), desc = doc.getElementById("hero-desc");
         if (kicker && route.kicker) kicker.textContent = route.kicker;
-        if (title && route.title) title.textContent = route.title;
-        const rev = hero.querySelector(".hero-reviews, [data-reviews]"), ctas = doc.getElementById("hero-ctas"), isMin = route.tier === "minimal";
+        if (title) { if (route.title) title.textContent = route.title; title.dataset.heroTier = route.tier; }
+        const isBp = key === "theme-blueprint", isMin = route.tier === "minimal";
+        const rev = hero.querySelector(".hero-reviews, [data-reviews]"), ctas = doc.getElementById("hero-ctas");
         if (rev) rev.hidden = isMin;
-        if (desc) { desc.hidden = isMin; if (!isMin && route.desc) desc.textContent = route.desc; }
+        if (desc) { desc.hidden = false; if (route.desc) desc.textContent = route.desc; desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
         if (ctas) ctas.hidden = isMin;
-        const isBp = key === "theme-blueprint", car = hero.querySelector(".carousel");
+        const car = hero.querySelector(".carousel");
         if (car) car.hidden = isBp;
         hero.classList.toggle("bg-base-300", isBp);
         hero.classList.toggle("border-b", isBp);
         hero.classList.toggle("border-base-content/10", isBp);
-        if (desc && !isMin) { desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
         hero.querySelectorAll(".absolute.top-4.left-4").forEach(el => el.classList.toggle("hidden", isMin));
     }
     if (doc) populateServiceDetail(doc, route);

@@ -113,13 +113,10 @@
     <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hero-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews" data-reviews="true"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
     <div>
       <span id="hero-kicker" class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 mb-2 justify-center block">Step Into The Green</span>
-      <h1 id="hero-title" class="tracking-tight font-extrabold text-base-content drop-shadow-md">Experience the Future of Mobility</h1>
+      <h1 id="hero-title" class="tracking-tight font-extrabold text-base-content data-[hero-tier=minimal]:text-2xl data-[hero-tier=minimal]:md:text-3xl data-[hero-tier=sub]:text-3xl data-[hero-tier=sub]:md:text-5xl data-[hero-tier=full]:text-5xl data-[hero-tier=full]:md:text-6xl drop-shadow-sm" data-hero-tier="full">Experience the Future of Mobility</h1>
     </div>
-    <p id="hero-desc" class="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mt-3 font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
-    <div id="hero-ctas" class="mt-6 flex flex-wrap gap-3 justify-center">
-      <button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none cta-primary">Book a Test Drive</button>
-      <button class="btn h-12 px-7 rounded-full bg-base-content/10 hover:bg-base-content/15 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md transition-all cta-second">Learn More</button>
-    </div>
+    <p id="hero-desc" class="text-sm md:text-base text-base-content/70 max-w-xl mx-auto mt-2 font-normal leading-relaxed" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
+    <div id="hero-ctas" class="mt-6 flex flex-wrap gap-3 justify-center"><button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none cta-primary">Book a Test Drive</button><button class="btn h-12 px-7 rounded-full bg-base-content/10 hover:bg-base-content/15 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md transition-all cta-second">Learn More</button></div>
   </div>
 </div>
 <div class="w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
@@ -534,16 +531,9 @@
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col gap-10">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
       <div class="md:col-span-2 flex flex-col gap-3">
-        <div class="flex items-center gap-2 text-xl font-bold">
-          <span class="w-8 h-8 rounded-lg bg-primary text-primary-content flex items-center justify-center font-black shadow-sm">P</span>
-          <span>Pandino Autobody</span>
-        </div>
+        <div class="flex items-center gap-2 text-xl font-bold"><span class="w-8 h-8 rounded-lg bg-primary text-primary-content flex items-center justify-center font-black shadow-sm">P</span><span>Pandino Autobody</span></div>
         <p class="text-xs opacity-70 leading-relaxed max-w-sm">Milan's premier certified collision repair and refinishing workshop since 2001. Direct insurance settlement and factory precision.</p>
-        <div class="flex flex-wrap gap-2 mt-2">
-          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">I-CAR GOLD CLASS</span>
-          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">ASE CERTIFIED</span>
-          <span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">OEM CERTIFIED</span>
-        </div>
+        <div class="flex flex-wrap gap-2 mt-2"><span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">I-CAR GOLD CLASS</span><span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">ASE CERTIFIED</span><span class="badge badge-outline badge-xs text-[10px] font-semibold py-2 px-2.5">OEM CERTIFIED</span></div>
       </div>
       <nav class="flex flex-col gap-2 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Services</h6><a href="#services/collision-repair" data-route="collision-repair" class="link link-hover">Collision Repair</a><a href="#services/paint-refinishing" data-route="paint-refinishing" class="link link-hover">Paint &amp; Refinishing</a><a href="#services/dent-removal" data-route="dent-removal" class="link link-hover">Dent Removal</a><a href="#services/frame-suspension" data-route="frame-suspension" class="link link-hover">Frame &amp; Suspension</a><a href="#services/windshield-glass" data-route="windshield-glass" class="link link-hover">Windshield &amp; Glass</a></nav>
       <div class="flex flex-col gap-2 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Shop Dispatch</h6><span class="opacity-80">Via Nazionale, 42, 20123 Milan (MI)</span><a href="tel:+390212345678" class="link link-hover text-primary font-bold">+39 02 1234 5678</a><span class="badge badge-warning badge-xs font-semibold mt-1">24/7 Emergency Towing</span></div>
@@ -562,15 +552,15 @@
       const b = document.getElementById('hero-breadcrumbs');
       if (b) { b.classList.toggle('hidden', r.tier === 'full' || !r.crumbs || r.crumbs.length <= 1); b.innerHTML = r.crumbs?.length > 1 ? `<ul>${r.crumbs.map((c, i) => i === r.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join('')}</ul>` : ''; }
       const k = document.getElementById('hero-kicker'), t = document.getElementById('hero-title'), d = document.getElementById('hero-desc');
-      if (k && r.kicker) k.textContent = r.kicker; if (t && r.title) t.textContent = r.title;
-      const rev = hero.querySelector('.hero-reviews, [data-reviews]'), ctas = document.getElementById('hero-ctas'), isMin = r.tier === 'minimal';
+      if (k && r.kicker) k.textContent = r.kicker; if (t) { if (r.title) t.textContent = r.title; t.dataset.heroTier = r.tier; }
+      const isBp = key === 'theme-blueprint', isMin = r.tier === 'minimal';
+      const rev = hero.querySelector('.hero-reviews, [data-reviews]'), ctas = document.getElementById('hero-ctas');
       if (rev) rev.hidden = isMin;
-      if (d) { d.hidden = isMin; if (!isMin && r.desc) d.textContent = r.desc; }
+      if (d) { d.hidden = false; if (r.desc) d.textContent = r.desc; d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
       if (ctas) ctas.hidden = isMin;
-      const isBp = key === 'theme-blueprint', car = hero.querySelector('.carousel');
+      const car = hero.querySelector('.carousel');
       if (car) car.hidden = isBp;
       hero.classList.toggle('bg-base-300', isBp); hero.classList.toggle('border-b', isBp); hero.classList.toggle('border-base-content/10', isBp);
-      if (d && !isMin) { d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
       hero.querySelectorAll('.absolute.top-4.left-4').forEach(el => el.classList.toggle('hidden', isMin));
     }
     populateServiceDetail(document, r); if (r.recipe) applyRecipe(document, r.recipe);
