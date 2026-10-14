@@ -597,7 +597,7 @@ export function navigateRoute(routeKey) {
         const kicker = doc.getElementById("hero-kicker"), title = doc.getElementById("hero-title"), desc = doc.getElementById("hero-desc");
         if (kicker && route.kicker) kicker.textContent = route.kicker;
         if (title) { if (route.title) title.textContent = route.title; title.dataset.heroTier = route.tier; }
-        const isBp = key === "theme-blueprint", isMin = route.tier === "minimal";
+        const isBp = key === "theme-blueprint" || key === "sections-blueprint", isMin = route.tier === "minimal";
         const rev = hero.querySelector(".hero-reviews, [data-reviews]"), ctas = doc.getElementById("hero-ctas");
         if (rev) rev.hidden = isMin;
         if (desc) { desc.hidden = false; if (route.desc) desc.textContent = route.desc; desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
@@ -609,7 +609,12 @@ export function navigateRoute(routeKey) {
         hero.classList.toggle("border-base-content/10", isBp);
         hero.querySelectorAll(".absolute.top-4.left-4").forEach(el => el.classList.toggle("hidden", isMin));
     }
-    if (doc) populateServiceDetail(doc, route);
+    if (doc) {
+        const isSpec = key === "sections-blueprint";
+        doc.documentElement[isSpec ? "setAttribute" : "removeAttribute"]("data-specimen", "true");
+        populateServiceDetail(doc, isSpec ? ROUTES["collision-repair"] : route);
+        if (isSpec && doc.getElementById("service-detail")) doc.getElementById("service-detail").hidden = false;
+    }
     if (route.recipe && doc) applyRecipe(doc, route.recipe);
     [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = doc?.getElementById("chip-" + s); if (c) c.style.backgroundColor = "var(--active-" + s + ")"; });
     bindBlueprintColorInteractions(doc);

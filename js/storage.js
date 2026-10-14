@@ -384,7 +384,8 @@ export const ROUTES = {
   privacy: { tier: "minimal", kicker: "Compliance & GDPR", title: "Privacy Policy", desc: "Transparent terms regarding customer data processing and rights.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Privacy"] },
   warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
   cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] },
-  "theme-blueprint": { tier: "minimal", kicker: "DAISYUI SYSTEM SPEC", title: "Theme Blueprint", desc: "System architecture, fluid clamp type scales, and OKLCH color models.", recipe: ["header", "hero", "theme-blueprint", "footer"], crumbs: ["Home", "Design System", "Blueprint"] }
+  "theme-blueprint": { tier: "minimal", kicker: "DAISYUI SYSTEM SPEC", title: "Theme Blueprint", desc: "System architecture, fluid clamp type scales, and OKLCH color models.", recipe: ["header", "hero", "theme-blueprint", "footer"], crumbs: ["Home", "Design System", "Blueprint"] },
+  "sections-blueprint": { tier: "minimal", kicker: "SECTION SPECIMEN CANVAS", title: "Section Architecture & Layout Library", desc: "Living showcase of all functional section patterns wired to active typography scales, OKLCH color palettes, and responsive grid rules.", recipe: ["header", "hero", "logostrip", "pains", "services", "service-detail", "solutions", "about", "trust", "reviews", "quote", "faq", "promo", "contact", "cta", "footer"], crumbs: ["Home", "Design System", "Sections"] }
 };
 export function populateServiceDetail(doc, route) {
   const svc = doc?.getElementById("service-detail");

@@ -87,7 +87,7 @@
         <span class="font-bold tracking-tight">Pandino</span>
       </a>
       <div class="hidden md:flex items-center">
-        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li><li><a href="#theme-blueprint" data-route="theme-blueprint" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Blueprint</a></li></ul></nav>
+        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li><li><a href="#theme-blueprint" data-route="theme-blueprint" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Blueprint</a></li><li><a href="#sections-blueprint" data-route="sections-blueprint" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Sections</a></li></ul></nav>
       </div>
       <div class="flex items-center gap-3">
         <a href="#contact" class="btn btn-sm h-9 px-4 rounded-full btn-primary text-xs font-semibold shadow-none border-none">Contact Us</a>
@@ -553,7 +553,7 @@
       if (b) { b.classList.toggle('hidden', r.tier === 'full' || !r.crumbs || r.crumbs.length <= 1); b.innerHTML = r.crumbs?.length > 1 ? `<ul>${r.crumbs.map((c, i) => i === r.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join('')}</ul>` : ''; }
       const k = document.getElementById('hero-kicker'), t = document.getElementById('hero-title'), d = document.getElementById('hero-desc');
       if (k && r.kicker) k.textContent = r.kicker; if (t) { if (r.title) t.textContent = r.title; t.dataset.heroTier = r.tier; }
-      const isBp = key === 'theme-blueprint', isMin = r.tier === 'minimal';
+      const isBp = key === 'theme-blueprint' || key === 'sections-blueprint', isMin = r.tier === 'minimal';
       const rev = hero.querySelector('.hero-reviews, [data-reviews]'), ctas = document.getElementById('hero-ctas');
       if (rev) rev.hidden = isMin;
       if (d) { d.hidden = false; if (r.desc) d.textContent = r.desc; d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
@@ -563,7 +563,11 @@
       hero.classList.toggle('bg-base-300', isBp); hero.classList.toggle('border-b', isBp); hero.classList.toggle('border-base-content/10', isBp);
       hero.querySelectorAll('.absolute.top-4.left-4').forEach(el => el.classList.toggle('hidden', isMin));
     }
-    populateServiceDetail(document, r); if (r.recipe) applyRecipe(document, r.recipe);
+    const isSpec = key === 'sections-blueprint';
+    document.documentElement[isSpec ? 'setAttribute' : 'removeAttribute']('data-specimen', 'true');
+    populateServiceDetail(document, isSpec ? ROUTES['collision-repair'] : r);
+    if (isSpec && document.getElementById('service-detail')) document.getElementById('service-detail').hidden = false;
+    if (r.recipe) applyRecipe(document, r.recipe);
     [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; });
     if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
   }
