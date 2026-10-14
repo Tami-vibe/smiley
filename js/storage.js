@@ -384,9 +384,7 @@ export const ROUTES = {
   privacy: { tier: "minimal", kicker: "Compliance & GDPR", title: "Privacy Policy", desc: "Transparent terms regarding customer data processing and rights.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Privacy"] },
   warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
   cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] },
-  "typography-ui": { tier: "minimal", kicker: "DESIGN SYSTEM", title: "Typography UI & Type Scale", desc: "Fluid clamp typographic scale, font pairings, and responsive hierarchy.", recipe: ["header", "hero", "typography-ui", "footer"], crumbs: ["Home", "Design System", "Typography"] },
-  "color-ui": { tier: "minimal", kicker: "DESIGN SYSTEM", title: "Color UI & OKLCH Ramp Tokens", desc: "Perceptually uniform color shades, surface contrasts, and semantic UI primitives.", recipe: ["header", "hero", "color-ui", "footer"], crumbs: ["Home", "Design System", "Color"] },
-  "design-system": { tier: "minimal", kicker: "DESIGN SYSTEM", title: "Typography UI & Type Scale", desc: "Fluid clamp typographic scale, font pairings, and responsive hierarchy.", recipe: ["header", "hero", "typography-ui", "footer"], crumbs: ["Home", "Design System"] }
+  "theme-blueprint": { tier: "minimal", kicker: "DAISYUI SYSTEM SPEC", title: "Theme Blueprint & Design Tokens", desc: "Living verification canvas for typography clamp scales, responsive grid columns, corner radii, and OKLCH color ratios.", recipe: ["header", "hero", "theme-blueprint", "footer"], crumbs: ["Home", "Design System", "Blueprint"] }
 };
 export function populateServiceDetail(doc, route) {
   const svc = doc?.getElementById("service-detail");

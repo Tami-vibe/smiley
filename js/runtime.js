@@ -265,7 +265,11 @@ export function syncCanvasState() {
         applyPainsLook(state.painsLook || "a");
         applyPainsAlignment(state.painsAlign || "center", false);
         const doc = getCanvasDocument();
-        if (doc) applyStateToDocument(doc, state);
+        if (doc) {
+            applyStateToDocument(doc, state);
+            const animToggle = byId("toggle-animations");
+            if (animToggle) doc.documentElement.dataset.animations = animToggle.checked ? "true" : "false";
+        }
         const promiseInput = document.getElementById("hero-promise");
         if (promiseInput && state.heroPromise && document.activeElement !== promiseInput) promiseInput.value = state.heroPromise;
         if (state.halign) {
@@ -309,8 +313,8 @@ function setDevicePreview(dev) {
     if (scroller) scroller.dataset.device = dev;
     if (frame) {
         frame.dataset.device = dev;
-        frame.style.width = dev === "desktop" ? "100%" : (dev === "tablet" ? "768px" : "390px");
-        frame.style.maxWidth = dev === "desktop" ? "" : (dev === "tablet" ? "768px" : "390px");
+        frame.style.width = dev === "desktop" ? "100%" : (dev === "tablet" ? "772px" : "390px");
+        frame.style.maxWidth = dev === "desktop" ? "" : (dev === "tablet" ? "772px" : "390px");
     }
     setTimeout(syncCanvasHeight, 150);
 }
@@ -451,6 +455,10 @@ function initGlobalDispatchListeners() {
         const theme = themeInput.checked ? "light" : "dark";
         [document.documentElement, document.getElementById("kit-drawer"), getCanvasDocument()?.documentElement, getCanvasDocument()?.body, document.querySelector(".kit-canvas-frame")].forEach(el => el?.setAttribute("data-theme", theme));
         state.theme = theme; safeWriteSiteData();
+    });
+    byId("toggle-animations")?.addEventListener("change", (e) => {
+        const doc = getCanvasDocument();
+        if (doc) doc.documentElement.dataset.animations = e.target.checked ? "true" : "false";
     });
     initActionButtons();
     initAccountSettings();

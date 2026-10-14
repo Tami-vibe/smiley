@@ -194,9 +194,12 @@
       </div>
       <div id="kit-page-host" data-kit-area="pages"></div>
     </div>
-    <div class="px-3 pt-2 pb-1 flex gap-2">
-      <a href="#typography-ui" target="_blank" data-route="typography-ui" class="btn btn-xs btn-outline rounded-lg flex-1 font-mono text-[11px]">Type Spec</a>
-      <a href="#color-ui" target="_blank" data-route="color-ui" class="btn btn-xs btn-outline rounded-lg flex-1 font-mono text-[11px]">Color Kit</a>
+    <div class="px-3 pt-2 pb-1 flex flex-col gap-2">
+      <a href="#theme-blueprint" data-route="theme-blueprint" class="btn btn-xs btn-outline rounded-lg w-full font-mono text-[11px]">Theme Blueprint</a>
+      <div class="flex items-center justify-between px-3 py-2 bg-base-200/50 rounded-lg border border-base-300">
+        <span class="text-xs font-mono font-medium">Canvas Easing</span>
+        <input type="checkbox" id="toggle-animations" class="toggle toggle-primary toggle-xs" checked />
+      </div>
     </div>
     <div aria-label="Design settings" class="cfg-bar join join-vertical w-full bg-base-100/60 rounded-xl border border-base-300/80 shadow-xs" role="tablist">
     <!-- Brand & Theme Settings Panel -->

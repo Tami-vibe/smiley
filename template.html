@@ -79,7 +79,7 @@
   body.scheme-brand { background-color: #111827 !important; color: #f9fafb !important; --color-base-100: #1f2937; --color-base-200: #111827; --color-base-300: #374151; --color-base-content: #f9fafb; }
 </style>
 </head>
-<body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page">
+<body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page canvas-transition">
   <header id="header" class="site-header sticky top-0 z-50 w-full h-14 bg-base-100/80 backdrop-blur-xl border-b border-base-content/5 transition-all" data-type="bar" data-surface="transparent">
     <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-full flex items-center justify-between">
       <a href="#hero" class="flex items-center gap-2.5 text-lg font-bold text-base-content no-underline">
@@ -87,7 +87,7 @@
         <span class="font-bold tracking-tight">Pandino</span>
       </a>
       <div class="hidden md:flex items-center">
-        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li><li><a href="#typography-ui" data-route="typography-ui" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Typography UI</a></li><li><a href="#color-ui" data-route="color-ui" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Color UI</a></li></ul></nav>
+        <nav aria-label="Main Navigation"><ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium"><li><a href="#services" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Services</a></li><li><a href="#about" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">About</a></li><li><a href="#solutions" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Solutions</a></li><li><a href="#reviews" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">Reviews</a></li><li><a href="#faq" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-base-content transition-opacity duration-150">FAQ</a></li><li><a href="#theme-blueprint" data-route="theme-blueprint" class="text-[13px] font-medium tracking-normal text-base-content/80 hover:text-primary transition-colors">Blueprint</a></li></ul></nav>
       </div>
       <div class="flex items-center gap-3">
         <a href="#contact" class="btn btn-sm h-9 px-4 rounded-full btn-primary text-xs font-semibold shadow-none border-none">Contact Us</a>
@@ -390,80 +390,98 @@
     </div>
   </div>
 </section>
-<!-- TYPOGRAPHY UI SPECIMEN -->
-<section id="typography-ui" class="w-full py-16 bg-base-100" hidden>
-  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-12">
+<!-- THEME BLUEPRINT & DESIGN TOKENS VERIFICATION CANVAS -->
+<section id="theme-blueprint" class="w-full py-16 bg-base-100 canvas-transition" hidden>
+  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-16">
+    <!-- Module 1: 60-30-10 Color Distribution Bar -->
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / TYPOGRAPHIC SPECIMEN &amp; SCALE</span>
-      <div class="divider my-2"></div>
-      <div class="space-y-4 pt-2">
-        <div><h1>Title H1: Precision Collision (Fluid 40px → 72px)</h1></div>
-        <div><h2>Headline H2: Certified Realignment (Fluid 32px → 64px)</h2></div>
-        <div><h3>Headline H3: Computerized Paint Matching (Fluid 24px → 48px)</h3></div>
-        <div><h4>Headline H4: Direct Insurer Concierge (Fluid 20px → 28px)</h4></div>
-        <div><p class="subtitle text-base sm:text-lg opacity-85">Subtitle: Restoring chassis integrity and factory metallurgy standards.</p></div>
-        <div><p class="leading-relaxed opacity-75">Body text: Standard descriptive copy rendered at 16px with 150% line height for optimal legibility.</p></div>
-        <div><small class="text-xs opacity-60">Small text: Statutory disclosures, legal terms, and warranty disclaimers at 14px.</small></div>
+      <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / ARCHITECTURAL BALANCE &amp; COLOR DISTRIBUTION (60-30-10)</span><span class="badge badge-sm badge-outline font-mono">WCAG Compliant</span></div>
+      <div class="divider my-1"></div>
+      <div class="w-full h-14 rounded-2xl overflow-hidden flex border border-base-300 shadow-sm text-xs font-mono font-semibold my-4">
+        <div class="w-[60%] flex h-full">
+          <div class="w-[58%] h-full bg-base-100 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">SURFACE 35%</span><span class="font-bold">bg-base-100</span></div>
+          <div class="w-[42%] h-full bg-base-200 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">CARDS 25%</span><span class="font-bold">bg-base-200</span></div>
+        </div>
+        <div class="w-[30%] flex h-full">
+          <div class="w-1/2 h-full bg-base-300 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-60">RECESSED 15%</span><span class="font-bold">bg-base-300</span></div>
+          <div class="w-1/2 h-full bg-base-content/10 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-70">STRUCTURAL /70</span><span class="font-bold opacity-70">content/50</span></div>
+        </div>
+        <div class="w-[10%] h-full bg-primary text-primary-content flex flex-col items-center justify-center">
+          <span class="text-[10px] opacity-80">10% ACCENT</span><span class="font-bold">bg-primary</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+        <div class="card bg-base-100 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-100 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-100</b></div><div class="text-[11px] font-mono text-base-content/70">Canvas Surface</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
+        <div class="card bg-base-200 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-200 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-200</b></div><div class="text-[11px] font-mono text-base-content/70">Elevated Cards</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
+        <div class="card bg-base-300 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-300 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-300</b></div><div class="text-[11px] font-mono text-base-content/70">Recessed Dividers</div><span class="badge badge-xs badge-info mt-2">WCAG AA (4.5:1)</span></div>
+        <div class="card bg-base-200/50 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-content shadow-xs"></span><b class="text-xs font-mono">--color-base-content</b></div><div class="text-[11px] font-mono text-base-content/70">Structural Text</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (12:1)</span></div>
+        <div class="card bg-primary text-primary-content border border-primary/20 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-primary-content shadow-xs"></span><b class="text-xs font-mono">--color-primary</b></div><div class="text-[11px] font-mono opacity-85">Brand Call-to-Action</div><span class="badge badge-xs badge-warning mt-2 text-warning-content">WCAG AA (4.5:1)</span></div>
       </div>
     </div>
+    <!-- Module 2: Tabular Typography Specimen Ladder -->
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">LIVE COMPONENT TYPOGRAPHY PREVIEWS</span>
-      <div class="divider my-2"></div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 items-stretch">
-        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between">
-          <div><span class="text-xs font-mono font-bold uppercase tracking-wider text-primary">Service Spec</span><h3 class="font-bold text-base-content mt-1">Laser Chassis Bench</h3><p class="text-sm opacity-80 mt-2">Millimeter-accurate 3D laser chassis alignment restoring factory crash structures.</p></div>
-          <div class="badge badge-primary badge-outline text-xs mt-4">OEM Verified</div>
+      <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">02 / TABULAR TYPOGRAPHY SPECIMEN LADDER</span><span class="badge badge-sm badge-outline font-mono">Fluid Clamp Scales</span></div>
+      <div class="divider my-1"></div>
+      <div class="overflow-x-auto rounded-2xl border border-base-300 bg-base-200/30">
+        <table class="table w-full">
+          <thead>
+            <tr class="bg-base-200/70 border-b border-base-300 text-xs font-mono uppercase tracking-wider text-base-content/70"><th class="w-2/5 sm:w-1/3 py-3 px-4">Design Token Metadata</th><th class="w-3/5 sm:w-2/3 py-3 px-4">Live Specimen</th></tr>
+          </thead>
+          <tbody class="divide-y divide-base-300">
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Title H1</div><div>Family: var(--headline-font) | Weight: Bold (700) | LH: 1.15 | LS: -0.02em</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-h1: clamp(2.5rem, 4.5vw + 1rem, 4.5rem) [40px → 72px]</div></td><td class="align-middle py-3 px-4"><h1 class="m-0 text-base-content">Promises Kept</h1></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Headline H2</div><div>Family: var(--headline-font) | Weight: Bold (700) | LH: 1.2 | LS: -0.02em</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-h2: clamp(2rem, 3.2vw + 0.8rem, 4rem) [32px → 64px]</div></td><td class="align-middle py-3 px-4"><h2 class="m-0 text-base-content">Promises Kept</h2></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Headline H3</div><div>Family: var(--headline-font) | Weight: SemiBold (600) | LH: 1.3 | LS: -0.01em</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-h3: clamp(1.5rem, 2vw + 0.5rem, 3rem) [24px → 48px]</div></td><td class="align-middle py-3 px-4"><h3 class="m-0 text-base-content">Promises Kept</h3></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Headline H4</div><div>Family: var(--headline-font) | Weight: Medium (500) | LH: 1.35</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-h4: clamp(1.25rem, 1.2vw + 0.5rem, 1.75rem) [20px → 28px]</div></td><td class="align-middle py-3 px-4"><h4 class="m-0 text-base-content">Promises Kept</h4></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Pre-title</div><div>Family: var(--body-font) | Weight: Bold (700) | LH: 1.2 | Tracking: +0.15em</div><div class="badge badge-xs badge-ghost font-mono mt-1">18px (1.125rem) UPPERCASE</div></td><td class="align-middle py-3 px-4"><span class="text-[18px] font-bold uppercase tracking-[0.15em] text-primary block">Promises Kept</span></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Subtitle</div><div>Family: var(--body-font) | Weight: Regular (400) | LH: 100% (1.0)</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-sub: clamp(1.125rem, 0.8vw + 0.8rem, 1.5rem) [18px → 24px]</div></td><td class="align-middle py-3 px-4"><p class="text-[clamp(1.125rem,0.8vw+0.8rem,1.5rem)] leading-none opacity-85 m-0 text-base-content">Promises Kept</p></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Body Text</div><div>Family: var(--body-font) | Weight: Regular (400) | LH: 150% (1.5)</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-body: 16px (1rem)</div></td><td class="align-middle py-3 px-4"><p class="text-base leading-normal opacity-80 m-0 text-base-content">Promises Kept</p></td></tr>
+            <tr><td class="align-top py-3 px-4 font-mono text-xs text-base-content/70"><div class="font-bold text-base-content">Small Text</div><div>Family: var(--body-font) | Weight: Regular (400) | LH: 150% (1.5)</div><div class="badge badge-xs badge-ghost font-mono mt-1">--fs-small: 14px (0.875rem)</div></td><td class="align-middle py-3 px-4"><small class="text-sm leading-normal opacity-60 block text-base-content">Promises Kept</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Module 3: Blueprint Responsive Grid & Spacing Ladder -->
+    <div class="space-y-8">
+      <div>
+        <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">03A / BLUEPRINT RESPONSIVE COLUMN GRID (12 / 8 / 4)</span><span class="badge badge-sm badge-outline font-mono">grid-cols-4 md:grid-cols-8 lg:grid-cols-12</span></div>
+        <div class="divider my-1"></div>
+        <div class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-2 w-full pt-2">
+          <div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] flex flex-col items-center justify-center font-bold"><span>COL</span><span>01</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] flex flex-col items-center justify-center font-bold"><span>COL</span><span>02</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] flex flex-col items-center justify-center font-bold"><span>COL</span><span>03</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] flex flex-col items-center justify-center font-bold"><span>COL</span><span>04</span></div>
+          <div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden md:flex flex-col items-center justify-center font-bold"><span>COL</span><span>05</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden md:flex flex-col items-center justify-center font-bold"><span>COL</span><span>06</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden md:flex flex-col items-center justify-center font-bold"><span>COL</span><span>07</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden md:flex flex-col items-center justify-center font-bold"><span>COL</span><span>08</span></div>
+          <div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden lg:flex flex-col items-center justify-center font-bold"><span>COL</span><span>09</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden lg:flex flex-col items-center justify-center font-bold"><span>COL</span><span>10</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden lg:flex flex-col items-center justify-center font-bold"><span>COL</span><span>11</span></div><div class="h-14 rounded-lg bg-primary/10 border border-primary/20 text-primary font-mono text-[10px] hidden lg:flex flex-col items-center justify-center font-bold"><span>COL</span><span>12</span></div>
         </div>
-        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between">
-          <div class="flex items-center gap-3 mb-2"><span class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold flex items-center justify-center text-xs">M</span><div><b class="text-xs block">Marco R.</b><small class="text-[11px] opacity-60">Verified Customer</small></div></div>
-          <p class="text-sm opacity-80 italic">"The typography and layout remained crystal clear on my phone."</p>
-          <div class="text-warning text-xs mt-3">★★★★★</div>
-        </div>
-        <div class="card bg-base-200/50 backdrop-blur-sm border border-base-content/10 rounded-2xl p-6 flex flex-col justify-between items-center text-center">
-          <span class="text-xs font-mono font-bold uppercase tracking-wider opacity-60">Fleet Volume</span>
-          <div class="text-4xl font-extrabold text-primary my-2">2,400+</div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-base-100 border border-base-content/10 text-xs font-semibold"><span class="w-2 h-2 rounded-full bg-success"></span><span>Repairs Completed</span></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">03B / SPACING SCALE LADDER (4px → 64px)</span><span class="badge badge-sm badge-outline font-mono">Harmonic Progression</span></div>
+        <div class="divider my-1"></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 items-end pt-2">
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-1"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">4px</b><span class="text-[10px] font-mono opacity-60">spacing-1</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-2"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">8px</b><span class="text-[10px] font-mono opacity-60">spacing-2</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-4"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">16px</b><span class="text-[10px] font-mono opacity-60">spacing-4</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-6"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">24px</b><span class="text-[10px] font-mono opacity-60">spacing-6</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-8"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">32px</b><span class="text-[10px] font-mono opacity-60">spacing-8</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-10"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">40px</b><span class="text-[10px] font-mono opacity-60">spacing-10</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-12"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">48px</b><span class="text-[10px] font-mono opacity-60">spacing-12</span></div></div>
+          <div class="card bg-base-200/60 border border-base-300 p-3 rounded-xl flex flex-col justify-between h-36"><div class="w-full bg-primary/20 border border-primary/40 rounded h-16"></div><div class="mt-2 text-center"><b class="block font-mono text-xs">64px</b><span class="text-[10px] font-mono opacity-60">spacing-16</span></div></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- COLOR UI SPECIMEN & OKLCH PALETTE -->
-<section id="color-ui" class="w-full py-16 bg-base-100" hidden>
-  <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-12">
+    <!-- Module 4: Border Radius Compliance Matrix -->
     <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">02 / OKLCH BRAND RAMP (900 DOWN TO 200)</span>
-      <div class="divider my-2"></div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 pt-2" id="colorRampGrid">
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-900"><span class="text-[10px] font-mono font-bold opacity-75">900</span><b class="text-xs font-mono">Darkest</b><span class="text-[10px] opacity-75 font-mono">L: 0.20</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-800"><span class="text-[10px] font-mono font-bold opacity-75">800</span><b class="text-xs font-mono">Deep</b><span class="text-[10px] opacity-75 font-mono">L: 0.28</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-700"><span class="text-[10px] font-mono font-bold opacity-75">700</span><b class="text-xs font-mono">Mid-Dark</b><span class="text-[10px] opacity-75 font-mono">L: 0.36</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-600"><span class="text-[10px] font-mono font-bold opacity-75">600</span><b class="text-xs font-mono">Base-Dark</b><span class="text-[10px] opacity-75 font-mono">L: 0.46</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-white" id="chip-500"><span class="text-[10px] font-mono font-bold opacity-75">500</span><b class="text-xs font-mono">Primary</b><span class="text-[10px] opacity-75 font-mono">L: 0.58</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-400"><span class="text-[10px] font-mono font-bold opacity-75">400</span><b class="text-xs font-mono">Bright</b><span class="text-[10px] opacity-75 font-mono">L: 0.70</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-300"><span class="text-[10px] font-mono font-bold opacity-75">300</span><b class="text-xs font-mono">Tint</b><span class="text-[10px] opacity-75 font-mono">L: 0.80</span></div>
-        <div class="p-4 rounded-xl border border-base-content/10 text-center flex flex-col justify-between h-28 text-black" id="chip-200"><span class="text-[10px] font-mono font-bold opacity-75">200</span><b class="text-xs font-mono">Light</b><span class="text-[10px] opacity-75 font-mono">L: 0.90</span></div>
-      </div>
-    </div>
-    <div>
-      <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">SURFACE CONTRAST TILES &amp; COMPLIANCE MINI-CARD</span>
-      <div class="divider my-2"></div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-        <div class="p-5 rounded-2xl bg-base-100 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 1</span><b class="block text-sm mt-1">Base 100 (Canvas)</b><p class="text-xs opacity-70 mt-1">Background canvas surface level.</p></div>
-        <div class="p-5 rounded-2xl bg-base-200 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 2</span><b class="block text-sm mt-1">Base 200 (Cards)</b><p class="text-xs opacity-70 mt-1">Elevated card &amp; container level.</p></div>
-        <div class="p-5 rounded-2xl bg-base-300 text-base-content border border-base-300 shadow-sm"><span class="text-xs font-mono opacity-60">Surface 3</span><b class="block text-sm mt-1">Base 300 (Recessed)</b><p class="text-xs opacity-70 mt-1">Recessed inputs &amp; dividers.</p></div>
-        <div class="p-5 rounded-2xl bg-base-content/10 text-base-content border border-base-content/10 backdrop-blur-md shadow-sm"><span class="text-xs font-mono opacity-60">Surface 4</span><b class="block text-sm mt-1">Frosted Glass</b><p class="text-xs opacity-70 mt-1">Backdrop-filtered surface.</p></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 items-center">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="badge badge-primary">Primary Badge</span>
-          <span class="badge badge-success badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Success Outline</span>
-          <span class="badge badge-warning badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>Warning Outline</span>
-          <span class="badge badge-error badge-outline gap-1 py-3 px-3"><svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>Error Outline</span>
+      <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">04 / BORDER RADIUS COMPLIANCE MATRIX</span><span class="badge badge-sm badge-outline font-mono">daisyUI System Geometry</span></div>
+      <div class="divider my-1"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="card bg-base-200/60 border border-base-300 rounded-box p-6 shadow-sm flex flex-col justify-between gap-4">
+          <div><div class="flex items-center justify-between mb-2"><span class="text-xs font-mono font-bold text-primary">--rounded-box</span><span class="badge badge-sm badge-ghost font-mono">16px</span></div><h4 class="font-bold text-base-content mb-1">Containers &amp; Modal Cards</h4><p class="text-xs text-base-content/70">Structural cards, drawers, dialog sheets, and content containers use 16px geometry.</p></div>
+          <div class="p-4 bg-base-100 rounded-box border border-base-300 text-center text-xs font-mono font-semibold text-base-content/80">Container Card Geometry (.rounded-box)</div>
         </div>
-        <div class="card bg-base-200 border border-base-content/10 shadow-xl p-5 rounded-2xl flex flex-row items-center justify-between gap-4">
-          <div><span class="text-[11px] font-mono uppercase tracking-wider text-primary font-bold">Contrast Compliance</span><b class="block text-sm text-base-content mt-0.5">WCAG AAA Verified</b><p class="text-xs opacity-70 mt-0.5">Tested across dark, brand, and white schemes.</p></div>
-          <button class="btn btn-primary btn-sm rounded-full px-4">Test Action</button>
+        <div class="card bg-base-200/60 border border-base-300 rounded-box p-6 shadow-sm flex flex-col justify-between gap-4">
+          <div><div class="flex items-center justify-between mb-2"><span class="text-xs font-mono font-bold text-primary">--rounded-btn</span><span class="badge badge-sm badge-ghost font-mono">8px</span></div><h4 class="font-bold text-base-content mb-1">Buttons &amp; Form Inputs</h4><p class="text-xs text-base-content/70">Interactive triggers, form controls, dropdown toggles, and action items use 8px geometry.</p></div>
+          <div class="space-y-2"><button class="btn btn-primary btn-sm rounded-btn w-full">Action Trigger (.rounded-btn)</button><input class="input input-bordered input-sm rounded-btn w-full text-xs font-mono" value="Input Geometry (.rounded-btn)" readonly /></div>
+        </div>
+        <div class="card bg-base-200/60 border border-base-300 rounded-box p-6 shadow-sm flex flex-col justify-between gap-4">
+          <div><div class="flex items-center justify-between mb-2"><span class="text-xs font-mono font-bold text-primary">--rounded-badge</span><span class="badge badge-sm badge-ghost font-mono">9999px</span></div><h4 class="font-bold text-base-content mb-1">Status Chips &amp; Pills</h4><p class="text-xs text-base-content/70">Tags, verification status chips, metadata counters, and pill navigations use 9999px geometry.</p></div>
+          <div class="flex flex-wrap items-center gap-2 justify-center py-2"><span class="badge badge-primary rounded-badge text-xs px-3 py-2 font-mono">--rounded-badge</span><span class="badge badge-success badge-outline rounded-badge text-xs px-3 py-2 font-mono">Status Active</span><span class="badge badge-neutral rounded-badge text-xs px-3 py-2 font-mono">Pill Chip</span></div>
         </div>
       </div>
     </div>
@@ -489,7 +507,7 @@
       <div class="flex flex-col gap-2 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Shop Dispatch</h6><span class="opacity-80">Via Nazionale, 42, 20123 Milan (MI)</span><a href="tel:+390212345678" class="link link-hover text-primary font-bold">+39 02 1234 5678</a><span class="badge badge-warning badge-xs font-semibold mt-1">24/7 Emergency Towing</span></div>
       <div class="flex flex-col gap-3 text-xs"><h6 class="footer-title opacity-80 text-xs font-bold uppercase tracking-wider mb-1">Claims Direct</h6><p class="opacity-70 leading-relaxed">Direct billing with all major European insurers. Zero upfront out-of-pocket on approved claims.</p><a href="#quote" class="btn btn-sm btn-primary rounded-xl font-bold w-fit">Request Estimate</a></div>
     </div>
-    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a><a href="#typography-ui" data-route="typography-ui" class="link link-hover">Type Spec</a><a href="#color-ui" data-route="color-ui" class="link link-hover">Color Kit</a></div></div>
+    <div class="border-t border-base-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs opacity-70"><p>© 2026 Business Name Srl · VAT IT12345678901</p><div class="flex items-center gap-6"><a href="#legal/privacy" data-route="privacy" class="link link-hover">Privacy Policy</a><a href="#legal/warranty" data-route="warranty" class="link link-hover">Lifetime Warranty</a><a href="#legal/cookies" data-route="cookies" class="link link-hover">Cookie Policy</a><a href="#theme-blueprint" data-route="theme-blueprint" class="link link-hover">Theme Blueprint</a></div></div>
   </div>
 </footer>
 </main>

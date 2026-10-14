@@ -175,6 +175,11 @@
   --color-ink: var(--color-charcoal);
   --color-muted: var(--color-muted-gray);
   --active-brand: var(--pill-accent);
+  --canvas-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --canvas-duration: 400ms;
+  --rounded-box: 16px;
+  --rounded-btn: 8px;
+  --rounded-badge: 9999px;
 }
 
 /* =========================================================
@@ -240,3 +245,10 @@ body:not(.kit-standalone-page) {
   p  { font-size: var(--fs-body); line-height: 1.5; }
   small { font-size: var(--fs-small); line-height: 1.5; }
 }
+
+[data-animations="false"] { --canvas-duration: 0ms; }
+[data-animations="false"] *, [data-animations="false"] *::before, [data-animations="false"] *::after { transition-duration: 0ms; animation-duration: 0ms; }
+.canvas-transition { transition: all var(--canvas-duration) var(--canvas-ease); }
+.rounded-box { border-radius: var(--rounded-box, 16px); }
+.rounded-btn { border-radius: var(--rounded-btn, 8px); }
+.rounded-badge { border-radius: var(--rounded-badge, 9999px); }
