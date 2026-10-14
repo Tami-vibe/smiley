@@ -96,7 +96,7 @@
   </header>
   <main class="heroes-container w-full bg-base-100 transition-all duration-300">
 <!-- UNIFIED HERO SECTION (data-layout="1..6") -->
-<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center py-20 md:py-32 data-[hero-tier=full]:h-screen data-[hero-tier=full]:max-h-screen data-[hero-tier=sub]:h-[50vh] data-[hero-tier=sub]:max-h-[50vh] data-[hero-tier=minimal]:h-[25vh] data-[hero-tier=minimal]:max-h-[25vh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-variant="fill">
+<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:py-20 data-[hero-tier=sub]:py-10 data-[hero-tier=minimal]:py-6 data-[hero-tier=full]:h-screen data-[hero-tier=full]:max-h-screen data-[hero-tier=sub]:h-[50vh] data-[hero-tier=sub]:max-h-[50vh] data-[hero-tier=minimal]:h-[25vh] data-[hero-tier=minimal]:max-h-[25vh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-variant="fill">
 <div class="carousel w-full h-full absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
   <div class="carousel-item absolute inset-0 w-full h-full is-active" data-slide="1"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div>
   <div class="carousel-item absolute inset-0 w-full h-full" data-slide="2"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div>
@@ -110,7 +110,7 @@
 <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 z-10 flex flex-col items-center text-center justify-center">
   <div class="hero-content flex-col text-center max-w-3xl w-full mx-auto z-10 py-6">
     <div id="hero-breadcrumbs" class="breadcrumbs text-xs opacity-60 mb-2 hidden justify-center [&>ul]:justify-center"></div>
-    <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
+    <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hero-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews" data-reviews="true"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
     <div>
       <span id="hero-kicker" class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 mb-2 justify-center block">Step Into The Green</span>
       <h1 id="hero-title" class="tracking-tight font-extrabold text-base-content drop-shadow-md">Experience the Future of Mobility</h1>
@@ -408,16 +408,16 @@
         <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
           <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">01 / OKLCH Algorithmic Ramp</h4><span class="badge badge-primary badge-sm font-mono">11-Step (50–950)</span></div>
           <p class="text-xs text-base-content/70 leading-relaxed">Dynamically computes perceptually uniform lightness/chroma steps from any hex via <code class="font-mono text-primary">js/storage.js</code>, preventing hue-shift and maintaining constant visual contrast.</p>
-          <div class="grid grid-cols-11 h-7 rounded-lg overflow-hidden border border-base-content/10 text-[9px] font-mono text-center leading-7">
-            <div class="bg-[var(--active-50)] text-zinc-900 font-bold">50</div><div class="bg-[var(--active-100)] text-zinc-900 font-bold">100</div><div class="bg-[var(--active-200)] text-zinc-900 font-bold">200</div><div class="bg-[var(--active-300)] text-zinc-900 font-bold">300</div><div class="bg-[var(--active-400)] text-zinc-900 font-bold">400</div><div class="bg-[var(--active-500)] text-white font-bold">500</div><div class="bg-[var(--active-600)] text-white font-bold">600</div><div class="bg-[var(--active-700)] text-white font-bold">700</div><div class="bg-[var(--active-800)] text-white font-bold">800</div><div class="bg-[var(--active-900)] text-white font-bold">900</div><div class="bg-[var(--active-950)] text-white font-bold">950</div>
+          <div id="blueprint-oklch-ramp" class="grid grid-cols-11 h-7 rounded-lg overflow-hidden border border-base-content/10 text-[9px] font-mono text-center leading-7">
+            <div data-step="50" class="bg-[var(--active-50)] text-zinc-900 font-bold cursor-pointer hover:opacity-80">50</div><div data-step="100" class="bg-[var(--active-100)] text-zinc-900 font-bold cursor-pointer hover:opacity-80">100</div><div data-step="200" class="bg-[var(--active-200)] text-zinc-900 font-bold cursor-pointer hover:opacity-80">200</div><div data-step="300" class="bg-[var(--active-300)] text-zinc-900 font-bold cursor-pointer hover:opacity-80">300</div><div data-step="400" class="bg-[var(--active-400)] text-zinc-900 font-bold cursor-pointer hover:opacity-80">400</div><div data-step="500" class="bg-[var(--active-500)] text-white font-bold cursor-pointer hover:opacity-80">500</div><div data-step="600" class="bg-[var(--active-600)] text-white font-bold cursor-pointer hover:opacity-80">600</div><div data-step="700" class="bg-[var(--active-700)] text-white font-bold cursor-pointer hover:opacity-80">700</div><div data-step="800" class="bg-[var(--active-800)] text-white font-bold cursor-pointer hover:opacity-80">800</div><div data-step="900" class="bg-[var(--active-900)] text-white font-bold cursor-pointer hover:opacity-80">900</div><div data-step="950" class="bg-[var(--active-950)] text-white font-bold cursor-pointer hover:opacity-80">950</div>
           </div>
         </div>
         <!-- Pillar 2: 9 Canonical Brand Palettes -->
         <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
           <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">02 / Canonical Brand Palettes</h4><span class="badge badge-neutral badge-sm font-mono">9 Pre-Calibrated</span></div>
           <p class="text-xs text-base-content/70 leading-relaxed">Calibrated ramps mapped directly to <code class="font-mono text-primary">--active-*</code> tokens in <code class="font-mono">tokens-base.css</code>:</p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="badge badge-sm font-mono border-none text-white bg-[#007fff]">Azure</span><span class="badge badge-sm font-mono border-none text-white bg-[#2563eb]">Blue</span><span class="badge badge-sm font-mono border-none text-white bg-[#f43f5e]">Rose</span><span class="badge badge-sm font-mono border-none text-white bg-[#10b981]">Emerald</span><span class="badge badge-sm font-mono border-none text-white bg-[#eab308]">Gamboge</span><span class="badge badge-sm font-mono border-none text-white bg-[#d946ef]">Punch</span><span class="badge badge-sm font-mono border-none text-white bg-[#f97316]">Orange</span><span class="badge badge-sm font-mono border-none text-white bg-[#06b6d4]">Turquoise</span><span class="badge badge-sm font-mono border-none text-white bg-[#374151]">Raven</span>
+          <div id="blueprint-brand-pills" class="flex flex-wrap gap-1.5 pt-1">
+            <span data-hex="#007fff" class="badge badge-sm font-mono border-none text-white bg-[#007fff] cursor-pointer hover:scale-105 transition-transform">Azure</span><span data-hex="#2563eb" class="badge badge-sm font-mono border-none text-white bg-[#2563eb] cursor-pointer hover:scale-105 transition-transform">Blue</span><span data-hex="#f43f5e" class="badge badge-sm font-mono border-none text-white bg-[#f43f5e] cursor-pointer hover:scale-105 transition-transform">Rose</span><span data-hex="#10b981" class="badge badge-sm font-mono border-none text-white bg-[#10b981] cursor-pointer hover:scale-105 transition-transform">Emerald</span><span data-hex="#eab308" class="badge badge-sm font-mono border-none text-white bg-[#eab308] cursor-pointer hover:scale-105 transition-transform">Gamboge</span><span data-hex="#d946ef" class="badge badge-sm font-mono border-none text-white bg-[#d946ef] cursor-pointer hover:scale-105 transition-transform">Punch</span><span data-hex="#f97316" class="badge badge-sm font-mono border-none text-white bg-[#f97316] cursor-pointer hover:scale-105 transition-transform">Orange</span><span data-hex="#06b6d4" class="badge badge-sm font-mono border-none text-white bg-[#06b6d4] cursor-pointer hover:scale-105 transition-transform">Turquoise</span><span data-hex="#374151" class="badge badge-sm font-mono border-none text-white bg-[#374151] cursor-pointer hover:scale-105 transition-transform">Raven</span>
           </div>
         </div>
         <!-- Pillar 3: Contextual Surface Schemes -->
@@ -554,7 +554,7 @@
 </footer>
 </main>
 <script type="module">
-  import { readSiteData, applyStateToDocument, onSiteDataChange, ROUTES, applyRecipe, populateServiceDetail } from './js/storage.js';
+  import { readSiteData, writeSiteData, applyStateToDocument, onSiteDataChange, ROUTES, applyRecipe, populateServiceDetail, rampFromHex, SHADE_STEPS } from './js/storage.js';
   function navRoute(raw) {
     const key = (raw || location.hash).replace(/^#?\/?(services\/|legal\/)?/, '') || 'home', r = ROUTES[key] || ROUTES.home, hero = document.getElementById('hero');
     if (hero) {
@@ -562,17 +562,29 @@
       const b = document.getElementById('hero-breadcrumbs');
       if (b) { b.classList.toggle('hidden', r.tier === 'full' || !r.crumbs || r.crumbs.length <= 1); b.innerHTML = r.crumbs?.length > 1 ? `<ul>${r.crumbs.map((c, i) => i === r.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join('')}</ul>` : ''; }
       const k = document.getElementById('hero-kicker'), t = document.getElementById('hero-title'), d = document.getElementById('hero-desc');
-      if (k && r.kicker) k.textContent = r.kicker; if (t && r.title) t.textContent = r.title; if (d && r.desc) d.textContent = r.desc;
+      if (k && r.kicker) k.textContent = r.kicker; if (t && r.title) t.textContent = r.title;
+      const rev = hero.querySelector('.hero-reviews, [data-reviews]'), ctas = document.getElementById('hero-ctas'), isMin = r.tier === 'minimal';
+      if (rev) rev.hidden = isMin;
+      if (d) { d.hidden = isMin; if (!isMin && r.desc) d.textContent = r.desc; }
+      if (ctas) ctas.hidden = isMin;
       const isBp = key === 'theme-blueprint', car = hero.querySelector('.carousel');
       if (car) car.hidden = isBp;
       hero.classList.toggle('bg-base-300', isBp); hero.classList.toggle('border-b', isBp); hero.classList.toggle('border-base-content/10', isBp);
-      if (d) { d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
-      hero.querySelectorAll('.absolute.top-4.left-4, a[href="#reviews"], #hero-ctas').forEach(el => el.classList.toggle('hidden', isBp));
+      if (d && !isMin) { d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
+      hero.querySelectorAll('.absolute.top-4.left-4').forEach(el => el.classList.toggle('hidden', isMin));
     }
     populateServiceDetail(document, r); if (r.recipe) applyRecipe(document, r.recipe);
     [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; });
     if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight();
   }
+  document.getElementById('blueprint-brand-pills')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-hex]');
+    if (!btn) return;
+    if (window.parent?.__applyBrandPalette) { window.parent.__applyBrandPalette(btn.dataset.hex); return; }
+    const hex = btn.dataset.hex, ramp = rampFromHex(hex);
+    if (ramp) { [document.documentElement, document.body].forEach(t => { SHADE_STEPS.forEach(s => { if (ramp[s]) t.style.setProperty(`--active-${s}`, ramp[s]); }); t.style.setProperty('--color-primary', ramp['500'] || hex); }); writeSiteData({ ...(readSiteData() || {}), brandColor: hex }); }
+  });
+  document.getElementById('blueprint-oklch-ramp')?.addEventListener('click', e => { const c = e.target.closest('[data-step]'); if (c) [document.documentElement, document.body].forEach(t => t.style.setProperty('--color-primary', `var(--active-${c.dataset.step})`)); });
   const initialData = readSiteData(); if (initialData) applyStateToDocument(document, initialData);
   onSiteDataChange((updatedData) => { if (updatedData) { applyStateToDocument(document, updatedData); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); } });
   window.addEventListener('load', () => { const data = readSiteData(); if (data) applyStateToDocument(document, data); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (location.hash) navRoute(location.hash); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); });

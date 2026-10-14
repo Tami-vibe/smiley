@@ -26,7 +26,7 @@ export function getCanvasDocument() {
 }
 export function getCanvasTargets() {
     const doc = getCanvasDocument();
-    return doc?.documentElement ? [doc.documentElement] : [document.documentElement];
+    return doc ? [doc.documentElement, doc.body].filter(Boolean) : [document.documentElement];
 }
 export function getCanvasBodyTargets() {
     const doc = getCanvasDocument();
@@ -573,6 +573,7 @@ export function initRuntime() {
     Object.assign(window, {
         __heroMedia: { get cur() { return state.heroIndex; }, setHeroIndex },
         __applyHeroPanel: applyHeroPanel,
+        __applyBrandPalette: applyBrandPalette,
         __kitPresetRefresh: () => {},
         __kitFilterPage: () => {},
         activateTab,
@@ -581,6 +582,12 @@ export function initRuntime() {
         applyPainsAlignment,
         navigateRoute
     });
+}
+export function bindBlueprintColorInteractions(doc) {
+    if (!doc) return;
+    const pills = doc.getElementById("blueprint-brand-pills"), ramp = doc.getElementById("blueprint-oklch-ramp");
+    if (pills && !pills._bpBound) { pills._bpBound = true; pills.addEventListener("click", e => { const b = e.target.closest("[data-hex]"); if (b) applyBrandPalette(b.dataset.hex); }); }
+    if (ramp && !ramp._bpBound) { ramp._bpBound = true; ramp.addEventListener("click", e => { const c = e.target.closest("[data-step]"); if (c) getCanvasTargets().forEach(t => t.style.setProperty("--color-primary", `var(--active-${c.dataset.step})`)); }); }
 }
 export function navigateRoute(routeKey) {
     const raw = routeKey || window.location.hash || "home";
@@ -595,23 +602,25 @@ export function navigateRoute(routeKey) {
             crumbs.classList.toggle("hidden", route.tier === "full" || !route.crumbs || route.crumbs.length <= 1);
             crumbs.innerHTML = route.crumbs?.length > 1 ? `<ul>${route.crumbs.map((c, i) => i === route.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join("")}</ul>` : "";
         }
-        const kicker = doc.getElementById("hero-kicker");
+        const kicker = doc.getElementById("hero-kicker"), title = doc.getElementById("hero-title"), desc = doc.getElementById("hero-desc");
         if (kicker && route.kicker) kicker.textContent = route.kicker;
-        const title = doc.getElementById("hero-title");
         if (title && route.title) title.textContent = route.title;
-        const desc = doc.getElementById("hero-desc");
-        if (desc && route.desc) desc.textContent = route.desc;
+        const rev = hero.querySelector(".hero-reviews, [data-reviews]"), ctas = doc.getElementById("hero-ctas"), isMin = route.tier === "minimal";
+        if (rev) rev.hidden = isMin;
+        if (desc) { desc.hidden = isMin; if (!isMin && route.desc) desc.textContent = route.desc; }
+        if (ctas) ctas.hidden = isMin;
         const isBp = key === "theme-blueprint", car = hero.querySelector(".carousel");
         if (car) car.hidden = isBp;
         hero.classList.toggle("bg-base-300", isBp);
         hero.classList.toggle("border-b", isBp);
         hero.classList.toggle("border-base-content/10", isBp);
-        if (desc) { desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
-        hero.querySelectorAll('.absolute.top-4.left-4, a[href="#reviews"], #hero-ctas').forEach(el => el.classList.toggle("hidden", isBp));
+        if (desc && !isMin) { desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
+        hero.querySelectorAll(".absolute.top-4.left-4").forEach(el => el.classList.toggle("hidden", isMin));
     }
     if (doc) populateServiceDetail(doc, route);
     if (route.recipe && doc) applyRecipe(doc, route.recipe);
     [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = doc?.getElementById("chip-" + s); if (c) c.style.backgroundColor = "var(--active-" + s + ")"; });
+    bindBlueprintColorInteractions(doc);
     syncCanvasHeight();
 }
 function bindRouteDelegation(targetDoc, targetWin) {
