@@ -601,6 +601,13 @@ export function navigateRoute(routeKey) {
         if (title && route.title) title.textContent = route.title;
         const desc = doc.getElementById("hero-desc");
         if (desc && route.desc) desc.textContent = route.desc;
+        const isBp = key === "theme-blueprint", car = hero.querySelector(".carousel");
+        if (car) car.hidden = isBp;
+        hero.classList.toggle("bg-base-300", isBp);
+        hero.classList.toggle("border-b", isBp);
+        hero.classList.toggle("border-base-content/10", isBp);
+        if (desc) { desc.classList.toggle("text-base-content/80", isBp); desc.classList.toggle("text-white/80", !isBp); }
+        hero.querySelectorAll('.absolute.top-4.left-4, a[href="#reviews"], #hero-ctas').forEach(el => el.classList.toggle("hidden", isBp));
     }
     if (doc) populateServiceDetail(doc, route);
     if (route.recipe && doc) applyRecipe(doc, route.recipe);

@@ -393,29 +393,71 @@
 <!-- THEME BLUEPRINT & DESIGN TOKENS VERIFICATION CANVAS -->
 <section id="theme-blueprint" class="w-full py-16 bg-base-100 canvas-transition" hidden>
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-16">
-    <!-- Module 1: 60-30-10 Color Distribution Bar -->
-    <div>
-      <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">01 / ARCHITECTURAL BALANCE &amp; COLOR DISTRIBUTION (60-30-10)</span><span class="badge badge-sm badge-outline font-mono">WCAG Compliant</span></div>
-      <div class="divider my-1"></div>
-      <div class="w-full h-14 rounded-2xl overflow-hidden flex border border-base-300 shadow-sm text-xs font-mono font-semibold my-4">
-        <div class="w-[60%] flex h-full">
-          <div class="w-[58%] h-full bg-base-100 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">SURFACE 35%</span><span class="font-bold">bg-base-100</span></div>
-          <div class="w-[42%] h-full bg-base-200 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">CARDS 25%</span><span class="font-bold">bg-base-200</span></div>
+    <!-- Module 1: Color System & 60-30-10 Distribution -->
+    <div class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-base-content/10 pb-4">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary block">MULTI-TIERED COLOR ENGINE</span>
+          <h3 class="text-xl font-bold tracking-tight">Algorithmic OKLCH Tokens &amp; Brand Surface Architecture</h3>
         </div>
-        <div class="w-[30%] flex h-full">
-          <div class="w-1/2 h-full bg-base-300 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-60">RECESSED 15%</span><span class="font-bold">bg-base-300</span></div>
-          <div class="w-1/2 h-full bg-base-content/10 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-70">STRUCTURAL /70</span><span class="font-bold opacity-70">content/50</span></div>
+        <span class="badge badge-neutral font-mono text-xs">DaisyUI 5 + OKLCH Ramps</span>
+      </div>
+      <!-- The 4 Pillars Specimen Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Pillar 1: OKLCH Algorithmic Ramp Generator -->
+        <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
+          <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">01 / OKLCH Algorithmic Ramp</h4><span class="badge badge-primary badge-sm font-mono">11-Step (50–950)</span></div>
+          <p class="text-xs text-base-content/70 leading-relaxed">Dynamically computes perceptually uniform lightness/chroma steps from any hex via <code class="font-mono text-primary">js/storage.js</code>, preventing hue-shift and maintaining constant visual contrast.</p>
+          <div class="grid grid-cols-11 h-7 rounded-lg overflow-hidden border border-base-content/10 text-[9px] font-mono text-center leading-7">
+            <div class="bg-[var(--active-50)] text-zinc-900 font-bold">50</div><div class="bg-[var(--active-100)] text-zinc-900 font-bold">100</div><div class="bg-[var(--active-200)] text-zinc-900 font-bold">200</div><div class="bg-[var(--active-300)] text-zinc-900 font-bold">300</div><div class="bg-[var(--active-400)] text-zinc-900 font-bold">400</div><div class="bg-[var(--active-500)] text-white font-bold">500</div><div class="bg-[var(--active-600)] text-white font-bold">600</div><div class="bg-[var(--active-700)] text-white font-bold">700</div><div class="bg-[var(--active-800)] text-white font-bold">800</div><div class="bg-[var(--active-900)] text-white font-bold">900</div><div class="bg-[var(--active-950)] text-white font-bold">950</div>
+          </div>
         </div>
-        <div class="w-[10%] h-full bg-primary text-primary-content flex flex-col items-center justify-center">
-          <span class="text-[10px] opacity-80">10% ACCENT</span><span class="font-bold">bg-primary</span>
+        <!-- Pillar 2: 9 Canonical Brand Palettes -->
+        <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
+          <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">02 / Canonical Brand Palettes</h4><span class="badge badge-neutral badge-sm font-mono">9 Pre-Calibrated</span></div>
+          <p class="text-xs text-base-content/70 leading-relaxed">Calibrated ramps mapped directly to <code class="font-mono text-primary">--active-*</code> tokens in <code class="font-mono">tokens-base.css</code>:</p>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <span class="badge badge-sm font-mono border-none text-white bg-[#007fff]">Azure</span><span class="badge badge-sm font-mono border-none text-white bg-[#2563eb]">Blue</span><span class="badge badge-sm font-mono border-none text-white bg-[#f43f5e]">Rose</span><span class="badge badge-sm font-mono border-none text-white bg-[#10b981]">Emerald</span><span class="badge badge-sm font-mono border-none text-white bg-[#eab308]">Gamboge</span><span class="badge badge-sm font-mono border-none text-white bg-[#d946ef]">Punch</span><span class="badge badge-sm font-mono border-none text-white bg-[#f97316]">Orange</span><span class="badge badge-sm font-mono border-none text-white bg-[#06b6d4]">Turquoise</span><span class="badge badge-sm font-mono border-none text-white bg-[#374151]">Raven</span>
+          </div>
+        </div>
+        <!-- Pillar 3: Contextual Surface Schemes -->
+        <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
+          <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">03 / Contextual Surface Modes</h4><span class="badge badge-neutral badge-sm font-mono">Tri-State + data-theme</span></div>
+          <p class="text-xs text-base-content/70 leading-relaxed">Supports three surface modes (<code class="font-mono">scheme-white</code>, <code class="font-mono">scheme-dark</code>, <code class="font-mono">scheme-brand</code>) layered with native DaisyUI root <code class="font-mono">data-theme</code> light/dark switching.</p>
+          <div class="grid grid-cols-3 gap-2 pt-1 font-mono text-[11px] text-center">
+            <div class="p-2 rounded bg-white text-zinc-950 font-bold border border-zinc-200">White</div><div class="p-2 rounded bg-zinc-950 text-white font-bold border border-zinc-800">Dark</div><div class="p-2 rounded bg-primary text-primary-content font-bold">Brand</div>
+          </div>
+        </div>
+        <!-- Pillar 4: Architectural 60-30-10 Distribution -->
+        <div class="card bg-base-200 border border-base-content/10 p-5 space-y-3">
+          <div class="flex items-center justify-between"><h4 class="font-bold text-sm text-base-content">04 / 60-30-10 Ratio Standard</h4><span class="badge badge-neutral badge-sm font-mono">WCAG Compliant</span></div>
+          <p class="text-xs text-base-content/70 leading-relaxed">Strict layout discipline: 60% neutral backdrop (<code class="font-mono">base-100/200/300</code>), 30% structural lines and cards (<code class="font-mono">base-content/10</code>), and 10% high-contrast brand focus (<code class="font-mono">primary</code>).</p>
+          <div class="w-full h-3 rounded-full overflow-hidden flex"><div class="bg-base-300 w-[60%]"></div><div class="bg-base-content/30 w-[30%]"></div><div class="bg-primary w-[10%]"></div></div>
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
-        <div class="card bg-base-100 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-100 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-100</b></div><div class="text-[11px] font-mono text-base-content/70">Canvas Surface</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
-        <div class="card bg-base-200 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-200 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-200</b></div><div class="text-[11px] font-mono text-base-content/70">Elevated Cards</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
-        <div class="card bg-base-300 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-300 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-300</b></div><div class="text-[11px] font-mono text-base-content/70">Recessed Dividers</div><span class="badge badge-xs badge-info mt-2">WCAG AA (4.5:1)</span></div>
-        <div class="card bg-base-200/50 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-content shadow-xs"></span><b class="text-xs font-mono">--color-base-content</b></div><div class="text-[11px] font-mono text-base-content/70">Structural Text</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (12:1)</span></div>
-        <div class="card bg-primary text-primary-content border border-primary/20 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-primary-content shadow-xs"></span><b class="text-xs font-mono">--color-primary</b></div><div class="text-[11px] font-mono opacity-85">Brand Call-to-Action</div><span class="badge badge-xs badge-warning mt-2 text-warning-content">WCAG AA (4.5:1)</span></div>
+      <!-- 60-30-10 Live Distribution Bar & Metadata Cards -->
+      <div class="pt-4">
+        <div class="flex items-center justify-between mb-2"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">LIVE COLOR DISTRIBUTION &amp; CONTRAST TARGETS</span><span class="badge badge-sm badge-outline font-mono">WCAG Compliant</span></div>
+        <div class="w-full h-14 rounded-2xl overflow-hidden flex border border-base-300 shadow-sm text-xs font-mono font-semibold my-3">
+          <div class="w-[60%] flex h-full">
+            <div class="w-[58%] h-full bg-base-100 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">SURFACE 35%</span><span class="font-bold">bg-base-100</span></div>
+            <div class="w-[42%] h-full bg-base-200 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">CARDS 25%</span><span class="font-bold">bg-base-200</span></div>
+          </div>
+          <div class="w-[30%] flex h-full">
+            <div class="w-1/2 h-full bg-base-300 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-60">RECESSED 15%</span><span class="font-bold">bg-base-300</span></div>
+            <div class="w-1/2 h-full bg-base-content/10 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-70">STRUCTURAL /70</span><span class="font-bold opacity-70">content/50</span></div>
+          </div>
+          <div class="w-[10%] h-full bg-primary text-primary-content flex flex-col items-center justify-center">
+            <span class="text-[10px] opacity-80">10% ACCENT</span><span class="font-bold">bg-primary</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+          <div class="card bg-base-100 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-100 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-100</b></div><div class="text-[11px] font-mono text-base-content/70">Canvas Surface</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
+          <div class="card bg-base-200 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-200 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-200</b></div><div class="text-[11px] font-mono text-base-content/70">Elevated Cards</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
+          <div class="card bg-base-300 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-300 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-300</b></div><div class="text-[11px] font-mono text-base-content/70">Recessed Dividers</div><span class="badge badge-xs badge-info mt-2">WCAG AA (4.5:1)</span></div>
+          <div class="card bg-base-200/50 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-content shadow-xs"></span><b class="text-xs font-mono">--color-base-content</b></div><div class="text-[11px] font-mono text-base-content/70">Structural Text</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (12:1)</span></div>
+          <div class="card bg-primary text-primary-content border border-primary/20 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-primary-content shadow-xs"></span><b class="text-xs font-mono">--color-primary</b></div><div class="text-[11px] font-mono opacity-85">Brand Call-to-Action</div><span class="badge badge-xs badge-warning mt-2 text-warning-content">WCAG AA (4.5:1)</span></div>
+        </div>
       </div>
     </div>
     <!-- Module 2: Tabular Typography Specimen Ladder -->
@@ -521,6 +563,11 @@
       if (b) { b.classList.toggle('hidden', r.tier === 'full' || !r.crumbs || r.crumbs.length <= 1); b.innerHTML = r.crumbs?.length > 1 ? `<ul>${r.crumbs.map((c, i) => i === r.crumbs.length - 1 ? `<li>${c}</li>` : `<li><a href="#home" data-route="home">${c}</a></li>`).join('')}</ul>` : ''; }
       const k = document.getElementById('hero-kicker'), t = document.getElementById('hero-title'), d = document.getElementById('hero-desc');
       if (k && r.kicker) k.textContent = r.kicker; if (t && r.title) t.textContent = r.title; if (d && r.desc) d.textContent = r.desc;
+      const isBp = key === 'theme-blueprint', car = hero.querySelector('.carousel');
+      if (car) car.hidden = isBp;
+      hero.classList.toggle('bg-base-300', isBp); hero.classList.toggle('border-b', isBp); hero.classList.toggle('border-base-content/10', isBp);
+      if (d) { d.classList.toggle('text-base-content/80', isBp); d.classList.toggle('text-white/80', !isBp); }
+      hero.querySelectorAll('.absolute.top-4.left-4, a[href="#reviews"], #hero-ctas').forEach(el => el.classList.toggle('hidden', isBp));
     }
     populateServiceDetail(document, r); if (r.recipe) applyRecipe(document, r.recipe);
     [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; });
