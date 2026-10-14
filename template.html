@@ -337,21 +337,35 @@
   </div>
 </section>
 <!-- QUOTE -->
-<section id="quote" class="w-full py-12 md:py-20 bg-base-200/40" data-theme="dark" aria-labelledby="quote-title">
+<section id="quote" class="w-full py-16 md:py-24 bg-base-100" data-theme="dark" aria-labelledby="quote-title">
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-    <div class="card bg-base-100 border border-base-300 shadow-md p-6 md:p-10 max-w-2xl mx-auto">
-      <div class="text-center mb-8">
-        <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 block mb-1">Free quote</span>
-        <h2 id="quote-title" class="tracking-tight font-extrabold text-base-content">Get your repair quote in 24 hours.</h2>
-        <p class="text-sm opacity-70 mt-2">Send a few photos of the damage. We reply with a clear price.</p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+      <!-- Column 1 (Left, 5 cols): Full-Cover Cover Image & Trust Spec -->
+      <div class="lg:col-span-5 relative rounded-3xl overflow-hidden min-h-[360px] lg:min-h-full border border-base-content/10 shadow-xl bg-base-200">
+        <img src="media/ai-images/repair-bench.jpg" alt="Inspection Bay" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-base-100/70 backdrop-blur-md border border-white/10 space-y-1"><span class="text-[10px] font-mono uppercase font-bold text-primary tracking-widest block">PHYSICAL BENCH AUDIT</span><p class="text-xs text-white font-medium leading-relaxed">Laser chassis diagnostics and hidden unibody stress checks conducted upon bay check-in.</p></div>
       </div>
-      <form class="flex flex-col gap-4" novalidate="">
-        <div class="form-control"><label class="label"><span class="label-text font-semibold">Name</span></label><input autocomplete="name" name="name" placeholder="Your name" required="" type="text" class="input input-bordered w-full rounded-xl"/></div>
-        <div class="form-control"><label class="label"><span class="label-text font-semibold">Phone or WhatsApp</span></label><input autocomplete="tel" name="phone" placeholder="+39 …" required="" type="tel" class="input input-bordered w-full rounded-xl"/></div>
-        <div class="form-control"><label class="label"><span class="label-text font-semibold">Damage photos <em class="opacity-60 text-xs font-normal">(optional)</em></span></label><input accept="image/*" multiple="" name="photos" type="file" class="file-input file-input-bordered w-full rounded-xl"/></div>
-        <div class="form-control"><label class="label cursor-pointer justify-start gap-3"><input required="" type="checkbox" class="checkbox checkbox-primary checkbox-sm rounded-md"/><span class="label-text text-xs">I agree to the <a href="#privacy" class="link link-hover text-primary">privacy policy</a>.</span></label></div>
-        <button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none w-full mt-2" type="submit">Get my quote</button>
-      </form>
+      <!-- Column 2 (Right, 7 cols): Form Card & Aftermarket Legal Disclaimer -->
+      <div class="lg:col-span-7 card bg-base-200/50 border border-base-content/10 p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary block mb-1">PRELIMINARY ASSESSMENT</span>
+          <h2 id="quote-title" class="text-2xl sm:text-4xl font-extrabold tracking-tight text-base-content">Get your repair quote in 24 hours.</h2>
+          <p class="text-sm text-base-content/70 mt-2">Send damage photos. We reply with an itemized preliminary cost bracket.</p>
+          <!-- Input Fields -->
+          <form class="space-y-4 mt-6">
+            <div><label class="text-xs font-medium text-base-content/80 block mb-1">Full Name</label><input type="text" placeholder="Your name" class="input input-bordered w-full rounded-xl bg-base-100 text-sm" /></div>
+            <div><label class="text-xs font-medium text-base-content/80 block mb-1">Phone or WhatsApp</label><input type="tel" placeholder="+39 ..." class="input input-bordered w-full rounded-xl bg-base-100 text-sm" /></div>
+            <div><label class="text-xs font-medium text-base-content/80 block mb-1">Damage photos (optional)</label><input type="file" class="file-input file-input-bordered w-full rounded-xl bg-base-100 text-sm" /></div>
+            <label class="flex items-center gap-2 cursor-pointer pt-1"><input type="checkbox" class="checkbox checkbox-primary checkbox-sm rounded-md" /><span class="text-xs text-base-content/70">I agree to the <a href="#privacy" class="link link-primary">privacy policy</a>.</span></label>
+            <button type="button" class="btn btn-primary w-full h-12 rounded-full font-semibold text-sm shadow-md mt-2">Request Preliminary Quote</button>
+          </form>
+        </div>
+        <!-- Verified Automotive Industry Disclaimer -->
+        <div class="mt-6 pt-4 border-t border-base-content/10">
+          <p class="text-[11px] font-mono text-base-content/50 leading-relaxed">* <strong class="text-base-content/70">Industry Standard Notice:</strong> Digital photo estimates provide a preliminary appraisal only. Comprehensive collision quotes require on-site teardown and computerized chassis measuring, as structural unibody misalignment, bracket fractures, and ADAS harness damage cannot be verified through surface imagery.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -425,13 +439,7 @@
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 space-y-16">
     <!-- Module 1: Color System & 60-30-10 Distribution -->
     <div class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-base-content/10 pb-4">
-        <div>
-          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary block">MULTI-TIERED COLOR ENGINE</span>
-          <h3 class="text-xl font-bold tracking-tight">Algorithmic OKLCH Tokens &amp; Brand Surface Architecture</h3>
-        </div>
-        <span class="badge badge-neutral font-mono text-xs">DaisyUI 5 + OKLCH Ramps</span>
-      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-base-content/10 pb-4"><div><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary block">MULTI-TIERED COLOR ENGINE</span><h3 class="text-xl font-bold tracking-tight">Algorithmic OKLCH Tokens &amp; Brand Surface Architecture</h3></div><span class="badge badge-neutral font-mono text-xs">DaisyUI 5 + OKLCH Ramps</span></div>
       <!-- The 4 Pillars Specimen Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Pillar 1: OKLCH Algorithmic Ramp Generator -->
@@ -446,19 +454,7 @@
       <!-- 60-30-10 Live Distribution Bar & Metadata Cards -->
       <div class="pt-4">
         <div class="flex items-center justify-between mb-2"><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary">LIVE COLOR DISTRIBUTION &amp; CONTRAST TARGETS</span><span class="badge badge-sm badge-outline font-mono">WCAG Compliant</span></div>
-        <div class="w-full h-14 rounded-2xl overflow-hidden flex border border-base-300 shadow-sm text-xs font-mono font-semibold my-3">
-          <div class="w-[60%] flex h-full">
-            <div class="w-[58%] h-full bg-base-100 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">SURFACE 35%</span><span class="font-bold">bg-base-100</span></div>
-            <div class="w-[42%] h-full bg-base-200 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">CARDS 25%</span><span class="font-bold">bg-base-200</span></div>
-          </div>
-          <div class="w-[30%] flex h-full">
-            <div class="w-1/2 h-full bg-base-300 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-60">RECESSED 15%</span><span class="font-bold">bg-base-300</span></div>
-            <div class="w-1/2 h-full bg-base-content/10 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-70">STRUCTURAL /70</span><span class="font-bold opacity-70">content/50</span></div>
-          </div>
-          <div class="w-[10%] h-full bg-primary text-primary-content flex flex-col items-center justify-center">
-            <span class="text-[10px] opacity-80">10% ACCENT</span><span class="font-bold">bg-primary</span>
-          </div>
-        </div>
+        <div class="w-full h-14 rounded-2xl overflow-hidden flex border border-base-300 shadow-sm text-xs font-mono font-semibold my-3"><div class="w-[60%] flex h-full"><div class="w-[58%] h-full bg-base-100 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">SURFACE 35%</span><span class="font-bold">bg-base-100</span></div><div class="w-[42%] h-full bg-base-200 border-r border-base-300 flex flex-col items-center justify-center text-base-content"><span class="text-[10px] opacity-60">CARDS 25%</span><span class="font-bold">bg-base-200</span></div></div><div class="w-[30%] flex h-full"><div class="w-1/2 h-full bg-base-300 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-60">RECESSED 15%</span><span class="font-bold">bg-base-300</span></div><div class="w-1/2 h-full bg-base-content/10 text-base-content border-r border-base-300 flex flex-col items-center justify-center"><span class="text-[10px] opacity-70">STRUCTURAL /70</span><span class="font-bold opacity-70">content/50</span></div></div><div class="w-[10%] h-full bg-primary text-primary-content flex flex-col items-center justify-center"><span class="text-[10px] opacity-80">10% ACCENT</span><span class="font-bold">bg-primary</span></div></div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
           <div class="card bg-base-100 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-100 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-100</b></div><div class="text-[11px] font-mono text-base-content/70">Canvas Surface</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
           <div class="card bg-base-200 border border-base-300 p-4 rounded-xl shadow-xs"><div class="flex items-center gap-2 mb-2"><span class="w-4 h-4 rounded-full bg-base-200 border border-base-content/20 shadow-xs"></span><b class="text-xs font-mono">--color-base-200</b></div><div class="text-[11px] font-mono text-base-content/70">Elevated Cards</div><span class="badge badge-xs badge-success mt-2">WCAG AAA (7:1)</span></div>
