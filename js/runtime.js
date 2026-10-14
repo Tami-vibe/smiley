@@ -331,6 +331,9 @@ const DISPATCH_MAP = {
     tier: v => applyTypographyPreset(v),
     painsLook: v => applyPainsLook(v),
     painsAlign: v => applyPainsAlignment(v),
+    cardAlign: v => { state.svcCardAlign = v; safeWriteSiteData(); syncActiveGroup("[data-card-align]", "data-card-align", v); const s = byId("services"); if (s) s.dataset.cardAlign = v; },
+    actionAlign: v => { state.svcActionAlign = v; safeWriteSiteData(); syncActiveGroup("[data-action-align]", "data-action-align", v); const s = byId("services"); if (s) s.dataset.actionAlign = v; },
+    galleryFilter: v => { syncActiveGroup("[data-gallery-filter]", "data-gallery-filter", v); getCanvasDocument().querySelectorAll("#gallery-row-1 [data-tag], #gallery-row-2 [data-tag]").forEach(el => { const m = v === "all" || el.dataset.tag === v; el.style.opacity = m ? "1" : "0.2"; el.style.filter = m ? "none" : "grayscale(100%)"; }); },
     dev: v => setDevicePreview(v),
     halign: v => {
         state.halign = v; safeWriteSiteData();

@@ -49,37 +49,30 @@
   --rose-50: #fef1f8; --rose-100: #ffe4f4; --rose-200: #ffc9e8; --rose-300: #ff9ed3;
   --rose-400: #ff61b4; --rose-500: #ff3399; --rose-600: #f20d74; --rose-700: #d3035b;
   --rose-800: #ae064b; --rose-900: #910a41; --rose-950: #590024;
-
   /* EMERALD — source 500 */
   --emerald-50: #f1fcf4; --emerald-100: #defae8; --emerald-200: #bff3d1; --emerald-300: #8de8ae;
   --emerald-400: #54d483; --emerald-500: #32cd6b; --emerald-600: #20994d; --emerald-700: #1c793f;
   --emerald-800: #1b6035; --emerald-900: #184f2e; --emerald-950: #082b16;
-
   /* GAMBOGE — source 500 */
   --gamboge-50: #fefaec; --gamboge-100: #fbf1ca; --gamboge-200: #f7e390; --gamboge-300: #f2ce57;
   --gamboge-400: #efba30; --gamboge-500: #e89b17; --gamboge-600: #cd7712; --gamboge-700: #ab5512;
   --gamboge-800: #8b4215; --gamboge-900: #723715; --gamboge-950: #411b07;
-
   /* PUNCH — source 600 */
   --punch-50: #fef2f2; --punch-100: #fee2e2; --punch-200: #ffc9c9; --punch-300: #fda4a4;
   --punch-400: #fa6f6f; --punch-500: #f14242; --punch-600: #de2121; --punch-700: #bb1a1a;
   --punch-800: #9b1919; --punch-900: #801c1c; --punch-950: #460909;
-
   /* INTERNATIONAL ORANGE — source 600 */
   --orange-50: #fff7ed; --orange-100: #ffedd5; --orange-200: #fed8aa; --orange-300: #fdbb74;
   --orange-400: #fb933c; --orange-500: #f87517; --orange-600: #f25d0d; --orange-700: #c2420c;
   --orange-800: #9a3512; --orange-900: #7c2e12; --orange-950: #431407;
-
   /* TURQUOISE — source 400 */
   --turquoise-50: #f0fdfa; --turquoise-100: #cbfcf2; --turquoise-200: #96f9e7; --turquoise-300: #5aeed8;
   --turquoise-400: #26d9c4; --turquoise-500: #0fbdab; --turquoise-600: #09988c; --turquoise-700: #0c7971;
   --turquoise-800: #0f605b; --turquoise-900: #11504c; --turquoise-950: #03302f;
-
   /* RAVEN — source 500 */
   --raven-50: #f9fafb; --raven-100: #f3f4f6; --raven-200: #e5e7eb; --raven-300: #d1d5db;
   --raven-400: #9ba2b0; --raven-500: #737b8c; --raven-600: #4a5464; --raven-700: #364052;
   --raven-800: #1e2838; --raven-900: #101728; --raven-950: #020613;
-
   /* Active palette (swapped dynamically by JS runtime. Default = Azure Radiance) */
   --active-50: var(--azure-50); --active-100: var(--azure-100); --active-200: var(--azure-200); --active-300: var(--azure-300);
   --active-400: var(--azure-400); --active-500: var(--azure-500); --active-600: var(--azure-600); --active-700: var(--azure-700);
@@ -259,3 +252,11 @@ body:not(.kit-standalone-page) {
   background: color-mix(in srgb, var(--color-primary) 15%, transparent); color: var(--color-primary);
   border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
 }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 25s linear infinite; }
+#services[data-card-align="center"] .card-body { align-items: center; text-align: center; }
+#services[data-card-align="left"] .card-body { align-items: flex-start; text-align: left; }
+#services[data-card-align="right"] .card-body { align-items: flex-end; text-align: right; }
+#services[data-action-align="start"] .svc-action { align-self: flex-start; }
+#services[data-action-align="center"] .svc-action { align-self: center; }
+#services[data-action-align="end"] .svc-action { align-self: flex-end; }

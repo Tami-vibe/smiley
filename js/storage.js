@@ -279,6 +279,8 @@ export function applyStateToDocument(doc, data) {
             pains.classList.add(`pains-align-${data.painsAlign}`);
         }
     }
+    if (data.svcCardAlign) { const s = doc.getElementById('services'); if (s) s.dataset.cardAlign = data.svcCardAlign; }
+    if (data.svcActionAlign) { const s = doc.getElementById('services'); if (s) s.dataset.actionAlign = data.svcActionAlign; }
     // 8. Hero Headline Pitch Text
     if (data.heroPromise) {
         const h1 = doc.querySelector('.hero.is-live-hero .hero-content h1, .hero#hero .hero-content h1') || doc.querySelector('.hero-content h1');
@@ -385,7 +387,8 @@ export const ROUTES = {
   warranty: { tier: "minimal", kicker: "Lifetime Coverage", title: "Lifetime Repair Warranty", desc: "Our workmanship and paint refinishing are backed by a lifetime guarantee.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Warranty"] },
   cookies: { tier: "minimal", kicker: "Cookie Preferences", title: "Cookie Policy", desc: "Information on cookies and local storage utilized for site functionality.", recipe: MIN_RECIPE, crumbs: ["Home", "Legal", "Cookies"] },
   "theme-blueprint": { tier: "minimal", kicker: "DAISYUI SYSTEM SPEC", title: "Theme Blueprint", desc: "System architecture, fluid clamp type scales, and OKLCH color models.", recipe: ["header", "hero", "theme-blueprint", "footer"], crumbs: ["Home", "Design System", "Blueprint"] },
-  "sections-blueprint": { tier: "minimal", kicker: "SECTION SPECIMEN CANVAS", title: "Section Architecture & Layout Library", desc: "Living showcase of all functional section patterns wired to active typography scales, OKLCH color palettes, and responsive grid rules.", recipe: ["header", "hero", "logostrip", "pains", "services", "service-detail", "solutions", "about", "trust", "reviews", "quote", "faq", "promo", "contact", "cta", "footer"], crumbs: ["Home", "Design System", "Sections"] }
+  "sections-blueprint": { tier: "minimal", kicker: "SECTION SPECIMEN CANVAS", title: "Section Architecture & Layout Library", desc: "Living showcase of all functional section patterns wired to active typography scales, OKLCH color palettes, and responsive grid rules.", recipe: ["header", "hero", "logostrip", "pains", "services", "service-detail", "solutions", "about", "trust", "reviews", "quote", "faq", "promo", "contact", "cta", "footer"], crumbs: ["Home", "Design System", "Sections"] },
+  story: { tier: "minimal", kicker: "OUR JOURNEY", title: "The Pandino Story", desc: "Key milestones that shaped our engineering craft and customer trust since 2001.", recipe: ["header", "hero", "story", "footer"], crumbs: ["Home", "Company", "Story"] }
 };
 export function populateServiceDetail(doc, route) {
   const svc = doc?.getElementById("service-detail");
