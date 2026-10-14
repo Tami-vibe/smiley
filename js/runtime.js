@@ -98,7 +98,7 @@ export function applyTypographyPreset(tier) {
 const state = {
     heroIndex: 0, headerStyle: "standard", headerAlign: "left", headerSticky: false,
     reviews: "white", ctas: 2, panel: "bottom", panelStyle: "solid",
-    brandColor: "#16a34a", theme: "dark", painsLook: "a", painsAlign: "center",
+    brandColor: "#16a34a", theme: "dark", painsLook: "a", painsAlign: "center", painsActions: "end",
     accountName: "", accountEmail: ""
 };
 let isSyncing = false;
@@ -107,6 +107,7 @@ function syncActiveGroup(selector, attr, activeVal) {
     document.querySelectorAll(selector).forEach(btn => {
         const on = btn.getAttribute(attr) === String(activeVal);
         btn.classList.toggle("active", on);
+        btn.classList.toggle("btn-active", on);
         btn.classList.toggle("btn-primary", on);
         btn.setAttribute("aria-pressed", String(on));
     });
@@ -225,9 +226,15 @@ export function applyPainsLook(look = "a") {
 }
 export function applyPainsAlignment(align = "center", persist = true) {
     state.painsAlign = ["left", "center", "right"].includes(align) ? align : "center";
-    const pains = byId("pains");
-    if (pains) { pains.setAttribute("data-card-align", state.painsAlign); pains.classList.remove("pains-align-left", "pains-align-center", "pains-align-right"); pains.classList.add(`pains-align-${state.painsAlign}`); }
-    syncActiveGroup("#painsAlignJoin [data-pains-align]", "data-pains-align", state.painsAlign);
+    const doc = getCanvasDocument(), pains = doc?.getElementById("pains") || byId("pains");
+    if (pains) { pains.dataset.cardAlign = state.painsAlign; pains.setAttribute("data-card-align", state.painsAlign); }
+    syncActiveGroup("[data-pains-align]", "data-pains-align", state.painsAlign);
+    if (persist) safeWriteSiteData();
+}
+export function applyPainsActions(align = "end", persist = true) {
+    state.painsActions = ["start", "center", "end"].includes(align) ? align : "end";
+    getCanvasDocument()?.querySelectorAll("#pains .card-actions").forEach(el => el.dataset.actionAlign = state.painsActions);
+    syncActiveGroup("[data-pains-actions]", "data-pains-actions", state.painsActions);
     if (persist) safeWriteSiteData();
 }
 export function applyGalleryWidth(val = "boxed") {
@@ -261,6 +268,16 @@ export function syncCanvasLayerLabels() {
         }
     });
 }
+// --- 8b. Mapbox Embed ---
+export function initMapbox(doc = getCanvasDocument()) {
+    const img = doc?.getElementById("mapbox-render");
+    if (!img) return;
+    img.onerror = () => {
+        const container = doc.getElementById("mapbox-container");
+        if (container) container.innerHTML = `<iframe class="w-full h-full border-0 filter contrast-125" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.3!2d9.19!3d45.464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDI3JzUxLjEiTiA5wrAxMScyNC4wIkU!5e0!3m2!1sen!2sit!4v1" loading="lazy"></iframe>`;
+    };
+    if (img.complete && img.naturalWidth === 0) img.onerror();
+}
 // --- 9. Unified Data-Dispatch Pattern & Sync ---
 export function syncCanvasState() {
     isSyncing = true;
@@ -279,11 +296,13 @@ export function syncCanvasState() {
         applyTypographyPreset(state.typographyTier || document.getElementById("typographySelect")?.value || "tier1");
         applyPainsLook(state.painsLook || "a");
         applyPainsAlignment(state.painsAlign || "center", false);
+        applyPainsActions(state.painsActions || "end", false);
         applyGalleryWidth(state.galleryWidth || "boxed");
         applyGalleryScale(state.galleryScale || "1", false);
         const doc = getCanvasDocument();
         if (doc) {
             applyStateToDocument(doc, state);
+            initMapbox(doc);
             const animToggle = byId("toggle-animations");
             if (animToggle) doc.documentElement.dataset.animations = animToggle.checked ? "true" : "false";
         }
@@ -348,6 +367,7 @@ const DISPATCH_MAP = {
     tier: v => applyTypographyPreset(v),
     painsLook: v => applyPainsLook(v),
     painsAlign: v => applyPainsAlignment(v),
+    painsActions: v => applyPainsActions(v),
     cardAlign: v => { state.svcCardAlign = v; safeWriteSiteData(); syncActiveGroup("[data-card-align]", "data-card-align", v); const s = byId("services"); if (s) s.dataset.cardAlign = v; },
     actionAlign: v => { state.svcActionAlign = v; safeWriteSiteData(); syncActiveGroup("[data-action-align]", "data-action-align", v); const s = byId("services"); if (s) s.dataset.actionAlign = v; },
     galleryFilter: v => { syncActiveGroup("[data-gallery-filter]", "data-gallery-filter", v); getCanvasDocument().querySelectorAll("#gallery-row-1 [data-tag], #gallery-row-2 [data-tag]").forEach(el => { const m = v === "all" || el.dataset.tag === v; el.style.opacity = m ? "1" : "0.2"; el.style.filter = m ? "none" : "grayscale(100%)"; }); },
@@ -412,8 +432,13 @@ function initAccountSettings() {
 }
 function initGlobalDispatchListeners() {
     document.addEventListener("click", e => {
+        const link = e.target.closest("a");
+        if (link && (link.target === "_blank" || link.id === "kitWin")) return;
         const btn = e.target.closest("button, [data-opt], .cfg-tab, .color-btn, .kit-row");
         if (!btn) return;
+        const doc = getCanvasDocument();
+        if (btn.dataset.painsAlign && doc?.getElementById("pains")) doc.getElementById("pains").dataset.cardAlign = btn.dataset.painsAlign;
+        if (btn.dataset.painsActions && doc) doc.querySelectorAll("#pains .card-actions").forEach(el => el.dataset.actionAlign = btn.dataset.painsActions);
         for (const k in btn.dataset) { if (DISPATCH_MAP[k]) return DISPATCH_MAP[k](btn.dataset[k], btn); }
         if (btn.classList.contains("color-btn")) {
             e.stopPropagation();
@@ -549,6 +574,8 @@ export function initRuntime() {
     initCanvasSectionClicks();
     const frame = document.getElementById("templateCanvasFrame") || document.querySelector(".kit-canvas-frame iframe");
     if (frame) {
+        const s = frame.getAttribute("src");
+        if (!s || s === "template" || s === "/template") frame.src = "./template.html";
         let resizeRaf = null;
         frame.addEventListener("load", () => {
             try {
@@ -561,12 +588,15 @@ export function initRuntime() {
                     ro.observe(doc.body);
                 }
                 bindRouteDelegation(doc, frame.contentWindow);
+                if (doc) initMapbox(doc);
             } catch (e) {}
             syncCanvasState();
             if (window.location.hash) navigateRoute(window.location.hash);
         });
         if (frame.contentDocument?.readyState === "complete") {
-            bindRouteDelegation(frame.contentDocument, frame.contentWindow);
+            const doc = frame.contentDocument || frame.contentWindow?.document;
+            bindRouteDelegation(doc, frame.contentWindow);
+            if (doc) initMapbox(doc);
             syncCanvasState();
         }
     }
@@ -575,14 +605,6 @@ export function initRuntime() {
             Object.assign(state, updatedData);
             syncCanvasState();
         }
-    });
-    document.getElementById("kitWin")?.addEventListener("click", e => {
-        e.preventDefault();
-        try {
-            state.typographyTier = document.getElementById("typographySelect")?.value || state.typographyTier || "tier1";
-            writeSiteData(state);
-        } catch (err) {}
-        window.open("./template.html", "_blank");
     });
     bindRouteDelegation(document, window);
     syncCanvasState();
@@ -602,6 +624,8 @@ export function navigateRoute(routeKey) {
     const raw = routeKey || window.location.hash || "home";
     const key = raw.replace(/^#?\/?(services\/|legal\/)?/, "") || "home";
     const route = ROUTES[key] || ROUTES.home;
+    const kitWin = byId("kitWin");
+    if (kitWin) kitWin.href = `./template.html?preview=1${window.location.hash || ""}`;
     const doc = getCanvasDocument();
     const hero = doc?.getElementById("hero");
     if (hero) {
@@ -639,10 +663,13 @@ export function navigateRoute(routeKey) {
 }
 function bindRouteDelegation(targetDoc, targetWin) {
     targetDoc?.addEventListener("click", e => {
-        const link = e.target.closest?.("[data-route]");
-        if (!link) return;
-        const route = link.dataset.route;
-        const href = link.getAttribute("href");
+        const link = e.target.closest("a");
+        if (link && (link.target === "_blank" || link.id === "kitWin")) return;
+        const routeLink = e.target.closest?.("[data-route]");
+        if (!routeLink) return;
+        e.preventDefault();
+        const route = routeLink.dataset.route;
+        const href = routeLink.getAttribute("href");
         if (href && href.startsWith("#")) {
             window.location.hash = href;
             if (targetWin && targetWin !== window) targetWin.location.hash = href;

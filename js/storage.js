@@ -3,67 +3,31 @@
    Real-time BroadcastChannel & LocalStorage persistence.
    Declarative style token & layout variant synchronization.
    ========================================================= */
-const KEY = 'site_data';
-const CHANNEL_NAME = 'pandino_site_sync';
+const KEY = 'site_data', CHANNEL_NAME = 'pandino_site_sync';
 let syncChannel = null;
-try {
-    if (typeof BroadcastChannel !== 'undefined') {
-        syncChannel = new BroadcastChannel(CHANNEL_NAME);
-    }
-} catch (e) {}
-export function readSiteData() {
-    try {
-        return JSON.parse(localStorage.getItem(KEY) || 'null');
-    } catch (e) {
-        return null;
-    }
-}
+try { if (typeof BroadcastChannel !== 'undefined') syncChannel = new BroadcastChannel(CHANNEL_NAME); } catch (e) {}
+export function readSiteData() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } }
 export function writeSiteData(data) {
     if (!data) return;
     try {
-        const serialized = JSON.stringify(data);
-        localStorage.setItem(KEY, serialized);
-        if (syncChannel) {
-            syncChannel.postMessage({ type: 'SITE_DATA_SYNC', data, timestamp: Date.now() });
-        }
-    } catch (e) { /* private browsing quota guard */ }
+        localStorage.setItem(KEY, JSON.stringify(data));
+        if (syncChannel) syncChannel.postMessage({ type: 'SITE_DATA_SYNC', data, timestamp: Date.now() });
+    } catch (e) {}
 }
 export function onSiteDataChange(callback) {
     if (typeof callback !== 'function') return () => {};
-    const onBroadcast = (e) => {
-        if (e.data && e.data.type === 'SITE_DATA_SYNC' && e.data.data) {
-            callback(e.data.data);
-        }
-    };
-    const onStorage = (e) => {
-        if (e.key === KEY && e.newValue) {
-            try {
-                callback(JSON.parse(e.newValue));
-            } catch (err) {}
-        }
-    };
-    if (syncChannel) {
-        syncChannel.addEventListener('message', onBroadcast);
-    }
+    const onBroadcast = (e) => { if (e.data?.type === 'SITE_DATA_SYNC' && e.data.data) callback(e.data.data); };
+    const onStorage = (e) => { if (e.key === KEY && e.newValue) { try { callback(JSON.parse(e.newValue)); } catch (err) {} } };
+    if (syncChannel) syncChannel.addEventListener('message', onBroadcast);
     window.addEventListener('storage', onStorage);
-    return () => {
-        if (syncChannel) syncChannel.removeEventListener('message', onBroadcast);
-        window.removeEventListener('storage', onStorage);
-    };
+    return () => { if (syncChannel) syncChannel.removeEventListener('message', onBroadcast); window.removeEventListener('storage', onStorage); };
 }
 /* Trailing debounce for high-frequency input (e.g., headline text input) */
 export function createDeferredWrite(run, wait = 250) {
     let timer = 0;
     const fire = () => { timer = 0; run(); };
-    const schedule = () => {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(fire, wait);
-    };
-    schedule.flush = () => {
-        if (!timer) return;
-        clearTimeout(timer);
-        fire();
-    };
+    const schedule = () => { if (timer) clearTimeout(timer); timer = setTimeout(fire, wait); };
+    schedule.flush = () => { if (!timer) return; clearTimeout(timer); fire(); };
     schedule.pending = () => timer !== 0;
     return schedule;
 }
@@ -79,65 +43,36 @@ export const FONT_TIERS = {
 };
 export function hexToRgb(hex) {
     const m = /^#?([0-9a-f]{6})$/i.exec(String(hex).trim());
-    if (!m) return null;
-    const n = parseInt(m[1], 16);
-    return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    return m ? { r: (parseInt(m[1], 16) >> 16) & 255, g: (parseInt(m[1], 16) >> 8) & 255, b: parseInt(m[1], 16) & 255 } : null;
 }
 export function rgbToOklch(r, g, b) {
-    let R = r / 255, G = g / 255, B = b / 255;
-    R = R <= .04045 ? R / 12.92 : ((R + .055) / 1.055) ** 2.4;
-    G = G <= .04045 ? G / 12.92 : ((G + .055) / 1.055) ** 2.4;
-    B = B <= .04045 ? B / 12.92 : ((B + .055) / 1.055) ** 2.4;
-    const l = 0.4122214708 * R + 0.5363325363 * G + 0.0514459929 * B;
-    const m = 0.2119034982 * R + 0.6806995451 * G + 0.1073969566 * B;
-    const s = 0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B;
-    const l_ = Math.cbrt(l), m_ = Math.cbrt(m), s_ = Math.cbrt(s);
-    const L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_;
-    const a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_;
-    const bb = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_;
-    const C = Math.sqrt(a * a + bb * bb);
-    let H = Math.atan2(bb, a) * 180 / Math.PI;
-    if (H < 0) H += 360;
-    return { L, C, H };
+    const toLinear = v => (v /= 255) <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4;
+    const R = toLinear(r), G = toLinear(g), B = toLinear(b);
+    const l = Math.cbrt(0.4122214708 * R + 0.5363325363 * G + 0.0514459929 * B), m = Math.cbrt(0.2119034982 * R + 0.6806995451 * G + 0.1073969566 * B), s = Math.cbrt(0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B);
+    const L = 0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, a = 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s, bb = 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s;
+    let H = Math.atan2(bb, a) * 180 / Math.PI; if (H < 0) H += 360;
+    return { L, C: Math.sqrt(a * a + bb * bb), H };
 }
 export function oklchToHex(L, C, H) {
-    const h = H * Math.PI / 180;
-    const a = C * Math.cos(h), b = C * Math.sin(h);
-    const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
-    const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
-    const s_ = L - 0.0894841775 * a - 1.2914855480 * b;
-    const l = l_ ** 3, m = m_ ** 3, s = s_ ** 3;
-    let R = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s;
-    let G = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s;
-    let B = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s;
-    const toS = v => {
-        v = Math.min(1, Math.max(0, v));
-        return v <= 0.0031308 ? 12.92 * v : 1.055 * (v ** (1 / 2.4)) - 0.055;
-    };
+    const h = H * Math.PI / 180, a = C * Math.cos(h), b = C * Math.sin(h);
+    const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3, m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3, s = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+    const toS = v => { v = Math.min(1, Math.max(0, v)); return v <= 0.0031308 ? 12.92 * v : 1.055 * (v ** (1 / 2.4)) - 0.055; };
     const hex = n => Math.round(toS(n) * 255).toString(16).padStart(2, '0');
-    return '#' + hex(R) + hex(G) + hex(B);
+    return '#' + hex(+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s) + hex(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s) + hex(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s);
 }
 export const SHADE_STEPS = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
 export const L_T = { 50: 0.976, 100: 0.947, 200: 0.899, 300: 0.832, 400: 0.742, 500: 0.670, 600: 0.587, 700: 0.511, 800: 0.433, 900: 0.377, 950: 0.257 };
 export const C_T = { 50: 0.015, 100: 0.036, 200: 0.069, 300: 0.110, 400: 0.151, 500: 0.175, 600: 0.177, 700: 0.163, 800: 0.136, 900: 0.112, 950: 0.077 };
 export function rampFromHex(hex) {
-    const rgb = hexToRgb(hex);
-    if (!rgb) return null;
-    const { L, C, H } = rgbToOklch(rgb.r, rgb.g, rgb.b);
-    const h = String(hex).trim().replace(/^#/, '').toLowerCase();
+    const rgb = hexToRgb(hex); if (!rgb) return null;
+    const { L, C, H } = rgbToOklch(rgb.r, rgb.g, rgb.b), h = String(hex).trim().replace(/^#/, '').toLowerCase();
     let lock = '500', best = 99;
-    SHADE_STEPS.forEach(n => {
-        const d = Math.abs(L - L_T[n]);
-        if (d < best) { best = d; lock = String(n); }
-    });
-    const neutral = C < 0.045;
-    const out = {};
+    SHADE_STEPS.forEach(n => { const d = Math.abs(L - L_T[n]); if (d < best) { best = d; lock = String(n); } });
+    const neutral = C < 0.045, out = {};
     SHADE_STEPS.forEach(n => {
         const key = String(n);
         if (key === lock) { out[key] = '#' + h; return; }
-        const c = neutral
-            ? Math.min(0.04, C_T[n] * (C / 0.028))
-            : Math.min(0.37, C * (C_T[n] / Math.max(0.02, C_T[Number(lock)])));
+        const c = neutral ? Math.min(0.04, C_T[n] * (C / 0.028)) : Math.min(0.37, C * (C_T[n] / Math.max(0.02, C_T[Number(lock)])));
         out[key] = oklchToHex(L_T[n], c, H);
     });
     return out;
@@ -163,19 +98,8 @@ export function applyStateToDocument(doc, data) {
         }
         const p500 = (ramp && ramp['500']) || hex;
         [root, body].forEach(target => {
-            if (ramp) {
-                SHADE_STEPS.forEach(step => {
-                    if (ramp[step]) {
-                        target.style.setProperty(`--active-${step}`, ramp[step]);
-                        target.style.setProperty(`--primary-${step}`, ramp[step]);
-                    }
-                });
-            }
-            target.style.setProperty('--color-primary', p500);
-            target.style.setProperty('--primary-color', p500);
-            target.style.setProperty('--active-500', p500);
-            target.style.setProperty('--p', p500);
-            target.style.setProperty('--pill-accent', p500);
+            if (ramp) { SHADE_STEPS.forEach(step => { if (ramp[step]) { target.style.setProperty(`--active-${step}`, ramp[step]); target.style.setProperty(`--primary-${step}`, ramp[step]); } }); }
+            ['--color-primary', '--primary-color', '--active-500', '--p', '--pill-accent'].forEach(p => target.style.setProperty(p, p500));
             target.style.setProperty('--tone-mid', (ramp && ramp['700']) || p500);
             target.style.setProperty('--brand-ink', hex);
             target.style.setProperty('--brand-contrast-fg', contrastFg);
@@ -184,100 +108,52 @@ export function applyStateToDocument(doc, data) {
     }
     // 2. Color Scheme & Theme Mode
     if (data.scheme) {
-        const isLight = (data.scheme === 'white');
-        const themeName = isLight ? 'light' : 'dark';
-        root.setAttribute('data-scheme', data.scheme);
-        root.setAttribute('data-theme', themeName);
-        body.setAttribute('data-theme', themeName);
-        body.classList.remove('scheme-white', 'scheme-dark', 'scheme-brand');
-        body.classList.add(`scheme-${data.scheme}`);
-        const frameContainer = document.querySelector('.kit-canvas-frame');
-        if (frameContainer) frameContainer.setAttribute('data-theme', themeName);
+        const isLight = (data.scheme === 'white'), themeName = isLight ? 'light' : 'dark';
+        root.setAttribute('data-scheme', data.scheme); root.setAttribute('data-theme', themeName); body.setAttribute('data-theme', themeName);
+        body.classList.remove('scheme-white', 'scheme-dark', 'scheme-brand'); body.classList.add(`scheme-${data.scheme}`);
+        document.querySelector('.kit-canvas-frame')?.setAttribute('data-theme', themeName);
     } else if (data.theme) {
-        root.setAttribute('data-theme', data.theme);
-        body.setAttribute('data-theme', data.theme);
-        const frameContainer = document.querySelector('.kit-canvas-frame');
-        if (frameContainer) frameContainer.setAttribute('data-theme', data.theme);
+        root.setAttribute('data-theme', data.theme); body.setAttribute('data-theme', data.theme);
+        document.querySelector('.kit-canvas-frame')?.setAttribute('data-theme', data.theme);
     }
     // 3. Typography Preset Model
     if (data.typographyTier) {
         const fonts = FONT_TIERS[data.typographyTier] || FONT_TIERS.tier1;
-        [root, body].forEach(target => {
-            target.style.setProperty('--headline-font', fonts.headline);
-            target.style.setProperty('--body-font', fonts.body);
-        });
+        [root, body].forEach(target => { target.style.setProperty('--headline-font', fonts.headline); target.style.setProperty('--body-font', fonts.body); });
         let dynStyle = doc.getElementById('pandino-dynamic-typography');
-        if (!dynStyle) {
-            dynStyle = doc.createElement('style');
-            dynStyle.id = 'pandino-dynamic-typography';
-            (doc.head || doc.body).appendChild(dynStyle);
-        }
-        dynStyle.textContent = `
-            body { font-family: ${fonts.body} !important; }
-            h1, h2, h3, h4, h5, h6, .hero-content h1, .title-wrap h1, .card-title, .sec-title {
-                font-family: ${fonts.headline} !important;
-            }
-        `;
+        if (!dynStyle) { dynStyle = doc.createElement('style'); dynStyle.id = 'pandino-dynamic-typography'; (doc.head || doc.body).appendChild(dynStyle); }
+        dynStyle.textContent = `body { font-family: ${fonts.body} !important; } h1, h2, h3, h4, h5, h6, .hero-content h1, .title-wrap h1, .card-title, .sec-title { font-family: ${fonts.headline} !important; }`;
     }
     // 4. Hero Layout Formats (0: Soft center, 1: Full-screen, 2: Frame, 3: Side menu, 4: Bold line, 5: Split)
     if (data.heroIndex !== undefined) {
         const hero = doc.getElementById('hero') || doc.querySelector('main.heroes-container > .hero, .heroes-container > .hero, .hero');
         if (hero) {
-            hero.dataset.layout = String(Number(data.heroIndex) + 1);
-            hero.hidden = false;
-            hero.classList.add('is-live-hero');
-            const HERO_LABELS = [
-                'Layout 1: Gradient Centered',
-                'Layout 2: Full Bleed',
-                'Layout 3: Centered Full',
-                'Layout 4: Bottom sidebar menu',
-                'Layout 5: Bold Minimal',
-                'Layout 6: Business Info'
-            ];
-            const label = hero.querySelector('.hero-label');
-            if (label && HERO_LABELS[data.heroIndex]) label.textContent = HERO_LABELS[data.heroIndex];
+            hero.dataset.layout = String(Number(data.heroIndex) + 1); hero.hidden = false; hero.classList.add('is-live-hero');
+            const HERO_LABELS = ['Layout 1: Gradient Centered', 'Layout 2: Full Bleed', 'Layout 3: Centered Full', 'Layout 4: Bottom sidebar menu', 'Layout 5: Bold Minimal', 'Layout 6: Business Info'];
+            const label = hero.querySelector('.hero-label'); if (label && HERO_LABELS[data.heroIndex]) label.textContent = HERO_LABELS[data.heroIndex];
         }
     }
     // 5. Hero Panel Position (off, bottom, left, right) - Enforces Split hero variant
     if (data.panel) {
         const pos = data.panel;
-        ['off', 'bottom', 'left', 'right'].forEach(v => {
-            body.classList.toggle('panel-' + v, pos === v);
-        });
+        ['off', 'bottom', 'left', 'right'].forEach(v => body.classList.toggle('panel-' + v, pos === v));
         doc.querySelectorAll('.biz-panel, .hb-info').forEach(panel => {
-            if (pos === 'off') {
-                panel.setAttribute('hidden', '');
-                panel.hidden = true;
-            } else {
-                panel.removeAttribute('hidden');
-                panel.hidden = false;
-            }
+            if (pos === 'off') { panel.setAttribute('hidden', ''); panel.hidden = true; } else { panel.removeAttribute('hidden'); panel.hidden = false; }
             panel.classList.toggle('self-end', pos === 'bottom');
         });
-        doc.querySelectorAll('.hero').forEach(hero => {
-            hero.setAttribute('data-panel', pos);
-        });
+        doc.querySelectorAll('.hero').forEach(hero => hero.setAttribute('data-panel', pos));
     }
     // 6. Hero Panel Style (solid vs outline)
-    if (data.panelStyle) {
-        body.classList.toggle('panel-solid', data.panelStyle === 'solid');
-        body.classList.toggle('panel-outline', data.panelStyle === 'outline');
-    }
+    if (data.panelStyle) { body.classList.toggle('panel-solid', data.panelStyle === 'solid'); body.classList.toggle('panel-outline', data.panelStyle === 'outline'); }
     // 7. Customer Pains Layout Variant (a: 3 Cards vs b: Split Comparison)
-    if (data.painsLook) {
-        const pains = doc.getElementById('pains') || doc.querySelector('.ks-pains');
-        if (pains) {
-            pains.setAttribute('data-look', data.painsLook);
-        }
-    }
-    // 7b. Customer Pains Card Alignment (left | center | right)
+    if (data.painsLook) { const pains = doc.getElementById('pains') || doc.querySelector('.ks-pains'); if (pains) pains.setAttribute('data-look', data.painsLook); }
+    // 7b. Customer Pains Card & Action Alignment
     if (data.painsAlign) {
         const pains = doc.getElementById('pains') || doc.querySelector('.ks-pains');
-        if (pains) {
-            pains.setAttribute('data-card-align', data.painsAlign);
-            pains.classList.remove('pains-align-left', 'pains-align-center', 'pains-align-right');
-            pains.classList.add(`pains-align-${data.painsAlign}`);
-        }
+        if (pains) { pains.setAttribute('data-card-align', data.painsAlign); pains.dataset.cardAlign = data.painsAlign; }
+    }
+    if (data.painsActions) {
+        doc.querySelectorAll('#pains .card-actions').forEach(el => { el.setAttribute('data-action-align', data.painsActions); el.dataset.actionAlign = data.painsActions; });
     }
     if (data.svcCardAlign) doc.getElementById('services')?.setAttribute('data-card-align', data.svcCardAlign);
     if (data.svcActionAlign) doc.getElementById('services')?.setAttribute('data-action-align', data.svcActionAlign);

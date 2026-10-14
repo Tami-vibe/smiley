@@ -12,6 +12,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="./css/tokens-base.css">
+<link rel="stylesheet" href="./css/daisyui-components.css">
 <script>
   (function() {
     try {
@@ -218,7 +219,7 @@
         <div class="card-body p-6">
           <div class="flex items-center justify-between gap-2"><h3 class="card-title text-lg font-bold text-base-content">Moving Deadlines</h3><span class="badge badge-error badge-sm font-semibold">THE HASSLE</span></div>
           <p class="text-sm text-base-content/70 leading-relaxed mt-1">Parts delays and lack of communication leave rental clocks ticking down while your vehicle sits disassembled.</p>
-          <div class="card-actions justify-end mt-4 pt-2 border-t border-base-content/5"><span class="badge badge-outline text-xs">Rental Expiry</span><span class="badge badge-outline text-xs">Parts Delay</span></div>
+          <div class="card-actions justify-end mt-4"><span class="badge badge-outline text-xs">Rental Expiry</span><span class="badge badge-outline text-xs">Parts Delay</span></div>
         </div>
       </div>
       <!-- Card 2: Surprise Supplemental Bills -->
@@ -227,7 +228,7 @@
         <div class="card-body p-6">
           <div class="flex items-center justify-between gap-2"><h3 class="card-title text-lg font-bold text-base-content">Estimate Creep</h3><span class="badge badge-error badge-sm font-semibold">SURPRISE COSTS</span></div>
           <p class="text-sm text-base-content/70 leading-relaxed mt-1">Initial quotes that balloon unexpectedly at vehicle pickup due to undocumented labor rates and unapproved parts supplements.</p>
-          <div class="card-actions justify-end mt-4 pt-2 border-t border-base-content/5"><span class="badge badge-outline text-xs">Hidden Fees</span><span class="badge badge-outline text-xs">Unapproved Costs</span></div>
+          <div class="card-actions justify-end mt-4"><span class="badge badge-outline text-xs">Hidden Fees</span><span class="badge badge-outline text-xs">Unapproved Costs</span></div>
         </div>
       </div>
       <!-- Card 3: Color Mismatch & Secondary Defects -->
@@ -236,7 +237,7 @@
         <div class="card-body p-6">
           <div class="flex items-center justify-between gap-2"><h3 class="card-title text-lg font-bold text-base-content">Flawed Finishes</h3><span class="badge badge-error badge-sm font-semibold">POOR QUALITY</span></div>
           <p class="text-sm text-base-content/70 leading-relaxed mt-1">Noticeable color mismatches, clear-coat peeling, and rough texture from non-certified spray environments.</p>
-          <div class="card-actions justify-end mt-4 pt-2 border-t border-base-content/5"><span class="badge badge-outline text-xs">Color Gap</span><span class="badge badge-outline text-xs">No Warranty</span></div>
+          <div class="card-actions justify-end mt-4"><span class="badge badge-outline text-xs">Color Gap</span><span class="badge badge-outline text-xs">No Warranty</span></div>
         </div>
       </div>
     </div>
@@ -284,8 +285,15 @@
       <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <figure aria-label="Drag to compare before and after" class="diff aspect-video rounded-xl overflow-hidden border border-base-300 shadow-sm" tabindex="0">
-            <div aria-label="Before the repair" class="diff-item-1" role="img" tabindex="0"><div class="bg-base-200 flex flex-col items-center justify-center h-full p-4 text-center"><svg aria-hidden="true" class="w-10 h-10 text-base-content/40 mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M8 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M7 6l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-5m0 -6h8m-6 0v-5m2 0h-4"></path><path d="M14 8v-2"></path><path d="M19 12h2"></path><path d="M17.5 15.5l1.5 1.5"></path><path d="M17.5 8.5l1.5 -1.5"></path></svg><span class="text-xs font-bold uppercase tracking-wider opacity-70">Before</span></div></div>
-            <div aria-label="After the repair" class="diff-item-2" role="img"><div class="bg-base-300 flex flex-col items-center justify-center h-full p-4 text-center"><svg aria-hidden="true" class="w-10 h-10 text-primary mb-2 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path><path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"></path></svg><span class="text-xs font-bold uppercase tracking-wider text-primary">After</span></div></div>
+            <!-- Diff Item 1: Before State -->
+            <div class="diff-item-1" role="img" tabindex="0">
+              <img src="media/ai-images/before-repair.jpeg" alt="Vehicle Damage Before Repair" />
+            </div>
+            <!-- Diff Item 2: After State -->
+            <div class="diff-item-2" role="img">
+              <img src="media/ai-images/after-repair.jpeg" alt="Vehicle Restored After Repair" />
+            </div>
+            <!-- Interactive Drag Resizer Handle -->
             <div class="diff-resizer"></div>
           </figure>
           <div class="flex flex-col gap-4">
@@ -416,29 +424,30 @@
     <h2 id="promo-title" class="text-3xl md:text-5xl font-black tracking-tight text-white">Headlight Restoration &amp; UV Sealing</h2>
     <p class="text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">Restore showroom optical clarity in 60 minutes. Guaranteed scratch removal and 2-year hydrophobic UV protection seal.</p>
     <div class="inline-flex items-baseline gap-3 px-6 py-2.5 rounded-full bg-base-100/40 backdrop-blur-md border border-white/10 shadow-lg"><span class="text-3xl md:text-4xl font-black text-primary">€49</span><s class="text-base text-white/50">€79</s><span class="badge badge-success badge-sm font-bold uppercase">Save 38%</span></div>
-    <div class="flex flex-wrap gap-4 justify-center items-center pt-2">
-      <a class="btn h-12 px-8 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-lg border-none" href="#quote"><span class="material-symbols-outlined text-base">calendar_month</span> Book the offer</a>
-      <a class="btn h-12 px-8 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium border border-white/15 backdrop-blur-md transition-all" href="tel:+390212345678"><span class="material-symbols-outlined text-base">call</span> Workshop Direct</a>
-    </div>
+    <div class="flex flex-wrap gap-4 justify-center items-center pt-2"><a class="btn h-12 px-8 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-lg border-none" href="#quote"><span class="material-symbols-outlined text-base">calendar_month</span> Book the offer</a><a class="btn h-12 px-8 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium border border-white/15 backdrop-blur-md transition-all" href="tel:+390212345678"><span class="material-symbols-outlined text-base">call</span> Workshop Direct</a></div>
   </div>
 </section>
 <!-- CONTACT -->
-<section id="contact" class="w-full py-12 md:py-20 bg-base-200/30" data-theme="dark" aria-labelledby="contact-title">
+<section id="contact" class="w-full py-16 md:py-24 bg-base-100" data-theme="dark" aria-labelledby="contact-title">
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-      <div class="card bg-base-100 border border-base-300 p-6 md:p-8 flex flex-col justify-between gap-6 shadow-sm">
-        <div>
-          <span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 block mb-1">Contact</span>
-          <h2 id="contact-title" class="tracking-tight font-extrabold text-base-content">Visit or call us.</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <!-- Left Column: Contact Details (5 cols) -->
+      <div class="lg:col-span-5 card bg-base-200/60 border border-base-content/10 p-8 rounded-3xl flex flex-col justify-between">
+        <div class="space-y-6">
+          <div><span class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary block mb-2">CONTACT</span><h2 id="contact-title" class="text-3xl md:text-4xl font-extrabold tracking-tight text-base-content">Visit or call us.</h2></div>
+          <div class="space-y-4 text-sm">
+            <div class="flex items-start gap-3"><span class="text-primary font-bold">📍</span><div><strong class="text-base-content block">Via Nazionale, 42</strong><span class="text-base-content/70">20123 Milan (MI)</span></div></div>
+            <div class="flex items-start gap-3"><span class="text-primary font-bold">📞</span><div><a href="tel:+390212345678" class="text-base-content font-bold hover:underline">+39 02 1234 5678</a><span class="text-xs text-base-content/60 block">Mon–Fri 08:00–18:30 · Sat 08:00–12:30</span></div></div>
+            <div class="flex items-start gap-3"><span class="text-primary font-bold">💬</span><div><a href="https://wa.me/390212345678" target="_blank" class="text-base-content font-bold hover:underline">WhatsApp Dispatch</a><span class="text-xs text-base-content/60 block">Send photos for immediate review</span></div></div>
+          </div>
         </div>
-        <ul class="flex flex-col gap-4 p-0 m-0 list-none" role="list">
-          <li class="flex items-start gap-4"><svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><div><b class="text-sm block">Via Nazionale, 42</b><span class="text-xs opacity-70">20123 Milan (MI)</span></div></li>
-          <li class="flex items-start gap-4"><svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg><div><b class="text-sm block"><a href="tel:+390212345678" class="link link-hover text-base-content">+39 02 1234 5678</a></b><span class="text-xs opacity-70">Mon–Fri 08:00–18:30 · Sat 08:00–12:30</span></div></li>
-          <li class="flex items-start gap-4"><svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg><div><b class="text-sm block"><a href="#contact" class="link link-hover text-primary">WhatsApp us</a></b><span class="text-xs opacity-70">Send photos, get a quick reply</span></div></li>
-          <li class="flex items-start gap-4"><svg aria-hidden="true" class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"></path><path d="M3 7l9 6l9 -6"></path></svg><div><b class="text-sm block"><a href="mailto:info@example.com" class="link link-hover text-base-content">info@example.com</a></b><span class="text-xs opacity-70">We answer within one working day</span></div></li>
-        </ul>
       </div>
-      <div class="card bg-base-100 border border-base-300 p-8 flex flex-col items-center justify-center text-center gap-4 shadow-sm min-h-[300px]"><svg aria-hidden="true" class="w-11 h-11 text-primary shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"></path></svg><p class="text-sm opacity-70 max-w-xs">The map loads only when you ask, so no Google cookies before consent.</p><button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none" type="button"><span class="material-symbols-outlined text-base">map</span> Show map</button></div>
+      <!-- Right Column: Full Cover Mapbox Container (7 cols) -->
+      <div class="lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[360px] lg:min-h-full border border-base-content/10 bg-base-200 shadow-xl">
+        <div id="mapbox-container" class="absolute inset-0 w-full h-full">
+          <img id="mapbox-render" src="https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/pin-s+10b981(9.19,45.464)/9.19,45.464,14,0/800x500?access_token=YOUR_MAPBOX_KEY" alt="Location Map" class="w-full h-full object-cover" />
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -595,6 +604,11 @@
     document.querySelectorAll('#about-gallery-filters [data-gallery-filter]').forEach(b => { b.classList.toggle('btn-primary', b === btn); b.classList.toggle('btn-outline', b !== btn); });
     document.querySelectorAll('#gallery-row-1 [data-tag], #gallery-row-2 [data-tag]').forEach(el => { const s = f === 'all' || el.dataset.tag === f; el.classList.toggle('opacity-25', !s); el.classList.toggle('grayscale', !s); });
   });
+  const img = document.getElementById('mapbox-render');
+  if (img) {
+    img.onerror = () => { const c = document.getElementById('mapbox-container'); if (c) c.innerHTML = '<iframe class="w-full h-full border-0 filter contrast-125" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.3!2d9.19!3d45.464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDI3JzUxLjEiTiA5wrAxMScyNC4wIkU!5e0!3m2!1sen!2sit!4v1" loading="lazy"></iframe>'; };
+    if (img.complete && img.naturalWidth === 0) img.onerror();
+  }
   const initialData = readSiteData(); if (initialData) applyStateToDocument(document, initialData);
   onSiteDataChange((updatedData) => { if (updatedData) { applyStateToDocument(document, updatedData); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); } });
   window.addEventListener('load', () => { const data = readSiteData(); if (data) applyStateToDocument(document, data); [900, 800, 700, 600, 500, 400, 300, 200].forEach(s => { const c = document.getElementById('chip-' + s); if (c) c.style.backgroundColor = 'var(--active-' + s + ')'; }); if (location.hash) navRoute(location.hash); if (window.parent?.__syncCanvasHeight) window.parent.__syncCanvasHeight(); });

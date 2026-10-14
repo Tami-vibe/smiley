@@ -60,19 +60,7 @@
         <span class="text-base-content/25 hidden md:inline select-none">/</span>
         <!-- Inline Project / Page Scope Breadcrumbs -->
         <div class="kit-crumbs flex items-center gap-1.5 min-w-0">
-          <span class="kit-project flex items-center gap-1 min-w-0">
-            <span class="kit-biz flex items-center gap-1 cursor-pointer" id="kitBizOpen">
-              <span class="material-symbols-outlined kit-biz-mark text-primary text-base" aria-hidden="true">storefront</span>
-              <input id="kitProject" readonly aria-label="Website name" value="Business Name" maxlength="48" class="bg-transparent border-none font-semibold text-xs sm:text-sm focus:outline-none w-24 sm:w-28 cursor-pointer">
-              <span class="kit-biz-caret text-xs text-base-content/60" aria-hidden="true">▾</span>
-            </span>
-            <button type="button" class="kit-name-edit btn btn-ghost btn-xs btn-circle" aria-label="Edit website name">
-              <span class="material-symbols-outlined text-xs">edit</span>
-            </button>
-            <span class="kit-niche text-xs text-base-content/60" id="kitNiche"></span>
-            <span class="kit-project-sep text-base-content/40 text-xs">/</span>
-            <button type="button" class="kit-page btn btn-ghost btn-xs font-semibold" id="kitPage" aria-haspopup="menu" aria-label="Page">Home</button>
-          </span>
+          <span class="kit-project flex items-center gap-1 min-w-0"><span class="kit-biz flex items-center gap-1 cursor-pointer" id="kitBizOpen"><span class="material-symbols-outlined kit-biz-mark text-primary text-base" aria-hidden="true">storefront</span><input id="kitProject" readonly aria-label="Website name" value="Business Name" maxlength="48" class="bg-transparent border-none font-semibold text-xs sm:text-sm focus:outline-none w-24 sm:w-28 cursor-pointer"><span class="kit-biz-caret text-xs text-base-content/60" aria-hidden="true">▾</span></span><button type="button" class="kit-name-edit btn btn-ghost btn-xs btn-circle" aria-label="Edit website name"><span class="material-symbols-outlined text-xs">edit</span></button><span class="kit-niche text-xs text-base-content/60" id="kitNiche"></span><span class="kit-project-sep text-base-content/40 text-xs">/</span><button type="button" class="kit-page btn btn-ghost btn-xs font-semibold" id="kitPage" aria-haspopup="menu" aria-label="Page">Home</button></span>
         </div>
       </div>
       <div class="flex-none flex items-center gap-2 sm:gap-3">
@@ -129,9 +117,11 @@
       </div>
     </div>
     <div class="flex items-center gap-1">
-      <button type="button" id="kitWin" class="btn btn-ghost btn-sm btn-circle tooltip tooltip-left text-base-content/70 hover:text-primary" data-tip="Live Preview" aria-label="Live Preview">
-        <span class="material-symbols-outlined text-base">open_in_new</span>
-      </button>
+      <a id="kitWin" href="./template.html?preview=1" target="_blank" rel="noopener noreferrer"
+         class="btn btn-ghost btn-sm btn-circle tooltip tooltip-left text-base-content/70 hover:text-primary inline-flex items-center justify-center cursor-pointer"
+         data-tip="Live Preview" aria-label="Live Preview">
+        <span class="material-symbols-outlined text-base pointer-events-none select-none">open_in_new</span>
+      </a>
     </div>
   </header>
   <!-- 2. Accordion Configuration Matrix (Scrollable Middle) -->
@@ -189,13 +179,9 @@
           </summary>
           <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
             <span class="text-[11px] text-base-content/70">Color Scheme</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-scheme="brand" title="Brand Color">Brand</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="white" title="Showroom White">White</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="dark" title="Carbon Charcoal">Dark</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-scheme="brand" title="Brand Color">Brand</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="white" title="Showroom White">White</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-scheme="dark" title="Carbon Charcoal">Dark</button></div>
             <span class="text-[11px] text-base-content/70">Text Contrast</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-contrast-mode="adaptive">Adaptive</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-contrast-mode="mono">Monochrome</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-contrast-mode="adaptive">Adaptive</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-contrast-mode="mono">Monochrome</button></div>
             <span class="text-[11px] text-base-content/70">Button Shade</span>
             <select id="btnShade" class="select select-bordered select-xs w-full rounded-lg bg-base-100" aria-label="Button Shade">
               <option value="auto" selected>Auto (Source Step)</option><option value="50">50 (Whisper)</option><option value="100">100 (Tint)</option><option value="300">300 (Soft)</option><option value="500">500 (Pure)</option><option value="700">700 (Deep)</option><option value="950">950 (Night)</option>
@@ -205,22 +191,10 @@
               <span class="badge badge-xs badge-ghost font-mono">9 Palettes</span>
             </div>
             <div class="grid grid-cols-2 gap-1.5" role="list">
-              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg">
-                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Azure</span><span class="badge badge-xs text-white bg-[#007fff]">500</span></div>
-                <div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#f0f7ff]" data-color="azure" data-hex="#f0f7ff"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#e0effe]" data-color="azure" data-hex="#e0effe"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#7cc0fd]" data-color="azure" data-hex="#7cc0fd"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#007fff]" data-color="azure" data-hex="#007fff"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#0053b8]" data-color="azure" data-hex="#0053b8"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#001a47]" data-color="azure" data-hex="#001a47"></button></div>
-              </div>
-              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg">
-                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Blue</span><span class="badge badge-xs text-white bg-[#2563eb]">500</span></div>
-                <div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#eff6ff]" data-color="blue" data-hex="#eff6ff"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#dbeafe]" data-color="blue" data-hex="#dbeafe"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#93c5fd]" data-color="blue" data-hex="#93c5fd"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#2563eb]" data-color="blue" data-hex="#2563eb"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#1d4ed8]" data-color="blue" data-hex="#1d4ed8"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#172554]" data-color="blue" data-hex="#172554"></button></div>
-              </div>
-              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg">
-                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Rose</span><span class="badge badge-xs text-white bg-[#f43f5e]">500</span></div>
-                <div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#fff1f2]" data-color="rose" data-hex="#fff1f2"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#ffe4e6]" data-color="rose" data-hex="#ffe4e6"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#fda4af]" data-color="rose" data-hex="#fda4af"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#f43f5e]" data-color="rose" data-hex="#f43f5e"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#be123c]" data-color="rose" data-hex="#be123c"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#4c0519]" data-color="rose" data-hex="#4c0519"></button></div>
-              </div>
-              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg">
-                <div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Emerald</span><span class="badge badge-xs text-white bg-[#10b981]">500</span></div>
-                <div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#ecfdf5]" data-color="emerald" data-hex="#ecfdf5"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#d1fae5]" data-color="emerald" data-hex="#d1fae5"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#6ee7b7]" data-color="emerald" data-hex="#6ee7b7"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#10b981]" data-color="emerald" data-hex="#10b981"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#047857]" data-color="emerald" data-hex="#047857"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#022c22]" data-color="emerald" data-hex="#022c22"></button></div>
-              </div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg"><div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Azure</span><span class="badge badge-xs text-white bg-[#007fff]">500</span></div><div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#f0f7ff]" data-color="azure" data-hex="#f0f7ff"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#e0effe]" data-color="azure" data-hex="#e0effe"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#7cc0fd]" data-color="azure" data-hex="#7cc0fd"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#007fff]" data-color="azure" data-hex="#007fff"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#0053b8]" data-color="azure" data-hex="#0053b8"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#001a47]" data-color="azure" data-hex="#001a47"></button></div></div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg"><div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Blue</span><span class="badge badge-xs text-white bg-[#2563eb]">500</span></div><div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#eff6ff]" data-color="blue" data-hex="#eff6ff"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#dbeafe]" data-color="blue" data-hex="#dbeafe"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#93c5fd]" data-color="blue" data-hex="#93c5fd"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#2563eb]" data-color="blue" data-hex="#2563eb"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#1d4ed8]" data-color="blue" data-hex="#1d4ed8"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#172554]" data-color="blue" data-hex="#172554"></button></div></div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg"><div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Rose</span><span class="badge badge-xs text-white bg-[#f43f5e]">500</span></div><div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#fff1f2]" data-color="rose" data-hex="#fff1f2"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#ffe4e6]" data-color="rose" data-hex="#ffe4e6"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#fda4af]" data-color="rose" data-hex="#fda4af"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#f43f5e]" data-color="rose" data-hex="#f43f5e"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#be123c]" data-color="rose" data-hex="#be123c"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#4c0519]" data-color="rose" data-hex="#4c0519"></button></div></div>
+              <div class="card bg-base-100/70 border border-base-300 p-2 flex flex-col gap-1 rounded-lg"><div class="flex items-center justify-between"><span class="font-semibold text-[11px]">Emerald</span><span class="badge badge-xs text-white bg-[#10b981]">500</span></div><div class="flex items-center gap-1 flex-wrap"><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#ecfdf5]" data-color="emerald" data-hex="#ecfdf5"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#d1fae5]" data-color="emerald" data-hex="#d1fae5"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#6ee7b7]" data-color="emerald" data-hex="#6ee7b7"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#10b981]" data-color="emerald" data-hex="#10b981"></button><button type="button" class="color-btn active w-4 h-4 rounded-lg border-2 border-white hover:scale-110 ring-1 ring-primary cursor-pointer bg-[#047857]" data-color="emerald" data-hex="#047857"></button><button type="button" class="color-btn w-4 h-4 rounded-lg border border-white/20 hover:scale-110 cursor-pointer bg-[#022c22]" data-color="emerald" data-hex="#022c22"></button></div></div>
             </div>
           </div>
         </details>
@@ -232,19 +206,13 @@
           </summary>
           <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-2">
             <span class="text-[11px] text-base-content/70">Header Type</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="type" data-val="bar">Classic</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="type" data-val="pill">Floating Pill</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="type" data-val="bar">Classic</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="type" data-val="pill">Floating Pill</button></div>
             <label class="cursor-pointer py-0.5 flex items-center justify-between"><span class="text-xs font-semibold text-base-content/80">Show Header</span><input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-opt="show" data-val="on" id="toggleHeaderShow" /></label>
             <label class="cursor-pointer py-0.5 flex items-center justify-between"><span class="text-xs font-semibold text-base-content/80">Sticky Navigation</span><input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-opt="sticky" data-val="on" id="toggleHeaderSticky" /></label>
             <span class="text-[11px] text-base-content/70">Bar Surface</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="surface" data-val="transparent">Transparent</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="light">Light</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="dark">Dark</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="glass">Glass</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="surface" data-val="transparent">Transparent</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="light">Light</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="dark">Dark</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="surface" data-val="glass">Glass</button></div>
             <span class="text-[11px] text-base-content/70">Menu Links</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="3">3</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="4">4</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="count" data-val="5">5</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="6">6</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="3">3</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="4">4</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-opt="count" data-val="5">5</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-opt="count" data-val="6">6</button></div>
           </div>
         </details>
       </div>
@@ -275,25 +243,15 @@
             <label class="text-[11px] font-semibold text-base-content/80" for="hero-promise">Headline Pitch</label>
             <input id="hero-promise" class="input input-bordered input-xs w-full font-medium" type="text" maxlength="60" placeholder="e.g., Experience the Future of Mobility" autocomplete="off">
             <span class="text-[11px] text-base-content/70">Rating &amp; Trust Badge</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-rev="off">None</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="white">Outlined</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="black">Solid</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-rev="off">None</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="white">Outlined</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-rev="black">Solid</button></div>
             <span class="text-[11px] text-base-content/70">Text Alignment</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="left">Left</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-halign="center">Center</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="right">Right</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="left">Left</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-halign="center">Center</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-halign="right">Right</button></div>
             <span class="text-[11px] text-base-content/70">Buttons Count</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="0">None</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="1">1 Button</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-ctacount="2">2 Buttons</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="0">None</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-ctacount="1">1 Button</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-ctacount="2">2 Buttons</button></div>
             <span class="text-[11px] text-base-content/70">Business Panel</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="off">Off</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-panel="bottom">Bottom</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="left">Left</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="right">Right</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="off">Off</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-panel="bottom">Bottom</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="left">Left</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-panel="right">Right</button></div>
             <span class="text-[11px] text-base-content/70">Panel Style</span>
-            <div class="join w-full">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pvariant="solid">Solid</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pvariant="outline">Outline</button>
-            </div>
+            <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pvariant="solid">Solid</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pvariant="outline">Outline</button></div>
             <div class="flex flex-col gap-1 pt-1 border-t border-base-300/60">
               <label class="cursor-pointer py-0.5 flex items-center justify-between"><span class="text-xs font-semibold text-base-content/80">Logo Marquee Slider</span><input type="checkbox" class="toggle toggle-primary toggle-xs" data-opt="marquee" data-val="on" id="toggleHeroMarquee" /></label>
               <label class="cursor-pointer py-0.5 flex items-center justify-between"><span class="text-xs font-semibold text-base-content/80">Text Reveal Animation</span><input type="checkbox" class="toggle toggle-primary toggle-xs" data-hmreveal="on" id="toggleHeroReveal" /></label>
@@ -345,17 +303,21 @@
           </summary>
           <div class="collapse-content px-3 pb-3 pt-1 flex flex-col gap-1.5">
             <label class="cursor-pointer py-0.5 flex items-center justify-between"><span class="text-xs text-base-content/70">Visible on Page</span><input type="checkbox" class="toggle toggle-primary toggle-xs" checked data-more="show" data-v="on" /></label>
-            <span class="text-[11px] text-base-content/70">Layout Style</span>
-            <div class="join w-full" id="painsLayoutJoin">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-look="a">3 Cards</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-look="b">Split Comparison</button>
+            <div class="flex justify-between items-center p-2 bg-base-200/50 rounded-xl mt-2 text-xs">
+              <span>Text</span>
+              <div class="join">
+                <button type="button" data-pains-align="left" class="btn btn-xs join-item">L</button>
+                <button type="button" data-pains-align="center" class="btn btn-xs join-item btn-active">C</button>
+                <button type="button" data-pains-align="right" class="btn btn-xs join-item">R</button>
+              </div>
             </div>
-            <span class="text-[11px] text-base-content/70">Buttons Count</span>
-            <div class="join w-full" id="painsCtaJoin">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-ctacount="0">None</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-ctacount="1">1 Button</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-ctacount="2">2 Buttons</button>
-            </div>
-            <span class="text-[11px] text-base-content/70">Card Alignment</span>
-            <div class="join w-full" id="painsAlignJoin">
-              <button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-align="left">Left</button><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-pains-align="center">Center</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-pains-align="right">Right</button>
+            <div class="flex justify-between items-center p-2 bg-base-200/50 rounded-xl mt-1 text-xs">
+              <span>Pills</span>
+              <div class="join">
+                <button type="button" data-pains-actions="start" class="btn btn-xs join-item">L</button>
+                <button type="button" data-pains-actions="center" class="btn btn-xs join-item">C</button>
+                <button type="button" data-pains-actions="end" class="btn btn-xs join-item btn-active">R</button>
+              </div>
             </div>
             <div class="join w-full"><button type="button" class="join-item btn btn-xs btn-outline flex-1 active" data-more="scheme" data-v="page">Default</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="brand">Brand</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="white">White</button><button type="button" class="join-item btn btn-xs btn-outline flex-1" data-more="scheme" data-v="dark">Dark</button></div>
             <select aria-label="Brand shade" class="select select-bordered select-xs w-full more-shade font-mono"><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="300">300</option><option value="400">400</option><option value="500">500</option><option value="600">600</option><option value="700" selected>700</option><option value="800">800</option><option value="900">900</option><option value="950">950</option></select>
@@ -575,49 +537,16 @@
     <div class="kit-account-body flex-1 overflow-y-auto flex flex-col gap-3">
       <!-- Profile Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="profile">
-        <div class="form-control w-full">
-          <label class="label py-1" for="kitAccountName">
-            <span class="label-text text-xs font-semibold text-base-content/80">Your Name</span>
-          </label>
-          <input id="kitAccountName" maxlength="48" placeholder="e.g. Alex Morgan" autocomplete="name" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" />
-        </div>
-        <div class="form-control w-full">
-          <label class="label py-1" for="kitAccountEmail">
-            <span class="label-text text-xs font-semibold text-base-content/80">Email Address</span>
-          </label>
-          <input id="kitAccountEmail" type="email" maxlength="80" placeholder="you@studio.com" autocomplete="email" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" />
-        </div>
-        <div class="flex items-start gap-2 p-2.5 rounded-lg bg-base-300/30 border border-base-300/40">
-          <span class="material-symbols-outlined text-sm text-primary mt-0.5 shrink-0">verified_user</span>
-          <p class="text-[11px] text-base-content/60 leading-relaxed m-0">Saved on this device. This profile owns the local Pandino workspace records.</p>
-        </div>
-        <button type="button" id="kitAccountSave" class="btn btn-sm btn-primary w-full mt-1 gap-1.5 rounded-lg">
-          <span class="material-symbols-outlined text-base">save</span>
-          <span>Save Changes</span>
-        </button>
+        <div class="form-control w-full"><label class="label py-1" for="kitAccountName"><span class="label-text text-xs font-semibold text-base-content/80">Your Name</span></label><input id="kitAccountName" maxlength="48" placeholder="e.g. Alex Morgan" autocomplete="name" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" /></div>
+        <div class="form-control w-full"><label class="label py-1" for="kitAccountEmail"><span class="label-text text-xs font-semibold text-base-content/80">Email Address</span></label><input id="kitAccountEmail" type="email" maxlength="80" placeholder="you@studio.com" autocomplete="email" class="input input-bordered input-sm w-full rounded-lg text-xs focus:input-primary bg-base-100" /></div>
+        <div class="flex items-start gap-2 p-2.5 rounded-lg bg-base-300/30 border border-base-300/40"><span class="material-symbols-outlined text-sm text-primary mt-0.5 shrink-0">verified_user</span><p class="text-[11px] text-base-content/60 leading-relaxed m-0">Saved on this device. This profile owns the local Pandino workspace records.</p></div>
+        <button type="button" id="kitAccountSave" class="btn btn-sm btn-primary w-full mt-1 gap-1.5 rounded-lg"><span class="material-symbols-outlined text-base">save</span><span>Save Changes</span></button>
       </div>
       <!-- Projects Pane -->
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="projects" hidden>
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-base-content">Workspace Projects</span>
-          <span class="badge badge-neutral badge-xs text-[10px]">1 / 5</span>
-        </div>
-        <div id="kitVault" class="kit-vault flex flex-col gap-2">
-          <div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-row items-center justify-between shadow-xs">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="material-symbols-outlined text-primary text-base">directions_car</span>
-              <div class="truncate">
-                <div class="text-xs font-semibold text-base-content truncate">Automotive Repair Pro</div>
-                <div class="text-[10px] text-base-content/50">Current Active Project</div>
-              </div>
-            </div>
-            <span class="badge badge-success badge-xs text-[10px]">Active</span>
-          </div>
-        </div>
-        <button type="button" class="kit-account-add btn btn-sm btn-outline btn-primary w-full gap-1.5 rounded-lg" id="kitVaultAdd">
-          <span class="material-symbols-outlined text-base">add</span>
-          <span>New Project</span>
-        </button>
+        <div class="flex items-center justify-between"><span class="text-xs font-bold text-base-content">Workspace Projects</span><span class="badge badge-neutral badge-xs text-[10px]">1 / 5</span></div>
+        <div id="kitVault" class="kit-vault flex flex-col gap-2"><div class="card bg-base-100 border border-base-300/60 p-3 rounded-xl flex flex-row items-center justify-between shadow-xs"><div class="flex items-center gap-2 min-w-0"><span class="material-symbols-outlined text-primary text-base">directions_car</span><div class="truncate"><div class="text-xs font-semibold text-base-content truncate">Automotive Repair Pro</div><div class="text-[10px] text-base-content/50">Current Active Project</div></div></div><span class="badge badge-success badge-xs text-[10px]">Active</span></div></div>
+        <button type="button" class="kit-account-add btn btn-sm btn-outline btn-primary w-full gap-1.5 rounded-lg" id="kitVaultAdd"><span class="material-symbols-outlined text-base">add</span><span>New Project</span></button>
         <p class="text-[11px] text-base-content/50 m-0">Up to 5 projects live in this local vault. Switching loads it on canvas.</p>
       </div>
       <div class="kit-account-pane flex flex-col gap-3" data-acct-pane="plan" hidden><div class="card bg-base-100 border border-primary/30 p-3.5 rounded-xl shadow-xs"><div class="flex items-center justify-between mb-2"><span class="text-xs font-bold text-base-content">Studio Tier</span><span class="badge badge-primary badge-sm text-[10px]">Unlimited</span></div><p class="text-xs text-base-content/70 m-0 leading-relaxed">Full access to automotive sections, custom tokens, and live preview exports.</p></div><div class="text-[11px] text-base-content/50">Renews annually. Managed via workspace administrator.</div></div>
@@ -629,7 +558,7 @@
 </div><!-- #cfg -->
 </div><!-- .drawer-side -->
 </div><!-- #kit-drawer -->
-<script type="module" src="./js/app.js?v=dev_test"></script>
+<script type="module" src="./js/app.js?v=live_fix_1"></script>
   <!-- CANONICAL SVG SPRITE SHEET -->
   <svg class="hidden" aria-hidden="true">
     <defs>
