@@ -255,6 +255,8 @@ body:not(.kit-standalone-page) {
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 25s linear infinite; }
 .\[animation-direction\:reverse\] { animation-direction: reverse; }
+.mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); }
+@media (min-width: 768px) { .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); } }
 #services[data-card-align="center"] .card-body { align-items: center; text-align: center; }
 #services[data-card-align="left"] .card-body { align-items: flex-start; text-align: left; }
 #services[data-card-align="right"] .card-body { align-items: flex-end; text-align: right; }
