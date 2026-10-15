@@ -21,18 +21,26 @@
    2. CANONICAL TOKENS (9 Brand Palettes & System Dimensions)
    ========================================================= */
 :root {
+  /* Surface Rhythm: Deep Midnight -> Slate Surfaces */
+  --color-base-100: #090D16;
+  --color-base-200: #0E131F;
+  --color-base-300: #131B2E;
+
+  /* Typography Contrast Hierarchy */
+  --color-base-content: #F8FAFC;  /* Slate-50: Main titles */
+  --color-text-secondary: #94A3B8; /* Slate-400: Body descriptions */
+  --color-text-muted: #64748B;     /* Slate-500: Footnotes / borders */
+
+  /* Unified Electric Indigo Accent */
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+  --color-primary-glow: rgba(99, 102, 241, 0.25);
+
   /* Base color tokens */
-  --color-white: #ffffff;
-  --color-charcoal: #17191c;
-  --color-charcoal-soft: #24272c;
-  --color-gray-100: #f2f3f5;
-  --color-gray-200: #e5e7eb;
-  --color-gray-400: #9aa0aa;
-  --color-gray-500: #6b7280;
-  --color-muted-gray: #5c6370;
-  --color-slate-700: #3c4450;
-  --color-pill-line: #c45a5a;
-  --color-indigo: #5b4dff;
+  --color-white: #ffffff; --color-charcoal: #17191c; --color-charcoal-soft: #24272c;
+  --color-gray-100: #f2f3f5; --color-gray-200: #e5e7eb; --color-gray-400: #9aa0aa;
+  --color-gray-500: #6b7280; --color-muted-gray: #5c6370; --color-slate-700: #3c4450;
+  --color-pill-line: #c45a5a; --color-indigo: #5b4dff;
 
   /* Brand ramps: 50 lightest → 950 darkest. Text is 950 or white. */
   /* AZURE RADIANCE — source 700 */
@@ -92,124 +100,48 @@
   --body-font: 'Manrope', sans-serif;
 
   /* Fluid type scale */
-  --fs-h1: clamp(2.5rem, 4.5vw + 1rem, 4.5rem);
-  --fs-h2: clamp(2rem, 3.2vw + 0.8rem, 4rem);
-  --fs-h3: clamp(1.5rem, 2vw + 0.5rem, 3rem);
-  --fs-h4: clamp(1.25rem, 1.2vw + 0.5rem, 1.75rem);
-  --fs-sub: clamp(1.125rem, 0.8vw + 0.8rem, 1.5rem);
-  --fs-body: 1rem;
-  --fs-small: 0.875rem;
-  --fs-label: 0.75rem;
-  --type-overline-size: 0.75rem;
-  --type-overline-track: 0.12em;
-  --type-title-size: clamp(1.75rem, 2.2vw + 1rem, 2.75rem);
-  --type-sub-size: 1.125rem;
-  --type-sub-lh: 1.5;
-  --type-body-size: 1rem;
-  --type-body-lh: 1.55;
-  --fs-title: clamp(2.25rem, 5vw + 1rem, 6rem);
-  --fs-title-side: clamp(2.25rem, 3vw + 1rem, 4.5rem);
-  --fs-btn: clamp(1rem, 0.2vw + 0.95rem, 1.125rem);
+  --fs-h1: clamp(2.5rem, 4.5vw + 1rem, 4.5rem); --fs-h2: clamp(2rem, 3.2vw + 0.8rem, 4rem); --fs-h3: clamp(1.5rem, 2vw + 0.5rem, 3rem); --fs-h4: clamp(1.25rem, 1.2vw + 0.5rem, 1.75rem);
+  --fs-sub: clamp(1.125rem, 0.8vw + 0.8rem, 1.5rem); --fs-body: 1rem; --fs-small: 0.875rem; --fs-label: 0.75rem;
+  --type-overline-size: 0.75rem; --type-overline-track: 0.12em; --type-title-size: clamp(1.75rem, 2.2vw + 1rem, 2.75rem);
+  --type-sub-size: 1.125rem; --type-sub-lh: 1.5; --type-body-size: 1rem; --type-body-lh: 1.55;
+  --fs-title: clamp(2.25rem, 5vw + 1rem, 6rem); --fs-title-side: clamp(2.25rem, 3vw + 1rem, 4.5rem); --fs-btn: clamp(1rem, 0.2vw + 0.95rem, 1.125rem);
 
   /* Pill & component tokens */
-  --kw-pill-pad-block: 7px;
-  --kw-pill-pad-inline: 12px;
-  --kw-pill-radius: 999px;
-  --kw-pill-fs: 0.8125rem;
-  --kw-pill-gap: 8px;
-  --kw-pill-line: var(--color-pill-line);
-  --kw-pill-bg: var(--color-white);
-  --kw-pill-fg: var(--color-slate-700);
-  --kw-pill-weight: 650;
-  --kw-pill-active-bg: var(--ks-accent, var(--active-600, var(--color-indigo)));
-  --kw-pill-active-fg: var(--color-white);
-  --route-hero-h: 560px;
-  --route-hero-copy-left: clamp(1rem, 4vw, 3rem);
-  --route-hero-copy-bottom: 118px;
-  --route-hero-copy-w: min(40rem, calc(100% - 32px));
+  --kw-pill-pad-block: 7px; --kw-pill-pad-inline: 12px; --kw-pill-radius: 999px; --kw-pill-fs: 0.8125rem; --kw-pill-gap: 8px;
+  --kw-pill-line: var(--color-pill-line); --kw-pill-bg: var(--color-white); --kw-pill-fg: var(--color-slate-700); --kw-pill-weight: 650;
+  --kw-pill-active-bg: var(--ks-accent, var(--active-600, var(--color-indigo))); --kw-pill-active-fg: var(--color-white);
+  --route-hero-h: 560px; --route-hero-copy-left: clamp(1rem, 4vw, 3rem); --route-hero-copy-bottom: 118px; --route-hero-copy-w: min(40rem, calc(100% - 32px));
 
   /* Spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --section-pad-y: clamp(3.5rem, 7vw, 6rem);
-  --section-pad-block: var(--section-pad-y);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+  --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
+  --section-pad-y: clamp(3.5rem, 7vw, 6rem); --section-pad-block: var(--section-pad-y);
 
   /* Fluid spacing */
-  --pad-x: clamp(1rem, 4vw, 2.5rem);
-  --pad-y: clamp(3.5rem, 8vh, 5rem);
-  --gap-overline: 0.5rem;
-  --gap-label: var(--gap-overline);
-  --gap-title: clamp(0.75rem, 1.5vw, 1.25rem);
-  --gap-sub: clamp(1.25rem, 2.5vw, 2rem);
+  --pad-x: clamp(1rem, 4vw, 2.5rem); --pad-y: clamp(3.5rem, 8vh, 5rem);
+  --gap-overline: 0.5rem; --gap-label: var(--gap-overline); --gap-title: clamp(0.75rem, 1.5vw, 1.25rem); --gap-sub: clamp(1.25rem, 2.5vw, 2rem);
 
   /* Section layout defaults */
-  --sec-align-text: center;
-  --sec-align-items: center;
-  --sec-justify: center;
-  --sec-margin-inline: auto;
+  --sec-align-text: center; --sec-align-items: center; --sec-justify: center; --sec-margin-inline: auto;
 
   /* Line lengths */
-  --measure-title: 56rem;
-  --measure-sub: 36rem;
+  --measure-title: 56rem; --measure-sub: 36rem;
 
   /* Header dimensions */
-  --fs-nav: clamp(0.875rem, 0.2vw + 0.83rem, 1.0625rem);
-  --header-h: clamp(3.5rem, 1.5vw + 3rem, 4.5rem);
+  --fs-nav: clamp(0.875rem, 0.2vw + 0.83rem, 1.0625rem); --header-h: clamp(3.5rem, 1.5vw + 3rem, 4.5rem);
 
   /* Container width & ink defaults */
-  --container-boxed: 1140px;
-  --container-wide: 1440px;
-  --color-ink: var(--color-charcoal);
-  --color-muted: var(--color-muted-gray);
-  --active-brand: var(--pill-accent);
-  --canvas-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --canvas-duration: 400ms;
-  --rounded-box: 16px;
-  --rounded-btn: 8px;
-  --rounded-badge: 9999px;
+  --container-boxed: 1140px; --container-wide: 1440px; --color-ink: var(--color-charcoal); --color-muted: var(--color-muted-gray);
+  --active-brand: var(--pill-accent); --canvas-ease: cubic-bezier(0.16, 1, 0.3, 1); --canvas-duration: 400ms;
+  --rounded-box: 16px; --rounded-btn: 8px; --rounded-badge: 9999px;
 }
 
 /* =========================================================
    3. COLOR SCHEME CONTEXTS (White, Dark, Brand)
    ========================================================= */
-body.scheme-white {
-  --charcoal: var(--color-charcoal);
-  --sch-bg: var(--color-white);
-  --sch-fg: var(--color-charcoal);
-  --sch-label: var(--raven-600);
-  --sch-soft: var(--color-gray-100);
-  --sch-card-pill: var(--color-white);
-  --sch-line: var(--color-gray-200);
-  --sch-muted: var(--color-gray-500);
-}
-
-body.scheme-dark {
-  --charcoal: var(--color-charcoal);
-  --sch-bg: var(--color-charcoal);
-  --sch-fg: var(--color-white);
-  --sch-label: var(--raven-400);
-  --sch-soft: var(--color-charcoal-soft);
-  --sch-card-pill: var(--color-charcoal);
-  --sch-line: rgba(255, 255, 255, 0.1);
-  --sch-muted: var(--color-gray-400);
-}
-
-body.scheme-brand {
-  --charcoal: var(--color-charcoal);
-  --sch-bg: var(--active-700);
-  --sch-fg: var(--color-white);
-  --sch-label: var(--active-200);
-  --sch-soft: var(--active-800);
-  --sch-card-pill: var(--active-900);
-  --sch-line: var(--active-600);
-  --sch-muted: var(--active-100);
-}
+body.scheme-white { --charcoal: var(--color-charcoal); --sch-bg: var(--color-white); --sch-fg: var(--color-charcoal); --sch-label: var(--raven-600); --sch-soft: var(--color-gray-100); --sch-card-pill: var(--color-white); --sch-line: var(--color-gray-200); --sch-muted: var(--color-gray-500); }
+body.scheme-dark { --charcoal: #090D16; --sch-bg: var(--color-base-100, #090D16); --sch-fg: var(--color-base-content, #F8FAFC); --sch-label: var(--color-text-secondary, #94A3B8); --sch-soft: var(--color-base-200, #0E131F); --sch-card-pill: var(--color-base-200, #0E131F); --sch-line: rgba(255, 255, 255, 0.07); --sch-muted: var(--color-text-muted, #64748B); }
+body.scheme-brand { --charcoal: var(--color-charcoal); --sch-bg: var(--active-700); --sch-fg: var(--color-white); --sch-label: var(--active-200); --sch-soft: var(--active-800); --sch-card-pill: var(--active-900); --sch-line: var(--active-600); --sch-muted: var(--active-100); }
 
 /* =========================================================
    4. BASE APPLICATION STYLES
@@ -227,15 +159,13 @@ body:not(.kit-standalone-page) {
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--headline-font);
-  }
-
-  h1 { font-size: var(--fs-h1); letter-spacing: -0.02em; line-height: 1.15; }
-  h2 { font-size: var(--fs-h2); letter-spacing: -0.02em; line-height: 1.2; }
-  h3 { font-size: var(--fs-h3); letter-spacing: -0.01em; line-height: 1.3; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
+  h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.15; }
+  h1 { font-size: var(--fs-h1); }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
   h4 { font-size: var(--fs-h4); line-height: 1.35; }
-  p  { font-size: var(--fs-body); line-height: 1.5; }
+  p { font-size: var(--fs-body); color: var(--color-text-secondary); line-height: 1.6; }
   small { font-size: var(--fs-small); line-height: 1.5; }
 }
 
@@ -245,6 +175,33 @@ body:not(.kit-standalone-page) {
 .rounded-box { border-radius: var(--rounded-box, 16px); }
 .rounded-btn { border-radius: var(--rounded-btn, 8px); }
 .rounded-badge { border-radius: var(--rounded-badge, 9999px); }
+
+/* Studio Card Elevation & Subtle Highlight */
+.studio-card {
+  background: color-mix(in srgb, var(--color-base-200) 80%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease-out;
+}
+.studio-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+/* Eyebrow Pill Tag Standard */
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
 [data-specimen="true"] section[id]:not(#hero)::before {
   content: "SECTION // #" attr(id); display: inline-block;
   font-family: monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
@@ -255,6 +212,25 @@ body:not(.kit-standalone-page) {
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 25s linear infinite; }
 .\[animation-direction\:reverse\] { animation-direction: reverse; }
+.steps .step::before {
+  width: 50px;
+  height: 50px;
+  font-size: 0; /* hides any residual text/emoji */
+}
+.steps .step:has(.step-icon)::before { width: 100%; height: 0.5rem; }
+.steps .step-icon { width: 50px; height: 50px; }
+.steps-vertical .step > span:not(.step-icon) { grid-column: 2; text-align: left; }
+@media (min-width: 1024px) { .steps-vertical .step > span:not(.step-icon) { grid-column: auto; text-align: center; } }
+.steps .step-primary::before, .steps .step-primary::after, .steps .step-primary .step-icon {
+  transition: background-color var(--canvas-duration, 300ms) var(--canvas-ease, ease-out);
+}
+.steps .step-primary:last-of-type::before, .steps .step-primary:last-of-type .step-icon {
+  animation: step-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes step-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
 .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); }
 @media (min-width: 768px) { .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); } }
 .gal-img { width: calc(16rem * var(--gal-scale, 1)); height: calc(10rem * var(--gal-scale, 1)); }

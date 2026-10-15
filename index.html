@@ -12,14 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <style>
   /* Scoped visual isolation for template canvas and elements */
-  .heroes-container svg:not([class*="w-"]):not([width]) {
-    max-width: 100%;
-    height: auto;
-  }
-  .svc-ic, .ks-ic { width: 2rem; height: 2rem; flex-shrink: 0; }
-  .svc-ic-sm, .ks-ic-sm, .faq-chev, .svc-arrow, .rc-arr { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
-  .ks-star { width: 1.25rem; height: 1.25rem; }
-  .rc-ph-ic { width: 2.25rem; height: 2.25rem; }
+  .heroes-container svg:not([class*="w-"]):not([width]) { max-width: 100%; height: auto; }
   .svc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; list-style: none; padding: 0; margin: 2rem 0; }
   .foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; }
   .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
@@ -87,9 +80,9 @@
           <iframe id="templateCanvasFrame" src="./template.html" class="w-full border-0 transition-all duration-300 min-h-[850px] bg-base-100" title="Template Preview Canvas"></iframe>
         </div><!-- .kit-canvas-frame -->
 <div aria-labelledby="cookie-title" aria-live="polite" class="cookie-banner hidden" hidden="" id="cookieBanner" role="dialog">
-<button aria-label="Close and reject" class="cookie-x" type="button"><svg class="ks-ic-sm w-4 h-4" aria-hidden="true"><use href="#icon-close"/></svg></button>
-<div class="cookie-copy"><b id="cookie-title"><svg class="ks-ic-sm w-4 h-4 text-primary" aria-hidden="true"><use href="#icon-cookie"/></svg> We use cookies</b><p>Only with your OK, for statistics and maps. Placeholder text — final wording after the privacy research.</p></div>
-<div class="cookie-ctas"><button class="btn btn-outline btn-primary ks-btn-outline" data-cookie="reject" type="button">Reject</button><button class="btn btn-outline btn-primary ks-btn-outline" data-cookie="custom" type="button">Customize</button><button class="btn btn-primary ks-btn" data-cookie="accept" type="button">Accept</button></div>
+<button aria-label="Close and reject" class="cookie-x" type="button"><svg class="w-4 h-4" aria-hidden="true"><use href="#icon-close"/></svg></button>
+<div><b id="cookie-title"><svg class="w-4 h-4 text-primary" aria-hidden="true"><use href="#icon-cookie"/></svg> We use cookies</b><p>Only with your OK, for statistics and maps. Placeholder text — final wording after the privacy research.</p></div>
+<div><button class="btn btn-sm btn-outline btn-primary" data-cookie="reject" type="button">Reject</button><button class="btn btn-sm btn-outline btn-primary" data-cookie="custom" type="button">Customize</button><button class="btn btn-sm btn-primary" data-cookie="accept" type="button">Accept</button></div>
 </div>
 <div aria-hidden="true" class="sh-mobile hidden" id="shMobile" hidden>
   <div class="sh-mobile-top navbar"><a class="sh-logo" href="/" aria-label="Home"><i></i>Logo</a><button class="sh-close btn btn-ghost btn-sm" id="shClose">Close</button></div>
