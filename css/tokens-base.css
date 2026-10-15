@@ -7,15 +7,7 @@
    ========================================================= */
 @layer reset, theme, base, components, utilities;
 
-@layer reset {
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-}
+@layer reset { *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; } }
 
 /* =========================================================
    2. CANONICAL TOKENS (9 Brand Palettes & System Dimensions)
@@ -45,21 +37,7 @@
   --color-gray-500: #6b7280; --color-muted-gray: #5c6370; --color-slate-700: #3c4450;
   --color-pill-line: #c45a5a; --color-indigo: #5b4dff;
 
-  /* Brand ramps: 50 lightest → 950 darkest. Text is 950 or white. */
-  /* AZURE RADIANCE — source 700 */
-  --azure-50: #eef9ff; --azure-100: #d8f1ff; --azure-200: #b9e6ff; --azure-300: #8ad9ff;
-  --azure-400: #52c3ff; --azure-500: #2aa7ff; --azure-600: #148cfc; --azure-700: #0078f2;
-  --azure-800: #115cbc; --azure-900: #144f94; --azure-950: #123159;
-
-  /* BLUE — source 700 */
-  --blue-50: #e9eeff; --blue-100: #d7e0ff; --blue-200: #bbc6ff; --blue-300: #8da0ff;
-  --blue-400: #606dff; --blue-500: #3c3fff; --blue-600: #291aff; --blue-700: #200df2;
-  --blue-800: #1c10c3; --blue-900: #1d1798; --blue-950: #130e58;
-
-  /* ROSE — source 600 */
-  --rose-50: #fef1f8; --rose-100: #ffe4f4; --rose-200: #ffc9e8; --rose-300: #ff9ed3;
-  --rose-400: #ff61b4; --rose-500: #ff3399; --rose-600: #f20d74; --rose-700: #d3035b;
-  --rose-800: #ae064b; --rose-900: #910a41; --rose-950: #590024;
+  /* Static ramps kept for reference. Azure, blue, and rose are painted onto --active-* by storage.js. */
   /* EMERALD — source 500 */
   --emerald-50: #f1fcf4; --emerald-100: #defae8; --emerald-200: #bff3d1; --emerald-300: #8de8ae;
   --emerald-400: #54d483; --emerald-500: #32cd6b; --emerald-600: #20994d; --emerald-700: #1c793f;
@@ -84,10 +62,10 @@
   --raven-50: #f9fafb; --raven-100: #f3f4f6; --raven-200: #e5e7eb; --raven-300: #d1d5db;
   --raven-400: #9ba2b0; --raven-500: #737b8c; --raven-600: #4a5464; --raven-700: #364052;
   --raven-800: #1e2838; --raven-900: #101728; --raven-950: #020613;
-  /* Active palette (swapped dynamically by JS runtime. Default = Azure Radiance) */
-  --active-50: var(--azure-50); --active-100: var(--azure-100); --active-200: var(--azure-200); --active-300: var(--azure-300);
-  --active-400: var(--azure-400); --active-500: var(--azure-500); --active-600: var(--azure-600); --active-700: var(--azure-700);
-  --active-800: var(--azure-800); --active-900: var(--azure-900); --active-950: var(--azure-950);
+  /* Active palette fallback until storage.js writes the OKLCH ramp. Default = Azure Radiance. */
+  --active-50: #eef9ff; --active-100: #d8f1ff; --active-200: #b9e6ff; --active-300: #8ad9ff;
+  --active-400: #52c3ff; --active-500: #2aa7ff; --active-600: #148cfc; --active-700: #0078f2;
+  --active-800: #115cbc; --active-900: #144f94; --active-950: #123159;
   --brand-500: var(--active-500);
 
   /* Brand tone aliases */
@@ -96,7 +74,7 @@
   --tone-deep3: var(--active-950); --tone-deep4: var(--active-950); --tone-deep5: var(--active-950);
   --tone-light1: var(--active-600); --tone-light2: var(--active-500);
   --tone-light3: var(--active-400); --tone-light4: var(--active-300);
-  --pill-accent: var(--azure-700); --pill-accent-fg: var(--color-white); --brand-ink: var(--azure-950);
+  --pill-accent: var(--active-700); --pill-accent-fg: var(--color-white); --brand-ink: var(--active-950);
 
   /* Typography families */
   --headline-font: 'Syne', sans-serif;
@@ -168,18 +146,10 @@ body:not(.kit-standalone-page) {
 }
 
 @layer base {
-  body {
-    font-family: var(--body-font);
-    background-color: var(--sch-bg, #f9fafb);
-    color: var(--sch-fg, #1f2937);
-    -webkit-font-smoothing: antialiased;
-  }
-
+  body { font-family: var(--body-font); background-color: var(--sch-bg, #f9fafb); color: var(--sch-fg, #1f2937); -webkit-font-smoothing: antialiased; }
   h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
   h1, h2, h3 { letter-spacing: -0.03em; line-height: 1.15; }
-  h1 { font-size: var(--fs-h1); }
-  h2 { font-size: var(--fs-h2); }
-  h3 { font-size: var(--fs-h3); }
+  h1 { font-size: var(--fs-h1); } h2 { font-size: var(--fs-h2); } h3 { font-size: var(--fs-h3); }
   h4 { font-size: var(--fs-h4); line-height: 1.35; }
   p { font-size: var(--fs-body); color: var(--color-text-secondary); line-height: 1.6; }
   small { font-size: var(--fs-small); line-height: 1.5; }
@@ -193,73 +163,29 @@ body:not(.kit-standalone-page) {
 .rounded-badge { border-radius: var(--rounded-badge, 9999px); }
 .badge-sm { font-size: 0.8125rem; padding: 0.3rem 0.75rem; }
 
-/* Studio Card Elevation & Subtle Highlight */
-.studio-card {
-  background: color-mix(in srgb, var(--color-base-200) 80%, transparent);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease-out;
-}
-.studio-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px -2px color-mix(in oklab, var(--color-primary) 20%, transparent);
-}
-
-/* Eyebrow Pill Tag Standard */
-.eyebrow-pill {
-  display: inline-flex;
-  align-items: center;
-  text-transform: uppercase;
-  font-size: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
-  color: var(--primary-400, var(--color-primary));
-  border: 1px solid color-mix(in oklab, var(--color-primary) 25%, transparent);
-}
-.btn-primary {
-  background: linear-gradient(180deg, var(--primary-500, var(--color-primary)) 0%, var(--primary-600, var(--color-primary)) 100%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.28), 0 2px 8px -1px color-mix(in oklab, var(--color-primary) 40%, transparent);
-  border: 1px solid color-mix(in oklab, var(--color-primary) 80%, black);
-  color: var(--color-primary-content, #ffffff);
-}
-[data-specimen="true"] section[id]:not(#hero)::before {
-  content: "SECTION // #" attr(id); display: inline-block;
-  font-family: monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 2px 8px; margin-bottom: 1rem; border-radius: 4px;
-  background: color-mix(in srgb, var(--color-primary) 15%, transparent); color: var(--color-primary);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
-}
+.studio-card { background: color-mix(in srgb, var(--color-base-200) 80%, transparent); border: 1px solid rgba(255, 255, 255, 0.07); box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06); transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease-out; }
+.studio-card:hover { transform: translateY(-2px); border-color: color-mix(in oklab, var(--color-primary) 40%, transparent); box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px -2px color-mix(in oklab, var(--color-primary) 20%, transparent); }
+.eyebrow-pill { display: inline-flex; align-items: center; text-transform: uppercase; font-size: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem); font-weight: 600; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 9999px; background-color: color-mix(in oklab, var(--color-primary) 12%, transparent); color: var(--primary-400, var(--color-primary)); border: 1px solid color-mix(in oklab, var(--color-primary) 25%, transparent); }
+.btn-primary { background: linear-gradient(180deg, var(--primary-500, var(--color-primary)) 0%, var(--primary-600, var(--color-primary)) 100%); box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.28), 0 2px 8px -1px color-mix(in oklab, var(--color-primary) 40%, transparent); border: 1px solid color-mix(in oklab, var(--color-primary) 80%, black); color: var(--color-primary-content, #ffffff); }
+[data-specimen="true"] section[id]:not(#hero)::before { content: "SECTION // #" attr(id); display: inline-block; font-family: monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 8px; margin-bottom: 1rem; border-radius: 4px; background: color-mix(in srgb, var(--color-primary) 15%, transparent); color: var(--color-primary); border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent); }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 25s linear infinite; }
 .\[animation-direction\:reverse\] { animation-direction: reverse; }
-.steps .step::before {
-  width: 50px;
-  height: 50px;
-  font-size: 0; /* hides any residual text/emoji */
-}
+.steps .step::before { width: 50px; height: 50px; font-size: 0; }
 .steps .step:has(.step-icon)::before { width: 100%; height: 0.5rem; }
 .collapse-arrow > .collapse-title::after { color: var(--active-500); }
 .steps .step-icon { width: 48px; height: 48px; }
 .steps-vertical .step > span:not(.step-icon) { grid-column: 2; text-align: left; }
 @media (min-width: 1024px) { .steps-vertical .step > span:not(.step-icon) { grid-column: auto; text-align: center; } }
-.steps .step-primary::before, .steps .step-primary::after, .steps .step-primary .step-icon {
-  transition: background-color var(--canvas-duration, 300ms) var(--canvas-ease, ease-out);
-}
-.steps .step-primary:last-of-type::before, .steps .step-primary:last-of-type .step-icon {
-  animation: step-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-@keyframes step-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(1.06); }
-}
+.steps .step-primary::before, .steps .step-primary::after, .steps .step-primary .step-icon { transition: background-color var(--canvas-duration, 300ms) var(--canvas-ease, ease-out); }
+.steps .step-primary:last-of-type::before, .steps .step-primary:last-of-type .step-icon { animation: step-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes step-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.06); } }
 .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 64px, black calc(100% - 64px), transparent 100%); }
-@media (min-width: 768px) { .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); } }
 .gal-img { width: calc(16rem * var(--gal-scale, 1)); height: calc(10rem * var(--gal-scale, 1)); }
-@media (min-width: 768px) { .gal-img { width: calc(18rem * var(--gal-scale, 1)); height: calc(11rem * var(--gal-scale, 1)); } }
+@media (min-width: 768px) {
+  .mask-feather-x { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 128px, black calc(100% - 128px), transparent 100%); }
+  .gal-img { width: calc(18rem * var(--gal-scale, 1)); height: calc(11rem * var(--gal-scale, 1)); }
+}
 #services[data-card-align="center"] .card-body { align-items: center; text-align: center; }
 #services[data-card-align="left"] .card-body { align-items: flex-start; text-align: left; }
 #services[data-card-align="right"] .card-body { align-items: flex-end; text-align: right; }
