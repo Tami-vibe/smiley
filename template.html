@@ -33,7 +33,7 @@
   })();
 </script>
 <style>
-  :root { --headline-font: 'Syne', sans-serif; --body-font: 'Manrope', sans-serif; --primary-color: #4F46E5; --color-primary: #4F46E5; --p: #4F46E5; }
+  :root { --headline-font: 'Syne', sans-serif; --body-font: 'Manrope', sans-serif; --primary-color: var(--primary-500, #10b981); --color-primary: var(--primary-500, #10b981); --p: var(--primary-500, #10b981); }
   html.kit-standalone-page, body.kit-standalone-page { height: auto !important; min-height: 100% !important; overflow-x: clip !important; }
   body { margin: 0; padding: 0; font-family: var(--body-font); overflow-x: clip; }
   h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
@@ -64,16 +64,9 @@
   .heroes-container .hero[data-layout="6"] .hb-info { display: grid; }
   #svc-title, #solutions-title, #pains-title, #rev-title, #faq-title, #contact-title, #final-title, #about-title { color: var(--color-base-content, currentColor); }
   .card-title, .card h3 { color: var(--color-base-content); }
-  body.scheme-dark { 
-    background-color: var(--color-base-100) !important; 
-    color: var(--color-base-content) !important; 
-    --color-base-100: #090D16; 
-    --color-base-200: #0E131F; 
-    --color-base-300: #131B2E; 
-    --color-base-content: #F8FAFC; 
-  }
-  body.scheme-white { background-color: #ffffff !important; color: #17191c !important; --color-base-100: #f6f7f9; --color-base-200: #ffffff; --color-base-300: #e5e7eb; --color-base-content: #17191c; }
-  body.scheme-brand { background-color: #111827 !important; color: #f9fafb !important; --color-base-100: #1f2937; --color-base-200: #111827; --color-base-300: #374151; --color-base-content: #f9fafb; }
+  body.scheme-dark { background-color: var(--color-base-100); color: var(--color-base-content); }
+  body.scheme-white { background-color: #ffffff; color: #17191c; --color-base-100: #f6f7f9; --color-base-200: #ffffff; --color-base-300: #e5e7eb; --color-base-content: #17191c; }
+  body.scheme-brand { background-color: var(--color-base-100); color: var(--color-base-content); }
 </style>
 </head>
 <body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page canvas-transition">
@@ -292,7 +285,7 @@
       <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
         <div aria-label="How it works steps" id="lsHow" class="w-full">
           <div class="p-6 bg-base-100 rounded-2xl border border-base-300 flex flex-col gap-8">
-            <ul class="steps steps-vertical lg:steps-horizontal w-full text-xs">
+            <ul class="steps steps-vertical lg:steps-horizontal w-full text-xs p-1">
               <!-- Step 1: Digital Intake -->
               <li class="step step-primary" data-content=""><span class="step-icon w-12 h-12 rounded-full flex items-center justify-center bg-primary text-primary-content shadow-sm"><svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span><span class="font-sans font-bold text-sm block mt-2 text-base-content">1. Digital Intake</span><span class="text-[13px] text-slate-300 font-normal font-sans block max-w-[130px] mx-auto">Photo appraisal & claim filing</span></li>
               <!-- Step 2: Laser Measuring -->
@@ -413,7 +406,7 @@
   </div>
 </section>
 <!-- CONTACT -->
-<section id="contact" class="w-full py-16 md:py-24 bg-base-100" data-theme="dark" aria-labelledby="contact-title">
+<section id="contact" class="w-full py-16 md:py-24 bg-base-100 relative overflow-hidden" data-theme="dark" aria-labelledby="contact-title">
   <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
       <!-- Left Column: Contact Details (5 cols) -->
@@ -428,22 +421,22 @@
         </div>
       </div>
       <!-- Right Column: Full Cover Mapbox Container (7 cols) -->
-      <div class="lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[380px] lg:min-h-full border border-white/[0.08] bg-base-200 shadow-xl">
+      <div class="relative min-h-[380px] rounded-3xl overflow-hidden border border-white/[0.08] bg-base-200 shadow-xl lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:min-h-0 lg:rounded-none lg:border-0 lg:border-l lg:shadow-none">
         <div id="mapbox-container" class="absolute inset-0 w-full h-full">
-          <img id="mapbox-render" src="https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/pin-s+10b981(9.19,45.464)/9.19,45.464,14,0/800x500?access_token=YOUR_MAPBOX_KEY" alt="Location Map" class="w-full h-full object-cover" />
+          <img id="mapbox-render" hidden data-src="https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1/static/pin-l+10b981(9.19,45.464)/9.19,45.464,15,0/1280x960@2x" alt="Map: Via Nazionale 42, Milan" class="w-full h-full object-cover" />
         </div>
       </div>
     </div>
   </div>
 </section>
 <!-- CALL TO ACTION (CTA) -->
-<section id="cta" class="w-full py-20 md:py-28 relative overflow-hidden bg-[#0c0f1d] border-t border-indigo-500/20" data-theme="dark" aria-labelledby="final-title">
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.28)_0%,transparent_70%)] pointer-events-none"></div>
+<section id="cta" class="w-full py-20 md:py-28 relative overflow-hidden bg-base-100 border-t border-base-content/10" data-theme="dark" aria-labelledby="final-title">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--color-primary)_22%,transparent)_0%,transparent_70%)] pointer-events-none"></div>
   <div class="relative z-10 w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center justify-center text-center gap-6">
     <h2 id="final-title" class="tracking-tight font-extrabold text-3xl md:text-5xl text-white">Had an accident? We'll take it from here.</h2>
     <p class="text-sm md:text-base text-slate-300 max-w-xl">Free quote, insurance handled, your car back like new.</p>
     <div class="flex flex-wrap gap-4 mt-2">
-      <a href="#quote" class="btn btn-primary h-12 px-8 rounded-full font-semibold shadow-lg shadow-indigo-500/25">Get a Free Quote</a>
+      <a href="#quote" class="btn btn-primary h-12 px-8 rounded-full font-semibold shadow-lg">Get a Free Quote</a>
       <a href="tel:+390212345678" class="btn h-12 px-8 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/10 backdrop-blur-md">Call Now</a>
     </div>
   </div>
@@ -590,7 +583,7 @@
   });
   const img = document.getElementById('mapbox-render');
   if (img) {
-    img.onerror = () => { const c = document.getElementById('mapbox-container'); if (c) c.innerHTML = '<iframe class="w-full h-full border-0 filter contrast-125" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.3!2d9.19!3d45.464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDI3JzUxLjEiTiA5wrAxMScyNC4wIkU!5e0!3m2!1sen!2sit!4v1" loading="lazy"></iframe>'; };
+    img.onerror = () => { img.hidden = true; };
     if (img.complete && img.naturalWidth === 0) img.onerror();
   }
   const initialData = readSiteData(); if (initialData) applyStateToDocument(document, initialData);

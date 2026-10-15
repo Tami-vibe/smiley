@@ -34,10 +34,10 @@
   --color-text-secondary: #94A3B8; /* Slate-400: Body descriptions */
   --color-text-muted: #64748B;     /* Slate-500: Footnotes / borders */
 
-  /* Unified Electric Indigo Accent */
-  --color-primary: #4F46E5;
-  --color-primary-hover: #4338CA;
-  --color-primary-glow: rgba(99, 102, 241, 0.25);
+  /* Active brand. Sections re-declare this so DaisyUI's theme primary cannot stick. */
+  --color-primary: var(--primary-500, #10b981);
+  --color-primary-hover: var(--primary-600, #059669);
+  --color-primary-glow: color-mix(in oklab, var(--color-primary) 25%, transparent);
 
   /* Base color tokens */
   --color-white: #ffffff; --color-charcoal: #17191c; --color-charcoal-soft: #24272c;
@@ -112,7 +112,7 @@
   /* Pill & component tokens */
   --kw-pill-pad-block: 7px; --kw-pill-pad-inline: 12px; --kw-pill-radius: 999px; --kw-pill-fs: 0.8125rem; --kw-pill-gap: 8px;
   --kw-pill-line: var(--color-pill-line); --kw-pill-bg: var(--color-white); --kw-pill-fg: var(--color-slate-700); --kw-pill-weight: 650;
-  --kw-pill-active-bg: var(--ks-accent, var(--active-600, var(--color-indigo))); --kw-pill-active-fg: var(--color-white);
+  --kw-pill-active-bg: var(--ks-accent, var(--active-600, var(--color-primary))); --kw-pill-active-fg: var(--color-white);
   --route-hero-h: 560px; --route-hero-copy-left: clamp(1rem, 4vw, 3rem); --route-hero-copy-bottom: 118px; --route-hero-copy-w: min(40rem, calc(100% - 32px));
 
   /* Spacing scale */
@@ -142,9 +142,22 @@
 /* =========================================================
    3. COLOR SCHEME CONTEXTS (White, Dark, Brand)
    ========================================================= */
+:root,
+[data-theme] {
+  --color-primary: var(--primary-500, #10b981);
+  --color-primary-content: var(--brand-contrast-fg, #ffffff);
+  --btn-color: var(--color-primary);
+}
+[data-theme="dark"],
+body.scheme-dark,
+body.scheme-brand {
+  --color-base-100: color-mix(in oklab, var(--color-primary) 2.5%, #080B11);
+  --color-base-200: color-mix(in oklab, var(--color-primary) 3.5%, #0E131E);
+  --color-base-300: color-mix(in oklab, var(--color-primary) 5%, #151C2B);
+}
 body.scheme-white { --charcoal: var(--color-charcoal); --sch-bg: var(--color-white); --sch-fg: var(--color-charcoal); --sch-label: var(--raven-600); --sch-soft: var(--color-gray-100); --sch-card-pill: var(--color-white); --sch-line: var(--color-gray-200); --sch-muted: var(--color-gray-500); }
-body.scheme-dark { --charcoal: #090D16; --sch-bg: var(--color-base-100, #090D16); --sch-fg: var(--color-base-content, #F8FAFC); --sch-label: var(--color-text-secondary, #94A3B8); --sch-soft: var(--color-base-200, #0E131F); --sch-card-pill: var(--color-base-200, #0E131F); --sch-line: rgba(255, 255, 255, 0.07); --sch-muted: var(--color-text-muted, #64748B); }
-body.scheme-brand { --charcoal: var(--color-charcoal); --sch-bg: var(--active-700); --sch-fg: var(--color-white); --sch-label: var(--active-200); --sch-soft: var(--active-800); --sch-card-pill: var(--active-900); --sch-line: var(--active-600); --sch-muted: var(--active-100); }
+body.scheme-dark { --charcoal: #090D16; --sch-bg: var(--color-base-100); --sch-fg: var(--color-base-content, #F8FAFC); --sch-label: var(--color-text-secondary, #94A3B8); --sch-soft: var(--color-base-200); --sch-card-pill: var(--color-base-200); --sch-line: rgba(255, 255, 255, 0.07); --sch-muted: var(--color-text-muted, #64748B); background-color: var(--color-base-100); }
+body.scheme-brand { --charcoal: var(--color-charcoal); --sch-bg: var(--color-base-100); --sch-fg: var(--color-white); --sch-label: var(--active-200); --sch-soft: var(--color-base-200); --sch-card-pill: var(--color-base-300); --sch-line: color-mix(in oklab, var(--color-primary) 28%, transparent); --sch-muted: var(--active-100); background-color: var(--color-base-100); }
 
 /* =========================================================
    4. BASE APPLICATION STYLES
@@ -189,7 +202,8 @@ body:not(.kit-standalone-page) {
 }
 .studio-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: color-mix(in oklab, var(--color-primary) 40%, transparent);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px -2px color-mix(in oklab, var(--color-primary) 20%, transparent);
 }
 
 /* Eyebrow Pill Tag Standard */
@@ -202,9 +216,15 @@ body:not(.kit-standalone-page) {
   letter-spacing: 0.08em;
   padding: 4px 10px;
   border-radius: 9999px;
-  background: rgba(99, 102, 241, 0.12);
-  color: #818cf8;
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background-color: color-mix(in oklab, var(--color-primary) 12%, transparent);
+  color: var(--primary-400, var(--color-primary));
+  border: 1px solid color-mix(in oklab, var(--color-primary) 25%, transparent);
+}
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary-500, var(--color-primary)) 0%, var(--primary-600, var(--color-primary)) 100%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.28), 0 2px 8px -1px color-mix(in oklab, var(--color-primary) 40%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 80%, black);
+  color: var(--color-primary-content, #ffffff);
 }
 [data-specimen="true"] section[id]:not(#hero)::before {
   content: "SECTION // #" attr(id); display: inline-block;
