@@ -34,8 +34,8 @@
 </script>
 <style>
   :root { --headline-font: 'Syne', sans-serif; --body-font: 'Manrope', sans-serif; --primary-color: #4F46E5; --color-primary: #4F46E5; --p: #4F46E5; }
-  html.kit-standalone-page, body.kit-standalone-page { height: auto !important; min-height: 100% !important; overflow-x: hidden !important; overflow-y: auto !important; }
-  body { margin: 0; padding: 0; font-family: var(--body-font); overflow-x: hidden; }
+  html.kit-standalone-page, body.kit-standalone-page { height: auto !important; min-height: 100% !important; overflow-x: clip !important; }
+  body { margin: 0; padding: 0; font-family: var(--body-font); overflow-x: clip; }
   h1, h2, h3, h4, h5, h6 { font-family: var(--headline-font); }
   .heroes-container svg:not([class*="w-"]):not([width]) { max-width: 100%; height: auto; }
   .sh-mobile[aria-hidden="true"], .sh-mobile[hidden] { display: none !important; }
@@ -51,10 +51,10 @@
   #pains[data-card-align="left"] .card-body, #pains.pains-align-left .card-body { align-items: flex-start; text-align: left; }
   #pains[data-card-align="right"] .card-body, #pains.pains-align-right .card-body { align-items: flex-end; text-align: right; }
   section, header, footer { cursor: pointer; transition: outline 0.15s ease, box-shadow 0.15s ease; }
-  .is-canvas-selected { outline: 3px solid var(--primary-color, #10b981) !important; outline-offset: -3px !important; position: relative !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important; }
+  .is-canvas-selected { outline: 3px solid var(--primary-color, #10b981) !important; outline-offset: -3px !important; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(16, 185, 129, 0.25) !important; }
   .heroes-container .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
   .heroes-container .hero > .carousel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-  .heroes-container .hero > .hero-content { position: relative; z-index: 10; padding: 120px 24px 80px; width: 100%; max-width: 56rem; }
+  .heroes-container .hero > .hero-content { position: relative; width: 100%; }
   .heroes-container .hero[data-layout="3"] { padding: clamp(1rem, 2.5vw, 2rem); }
   .heroes-container .hero[data-layout="3"] > .carousel { inset: clamp(1rem, 2.5vw, 2rem); border-radius: 1.5rem; }
   .heroes-container .hero[data-layout="4"] > .hero-content { align-items: flex-start; text-align: left; margin-inline: clamp(1.5rem, 6vw, 6rem) auto; max-width: 44rem; }
@@ -77,7 +77,7 @@
 </style>
 </head>
 <body class="bg-base-100 text-base-content antialiased w-full scheme-dark kit-standalone-page canvas-transition">
-  <header id="header" class="site-header sticky top-0 z-50 w-full h-14 bg-base-100/80 backdrop-blur-xl border-b border-base-content/5 transition-all" data-type="bar" data-surface="transparent">
+  <header id="header" class="site-header sticky top-0 z-50 w-full h-14 bg-base-100/80 backdrop-blur-xl border-b border-white/[0.08] transition-all" data-type="bar" data-surface="transparent">
     <div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 h-full flex items-center justify-between">
       <a href="#hero" class="flex items-center gap-2.5 text-lg font-bold text-base-content no-underline">
         <span class="w-8 h-8 rounded-xl bg-primary text-primary-content flex items-center justify-center text-sm font-extrabold shadow-sm">P</span>
@@ -93,7 +93,7 @@
   </header>
   <main class="heroes-container w-full bg-base-100 transition-all duration-300">
 <!-- UNIFIED HERO SECTION (data-layout="1..6") -->
-<section id="hero" class="hero w-full transition-all duration-300 relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:py-20 data-[hero-tier=sub]:py-10 data-[hero-tier=minimal]:min-h-0 data-[hero-tier=minimal]:py-12 data-[hero-tier=minimal]:md:py-16 data-[hero-tier=full]:h-screen data-[hero-tier=full]:max-h-screen data-[hero-tier=sub]:h-[50vh] data-[hero-tier=sub]:max-h-[50vh]" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-variant="fill">
+<section id="hero" class="hero w-full relative overflow-hidden flex items-center justify-center data-[hero-tier=full]:min-h-[100dvh] data-[hero-tier=sub]:min-h-[50dvh] data-[hero-tier=minimal]:py-12" data-hero-tier="full" data-theme="dark" data-layout="1" data-panel="off" data-reviews="white" data-ctas="1" data-cta-variant="fill">
 <div class="carousel w-full h-full absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
   <div class="carousel-item absolute inset-0 w-full h-full is-active" data-slide="1"><video src="./media/hero/night-city-sedan.mp4" muted playsinline preload="metadata" loop autoplay class="w-full h-full object-cover"></video></div>
   <div class="carousel-item absolute inset-0 w-full h-full" data-slide="2"><img src="./media/hero/highway-suv.jpg" alt="" class="w-full h-full object-cover"></div>
@@ -105,16 +105,14 @@
 </div>
 <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[var(--color-base-100)] via-[var(--color-base-100)]/60 to-transparent pointer-events-none z-10"></div>
 <div class="absolute top-4 left-4 badge badge-neutral badge-sm font-mono opacity-70 z-20">Layout 1: Gradient Centered</div>
-<div class="w-full max-w-7xl 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 z-10 flex flex-col items-center text-center justify-center">
-  <div class="hero-content flex-col text-center max-w-3xl w-full mx-auto z-10 py-6">
+<div class="hero-content text-center z-20 max-w-4xl px-4 py-16">
+  <div class="max-w-2xl mx-auto flex flex-col items-center">
     <div id="hero-breadcrumbs" class="breadcrumbs text-xs opacity-60 mb-2 hidden justify-center [&>ul]:justify-center"></div>
     <a aria-label="Rating 4.8 out of 5 from 12 reviews" class="hero-reviews badge badge-neutral gap-2 py-3 px-4 border border-white/20 mb-4 inline-flex items-center" href="#reviews" data-reviews="true"><span class="text-warning" aria-hidden="true">★★★★★</span> 4.8 <small class="opacity-70">· 12 reviews</small></a>
-    <div>
-      <span id="hero-kicker" class="text-xs font-mono font-bold uppercase tracking-[0.2em] text-primary/90 mb-2 justify-center block">Step Into The Green</span>
-      <h1 id="hero-title" class="tracking-tight font-extrabold text-base-content data-[hero-tier=minimal]:text-3xl data-[hero-tier=minimal]:md:text-5xl data-[hero-tier=sub]:text-3xl data-[hero-tier=sub]:md:text-5xl data-[hero-tier=full]:text-5xl data-[hero-tier=full]:md:text-6xl drop-shadow-sm" data-hero-tier="full">Experience the Future of Mobility</h1>
-    </div>
-    <p id="hero-desc" class="mt-3.5 md:mt-4 text-base md:text-lg text-base-content/70 max-w-2xl mx-auto leading-relaxed font-normal" data-tagline-size="long">Advanced technology meets stunning design. Premium automotive experience awaits you.</p>
-    <div id="hero-ctas" class="mt-6 flex flex-wrap gap-3 justify-center"><button class="btn h-12 px-7 rounded-full btn-primary text-sm font-semibold tracking-normal shadow-sm border-none cta-primary">Book a Test Drive</button><button class="btn h-12 px-7 rounded-full bg-base-content/10 hover:bg-base-content/15 text-base-content text-sm font-medium border border-base-content/10 backdrop-blur-md transition-all cta-second">Learn More</button></div>
+    <span id="hero-kicker" class="eyebrow-pill mb-3">CERTIFIED COLLISION CENTER</span>
+    <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-md" data-hero-tier="full">Precision Autobody Repair &amp; Refinishing</h1>
+    <p id="hero-desc" class="py-4 text-base md:text-lg text-slate-300 max-w-xl leading-relaxed" data-tagline-size="long">Restoring chassis geometry, computerized optical paint match, and direct insurance billing to strict OEM standards.</p>
+    <div id="hero-ctas" class="flex flex-wrap gap-3 justify-center mt-2"><a href="#quote" class="btn btn-primary h-12 px-8 rounded-full font-semibold shadow-lg shadow-primary/25 cta-primary">Get a Free Quote</a><a href="tel:+390212345678" class="btn h-12 px-8 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/10 backdrop-blur-md cta-second">Call Now</a></div>
   </div>
 </div>
 <div class="w-full grid grid-cols-1 md:grid-cols-4 z-10 text-xs border-t border-base-300/60 bg-base-100/95 backdrop-blur-md" aria-label="Business information" hidden>
@@ -283,11 +281,10 @@
       <input aria-label="Insurance claims" class="tab text-slate-400 hover:text-white checked:bg-slate-800 checked:text-white checked:border checked:border-white/10" name="rc_tabs" type="radio"/>
       <div class="tab-content p-4 md:p-6 bg-base-100 rounded-2xl border border-base-300 mt-2">
         <div aria-label="Insurance claim steps" id="lsClaims" class="w-full">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="card bg-base-100 shadow-sm border border-base-200"><div class="card-body p-4 flex flex-col gap-3"><div class="flex justify-between items-center"><span class="font-extrabold text-sm text-base-content">1. Send photos</span><span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">1</span></div><div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden"><span class="material-symbols-outlined text-primary text-3xl">photo_camera</span></div><span class="text-sm text-slate-300">Take photos with your phone. Fast 2 min upload.</span></div></div>
-            <div class="card bg-base-100 shadow-sm border border-base-200"><div class="card-body p-4 flex flex-col gap-3"><div class="flex justify-between items-center"><span class="font-extrabold text-sm text-base-content">2. We assess</span><span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">2</span></div><div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden"><span class="material-symbols-outlined text-primary text-3xl">receipt_long</span></div><span class="text-sm text-slate-300">We inspect the car and write a clear, binding estimate.</span></div></div>
-            <div class="card bg-base-100 shadow-sm border border-base-200"><div class="card-body p-4 flex flex-col gap-3"><div class="flex justify-between items-center"><span class="font-extrabold text-sm text-base-content">3. Insurance handled</span><span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">3</span></div><div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden"><span class="material-symbols-outlined text-primary text-3xl">verified_user</span></div><span class="text-sm text-slate-300">You sign one authorization. We deal with the insurer.</span></div></div>
-            <div class="card bg-base-100 shadow-sm border border-base-200"><div class="card-body p-4 flex flex-col gap-3"><div class="flex justify-between items-center"><span class="font-extrabold text-sm text-base-content">4. Repair &amp; keys</span><span class="w-6 h-6 rounded-full bg-base-content/10 grid place-items-center text-xs font-extrabold">4</span></div><div class="h-24 bg-black/20 rounded-lg grid place-items-center border border-white/5 relative overflow-hidden"><span class="material-symbols-outlined text-primary text-3xl">key</span></div><span class="text-sm text-slate-300">Car repaired, cleaned, tested and keys returned.</span></div></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="card bg-base-200/60 border border-white/[0.08] rounded-2xl"><div class="card-body p-6 gap-3"><span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-white/[0.08]"><span class="material-symbols-outlined text-xl">assignment_ind</span></span><h3 class="card-title text-base font-bold">Direct Insurer Assignment</h3><p class="text-[13px] text-slate-300 leading-relaxed">No upfront cash. We settle directly with your insurer through DRP billing.</p></div></div>
+            <div class="card bg-base-200/60 border border-white/[0.08] rounded-2xl"><div class="card-body p-6 gap-3"><span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-white/[0.08]"><span class="material-symbols-outlined text-xl">straighten</span></span><h3 class="card-title text-base font-bold">Certified Damage Report</h3><p class="text-[13px] text-slate-300 leading-relaxed">Computerized laser measuring and a digital appraisal your insurer can approve fast.</p></div></div>
+            <div class="card bg-base-200/60 border border-white/[0.08] rounded-2xl"><div class="card-body p-6 gap-3"><span class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-white/[0.08]"><span class="material-symbols-outlined text-xl">key</span></span><h3 class="card-title text-base font-bold">Replacement Car on Arrival</h3><p class="text-[13px] text-slate-300 leading-relaxed">Loaner vehicle keys handed over immediately at check-in.</p></div></div>
           </div>
         </div>
       </div>
@@ -431,7 +428,7 @@
         </div>
       </div>
       <!-- Right Column: Full Cover Mapbox Container (7 cols) -->
-      <div class="lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[360px] lg:min-h-full border border-base-content/10 bg-base-200 shadow-xl">
+      <div class="lg:col-span-7 relative rounded-3xl overflow-hidden min-h-[380px] lg:min-h-full border border-white/[0.08] bg-base-200 shadow-xl">
         <div id="mapbox-container" class="absolute inset-0 w-full h-full">
           <img id="mapbox-render" src="https://api.mapbox.com/styles/v1/mapbox/dark-v11/static/pin-s+10b981(9.19,45.464)/9.19,45.464,14,0/800x500?access_token=YOUR_MAPBOX_KEY" alt="Location Map" class="w-full h-full object-cover" />
         </div>

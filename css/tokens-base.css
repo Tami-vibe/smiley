@@ -222,7 +222,8 @@ body:not(.kit-standalone-page) {
   font-size: 0; /* hides any residual text/emoji */
 }
 .steps .step:has(.step-icon)::before { width: 100%; height: 0.5rem; }
-.steps .step-icon { width: 50px; height: 50px; }
+.collapse-arrow > .collapse-title::after { color: var(--active-500); }
+.steps .step-icon { width: 48px; height: 48px; }
 .steps-vertical .step > span:not(.step-icon) { grid-column: 2; text-align: left; }
 @media (min-width: 1024px) { .steps-vertical .step > span:not(.step-icon) { grid-column: auto; text-align: center; } }
 .steps .step-primary::before, .steps .step-primary::after, .steps .step-primary .step-icon {
