@@ -21,6 +21,9 @@
    2. CANONICAL TOKENS (9 Brand Palettes & System Dimensions)
    ========================================================= */
 :root {
+  /* Dynamically scales 1rem between 16px (mobile) and 20px (ultra-wide desktop) */
+  font-size: clamp(16px, 0.35vw + 14.5px, 20px);
+
   /* Surface Rhythm: Deep Midnight -> Slate Surfaces */
   --color-base-100: #090D16;
   --color-base-200: #0E131F;
@@ -175,6 +178,7 @@ body:not(.kit-standalone-page) {
 .rounded-box { border-radius: var(--rounded-box, 16px); }
 .rounded-btn { border-radius: var(--rounded-btn, 8px); }
 .rounded-badge { border-radius: var(--rounded-badge, 9999px); }
+.badge-sm { font-size: 0.8125rem; padding: 0.3rem 0.75rem; }
 
 /* Studio Card Elevation & Subtle Highlight */
 .studio-card {
@@ -193,7 +197,7 @@ body:not(.kit-standalone-page) {
   display: inline-flex;
   align-items: center;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem);
   font-weight: 600;
   letter-spacing: 0.08em;
   padding: 4px 10px;
